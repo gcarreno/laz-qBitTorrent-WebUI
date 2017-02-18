@@ -22,6 +22,61 @@
 <tr>
 <td><p><tt><span class="code"><span class="kw">type</span> TqBitTorrentWebUI <span class="sym">=</span> <span class="kw">class</span><span class="sym">(</span>TComponent<span class="sym">)</span> <span class="kw">end</span><span class="sym">;</span></span></tt></p></td>
 </tr>
+<tr>
+<td><p><tt><span class="code"><span class="kw">public</span></span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">constructor </span><a href="../qbittorrentwebui/tqbittorrentwebui.create.html">Create</a><span class="sym">();</span><span class="kw"> override</span><span class="sym">;</span></span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">destructor </span><a href="../qbittorrentwebui/tqbittorrentwebui.destroy.html">Destroy</a><span class="sym">;</span><span class="kw"> override</span><span class="sym">;</span></span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">function </span><a href="../qbittorrentwebui/tqbittorrentwebui.login.html">Login</a><span class="sym">;</span></span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">Performs a Login</p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">function </span><a href="../qbittorrentwebui/tqbittorrentwebui.logout.html">Logout</a><span class="sym">;</span></span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">Performs a Logout</p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbittorrentwebui/tqbittorrentwebui.islogged.html">IsLogged</a><span class="sym">: </span>Boolean<span class="sym">;</span>  [r]</span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">Contains state of Login</p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbittorrentwebui/tqbittorrentwebui.logincookie.html">LoginCookie</a><span class="sym">: </span>string<span class="sym">;</span>  [r]</span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">Cookie value from the Login call.</p></td>
+</tr>
+<tr>
+<td><p><tt><span class="code"><span class="kw">published</span></span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbittorrentwebui/tqbittorrentwebui.username.html">UserName</a><span class="sym">: </span>string<span class="sym">;</span>  [rw]</span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">Username to login to the qBittorrent client.</p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbittorrentwebui/tqbittorrentwebui.password.html">Password</a><span class="sym">: </span>string<span class="sym">;</span>  [rw]</span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">Password to login to the qBittorrent client.</p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbittorrentwebui/tqbittorrentwebui.host.html">Host</a><span class="sym">: </span>string<span class="sym">;</span>  [rw]</span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">Host/Address  for the qBittorrent client.</p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbittorrentwebui/tqbittorrentwebui.port.html">Port</a><span class="sym">: </span>Integer<span class="sym">;</span>  [rw]</span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">Port  for the qBittorrent client.</p></td>
+</tr>
+<tr>
+<td><p><tt><span class="code"></span></tt></p></td>
+</tr>
 </table>
 <h2>Inheritance</h2>
 <table cellpadding="0" cellspacing="0">
