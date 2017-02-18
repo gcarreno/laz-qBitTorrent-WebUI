@@ -20,8 +20,8 @@ implementation
 
 Procedure Register;
 begin
-  {.$I tqbittorrentwebui_icon.lrs}
-  RegisterComponents('qBitTirrent', [TqBitTorrentWebUI]);
+  {$I tqbittorrentwebui_icon.lrs}
+  RegisterComponents('qBitTorrent', [TqBitTorrentWebUI]);
 end;
 
 end.

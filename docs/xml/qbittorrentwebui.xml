@@ -21,6 +21,13 @@
         <seealso />
       </element>
 
+      <!-- unresolved type reference Visibility: default -->
+      <element name="SysUtils">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+
       <!-- object Visibility: default -->
       <element name="TqBitTorrentWebUI">
         <short>Implements an interface to access the WebUI of qBitTorrent.</short>
