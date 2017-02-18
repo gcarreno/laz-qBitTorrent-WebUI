@@ -1,19 +1,173 @@
-object Form1: TForm1
-  Left = 690
-  Height = 240
-  Top = 123
-  Width = 320
-  Caption = 'Form1'
+object frmMain: TfrmMain
+  Left = 419
+  Height = 421
+  Top = 115
+  Width = 710
+  Caption = 'frmMain'
+  ClientHeight = 421
+  ClientWidth = 710
+  Menu = mmMain
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
-  LCLVersion = '1.7'
-  object qBitTorrentWebUI1: TqBitTorrentWebUI
+  Visible = False
+  object psMain: TPairSplitter
+    Cursor = crVSplit
+    Left = 0
+    Height = 347
+    Top = 74
+    Width = 710
+    Align = alClient
+    Position = 200
+    SplitterType = pstVertical
+    object pssInfo: TPairSplitterSide
+      Cursor = crArrow
+      Left = 0
+      Height = 200
+      Top = 0
+      Width = 710
+      ClientWidth = 710
+      ClientHeight = 200
+      object memInfo: TMemo
+        Left = 0
+        Height = 180
+        Top = 20
+        Width = 710
+        Align = alClient
+        ReadOnly = True
+        ScrollBars = ssAutoVertical
+        TabOrder = 0
+      end
+      object stLabelInfo: TStaticText
+        Left = 0
+        Height = 20
+        Top = 0
+        Width = 710
+        Align = alTop
+        Caption = 'Info:'
+        FocusControl = memInfo
+        TabOrder = 1
+      end
+    end
+    object pssLog: TPairSplitterSide
+      Cursor = crArrow
+      Left = 0
+      Height = 142
+      Top = 205
+      Width = 710
+      ClientWidth = 710
+      ClientHeight = 142
+      object memLog: TMemo
+        Left = 0
+        Height = 120
+        Top = 22
+        Width = 710
+        Align = alClient
+        ScrollBars = ssAutoVertical
+        TabOrder = 0
+      end
+      object stLabelLog: TStaticText
+        Left = 0
+        Height = 22
+        Top = 0
+        Width = 710
+        Align = alTop
+        Caption = 'Log:'
+        TabOrder = 1
+      end
+    end
+  end
+  object panButtons: TPanel
+    Left = 0
+    Height = 74
+    Top = 0
+    Width = 710
+    Align = alTop
+    ClientHeight = 74
+    ClientWidth = 710
+    TabOrder = 1
+    object btnTestLogin: TButton
+      Left = 8
+      Height = 25
+      Top = 8
+      Width = 75
+      Action = actTestLogin
+      TabOrder = 0
+    end
+    object btnTestLogout: TButton
+      Left = 96
+      Height = 25
+      Top = 8
+      Width = 75
+      Action = actTestLogout
+      TabOrder = 1
+    end
+    object btnFileExit: TButton
+      Left = 621
+      Height = 25
+      Top = 8
+      Width = 75
+      Action = actFileExit
+      Anchors = [akTop, akRight]
+      TabOrder = 2
+    end
+    object DividerBevel1: TDividerBevel
+      Left = 8
+      Height = 17
+      Top = 40
+      Width = 687
+      Caption = 'Get Methods'
+      Anchors = [akTop, akLeft, akRight]
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+  end
+  object qbttMain: TqBitTorrentWebUI
     UserName = 'admin'
     Password = 'admin'
     Host = 'localhost'
     Port = 9090
-    Left = 176
-    Top = 24
+    Left = 576
+    Top = 8
+  end
+  object mmMain: TMainMenu
+    Left = 296
+    Top = 8
+    object mnuFile: TMenuItem
+      Caption = '&File'
+      object mnuFileExit: TMenuItem
+        Action = actFileExit
+      end
+    end
+    object mnuTest: TMenuItem
+      Caption = '&Test'
+      object mnuTestLogin: TMenuItem
+        Action = actTestLogin
+      end
+      object mnuTestLogout: TMenuItem
+        Action = actTestLogout
+      end
+    end
+  end
+  object alMain: TActionList
+    Left = 378
+    Top = 8
+    object actFileExit: TFileExit
+      Category = 'File'
+      Caption = 'E&xit'
+      Hint = 'Exit'
+    end
+    object actTestLogin: TAction
+      Category = 'Test'
+      Caption = 'Log&in'
+      DisableIfNoHandler = False
+      OnExecute = actTestLoginExecute
+    end
+    object actTestLogout: TAction
+      Category = 'Test'
+      Caption = 'Log&out'
+      DisableIfNoHandler = False
+      OnExecute = actTestLogoutExecute
+    end
   end
 end
