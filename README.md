@@ -16,3 +16,7 @@ You can get it from one of these options:
  * If you are using the [Online Package Manager](http://wiki.freepascal.org/Online_Package_Manager) that comes with Lazarus, it's listed with 2 versions:
    * Version 40.
    * Version 40.1.
+
+I'm using the [Online Package Manager](http://wiki.freepascal.org/Online_Package_Manager) and I'm testing this with version 40.1 of the Synapse Network lib.
+
+I've chosen not to put a package dependency on that lib so you can manage what version you want to use.

@@ -13,7 +13,8 @@
       </SearchPaths>
     </CompilerOptions>
     <Description Value="A component to access the qBitTorrent Web UI"/>
-    <Version Minor="1" Build="1"/>
+    <License Value="Needs MIT license text"/>
+    <Version Minor="1" Build="2"/>
     <Files Count="2">
       <Item1>
         <Filename Value="../src/Register_qBitTorrentWebUI.pas"/>

@@ -16,23 +16,51 @@
 
       <!-- unresolved type reference Visibility: default -->
       <element name="Classes">
-        <short />
-        <descr />
-        <seealso />
+        <short/>
+        <descr/>
+        <seealso/>
       </element>
 
       <!-- unresolved type reference Visibility: default -->
       <element name="SysUtils">
-        <short />
-        <descr />
-        <seealso />
+        <short/>
+        <descr/>
+        <seealso/>
       </element>
 
       <!-- object Visibility: default -->
       <element name="TqBitTorrentWebUI">
         <short>Implements an interface to access the WebUI of qBitTorrent.</short>
-        <descr />
-        <seealso />
+        <descr/>
+        <seealso/>
+      </element>
+
+      <!-- property Visibility: published -->
+      <element name="TqBitTorrentWebUI.UserName">
+        <short>Username to login to the qBittorrent client.</short>
+        <descr/>
+        <seealso/>
+      </element>
+
+      <!-- property Visibility: published -->
+      <element name="TqBitTorrentWebUI.Password">
+        <short>Password to login to the qBittorrent client.</short>
+        <descr/>
+        <seealso/>
+      </element>
+
+      <!-- property Visibility: published -->
+      <element name="TqBitTorrentWebUI.Host">
+        <short>Host/Address  for the qBittorrent client.</short>
+        <descr/>
+        <seealso/>
+      </element>
+
+      <!-- property Visibility: published -->
+      <element name="TqBitTorrentWebUI.Port">
+        <short>Port  for the qBittorrent client.</short>
+        <descr/>
+        <seealso/>
       </element>
 
     </module>
