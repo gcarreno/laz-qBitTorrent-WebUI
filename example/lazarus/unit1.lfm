@@ -1,0 +1,11 @@
+object Form1: TForm1
+  Left = 525
+  Height = 240
+  Top = 175
+  Width = 320
+  Caption = 'Form1'
+  OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  LCLVersion = '1.7'
+end

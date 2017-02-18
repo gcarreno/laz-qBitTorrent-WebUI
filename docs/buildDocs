@@ -3,5 +3,5 @@
     --package=lazqBitTorrentWebUI \
     --output=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/docs/html \
     --format=html \
-    --descr=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/docs/xml/lazqbittorrentwebui.xml \
-    --input=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/src/lazqbittorrentwebui.pas
+    --descr=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/docs/xml/qbittorrentwebui.xml \
+    --input=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/src/qBitTorrentWebUI.pas

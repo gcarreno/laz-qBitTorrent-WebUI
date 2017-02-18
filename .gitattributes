@@ -3,15 +3,17 @@
 
 # Explicitly declare text files you want to always be normalized and converted
 # to native line endings on checkout.
-*.inc text
-*.pas text
-*.pp  text
-*.lpk text
-*.lpi text
-*.lps text
-*.lpr text
-*.def text
-*.xml text
+*.inc  text
+*.pas  text
+*.pp   text
+*.lpk  text
+*.lpi  text
+*.lps  text
+*.lpr  text
+*.def  text
+*.css  text
+*.html text
+*.xml  text
 
 # Declare files that will always have CRLF line endings on checkout.
 *.dpk   text eol=crlf

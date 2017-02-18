@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Package Version="4">
+    <Name Value="lazqBitTorrentWebUI"/>
+    <Type Value="RunAndDesignTime"/>
+    <AddToProjectUsesSection Value="True"/>
+    <Author Value="Gustavo Carreno &lt;guscarreno@gmail.com>"/>
+    <CompilerOptions>
+      <Version Value="11"/>
+      <SearchPaths>
+        <OtherUnitFiles Value="../src"/>
+        <UnitOutputDirectory Value="../bin/lib/$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+    </CompilerOptions>
+    <Description Value="A component to access the qBitTorrent Web UI"/>
+    <Version Minor="1" Build="1"/>
+    <Files Count="2">
+      <Item1>
+        <Filename Value="../src/Register_qBitTorrentWebUI.pas"/>
+        <HasRegisterProc Value="True"/>
+        <AddToUsesPkgSection Value="False"/>
+        <UnitName Value="Register_qBitTorrentWebUI"/>
+      </Item1>
+      <Item2>
+        <Filename Value="../src/qBitTorrentWebUI.pas"/>
+        <UnitName Value="qBitTorrentWebUI"/>
+      </Item2>
+    </Files>
+    <LazDoc Paths="../docs/xml"/>
+    <RequiredPkgs Count="2">
+      <Item1>
+        <PackageName Value="LCL"/>
+        <MaxVersion Major="1"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="FCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item2>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fpdoc-descriptions>
+  <package name="lazqBitTorrentWebUI">
+
+    <!--
+      ====================================================================
+      qBitTorrentWebUI
+      ====================================================================
+    -->
+
+    <module name="qBitTorrentWebUI">
+      <short>Component to access the WebUI of qBitTorrent.</short>
+      <descr>
+        <p>In this unit you can find an implementation of component to access the WebUI of qBitTorrent.</p>
+      </descr>
+
+      <!-- unresolved type reference Visibility: default -->
+      <element name="Classes">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+
+      <!-- object Visibility: default -->
+      <element name="TqBitTorrentWebUI">
+        <short>Implements an interface to access the WebUI of qBitTorrent.</short>
+        <descr />
+        <seealso />
+      </element>
+
+    </module>
+  </package>
+</fpdoc-descriptions>
