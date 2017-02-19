@@ -38,7 +38,7 @@ uses
   qBitTorrentWebUI;
 
 type
-  Form1 = class(TForm)
+  TForm1 = class(TForm)
     {...}
     Fqb: TqBitTorrentWebUI;
     {...}
@@ -47,6 +47,9 @@ type
     procedure LoginExecute(Sender: TObject);
     {...}
   end;
+
+var
+  Form1: TForm1;
 
 implementation
 
@@ -76,7 +79,7 @@ uses
   qBitTorrentWebUI;
 
 type
-  Form1 = class(TForm)
+  TForm1 = class(TForm)
     {...}
     Fqb: TqBitTorrentWebUI;
     {...}
@@ -85,6 +88,9 @@ type
     procedure LogoutExecute(Sender: TObject);
     {...}
   end;
+
+var
+  Form1: TForm1;
 
 implementation
 
@@ -116,7 +122,7 @@ uses
   qBitTorrentWebUI;
 
 type
-  Form1 = class(TForm)
+  TForm1 = class(TForm)
     {...}
     Fqb: TqBitTorrentWebUI;
     {...}
@@ -125,6 +131,9 @@ type
     procedure GetApiVersionExecute(Sender: TObject);
     {...}
   end;
+
+var
+  Form1: TForm1;
 
 implementation
 
@@ -154,7 +163,7 @@ uses
   qBitTorrentWebUI;
 
 type
-  Form1 = class(TForm)
+  TForm1 = class(TForm)
     {...}
     Fqb: TqBitTorrentWebUI;
     {...}
@@ -163,6 +172,9 @@ type
     procedure GetMinApiVersionExecute(Sender: TObject);
     {...}
   end;
+
+var
+  Form1: TForm1;
 
 implementation
 
