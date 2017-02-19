@@ -25,15 +25,25 @@ type
     FIsLogged: Boolean;
     FLoginCookie: String;
 
+    // Authentication
     function DoLogin: Boolean;
     function DoLogout: Boolean;
+
+    // Get methods
+    function DoGetApiVersion: String;
+    function DoGetMinApiVersion: String;
   protected
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
 
+    // Authentication
     function Login: Boolean;
     function Logout: Boolean;
+
+    // Get methods
+    function GetApiVersion: String;
+    function GetMinApiVersion: String;
 
     property IsLogged: Boolean
       read FIsLogged;
@@ -57,6 +67,9 @@ type
   end;
 
 implementation
+
+const
+  sUserAgent = 'lazqBitTorrentWebUI/0.1.0.3';
 
 { TqBitTorrentWebUI }
 
@@ -89,6 +102,56 @@ begin
   FIsLogged := Result;
 end;
 
+function TqBitTorrentWebUI.DoLogin: Boolean;
+var
+  sURL: String;
+  sDoc: TStringStream;
+  sCookie: String;
+  index: Integer;
+  iPos: Integer;
+const
+  sPath = '/login';
+begin
+  Result := False;
+  FHttp.Clear;
+  FHttp.UserAgent := sUserAgent;
+  FHttp.Headers.Add('Content-Type: application/x-www-form-urlencoded');
+  sDoc := TStringStream.Create('username='+FUserName+'&password='+FPassword);
+  FHttp.Document.LoadFromStream(sDoc);
+  sDoc.Free;
+  if FPort = 80 then
+  begin
+    sURL := 'http://'+FHost+sPath;
+  end
+  else
+  begin
+    sURL := 'http://'+FHost+':'+IntToStr(FPort)+sPath;
+  end;
+  FHttp.HTTPMethod('POST', sURL);
+  if FHttp.ResultCode = 200 then
+  begin
+    Result := True;
+    sCookie := '';
+    FLoginCookie := '';
+    for index := 0 to FHttp.Cookies.Count - 1 do
+    begin
+      sCookie := FHttp.Cookies[index];
+      iPos := Pos('SID=', sCookie);
+      if iPos > 0 then
+      begin
+        FLoginCookie := Copy(sCookie, iPos+4, MaxInt);
+        Break;
+      end;
+    end;
+  end
+  else
+  begin
+    raise Exception.Create(
+      'Login failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
+    );
+  end;
+end;
+
 function TqBitTorrentWebUI.Logout: Boolean;
 begin
   if not FIsLogged then
@@ -101,65 +164,23 @@ begin
   FIsLogged := not Result;
 end;
 
-function TqBitTorrentWebUI.DoLogin: Boolean;
-var
-  sURL: String;
-  sDoc: String;
-  sCookie: String;
-  index: Integer;
-  iPos: Integer;
-begin
-  Result := False;
-  FHttp.Clear;
-  FHttp.Headers.Add('Content-Type: application/x-www-form-urlencoded');
-  sDoc := 'username='+FUserName+'&password='+FPassword;
-  FHttp.Document.WriteAnsiString(sDoc);
-  if FPort = 80 then
-  begin
-    sURL := 'http://'+FHost+'/login'
-  end
-  else
-  begin
-    sURL := 'http://'+FHost+':'+IntToStr(FPort)+'/login';
-  end;
-  FHttp.HTTPMethod('POST', sURL);
-  if FHttp.ResultCode = 200 then
-  begin
-    Result := True;
-    sCookie := '';
-    for index := 0 to FHttp.Cookies.Count - 1 do
-    begin
-      sCookie := FHttp.Cookies[index];
-      iPos := Pos('SID=', sCookie);
-      if iPos > 0 then
-      begin
-        FLoginCookie := Copy(sCookie, iPos+3, Length(sCookie));
-        Break;
-      end;
-    end;
-    FLoginCookie := sCookie;
-  end
-  else
-  begin
-    raise Exception.Create(
-      'Login failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
-    );
-  end;
-end;
-
 function TqBitTorrentWebUI.DoLogout: Boolean;
 var
   sURL: String;
+const
+  sPath = '/logout';
 begin
   Result := False;
   FHttp.Clear;
+  FHttp.UserAgent := sUserAgent;
+  FHttp.Cookies.Add('SID='+FLoginCookie);
   if FPort = 80 then
   begin
-    sURL := 'http://'+FHost+'/logout'
+    sURL := 'http://'+FHost+sPath;
   end
   else
   begin
-    sURL := 'http://'+FHost+':'+IntToStr(FPort)+'/logout';
+    sURL := 'http://'+FHost+':'+IntToStr(FPort)+sPath;
   end;
   FHttp.HTTPMethod('POST', sURL);
   if FHttp.ResultCode = 200 then
@@ -170,6 +191,106 @@ begin
   begin
     raise Exception.Create(
       'Logout failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
+    );
+  end;
+end;
+
+function TqBitTorrentWebUI.GetApiVersion: String;
+begin
+  if FIsLogged then
+  begin
+    Result := DoGetApiVersion;
+  end
+  else
+  begin
+    Result := '';
+    raise Exception.Create(
+      'You need to login first.'
+    );
+  end;
+end;
+
+function TqBitTorrentWebUI.DoGetApiVersion: String;
+var
+  sURL: String;
+  sVer: TStringStream;
+const
+  sPath = '/version/api';
+begin
+  Result := '';
+  FHttp.Clear;
+  FHttp.UserAgent := sUserAgent;
+  FHttp.Cookies.Add('SID='+FLoginCookie+';');
+  if FPort = 80 then
+  begin
+    sURL := 'http://'+FHost+sPath;
+  end
+  else
+  begin
+    sURL := 'http://'+FHost+':'+IntToStr(FPort)+sPath;
+  end;
+  FHttp.HTTPMethod('GET', sURL);
+  if FHttp.ResultCode = 200 then
+  begin
+    sVer := TStringStream.Create;
+    FHttp.Document.SaveToStream(sVer);
+    Result := sVer.DataString;
+    sVer.Free;
+  end
+  else
+  begin
+    raise Exception.Create(
+      'API Version failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
+    );
+  end;
+end;
+
+function TqBitTorrentWebUI.GetMinApiVersion: String;
+begin
+  if FIsLogged then
+  begin
+    Result := DoGetMinApiVersion;
+  end
+  else
+  begin
+    Result := '';
+    raise Exception.Create(
+      'You need to login first.'
+    );
+  end;
+end;
+
+function TqBitTorrentWebUI.DoGetMinApiVersion: String;
+var
+  sURL: String;
+  sVer: TStringStream;
+const
+  sPath = '/version/api_min';
+begin
+  Result := '';
+  FHttp.Clear;
+  FHttp.UserAgent := sUserAgent;
+  FHttp.Cookies.Add('SID='+FLoginCookie+';');
+  if FPort = 80 then
+  begin
+    sURL := 'http://'+FHost+sPath;
+  end
+  else
+  begin
+    sURL := 'http://'+FHost+':'+IntToStr(FPort)+sPath;
+  end;
+  FHttp.HTTPMethod('GET', sURL);
+  if FHttp.ResultCode = 200 then
+  begin
+    sVer := TStringStream.Create;
+    FHttp.Document.SaveToStream(sVer);
+    Result := sVer.DataString;
+    sVer.Free;
+  end
+  else
+  begin
+    raise Exception.Create(
+      'Minimum API Version failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
     );
   end;
 end;

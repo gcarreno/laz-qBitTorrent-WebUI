@@ -71,11 +71,39 @@
         <descr/>
         <seealso/>
       </element>
+      <!-- function result Visibility: default -->
+      <element name="TqBitTorrentWebUI.Login.Result">
+        <short>True if login succeded.</short>
+      </element>
       <!-- function Visibility: public -->
       <element name="TqBitTorrentWebUI.Logout">
         <short>Performs a Logout</short>
         <descr/>
         <seealso/>
+      </element>
+      <!-- function result Visibility: default -->
+      <element name="TqBitTorrentWebUI.Logout.Result">
+        <short>True if logout succeded.</short>
+      </element>
+      <!-- function Visibility: public -->
+      <element name="TqBitTorrentWebUI.GetApiVersion">
+        <short>Get the WebUI API version.</short>
+        <descr/>
+        <seealso/>
+      </element>
+      <!-- function result Visibility: default -->
+      <element name="TqBitTorrentWebUI.GetApiVersion.Result">
+        <short>A string with the WebUI API version.</short>
+      </element>
+      <!-- function Visibility: public -->
+      <element name="TqBitTorrentWebUI.GetMinApiVersion">
+        <short>Get the WebUI minimum accepted API version.</short>
+        <descr/>
+        <seealso/>
+      </element>
+      <!-- function result Visibility: default -->
+      <element name="TqBitTorrentWebUI.GetMinApiVersion.Result">
+        <short>A string with the WebUI minimum accepted API version.</short>
       </element>
     </module>
   </package>

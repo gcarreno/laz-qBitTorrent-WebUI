@@ -13,6 +13,8 @@ type
   { TfrmMain }
 
   TfrmMain = class(TForm)
+    actTestGetMinApiVersion: TAction;
+    actTestGetApiVersion: TAction;
     actTestLogout: TAction;
     actTestLogin: TAction;
     alMain: TActionList;
@@ -20,7 +22,12 @@ type
     actFileExit: TFileExit;
     btnTestLogout: TButton;
     btnFileExit: TButton;
+    btnTestGetAPIVersion: TButton;
+    btnTestGetMinAPiVersion: TButton;
     DividerBevel1: TDividerBevel;
+    mnuTestGetMinApiVersion: TMenuItem;
+    mnuTestGetAPIVersion: TMenuItem;
+    mnuSep1: TMenuItem;
     mnuTestLogout: TMenuItem;
     mnuTestLogin: TMenuItem;
     mnuTest: TMenuItem;
@@ -36,6 +43,8 @@ type
     qbttMain: TqBitTorrentWebUI;
     stLabelLog: TStaticText;
     stLabelInfo: TStaticText;
+    procedure actTestGetApiVersionExecute(Sender: TObject);
+    procedure actTestGetMinApiVersionExecute(Sender: TObject);
     procedure actTestLoginExecute(Sender: TObject);
     procedure actTestLogoutExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -71,6 +80,11 @@ begin
 {$ENDIF}
 end;
 
+procedure TfrmMain.FormCloseQuery(Sender: TObject; var CanClose: boolean);
+begin
+  CanClose := True;
+end;
+
 procedure TfrmMain.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   CloseAction := caFree;
@@ -99,7 +113,7 @@ begin
     bLoginResult := qbttMain.Login;
     if bLoginResult then
     begin
-      Log('Login succeded.');
+      Log(#9'Success.');
       Info('Cookies:');
       Info(qbttMain.LoginCookie);
     end
@@ -122,7 +136,7 @@ begin
     bLogoutResult := qbttMain.Logout;
     if bLogoutResult then
     begin
-      Log('Logout succeded.');
+      Log(#9'Success.');
     end
     else
     begin
@@ -134,9 +148,34 @@ begin
   end;
 end;
 
-procedure TfrmMain.FormCloseQuery(Sender: TObject; var CanClose: boolean);
+procedure TfrmMain.actTestGetApiVersionExecute(Sender: TObject);
+var
+  iAPIVersion: String;
 begin
-  CanClose := True;
+  Log('Getting API Version.');
+  try
+    iAPIVersion := qbttMain.GetApiVersion;
+    Log(#9'Success.');
+    Info('API Version: ' + iAPIVersion);
+  except
+    on E:Exception do
+      Log('Error: ' + E.Message);
+  end;
+end;
+
+procedure TfrmMain.actTestGetMinApiVersionExecute(Sender: TObject);
+var
+  iAPIVersion: String;
+begin
+  Log('Getting Minimum API Version.');
+  try
+    iAPIVersion := qbttMain.GetMinApiVersion;
+    Log(#9'Success.');
+    Info('Min API Version: ' + iAPIVersion);
+  except
+    on E:Exception do
+      Log('Error: ' + E.Message);
+  end;
 end;
 
 end.

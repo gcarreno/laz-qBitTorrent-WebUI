@@ -14,8 +14,8 @@ object frmMain: TfrmMain
   object psMain: TPairSplitter
     Cursor = crVSplit
     Left = 0
-    Height = 347
-    Top = 74
+    Height = 325
+    Top = 96
     Width = 710
     Align = alClient
     Position = 200
@@ -52,14 +52,14 @@ object frmMain: TfrmMain
     object pssLog: TPairSplitterSide
       Cursor = crArrow
       Left = 0
-      Height = 142
+      Height = 120
       Top = 205
       Width = 710
       ClientWidth = 710
-      ClientHeight = 142
+      ClientHeight = 120
       object memLog: TMemo
         Left = 0
-        Height = 120
+        Height = 98
         Top = 22
         Width = 710
         Align = alClient
@@ -79,11 +79,11 @@ object frmMain: TfrmMain
   end
   object panButtons: TPanel
     Left = 0
-    Height = 74
+    Height = 96
     Top = 0
     Width = 710
     Align = alTop
-    ClientHeight = 74
+    ClientHeight = 96
     ClientWidth = 710
     TabOrder = 1
     object btnTestLogin: TButton
@@ -121,6 +121,22 @@ object frmMain: TfrmMain
       Font.Style = [fsBold]
       ParentFont = False
     end
+    object btnTestGetAPIVersion: TButton
+      Left = 8
+      Height = 25
+      Top = 64
+      Width = 75
+      Action = actTestGetApiVersion
+      TabOrder = 3
+    end
+    object btnTestGetMinAPiVersion: TButton
+      Left = 88
+      Height = 25
+      Top = 64
+      Width = 91
+      Action = actTestGetMinApiVersion
+      TabOrder = 4
+    end
   end
   object qbttMain: TqBitTorrentWebUI
     UserName = 'admin'
@@ -147,6 +163,15 @@ object frmMain: TfrmMain
       object mnuTestLogout: TMenuItem
         Action = actTestLogout
       end
+      object mnuSep1: TMenuItem
+        Caption = '-'
+      end
+      object mnuTestGetAPIVersion: TMenuItem
+        Action = actTestGetApiVersion
+      end
+      object mnuTestGetMinApiVersion: TMenuItem
+        Action = actTestGetMinApiVersion
+      end
     end
   end
   object alMain: TActionList
@@ -168,6 +193,18 @@ object frmMain: TfrmMain
       Caption = 'Log&out'
       DisableIfNoHandler = False
       OnExecute = actTestLogoutExecute
+    end
+    object actTestGetApiVersion: TAction
+      Category = 'Test'
+      Caption = '&API Ver'
+      DisableIfNoHandler = False
+      OnExecute = actTestGetApiVersionExecute
+    end
+    object actTestGetMinApiVersion: TAction
+      Category = 'Test'
+      Caption = '&Min Api Ver'
+      DisableIfNoHandler = False
+      OnExecute = actTestGetMinApiVersionExecute
     end
   end
 end
