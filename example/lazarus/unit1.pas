@@ -13,6 +13,7 @@ type
   { TfrmMain }
 
   TfrmMain = class(TForm)
+    actTestGetqBitTorrentVersion: TAction;
     actTestGetMinApiVersion: TAction;
     actTestGetApiVersion: TAction;
     actTestLogout: TAction;
@@ -24,7 +25,9 @@ type
     btnFileExit: TButton;
     btnTestGetAPIVersion: TButton;
     btnTestGetMinAPiVersion: TButton;
+    btnTestGetqBitTorrentVersion: TButton;
     DividerBevel1: TDividerBevel;
+    mnuTestGetqBitTorrentVersion: TMenuItem;
     mnuTestGetMinApiVersion: TMenuItem;
     mnuTestGetAPIVersion: TMenuItem;
     mnuSep1: TMenuItem;
@@ -45,6 +48,7 @@ type
     stLabelInfo: TStaticText;
     procedure actTestGetApiVersionExecute(Sender: TObject);
     procedure actTestGetMinApiVersionExecute(Sender: TObject);
+    procedure actTestGetqBitTorrentVersionExecute(Sender: TObject);
     procedure actTestLoginExecute(Sender: TObject);
     procedure actTestLogoutExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -165,13 +169,28 @@ end;
 
 procedure TfrmMain.actTestGetMinApiVersionExecute(Sender: TObject);
 var
-  iAPIVersion: String;
+  iMinAPIVersion: String;
 begin
   Log('Getting Minimum API Version.');
   try
-    iAPIVersion := qbttMain.GetMinApiVersion;
+    iMinAPIVersion := qbttMain.GetMinApiVersion;
     Log(#9'Success.');
-    Info('Min API Version: ' + iAPIVersion);
+    Info('Min API Version: ' + iMinAPIVersion);
+  except
+    on E:Exception do
+      Log('Error: ' + E.Message);
+  end;
+end;
+
+procedure TfrmMain.actTestGetqBitTorrentVersionExecute(Sender: TObject);
+var
+  iqBitTorrentAPIVersion: String;
+begin
+  Log('Getting qBitTorrent Version.');
+  try
+    iqBitTorrentAPIVersion := qbttMain.GetqBitTorrentVersion;
+    Log(#9'Success.');
+    Info('qBitTorrent Version: ' + iqBitTorrentAPIVersion);
   except
     on E:Exception do
       Log('Error: ' + E.Message);

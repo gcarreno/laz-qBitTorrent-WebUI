@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-<title>TqBitTorrentWebUI.GetMinApiVersion</title>
+<title>TqBitTorrentWebUI.GetqBitTorrentVersion</title>
 <link rel="stylesheet" href="../fpdoc.css" type="text/css">
 
 </head>
@@ -13,17 +13,17 @@
 <td align="right"><span class="bartitle">Reference for unit 'qBitTorrentWebUI' (<a href="../index.html">#lazqBitTorrentWebUI</a>)</span></td>
 </tr>
 </table>
-<h1>TqBitTorrentWebUI.GetMinApiVersion</h1>
-<p>Get the WebUI minimum accepted API version.</p>
+<h1>TqBitTorrentWebUI.GetqBitTorrentVersion</h1>
+<p>Get qBitTorrent's version.</p>
 <h2>Declaration</h2>
-<p>Source position: qBitTorrentWebUI.pas line 47</p>
+<p>Source position: qBitTorrentWebUI.pas line 48</p>
 <table cellpadding="0" cellspacing="0">
 <tr>
-<td><p><tt><span class="code"> <span class="kw">public</span> <span class="kw">function</span> <a href="../qbittorrentwebui/tqbittorrentwebui.html">TqBitTorrentWebUI</a><span class="sym">.</span>GetMinApiVersion<span class="sym">: </span>string<span class="sym">;</span></span></tt></p></td>
+<td><p><tt><span class="code"> <span class="kw">public</span> <span class="kw">function</span> <a href="../qbittorrentwebui/tqbittorrentwebui.html">TqBitTorrentWebUI</a><span class="sym">.</span>GetqBitTorrentVersion<span class="sym">: </span>string<span class="sym">;</span></span></tt></p></td>
 </tr>
 </table>
 <h2>Function result</h2>
-<p>A string with the WebUI minimum accepted API version.</p>
+<p>A string with qBitTorrent's version.</p>
 <h2>Errors</h2>
 <p>Will throw an exception if not successfull.</p>
 <h2>Example</h2>
@@ -37,7 +37,7 @@
     <span class="cmt">{...}</span>
   <span class="kw">public</span>
     <span class="cmt">{...}</span>
-    <span class="kw">procedure</span> GetMinApiVersionExecute<span class="sym">(</span>Sender<span class="sym">:</span> TObject<span class="sym">)</span><span class="sym">;</span>
+    <span class="kw">procedure</span> GetqBitTorrentVersionExecute<span class="sym">(</span>Sender<span class="sym">:</span> TObject<span class="sym">)</span><span class="sym">;</span>
     <span class="cmt">{...}</span>
   <span class="kw">end</span><span class="sym">;</span>
 
@@ -46,17 +46,17 @@
 
 <span class="kw">implementation</span>
 
-prodecure TForm1<span class="sym">.</span>GetMinApiVersionExecute<span class="sym">(</span>Sender<span class="sym">:</span> TObject<span class="sym">)</span><span class="sym">;</span>
+prodecure TForm1<span class="sym">.</span>GetqBitTorrentVersionExecute<span class="sym">(</span>Sender<span class="sym">:</span> TObject<span class="sym">)</span><span class="sym">;</span>
 <span class="kw">var</span>
   sVersion<span class="sym">:</span> String<span class="sym">;</span>
 <span class="kw">begin</span>
   <span class="kw">try</span>
-    sversion <span class="sym">:=</span> Fqb<span class="sym">.</span>GetMinApiVersion
+    sversion <span class="sym">:=</span> Fqb<span class="sym">.</span>GetqBitTorrentVersion
      <span class="cmt">// Do something with the version</span>
   <span class="kw">except</span>
     <span class="kw">on</span> E<span class="sym">:</span>Exception <span class="kw">do</span>
     <span class="kw">begin</span>
-      <span class="cmt">// If GetMinApiVersion fails it will raise an exception</span>
+      <span class="cmt">// If GetqBitTorrentVersion fails it will raise an exception</span>
     <span class="kw">end</span><span class="sym">;</span>
   <span class="kw">end</span><span class="sym">;</span>
 <span class="kw">end</span><span class="sym">;</span>

@@ -2,9 +2,9 @@
 <fpdoc-descriptions>
   <package name="lazqBitTorrentWebUI">
     <!--
-      ====================================================================
-      qBitTorrentWebUI
-      ====================================================================
+         ====================================================================
+         qBitTorrentWebUI
+         ====================================================================
     -->
     <module name="qBitTorrentWebUI">
       <short>Component to access the WebUI of qBitTorrent.</short>
@@ -13,74 +13,74 @@
       </descr>
       <!-- unresolved type reference Visibility: default -->
       <element name="Classes">
-        <short/>
-        <descr/>
+        <short />
+        <descr />
         <errors />
-        <seealso/>
+        <seealso />
       </element>
       <!-- unresolved type reference Visibility: default -->
       <element name="SysUtils">
-        <short/>
-        <descr/>
+        <short />
+        <descr />
         <errors />
-        <seealso/>
+        <seealso />
       </element>
       <!-- object Visibility: default -->
       <element name="TqBitTorrentWebUI">
         <short>Implements an interface to access the WebUI of qBitTorrent.</short>
-        <descr/>
+        <descr />
         <errors />
-        <seealso/>
+        <seealso />
       </element>
       <!-- property Visibility: published -->
       <element name="TqBitTorrentWebUI.IsLogged">
         <short>Contains state of Login</short>
-        <descr/>
+        <descr />
         <errors />
-        <seealso/>
+        <seealso />
       </element>
       <!-- property Visibility: published -->
       <element name="TqBitTorrentWebUI.UserName">
         <short>Username to login to the qBittorrent client.</short>
-        <descr/>
+        <descr />
         <errors />
-        <seealso/>
+        <seealso />
       </element>
       <!-- property Visibility: published -->
       <element name="TqBitTorrentWebUI.Password">
         <short>Password to login to the qBittorrent client.</short>
-        <descr/>
+        <descr />
         <errors />
-        <seealso/>
+        <seealso />
       </element>
       <!-- property Visibility: published -->
       <element name="TqBitTorrentWebUI.Host">
         <short>Host/Address  for the qBittorrent client.</short>
-        <descr/>
+        <descr />
         <errors />
-        <seealso/>
+        <seealso />
       </element>
       <!-- property Visibility: published -->
       <element name="TqBitTorrentWebUI.Port">
         <short>Port  for the qBittorrent client.</short>
-        <descr/>
+        <descr />
         <errors />
-        <seealso/>
+        <seealso />
       </element>
       <!-- property Visibility: published -->
       <element name="TqBitTorrentWebUI.LoginCookie">
         <short>Cookie value from the Login call.</short>
-        <descr/>
+        <descr />
         <errors />
-        <seealso/>
+        <seealso />
       </element>
       <!-- function Visibility: public -->
       <element name="TqBitTorrentWebUI.Login">
         <short>Performs a Login</short>
-        <descr/>
+        <descr />
         <errors>Will throw an exception if not successfull.</errors>
         <example file="examples/login_example.pas" />
-        <seealso/>
+        <seealso />
       </element>
       <!-- function result Visibility: default -->
       <element name="TqBitTorrentWebUI.Login.Result">
@@ -89,9 +89,9 @@
       <!-- function Visibility: public -->
       <element name="TqBitTorrentWebUI.Logout">
         <short>Performs a Logout</short>
-        <descr/>
+        <descr />
         <errors>Will throw an exception if not successfull.</errors>
-        <seealso/>
+        <seealso />
         <example file="examples/logout_example.pas" />
       </element>
       <!-- function result Visibility: default -->
@@ -101,9 +101,9 @@
       <!-- function Visibility: public -->
       <element name="TqBitTorrentWebUI.GetApiVersion">
         <short>Get the WebUI API version.</short>
-        <descr/>
+        <descr />
         <errors>Will throw an exception if not successfull.</errors>
-        <seealso/>
+        <seealso />
         <example file="examples/getapiversion_example.pas" />
       </element>
       <!-- function result Visibility: default -->
@@ -113,14 +113,26 @@
       <!-- function Visibility: public -->
       <element name="TqBitTorrentWebUI.GetMinApiVersion">
         <short>Get the WebUI minimum accepted API version.</short>
-        <descr/>
+        <descr />
         <errors>Will throw an exception if not successfull.</errors>
         <example file="examples/getminapiversion_example.pas" />
-        <seealso/>
+        <seealso />
       </element>
       <!-- function result Visibility: default -->
       <element name="TqBitTorrentWebUI.GetMinApiVersion.Result">
         <short>A string with the WebUI minimum accepted API version.</short>
+      </element>
+      <!-- function Visibility: public -->
+      <element name="TqBitTorrentWebUI.GetqBitTorrentVersion">
+        <short>Get qBitTorrent's version.</short>
+        <descr />
+        <errors>Will throw an exception if not successfull.</errors>
+        <example file="examples/getqbittorrentversion_example.pas" />
+        <seealso />
+      </element>
+      <!-- function result Visibility: default -->
+      <element name="TqBitTorrentWebUI.GetqBitTorrentVersion.Result">
+        <short>A string with qBitTorrent's version.</short>
       </element>
     </module>
   </package>

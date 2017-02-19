@@ -137,6 +137,14 @@ object frmMain: TfrmMain
       Action = actTestGetMinApiVersion
       TabOrder = 4
     end
+    object btnTestGetqBitTorrentVersion: TButton
+      Left = 184
+      Height = 25
+      Top = 64
+      Width = 120
+      Action = actTestGetqBitTorrentVersion
+      TabOrder = 5
+    end
   end
   object qbttMain: TqBitTorrentWebUI
     UserName = 'admin'
@@ -172,6 +180,9 @@ object frmMain: TfrmMain
       object mnuTestGetMinApiVersion: TMenuItem
         Action = actTestGetMinApiVersion
       end
+      object mnuTestGetqBitTorrentVersion: TMenuItem
+        Action = actTestGetqBitTorrentVersion
+      end
     end
   end
   object alMain: TActionList
@@ -205,6 +216,12 @@ object frmMain: TfrmMain
       Caption = '&Min Api Ver'
       DisableIfNoHandler = False
       OnExecute = actTestGetMinApiVersionExecute
+    end
+    object actTestGetqBitTorrentVersion: TAction
+      Category = 'Test'
+      Caption = '&qBitTorrent Ver'
+      DisableIfNoHandler = False
+      OnExecute = actTestGetqBitTorrentVersionExecute
     end
   end
 end

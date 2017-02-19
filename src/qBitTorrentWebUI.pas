@@ -32,6 +32,7 @@ type
     // Get methods
     function DoGetApiVersion: String;
     function DoGetMinApiVersion: String;
+    function DoGetqBitTorrentVersion: String;
   protected
   public
     constructor Create(AOwner: TComponent); override;
@@ -44,6 +45,7 @@ type
     // Get methods
     function GetApiVersion: String;
     function GetMinApiVersion: String;
+    function GetqBitTorrentVersion: String;
 
     property IsLogged: Boolean
       read FIsLogged;
@@ -291,6 +293,56 @@ begin
   begin
     raise Exception.Create(
       'Minimum API Version failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
+    );
+  end;
+end;
+
+function TqBitTorrentWebUI.GetqBitTorrentVersion: String;
+begin
+  if FIsLogged then
+  begin
+    Result := DoGetqBitTorrentVersion;
+  end
+  else
+  begin
+    Result := '';
+    raise Exception.Create(
+      'You need to login first.'
+    );
+  end;
+end;
+
+function TqBitTorrentWebUI.DoGetqBitTorrentVersion: String;
+var
+  sURL: String;
+  sVer: TStringStream;
+const
+  sPath = '/version/qbittorrent';
+begin
+  Result := '';
+  FHttp.Clear;
+  FHttp.UserAgent := sUserAgent;
+  FHttp.Cookies.Add('SID='+FLoginCookie+';');
+  if FPort = 80 then
+  begin
+    sURL := 'http://'+FHost+sPath;
+  end
+  else
+  begin
+    sURL := 'http://'+FHost+':'+IntToStr(FPort)+sPath;
+  end;
+  FHttp.HTTPMethod('GET', sURL);
+  if FHttp.ResultCode = 200 then
+  begin
+    sVer := TStringStream.Create;
+    FHttp.Document.SaveToStream(sVer);
+    Result := sVer.DataString;
+    sVer.Free;
+  end
+  else
+  begin
+    raise Exception.Create(
+      'qBitTorrent Version failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
     );
   end;
 end;
