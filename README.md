@@ -67,7 +67,6 @@ begin
     end;
   end;
 end;
-
 ```
 
 #### Logout
@@ -108,7 +107,6 @@ begin
     end;
   end;
 end;
-
 ```
 
 ### GET Methods
@@ -151,7 +149,6 @@ begin
     end;
   end;
 end;
-
 ```
 
 #### GetMinApiVersion
@@ -192,5 +189,4 @@ begin
     end;
   end;
 end;
-
 ```

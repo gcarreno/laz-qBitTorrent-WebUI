@@ -24,5 +24,42 @@
 </table>
 <h2>Function result</h2>
 <p>True if login succeded.</p>
+<h2>Errors</h2>
+<p>Will throw an exception if not successfull.</p>
+<h2>Example</h2>
+<pre><span class="kw">uses</span>
+  qBitTorrentWebUI<span class="sym">;</span>
+
+<span class="kw">type</span>
+  TForm1 <span class="sym">=</span> <span class="kw">class</span><span class="sym">(</span>TForm<span class="sym">)</span>
+    <span class="cmt">{...}</span>
+    Fqb<span class="sym">:</span> TqBitTorrentWebUI<span class="sym">;</span>
+    <span class="cmt">{...}</span>
+  <span class="kw">public</span>
+    <span class="cmt">{...}</span>
+    <span class="kw">procedure</span> LoginExecute<span class="sym">(</span>Sender<span class="sym">:</span> TObject<span class="sym">)</span><span class="sym">;</span>
+    <span class="cmt">{...}</span>
+  <span class="kw">end</span><span class="sym">;</span>
+
+<span class="kw">var</span>
+  Form1<span class="sym">:</span> TForm1<span class="sym">;</span>
+
+<span class="kw">implementation</span>
+
+prodecure TForm1<span class="sym">.</span>LoginExecute<span class="sym">(</span>Sender<span class="sym">:</span> TObject<span class="sym">)</span><span class="sym">;</span>
+<span class="kw">begin</span>
+  <span class="kw">try</span>
+    <span class="kw">if</span> Fqb<span class="sym">.</span>Login <span class="kw">then</span>
+    <span class="kw">begin</span>
+      <span class="cmt">// Do something after a successfull login</span>
+    <span class="kw">end</span><span class="sym">;</span>
+  <span class="kw">except</span>
+    <span class="kw">on</span> E<span class="sym">:</span>Exception <span class="kw">do</span>
+    <span class="kw">begin</span>
+      <span class="cmt">// If login fails it will raise an exception</span>
+    <span class="kw">end</span><span class="sym">;</span>
+  <span class="kw">end</span><span class="sym">;</span>
+<span class="kw">end</span><span class="sym">;</span>
+</pre>
 </body>
 </html>
