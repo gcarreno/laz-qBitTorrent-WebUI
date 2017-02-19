@@ -31,5 +31,6 @@
 *.dll binary
 
 # Keep these files from archive/exports, mainly from production.
-.gitignore     export-ignore
-.gitattributes export-ignore
+.gitignore      export-ignore
+.gitattributes  export-ignore
+/docs/buildDocs export-ignore

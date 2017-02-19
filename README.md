@@ -3,9 +3,9 @@
 
 A Lazarus component to access the qBitTorrent Web UI
 
-##Dependencies
+## Dependencies
 
-###Ararat Synapse
+### Ararat Synapse
 
 This component depends on the [Ararat Synapse](http://synapse.ararat.cz/doku.php/start) Network Lib.
 
@@ -20,3 +20,165 @@ You can get it from one of these options:
 I'm using the [Online Package Manager](http://wiki.freepascal.org/Online_Package_Manager) and I'm testing this with version 40.1 of the Synapse Network lib.
 
 I've chosen not to put a package dependency on that lib so you can manage what version you want to use.
+
+The package has a path for my personal version of Synapse, so you may want to fix that once you decide to use it.
+
+## Usage
+
+### Authentication
+
+#### Login
+
+This allows you to login to the WebUI.
+
+You have to login before you can do anything else.
+
+```Pascal
+uses
+  qBitTorrentWebUI;
+
+type
+  Form1 = class(TForm)
+    {...}
+    Fqb: TqBitTorrentWebUI;
+    {...}
+  public
+    {...}
+    procedure LoginExecute(Sender: TObject);
+    {...}
+  end;
+
+implementation
+
+prodecure TForm1.LoginExecute(Sender: TObject);
+begin
+  try
+    if Fqb.Login then
+    begin
+      // Do something after a successfull login
+    end;
+  except
+    on E:Exception do
+    begin
+      // If login fails it will raise an exception
+    end;
+  end;
+end;
+
+```
+
+#### Logout
+
+This will log you out from the WebbUI.
+
+```Pascal
+uses
+  qBitTorrentWebUI;
+
+type
+  Form1 = class(TForm)
+    {...}
+    Fqb: TqBitTorrentWebUI;
+    {...}
+  public
+    {...}
+    procedure LogoutExecute(Sender: TObject);
+    {...}
+  end;
+
+implementation
+
+prodecure TForm1.LogoutExecute(Sender: TObject);
+begin
+  try
+    if Fqb.Logout then
+    begin
+      // Do something after a successfull logout
+    end;
+  except
+    on E:Exception do
+    begin
+      // If logout fails it will raise an exception
+    end;
+  end;
+end;
+
+```
+
+### GET Methods
+
+#### GetApiVersion
+
+This will retrieve the WebUI version.
+
+```Pascal
+uses
+  qBitTorrentWebUI;
+
+type
+  Form1 = class(TForm)
+    {...}
+    Fqb: TqBitTorrentWebUI;
+    {...}
+  public
+    {...}
+    procedure GetApiVersionExecute(Sender: TObject);
+    {...}
+  end;
+
+implementation
+
+prodecure TForm1.GetApiVersionExecute(Sender: TObject);
+var
+  sVersion: String;
+begin
+  try
+    sversion := Fqb.GetApiVersion
+     // Do something with the version
+  except
+    on E:Exception do
+    begin
+      // If GetApiVersion fails it will raise an exception
+    end;
+  end;
+end;
+
+```
+
+#### GetMinApiVersion
+
+This will retrieve the minimum WebUI version it supports.
+
+```Pascal
+uses
+  qBitTorrentWebUI;
+
+type
+  Form1 = class(TForm)
+    {...}
+    Fqb: TqBitTorrentWebUI;
+    {...}
+  public
+    {...}
+    procedure GetMinApiVersionExecute(Sender: TObject);
+    {...}
+  end;
+
+implementation
+
+prodecure TForm1.GetMinApiVersionExecute(Sender: TObject);
+var
+  sVersion: String;
+begin
+  try
+    sversion := Fqb.GetMinApiVersion
+     // Do something with the version
+  except
+    on E:Exception do
+    begin
+      // If GetMinApiVersion fails it will raise an exception
+    end;
+  end;
+end;
+
+```
