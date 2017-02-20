@@ -53,19 +53,15 @@ type
       read FLoginCookie;
   published
     property UserName: String
-      index 1
       read FUserName
       write FUserName;
     property Password: String
-      index 2
       read FPassword
       write FPassword;
     property Host: String
-      index 3
       read FHost
       write FHost;
     property Port: Integer
-      index 4
       read FPort
       write FPort
       default 8080;
