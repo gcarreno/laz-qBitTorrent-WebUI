@@ -33,6 +33,7 @@ type
     function DoGetApiVersion: String;
     function DoGetMinApiVersion: String;
     function DoGetqBitTorrentVersion: String;
+    function DoExecShutdown: Boolean;
   protected
   public
     constructor Create(AOwner: TComponent); override;
@@ -46,6 +47,7 @@ type
     function GetApiVersion: String;
     function GetMinApiVersion: String;
     function GetqBitTorrentVersion: String;
+    function ExecShutdown: Boolean;
 
     property IsLogged: Boolean
       read FIsLogged;
@@ -344,6 +346,51 @@ begin
   begin
     raise Exception.Create(
       'qBitTorrent Version failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
+    );
+  end;
+end;
+
+function TqBitTorrentWebUI.DoExecShutdown: Boolean;
+var
+  sURL: String;
+const
+  sPath = '/command/shutdown';
+begin
+  Result := False;
+  FHttp.Clear;
+  FHttp.UserAgent := sUserAgent;
+  if FPort = 80 then
+  begin
+    sURL := 'http://'+FHost+sPath;
+  end
+  else
+  begin
+    sURL := 'http://'+FHost+':'+IntToStr(FPort)+sPath;
+  end;
+  FHttp.HTTPMethod('GET', sURL);
+  if FHttp.ResultCode = 200 then
+  begin
+    Result := True;
+  end
+  else
+  begin
+    raise Exception.Create(
+      'Shutdown failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
+    );
+  end;
+end;
+
+function TqBitTorrentWebUI.ExecShutdown: Boolean;
+begin
+  if FIsLogged then
+  begin
+    Result := DoExecShutdown;
+  end
+  else
+  begin
+    Result := False;
+    raise Exception.Create(
+      'You need to login first.'
     );
   end;
 end;

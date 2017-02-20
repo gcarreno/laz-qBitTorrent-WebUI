@@ -130,9 +130,21 @@
         <example file="examples/getqbittorrentversion_example.pas" />
         <seealso />
       </element>
+      <!-- function Visibility: public -->
+      <element name="TqBitTorrentWebUI.ExecShutdown">
+        <short>Executes the command to shutdown(close) the qBitTorrent client</short>
+        <descr />
+        <errors>Will throw an exception if not successfull.</errors>
+        <example file="examples/execshutdown_example.pas" />
+        <seealso />
+      </element>
       <!-- function result Visibility: default -->
       <element name="TqBitTorrentWebUI.GetqBitTorrentVersion.Result">
         <short>A string with qBitTorrent's version.</short>
+      </element>
+      <!-- function result Visibility: default -->
+      <element name="TqBitTorrentWebUI.ExecShutdown.Result">
+        <short>True if shutdown succeded.</short>
       </element>
     </module>
   </package>

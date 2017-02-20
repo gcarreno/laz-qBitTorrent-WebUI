@@ -2,22 +2,21 @@ object frmMain: TfrmMain
   Left = 419
   Height = 421
   Top = 115
-  Width = 710
+  Width = 699
   Caption = 'frmMain'
   ClientHeight = 421
-  ClientWidth = 710
+  ClientWidth = 699
   Menu = mmMain
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
-  LCLVersion = '1.7'
   Visible = False
   object psMain: TPairSplitter
     Cursor = crVSplit
     Left = 0
-    Height = 325
-    Top = 96
-    Width = 710
+    Height = 269
+    Top = 152
+    Width = 699
     Align = alClient
     Position = 200
     SplitterType = pstVertical
@@ -26,14 +25,14 @@ object frmMain: TfrmMain
       Left = 0
       Height = 200
       Top = 0
-      Width = 710
-      ClientWidth = 710
+      Width = 699
+      ClientWidth = 699
       ClientHeight = 200
       object memInfo: TMemo
         Left = 0
         Height = 180
         Top = 20
-        Width = 710
+        Width = 699
         Align = alClient
         ReadOnly = True
         ScrollBars = ssAutoVertical
@@ -43,7 +42,7 @@ object frmMain: TfrmMain
         Left = 0
         Height = 20
         Top = 0
-        Width = 710
+        Width = 699
         Align = alTop
         Caption = 'Info:'
         FocusControl = memInfo
@@ -53,16 +52,16 @@ object frmMain: TfrmMain
     object pssLog: TPairSplitterSide
       Cursor = crArrow
       Left = 0
-      Height = 120
+      Height = 64
       Top = 205
-      Width = 710
-      ClientWidth = 710
-      ClientHeight = 120
+      Width = 699
+      ClientWidth = 699
+      ClientHeight = 64
       object memLog: TMemo
         Left = 0
-        Height = 98
+        Height = 42
         Top = 22
-        Width = 710
+        Width = 699
         Align = alClient
         ScrollBars = ssAutoVertical
         TabOrder = 0
@@ -71,7 +70,7 @@ object frmMain: TfrmMain
         Left = 0
         Height = 22
         Top = 0
-        Width = 710
+        Width = 699
         Align = alTop
         Caption = 'Log:'
         TabOrder = 1
@@ -80,12 +79,12 @@ object frmMain: TfrmMain
   end
   object panButtons: TPanel
     Left = 0
-    Height = 96
+    Height = 152
     Top = 0
-    Width = 710
+    Width = 699
     Align = alTop
-    ClientHeight = 96
-    ClientWidth = 710
+    ClientHeight = 152
+    ClientWidth = 699
     TabOrder = 1
     object btnTestLogin: TButton
       Left = 8
@@ -104,7 +103,7 @@ object frmMain: TfrmMain
       TabOrder = 1
     end
     object btnFileExit: TButton
-      Left = 621
+      Left = 610
       Height = 25
       Top = 8
       Width = 75
@@ -112,11 +111,11 @@ object frmMain: TfrmMain
       Anchors = [akTop, akRight]
       TabOrder = 2
     end
-    object DividerBevel1: TDividerBevel
+    object divbGetMethhods: TDividerBevel
       Left = 8
       Height = 17
       Top = 40
-      Width = 687
+      Width = 676
       Caption = 'Get Methods'
       Anchors = [akTop, akLeft, akRight]
       Font.Style = [fsBold]
@@ -145,6 +144,25 @@ object frmMain: TfrmMain
       Width = 120
       Action = actTestGetqBitTorrentVersion
       TabOrder = 5
+    end
+    object divbCommands: TDividerBevel
+      Left = 8
+      Height = 17
+      Top = 96
+      Width = 676
+      Caption = 'Commands'
+      Anchors = [akTop, akLeft, akRight]
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Button1: TButton
+      Left = 599
+      Height = 25
+      Top = 120
+      Width = 85
+      Action = actTestExecShutdown
+      Anchors = [akTop, akRight]
+      TabOrder = 6
     end
   end
   object qbttMain: TqBitTorrentWebUI
@@ -183,6 +201,12 @@ object frmMain: TfrmMain
       end
       object mnuTestGetqBitTorrentVersion: TMenuItem
         Action = actTestGetqBitTorrentVersion
+      end
+      object mnuSep2: TMenuItem
+        Caption = '-'
+      end
+      object mnuTestExecShutdown: TMenuItem
+        Action = actTestExecShutdown
       end
     end
   end
@@ -223,6 +247,12 @@ object frmMain: TfrmMain
       Caption = '&qBitTorrent Ver'
       DisableIfNoHandler = False
       OnExecute = actTestGetqBitTorrentVersionExecute
+    end
+    object actTestExecShutdown: TAction
+      Category = 'Test'
+      Caption = 'S&hutdown'
+      DisableIfNoHandler = False
+      OnExecute = actTestExecShutdownExecute
     end
   end
 end

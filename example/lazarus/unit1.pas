@@ -13,6 +13,7 @@ type
   { TfrmMain }
 
   TfrmMain = class(TForm)
+    actTestExecShutdown: TAction;
     actTestGetqBitTorrentVersion: TAction;
     actTestGetMinApiVersion: TAction;
     actTestGetApiVersion: TAction;
@@ -26,7 +27,11 @@ type
     btnTestGetAPIVersion: TButton;
     btnTestGetMinAPiVersion: TButton;
     btnTestGetqBitTorrentVersion: TButton;
-    DividerBevel1: TDividerBevel;
+    Button1: TButton;
+    divbGetMethhods: TDividerBevel;
+    divbCommands: TDividerBevel;
+    mnuTestExecShutdown: TMenuItem;
+    mnuSep2: TMenuItem;
     mnuTestGetqBitTorrentVersion: TMenuItem;
     mnuTestGetMinApiVersion: TMenuItem;
     mnuTestGetAPIVersion: TMenuItem;
@@ -46,6 +51,7 @@ type
     qbttMain: TqBitTorrentWebUI;
     stLabelLog: TStaticText;
     stLabelInfo: TStaticText;
+    procedure actTestExecShutdownExecute(Sender: TObject);
     procedure actTestGetApiVersionExecute(Sender: TObject);
     procedure actTestGetMinApiVersionExecute(Sender: TObject);
     procedure actTestGetqBitTorrentVersionExecute(Sender: TObject);
@@ -123,7 +129,7 @@ begin
     end
     else
     begin
-      Log('Login failed.');
+      Log(#9'Failed.');
     end;
   except
     on E:Exception do
@@ -144,7 +150,7 @@ begin
     end
     else
     begin
-      Log('Logout failed.');
+      Log(#9'Failed.');
     end;
   except
     on E:Exception do
@@ -191,6 +197,27 @@ begin
     iqBitTorrentAPIVersion := qbttMain.GetqBitTorrentVersion;
     Log(#9'Success.');
     Info('qBitTorrent Version: ' + iqBitTorrentAPIVersion);
+  except
+    on E:Exception do
+      Log('Error: ' + E.Message);
+  end;
+end;
+
+procedure TfrmMain.actTestExecShutdownExecute(Sender: TObject);
+var
+  bShutdownResult: Boolean;
+begin
+  Log('Shutting client down.');
+  try
+    bShutdownResult := qbttMain.ExecShutdown;
+    if bShutdownResult then
+    begin
+      Log(#9'Success.');
+    end
+    else
+    begin
+      Log(#9'Failed.');
+    end;
   except
     on E:Exception do
       Log('Error: ' + E.Message);

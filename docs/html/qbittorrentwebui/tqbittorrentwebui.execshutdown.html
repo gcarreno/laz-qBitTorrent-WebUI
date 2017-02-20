@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-<title>TqBitTorrentWebUI.Logout</title>
+<title>TqBitTorrentWebUI.ExecShutdown</title>
 <link rel="stylesheet" href="../fpdoc.css" type="text/css">
 
 </head>
@@ -13,17 +13,17 @@
 <td align="right"><span class="bartitle">Reference for unit 'qBitTorrentWebUI' (<a href="../index.html">#lazqBitTorrentWebUI</a>)</span></td>
 </tr>
 </table>
-<h1>TqBitTorrentWebUI.Logout</h1>
-<p>Performs a Logout</p>
+<h1>TqBitTorrentWebUI.ExecShutdown</h1>
+<p>Executes the command to shutdown(close) the qBitTorrent client</p>
 <h2>Declaration</h2>
-<p>Source position: qBitTorrentWebUI.pas line 44</p>
+<p>Source position: qBitTorrentWebUI.pas line 50</p>
 <table cellpadding="0" cellspacing="0">
 <tr>
-<td><p><tt><span class="code"> <span class="kw">public</span> <span class="kw">function</span> <a href="../qbittorrentwebui/tqbittorrentwebui.html">TqBitTorrentWebUI</a><span class="sym">.</span>Logout<span class="sym">: </span>Boolean<span class="sym">;</span></span></tt></p></td>
+<td><p><tt><span class="code"> <span class="kw">public</span> <span class="kw">function</span> <a href="../qbittorrentwebui/tqbittorrentwebui.html">TqBitTorrentWebUI</a><span class="sym">.</span>ExecShutdown<span class="sym">: </span>Boolean<span class="sym">;</span></span></tt></p></td>
 </tr>
 </table>
 <h2>Function result</h2>
-<p>True if logout succeded.</p>
+<p>True if shutdown succeded.</p>
 <h2>Errors</h2>
 <p>Will throw an exception if not successfull.</p>
 <h2>Example</h2>
@@ -37,7 +37,7 @@
     <span class="cmt">{...}</span>
   <span class="kw">public</span>
     <span class="cmt">{...}</span>
-    <span class="kw">procedure</span> LogoutExecute<span class="sym">(</span>Sender<span class="sym">:</span> TObject<span class="sym">)</span><span class="sym">;</span>
+    <span class="kw">procedure</span> ExecShutdownExecute<span class="sym">(</span>Sender<span class="sym">:</span> TObject<span class="sym">)</span><span class="sym">;</span>
     <span class="cmt">{...}</span>
   <span class="kw">end</span><span class="sym">;</span>
 
@@ -46,17 +46,17 @@
 
 <span class="kw">implementation</span>
 
-prodecure TForm1<span class="sym">.</span>LogoutExecute<span class="sym">(</span>Sender<span class="sym">:</span> TObject<span class="sym">)</span><span class="sym">;</span>
+prodecure TForm1<span class="sym">.</span>ExecShutdownExecute<span class="sym">(</span>Sender<span class="sym">:</span> TObject<span class="sym">)</span><span class="sym">;</span>
 <span class="kw">begin</span>
   <span class="kw">try</span>
-    <span class="kw">if</span> Fqb<span class="sym">.</span>Logout <span class="kw">then</span>
+    <span class="kw">if</span> Fqb<span class="sym">.</span>ExecShutdownExecute <span class="kw">then</span>
     <span class="kw">begin</span>
-      <span class="cmt">// Do something after a successfull logout</span>
+      <span class="cmt">// Do something after a successfull shutdown</span>
     <span class="kw">end</span><span class="sym">;</span>
   <span class="kw">except</span>
     <span class="kw">on</span> E<span class="sym">:</span>Exception <span class="kw">do</span>
     <span class="kw">begin</span>
-      <span class="cmt">// If logout fails it will raise an exception</span>
+      <span class="cmt">// If shutdown fails it will raise an exception</span>
     <span class="kw">end</span><span class="sym">;</span>
   <span class="kw">end</span><span class="sym">;</span>
 <span class="kw">end</span><span class="sym">;</span>
