@@ -53,17 +53,22 @@ type
       read FLoginCookie;
   published
     property UserName: String
+      index 1
       read FUserName
       write FUserName;
     property Password: String
+      index 2
       read FPassword
       write FPassword;
     property Host: String
+      index 3
       read FHost
       write FHost;
     property Port: Integer
+      index 4
       read FPort
-      write FPort;
+      write FPort
+      default 8080;
     // TODO: Add some Notifications for HTTP access:
     // Like Login and such
   end;
@@ -71,7 +76,7 @@ type
 implementation
 
 const
-  sUserAgent = 'lazqBitTorrentWebUI/0.1.0.3';
+  sUserAgent = 'lazqBitTorrentWebUI/0.1.0.6';
 
 { TqBitTorrentWebUI }
 
@@ -80,8 +85,8 @@ begin
   inherited Create(AOwner);
   FUserName := 'admin';
   FPassword := 'admin';
-  FHost := 'localhost';
-  FPort := 9090;
+  FHost := '127.0.0.1';
+  FPort := 8080;
   FHttp := THTTPSend.Create;
   FIsLogged := False;
 end;

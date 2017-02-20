@@ -111,8 +111,8 @@ var
   bLoginResult: Boolean;
 begin
   Log('About to login.');
-  qbttMain.UserName := 'qBitTorrentWebUI';
-  qbttMain.Password := 'Password';
+  //qbttMain.UserName := 'qBitTorrentWebUI';
+  //qbttMain.Password := 'Password';
   try
     bLoginResult := qbttMain.Login;
     if bLoginResult then

@@ -10,6 +10,7 @@ object frmMain: TfrmMain
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
+  LCLVersion = '1.7'
   Visible = False
   object psMain: TPairSplitter
     Cursor = crVSplit
@@ -147,9 +148,9 @@ object frmMain: TfrmMain
     end
   end
   object qbttMain: TqBitTorrentWebUI
-    UserName = 'admin'
-    Password = 'admin'
-    Host = 'localhost'
+    UserName = 'qBitTorrentWebUI'
+    Password = 'Password'
+    Host = '127.0.0.1'
     Port = 9090
     Left = 576
     Top = 8
