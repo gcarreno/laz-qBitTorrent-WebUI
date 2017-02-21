@@ -17,7 +17,6 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
-        <IsVisibleTab Value="True"/>
         <TopLine Value="209"/>
         <CursorPos X="44" Y="227"/>
         <UsageCount Value="53"/>
@@ -39,9 +38,10 @@
       </Unit3>
       <Unit4>
         <Filename Value="../../src/qBitTorrentWebUI.pas"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="511"/>
-        <CursorPos X="5" Y="530"/>
+        <TopLine Value="463"/>
+        <CursorPos X="7" Y="479"/>
         <UsageCount Value="26"/>
         <Loaded Value="True"/>
       </Unit4>
