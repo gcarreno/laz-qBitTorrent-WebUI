@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fpdoc-descriptions>
+  <package name="lazqBitTorrentWebUI">
+    <!--
+         ====================================================================
+         qBTorrents
+         ====================================================================
+    -->
+    <module name="qBTorrents">
+      <short>Unit containing a container for torrents.</short>
+      <descr>
+        <p>This unit contains a set of objects to suport the torrents data aquired from the API.</p>
+      </descr>
+      <!-- unresolved type reference Visibility: default -->
+      <element name="System">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- unresolved type reference Visibility: default -->
+      <element name="Classes">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- unresolved type reference Visibility: default -->
+      <element name="Contnrs">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- unresolved type reference Visibility: default -->
+      <element name="SysUtils">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+    </module>
+  </package>
+</fpdoc-descriptions>

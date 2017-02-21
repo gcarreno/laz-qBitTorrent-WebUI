@@ -48,7 +48,7 @@
       </element>
       <!-- property Visibility: public -->
       <element name="TqBitTorrentWebUI.IsLogged">
-        <short>Contains state of Login</short>
+        <short>Contains state of Login.</short>
         <descr />
         <errors />
         <seealso />
@@ -180,40 +180,6 @@
       <!-- function result Visibility: default -->
       <element name="TqBitTorrentWebUI.GetTorrents.Result">
         <short>True if query of torrents succeded.</short>
-      </element>
-    </module>
-    <module name="qBTorrents">
-      <short>Unit containing a container for torrents.</short>
-      <descr>
-        <p>This unit contains a set of objects to suport the torrents data aquired from the API.</p>
-      </descr>
-      <!-- unresolved type reference Visibility: default -->
-      <element name="System">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
-      </element>
-      <!-- unresolved type reference Visibility: default -->
-      <element name="Classes">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
-      </element>
-      <!-- unresolved type reference Visibility: default -->
-      <element name="Contnrs">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
-      </element>
-      <!-- unresolved type reference Visibility: default -->
-      <element name="SysUtils">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
       </element>
     </module>
   </package>
