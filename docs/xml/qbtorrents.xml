@@ -13,39 +13,37 @@
       </descr>
       <!-- unresolved type reference Visibility: default -->
       <element name="System">
-        <short/>
-        <descr/>
-        <errors/>
-        <seealso/>
+        <short />
+        <descr />
+        <errors />
+        <seealso />
       </element>
       <!-- unresolved type reference Visibility: default -->
       <element name="Classes">
-        <short/>
-        <descr/>
-        <errors/>
-        <seealso/>
+        <short />
+        <descr />
+        <errors />
+        <seealso />
       </element>
       <!-- unresolved type reference Visibility: default -->
       <element name="Contnrs">
-        <short/>
-        <descr/>
-        <errors/>
-        <seealso/>
+        <short />
+        <descr />
+        <errors />
+        <seealso />
       </element>
       <!-- unresolved type reference Visibility: default -->
       <element name="SysUtils">
-        <short/>
-        <descr/>
-        <errors/>
-        <seealso/>
+        <short />
+        <descr />
+        <errors />
+        <seealso />
       </element>
       <!-- enumeration type Visibility: default -->
       <element name="TqBTorrentState">
-        <short>
-          Torrent States.
-        </short>
-        <descr/>
-        <seealso/>
+        <short>Torrent States.</short>
+        <descr />
+        <seealso />
       </element>
       <!-- enumeration value Visibility: default -->
       <element name="TqBTorrentState.tsError">
@@ -101,62 +99,204 @@
       </element>
       <!-- object Visibility: default -->
       <element name="TqBTorrent">
-        <short>
-          Container class for a single torrent.
-        </short>
-        <descr/>
-        <errors/>
-        <seealso/>
+        <short>Container class for a single torrent.</short>
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrent.Hash">
+        <short>Torrent hash.</short>
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrent.Name">
+        <short>Torrent name.</short>
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrent.Size">
+        <short>Total size (bytes) of files selected for download.</short>
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrent.Progress">
+        <short>Torrent progress (percentage/100).</short>
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrent.DlSpeed">
+        <short>Torrent download speed (bytes/s).</short>
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrent.UpSpeed">
+        <short>Torrent upload speed (bytes/s).</short>
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrent.Priority">
+        <short>Torrent priority. Returns -1 if queuing is disabled or torrent is in seed mode.</short>
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrent.NumSeeds">
+        <short>Number of seeds connected to.</short>
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrent.NumComplete">
+        <short>Number of seeds in the swarm.</short>
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrent.NumLeechs">
+        <short>Number of leechers connected to.</short>
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrent.NumIncomplete">
+        <short>Number of leechers in the swarm.</short>
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrent.Ratio">
+        <short>Torrent share ratio. Max ratio value: 9999.</short>
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrent.Eta">
+        <short>Torrent ETA (seconds).</short>
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrent.State">
+        <short>Torrent state.</short>
+        <descr />
+        <seealso>
+          <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link>
+        </seealso>
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrent.SeqDl">
+        <short>True if sequential download is enabled.</short>
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrent.FirstLastPiecePrioritized">
+        <short>True if first last piece are prioritized.</short>
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrent.Category">
+        <short>Category of the torrent.</short>
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrent.SuperSeeding">
+        <short>True if super seeding is enabled.</short>
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrent.ForceStart">
+        <short>True if force start is enabled for this torrent.</short>
+        <descr />
+        <seealso />
       </element>
       <!-- object Visibility: default -->
       <element name="TqBTorrents">
         <short>
-          Container class for a list of <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrent">TqBTorrent</link>.
+          Container class for a list of
+          <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrent">TqBTorrent</link>
+          .
         </short>
-        <descr/>
-        <errors/>
-        <seealso/>
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrents.Items">
+        <short>Propert to access the list of <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrent">TqBTorrent</link>.</short>
+        <descr />
+        <seealso />
+      </element>
+      <!-- argument Visibility: public -->
+      <element name="TqBTorrents.Items.Index">
+        <short />
       </element>
       <!-- function Visibility: default -->
       <element name="StrToqBState">
         <short>
-          Translates from <var>String</var> to <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link>.
+          Translates from
+          <var>String</var>
+          to
+          <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link>
+          .
         </short>
-        <descr/>
-        <errors/>
-        <seealso/>
+        <descr />
+        <errors />
+        <seealso />
       </element>
       <!-- function result Visibility: default -->
       <element name="StrToqBState.Result">
         <short>
-          The translated <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link>.
+          The translated
+          <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link>
+          .
         </short>
       </element>
       <!-- argument Visibility: default -->
       <element name="StrToqBState.aState">
         <short>
-          The <var>String</var> to be translated.
+          The
+          <var>String</var>
+          to be translated.
         </short>
       </element>
       <!-- function Visibility: default -->
       <element name="qBStateToStr">
         <short>
-          Translates from <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link> to <var>String</var>.
+          Translates from
+          <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link>
+          to
+          <var>String</var>
+          .
         </short>
-        <descr/>
-        <errors/>
-        <seealso/>
+        <descr />
+        <errors />
+        <seealso />
       </element>
       <!-- function result Visibility: default -->
       <element name="qBStateToStr.Result">
         <short>
-          The translated <var>String</var>.
+          The translated
+          <var>String</var>
+          .
         </short>
       </element>
       <!-- argument Visibility: default -->
       <element name="qBStateToStr.aState">
         <short>
-          The <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link> to be translated.
+          The
+          <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link>
+          to be translated.
         </short>
       </element>
     </module>

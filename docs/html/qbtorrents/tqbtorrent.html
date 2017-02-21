@@ -15,7 +15,7 @@
 </table>
 <h1>TqBTorrent</h1>
 <p>[<a href="../qbtorrents/tqbtorrent-1.html" onClick="window.open('../qbtorrents/tqbtorrent-1.html', 'list', 'dependent=yes,resizable=yes,scrollbars=yes,height=400,width=300'); return false;">Properties</a> (<a href="../qbtorrents/tqbtorrent-2.html" onClick="window.open('../qbtorrents/tqbtorrent-2.html', 'list', 'dependent=yes,resizable=yes,scrollbars=yes,height=400,width=300'); return false;">by Name</a>)] [<a href="../qbtorrents/tqbtorrent-3.html" onClick="window.open('../qbtorrents/tqbtorrent-3.html', 'list', 'dependent=yes,resizable=yes,scrollbars=yes,height=400,width=300'); return false;">Methods</a> (<a href="../qbtorrents/tqbtorrent-4.html" onClick="window.open('../qbtorrents/tqbtorrent-4.html', 'list', 'dependent=yes,resizable=yes,scrollbars=yes,height=400,width=300'); return false;">by Name</a>)] [<a href="../qbtorrents/tqbtorrent-5.html" onClick="window.open('../qbtorrents/tqbtorrent-5.html', 'list', 'dependent=yes,resizable=yes,scrollbars=yes,height=400,width=300'); return false;">Events</a> (<a href="../qbtorrents/tqbtorrent-6.html" onClick="window.open('../qbtorrents/tqbtorrent-6.html', 'list', 'dependent=yes,resizable=yes,scrollbars=yes,height=400,width=300'); return false;">by Name</a>)] </p>
-<p>Container class for a single torrent.         </p>
+<p>Container class for a single torrent.</p>
 <h2>Declaration</h2>
 <p>Source position: qBTorrents.pas line 52</p>
 <table cellpadding="0" cellspacing="0">
@@ -33,60 +33,98 @@
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.hash.html">Hash</a><span class="sym">: </span>string<span class="sym">;</span>  [rw]</span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">Torrent hash.</p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.name.html">Name</a><span class="sym">: </span>string<span class="sym">;</span>  [rw]</span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">Torrent name.</p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.size.html">Size</a><span class="sym">: </span>Int64<span class="sym">;</span>  [rw]</span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">Total size (bytes) of files selected for download.</p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.progress.html">Progress</a><span class="sym">: </span>Double<span class="sym">;</span>  [rw]</span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">Torrent progress (percentage/100).</p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.dlspeed.html">DlSpeed</a><span class="sym">: </span>Integer<span class="sym">;</span>  [rw]</span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">Torrent download speed (bytes/s).</p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.upspeed.html">UpSpeed</a><span class="sym">: </span>Integer<span class="sym">;</span>  [rw]</span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">Torrent upload speed (bytes/s).</p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.priority.html">Priority</a><span class="sym">: </span>Integer<span class="sym">;</span>  [rw]</span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">Torrent priority. Returns -1 if queuing is disabled or torrent is in seed mode.</p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.numseeds.html">NumSeeds</a><span class="sym">: </span>Integer<span class="sym">;</span>  [rw]</span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">Number of seeds connected to.</p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.numcomplete.html">NumComplete</a><span class="sym">: </span>Integer<span class="sym">;</span>  [rw]</span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">Number of seeds in the swarm.</p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.numleechs.html">NumLeechs</a><span class="sym">: </span>Integer<span class="sym">;</span>  [rw]</span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">Number of leechers connected to.</p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.numincomplete.html">NumIncomplete</a><span class="sym">: </span>Integer<span class="sym">;</span>  [rw]</span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">Number of leechers in the swarm.</p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.ratio.html">Ratio</a><span class="sym">: </span>Double<span class="sym">;</span>  [rw]</span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">Torrent share ratio. Max ratio value: 9999.</p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.eta.html">Eta</a><span class="sym">: </span>Integer<span class="sym">;</span>  [rw]</span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">Torrent ETA (seconds).</p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.state.html">State</a><span class="sym">: </span><a href="../qbtorrents/tqbtorrentstate.html">TqBTorrentState</a><span class="sym">;</span>  [rw]</span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">Torrent state.</p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.seqdl.html">SeqDl</a><span class="sym">: </span>Boolean<span class="sym">;</span>  [rw]</span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">True if sequential download is enabled.</p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.firstlastpieceprioritized.html">FirstLastPiecePrioritized</a><span class="sym">: </span>Boolean<span class="sym">;</span>  [rw]</span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">True if first last piece are prioritized.</p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.category.html">Category</a><span class="sym">: </span>string<span class="sym">;</span>  [rw]</span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">Category of the torrent.</p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.superseeding.html">SuperSeeding</a><span class="sym">: </span>Boolean<span class="sym">;</span>  [rw]</span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">True if super seeding is enabled.</p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.forcestart.html">ForceStart</a><span class="sym">: </span>Boolean<span class="sym">;</span>  [rw]</span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">True if force start is enabled for this torrent.</p></td>
 </tr>
 <tr>
 <td><p><tt><span class="code"></span></tt></p></td>
@@ -97,7 +135,7 @@
 <tr>
 <td align="center" valign="top"><p><tt><span class="code"><a href="../qbtorrents/tqbtorrent.html">TqBTorrent</a></span></tt></p></td>
 <td><p>&nbsp;&nbsp;</p></td>
-<td><p class="cmt">Container class for a single torrent.         </p></td>
+<td><p class="cmt">Container class for a single torrent.</p></td>
 </tr>
 <tr>
 <td align="center">|</td>
