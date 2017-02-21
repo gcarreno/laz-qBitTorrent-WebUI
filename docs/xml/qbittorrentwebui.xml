@@ -13,140 +13,207 @@
       </descr>
       <!-- unresolved type reference Visibility: default -->
       <element name="Classes">
-        <short/>
-        <descr/>
-        <errors/>
-        <seealso/>
+        <short />
+        <descr />
+        <errors />
+        <seealso />
       </element>
       <!-- unresolved type reference Visibility: default -->
       <element name="SysUtils">
-        <short/>
-        <descr/>
-        <errors/>
-        <seealso/>
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- unresolved type reference Visibility: default -->
+      <element name="HTTPSend">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- unresolved type reference Visibility: default -->
+      <element name="qBTorrents">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
       </element>
       <!-- object Visibility: default -->
       <element name="TqBitTorrentWebUI">
         <short>Implements an interface to access the WebUI of qBitTorrent.</short>
-        <descr/>
-        <errors/>
-        <seealso/>
+        <descr />
+        <errors />
+        <seealso />
       </element>
-      <!-- property Visibility: published -->
+      <!-- property Visibility: public -->
       <element name="TqBitTorrentWebUI.IsLogged">
         <short>Contains state of Login</short>
-        <descr/>
-        <errors/>
-        <seealso/>
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBitTorrentWebUI.LoginCookie">
+        <short>Cookie value from the Login.</short>
+        <descr />
+        <errors />
+        <seealso>
+          <link id="qBitTorrentWebUI.TqBitTorrentWebUI.Active">TqBitTorrentWebUI.Active</link>
+        </seealso>
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBitTorrentWebUI.Torrents">
+        <short>Contains the list of torrents</short>
+        <descr />
+        <errors />
+        <seealso>
+          <link id="qBitTorrentWebUI.TqBitTorrentWebUI.GetTorrents">TqBitTorrentWebUI.GetTorrents</link>
+        </seealso>
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBitTorrentWebUI.APIVersion">
+        <short>Contains the version of the API.</short>
+        <descr />
+        <errors />
+        <seealso>
+          <link id="qBitTorrentWebUI.TqBitTorrentWebUI.Active">TqBitTorrentWebUI.Active</link>
+        </seealso>
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBitTorrentWebUI.MinAPIVersion">
+        <short>Contains the minimum version the API supports.</short>
+        <descr />
+        <errors />
+        <seealso>
+          <link id="qBitTorrentWebUI.TqBitTorrentWebUI.Active">TqBitTorrentWebUI.Active</link>
+        </seealso>
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBitTorrentWebUI.qBitTorrentVersion">
+        <short>Contains the version of the qBitTorrent client.</short>
+        <descr />
+        <errors />
+        <seealso>
+          <link id="qBitTorrentWebUI.TqBitTorrentWebUI.Active">TqBitTorrentWebUI.Active</link>
+        </seealso>
+      </element>
+      <!-- property Visibility: published -->
+      <element name="TqBitTorrentWebUI.Active">
+        <short>If the component is Active or not.</short>
+        <descr>
+          <p>Changing this property triggers a series of internal events.</p>
+          <p>If you set it to <var>True</var> the component will Login and:</p>
+          <ul>
+            <li>Set the <link id="qBitTorrentWebUI.TqBitTorrentWebUI.IsLogged">IsLogged</link> property <var>True</var>.</li>
+            <li>Set the <link id="qBitTorrentWebUI.TqBitTorrentWebUI.LoginCookie">LoginCookie</link> property to what the API returns.</li>
+            <li>Set the <link id="qBitTorrentWebUI.TqBitTorrentWebUI.APIVersion">APIVersion</link> property to what the API returns.</li>
+            <li>Set the <link id="qBitTorrentWebUI.TqBitTorrentWebUI.MinAPIVersion">MinAPIVersion</link> property to what the API returns.</li>
+            <li>Set the <link id="qBitTorrentWebUI.TqBitTorrentWebUI.qBitTorrentVersion">qBitTorrentVersion</link> property to what the API returns.</li>
+          </ul>
+          <p>If you set it to <var>False</var> the component will Logout and:</p>
+          <ul>
+            <li>Set the <link id="qBitTorrentWebUI.TqBitTorrentWebUI.IsLogged">IsLogged</link> property to <var>False</var>.</li>
+            <li>Set the <link id="qBitTorrentWebUI.TqBitTorrentWebUI.LoginCookie">LoginCookie</link> property to empty.</li>
+            <li>Set the <link id="qBitTorrentWebUI.TqBitTorrentWebUI.APIVersion">APIVersion</link> property to -1.</li>
+            <li>Set the <link id="qBitTorrentWebUI.TqBitTorrentWebUI.MinAPIVersion">MinAPIVersion</link> property to -1.</li>
+            <li>Set the <link id="qBitTorrentWebUI.TqBitTorrentWebUI.qBitTorrentVersion">qBitTorrentVersion</link> property to empty.</li>
+          </ul>
+        </descr>
+        <errors />
+        <seealso>
+          <link id="qBitTorrentWebUI.TqBitTorrentWebUI.IsLogged">TqBitTorrentWebUI.IsLogged</link>
+          <link id="qBitTorrentWebUI.TqBitTorrentWebUI.LoginCookie">TqBitTorrentWebUI.LoginCookie</link>
+          <link id="qBitTorrentWebUI.TqBitTorrentWebUI.APIVersion">TqBitTorrentWebUI.APIVersion</link>
+          <link id="qBitTorrentWebUI.TqBitTorrentWebUI.MinAPIVersion">TqBitTorrentWebUI.MinAPIVersion</link>
+          <link id="qBitTorrentWebUI.TqBitTorrentWebUI.qBitTorrentVersion">TqBitTorrentWebUI.qBitTorrentVersion</link>
+        </seealso>
       </element>
       <!-- property Visibility: published -->
       <element name="TqBitTorrentWebUI.UserName">
         <short>Username to login to the qBittorrent client.</short>
-        <descr/>
-        <errors/>
-        <seealso/>
+        <descr />
+        <errors />
+        <seealso />
       </element>
       <!-- property Visibility: published -->
       <element name="TqBitTorrentWebUI.Password">
         <short>Password to login to the qBittorrent client.</short>
-        <descr/>
-        <errors/>
-        <seealso/>
+        <descr />
+        <errors />
+        <seealso />
       </element>
       <!-- property Visibility: published -->
       <element name="TqBitTorrentWebUI.Host">
         <short>Host/Address  for the qBittorrent client.</short>
-        <descr/>
-        <errors/>
-        <seealso/>
+        <descr />
+        <errors />
+        <seealso />
       </element>
       <!-- property Visibility: published -->
       <element name="TqBitTorrentWebUI.Port">
         <short>Port  for the qBittorrent client.</short>
-        <descr/>
-        <errors/>
-        <seealso/>
-      </element>
-      <!-- property Visibility: published -->
-      <element name="TqBitTorrentWebUI.LoginCookie">
-        <short>Cookie value from the Login call.</short>
-        <descr/>
-        <errors/>
-        <seealso/>
-      </element>
-      <!-- function Visibility: public -->
-      <element name="TqBitTorrentWebUI.Login">
-        <short>Performs a Login</short>
-        <descr/>
-        <errors>Will throw an exception if not successfull.</errors>
-        <example file="examples/login_example.pas"/>
-        <seealso/>
-      </element>
-      <!-- function result Visibility: default -->
-      <element name="TqBitTorrentWebUI.Login.Result">
-        <short>True if login succeded.</short>
-      </element>
-      <!-- function Visibility: public -->
-      <element name="TqBitTorrentWebUI.Logout">
-        <short>Performs a Logout</short>
-        <descr/>
-        <errors>Will throw an exception if not successfull.</errors>
-        <seealso/>
-        <example file="examples/logout_example.pas"/>
-      </element>
-      <!-- function result Visibility: default -->
-      <element name="TqBitTorrentWebUI.Logout.Result">
-        <short>True if logout succeded.</short>
-      </element>
-      <!-- function Visibility: public -->
-      <element name="TqBitTorrentWebUI.GetApiVersion">
-        <short>Get the WebUI API version.</short>
-        <descr/>
-        <errors>Will throw an exception if not successfull.</errors>
-        <seealso/>
-        <example file="examples/getapiversion_example.pas"/>
-      </element>
-      <!-- function result Visibility: default -->
-      <element name="TqBitTorrentWebUI.GetApiVersion.Result">
-        <short>A string with the WebUI API version.</short>
-      </element>
-      <!-- function Visibility: public -->
-      <element name="TqBitTorrentWebUI.GetMinApiVersion">
-        <short>Get the WebUI minimum accepted API version.</short>
-        <descr/>
-        <errors>Will throw an exception if not successfull.</errors>
-        <example file="examples/getminapiversion_example.pas"/>
-        <seealso/>
-      </element>
-      <!-- function result Visibility: default -->
-      <element name="TqBitTorrentWebUI.GetMinApiVersion.Result">
-        <short>A string with the WebUI minimum accepted API version.</short>
-      </element>
-      <!-- function Visibility: public -->
-      <element name="TqBitTorrentWebUI.GetqBitTorrentVersion">
-        <short>Get qBitTorrent's version.</short>
-        <descr/>
-        <errors>Will throw an exception if not successfull.</errors>
-        <example file="examples/getqbittorrentversion_example.pas"/>
-        <seealso/>
+        <descr />
+        <errors />
+        <seealso />
       </element>
       <!-- function Visibility: public -->
       <element name="TqBitTorrentWebUI.ExecShutdown">
-        <short>Executes the command to shutdown(close) the qBitTorrent client</short>
-        <descr/>
+        <short>Executes the command to shutdown(close) the qBitTorrent client.</short>
+        <descr />
         <errors>Will throw an exception if not successfull.</errors>
-        <example file="examples/execshutdown_example.pas"/>
-        <seealso/>
-      </element>
-      <!-- function result Visibility: default -->
-      <element name="TqBitTorrentWebUI.GetqBitTorrentVersion.Result">
-        <short>A string with qBitTorrent's version.</short>
+        <example file="examples/execshutdown_example.pas" />
+        <seealso />
       </element>
       <!-- function result Visibility: default -->
       <element name="TqBitTorrentWebUI.ExecShutdown.Result">
         <short>True if shutdown succeded.</short>
       </element>
-    <element name="TqBitTorrentWebUI.Torrents"><short>Contains the list of torrents</short>
+      <!-- function Visibility: public -->
+      <element name="TqBitTorrentWebUI.GetTorrents">
+        <short>Queries the API for torrents.</short>
+        <descr />
+        <errors>Will throw an exception if not successfull.</errors>
+        <example file="examples/gettorrents_example.pas" />
+        <seealso />
+      </element>
+      <!-- function result Visibility: default -->
+      <element name="TqBitTorrentWebUI.GetTorrents.Result">
+        <short>True if query of torrents succeded.</short>
+      </element>
+    </module>
+    <module name="qBTorrents">
+      <short>Unit containing a container for torrents.</short>
+      <descr>
+        <p>This unit contains a set of objects to suport the torrents data aquired from the API.</p>
+      </descr>
+      <!-- unresolved type reference Visibility: default -->
+      <element name="System">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- unresolved type reference Visibility: default -->
+      <element name="Classes">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- unresolved type reference Visibility: default -->
+      <element name="Contnrs">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- unresolved type reference Visibility: default -->
+      <element name="SysUtils">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
       </element>
     </module>
   </package>

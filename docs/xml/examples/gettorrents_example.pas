@@ -8,7 +8,7 @@ type
     {...}
   public
     {...}
-    procedure ExecShutdownExecute(Sender: TObject);
+    procedure GetTorrentsExecute(Sender: TObject);
     {...}
   end;
 
@@ -17,11 +17,11 @@ var
 
 implementation
 
-prodecure TForm1.ExecShutdownExecute(Sender: TObject);
+prodecure TForm1.GetTorrentsExecute(Sender: TObject);
 begin
   try
     Fqb.Active := True;
-    if Fqb.ExecShutdown then
+    if Fqb.GetTorrents then
     begin
       // Do something after a successfull shutdown
     end;

@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>TqBitTorrentWebUI.GetTorrents</title>
+<link rel="stylesheet" href="../fpdoc.css" type="text/css">
+
+</head>
+<body>
+<table class="bar" width="100%" border="0" cellpadding="4" cellspacing="0">
+<tr>
+<td><b>[<a href="../qbittorrentwebui/index.html">Overview</a>][<a href="../qbittorrentwebui/index-4.html">Classes</a>][<a href="../qbittorrentwebui/index-8.html">Index</a>]</b></td>
+<td align="right"><span class="bartitle">Reference for unit 'qBitTorrentWebUI' (<a href="../index.html">#lazqBitTorrentWebUI</a>)</span></td>
+</tr>
+</table>
+<h1>TqBitTorrentWebUI.GetTorrents</h1>
+<p>Queries the API for torrents.</p>
+<h2>Declaration</h2>
+<p>Source position: qBitTorrentWebUI.pas line 73</p>
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td><p><tt><span class="code"> <span class="kw">public</span> <span class="kw">function</span> <a href="../qbittorrentwebui/tqbittorrentwebui.html">TqBitTorrentWebUI</a><span class="sym">.</span>GetTorrents<span class="sym">: </span>Boolean<span class="sym">;</span></span></tt></p></td>
+</tr>
+</table>
+<h2>Function result</h2>
+<p>True if query of torrents succeded.</p>
+<h2>Errors</h2>
+<p>Will throw an exception if not successfull.</p>
+<h2>Example</h2>
+<pre><span class="kw">uses</span>
+  qBitTorrentWebUI<span class="sym">;</span>
+
+<span class="kw">type</span>
+  TForm1 <span class="sym">=</span> <span class="kw">class</span><span class="sym">(</span>TForm<span class="sym">)</span>
+    <span class="cmt">{...}</span>
+    Fqb<span class="sym">:</span> TqBitTorrentWebUI<span class="sym">;</span>
+    <span class="cmt">{...}</span>
+  <span class="kw">public</span>
+    <span class="cmt">{...}</span>
+    <span class="kw">procedure</span> GetTorrentsExecute<span class="sym">(</span>Sender<span class="sym">:</span> TObject<span class="sym">)</span><span class="sym">;</span>
+    <span class="cmt">{...}</span>
+  <span class="kw">end</span><span class="sym">;</span>
+
+<span class="kw">var</span>
+  Form1<span class="sym">:</span> TForm1<span class="sym">;</span>
+
+<span class="kw">implementation</span>
+
+prodecure TForm1<span class="sym">.</span>GetTorrentsExecute<span class="sym">(</span>Sender<span class="sym">:</span> TObject<span class="sym">)</span><span class="sym">;</span>
+<span class="kw">begin</span>
+  <span class="kw">try</span>
+    Fqb<span class="sym">.</span>Active <span class="sym">:=</span> True<span class="sym">;</span>
+    <span class="kw">if</span> Fqb<span class="sym">.</span>GetTorrents <span class="kw">then</span>
+    <span class="kw">begin</span>
+      <span class="cmt">// Do something after a successfull shutdown</span>
+    <span class="kw">end</span><span class="sym">;</span>
+  <span class="kw">except</span>
+    <span class="kw">on</span> E<span class="sym">:</span>Exception <span class="kw">do</span>
+    <span class="kw">begin</span>
+      <span class="cmt">// If shutdown fails it will raise an exception</span>
+    <span class="kw">end</span><span class="sym">;</span>
+    Fqb<span class="sym">.</span>Active <span class="sym">:=</span> False<span class="sym">;</span>
+  <span class="kw">end</span><span class="sym">;</span>
+<span class="kw">end</span><span class="sym">;</span>
+</pre>
+</body>
+</html>

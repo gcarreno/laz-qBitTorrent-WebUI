@@ -4,4 +4,5 @@
     --output=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/docs/html \
     --format=html \
     --descr=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/docs/xml/qbittorrentwebui.xml \
-    --input=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/src/qBitTorrentWebUI.pas
+    --input=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/src/qBitTorrentWebUI.pas \
+    --input=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/src/qBTorrents.pas
