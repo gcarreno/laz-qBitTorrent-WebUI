@@ -6,7 +6,8 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, DividerBevel, Forms, Controls, Graphics, Dialogs,
-  PairSplitter, ExtCtrls, StdCtrls, Menus, ActnList, StdActns, qBitTorrentWebUI;
+  PairSplitter, ExtCtrls, StdCtrls, Menus, ActnList, StdActns,
+  qBitTorrentWebUI, qBTorrents;
 
 type
 
@@ -47,6 +48,8 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
   private
+    function FormatBytes(aSize: Int64): String;
+    function FormatState(aState: TqBTorrentState): String;
     procedure SetActions;
 
   public
@@ -103,6 +106,61 @@ procedure TfrmMain.SetActions;
 begin
   actTestExecShutdown.Enabled := chkFileActive.Checked;
   actTestGetTorrents.Enabled := chkFileActive.Checked;
+end;
+
+function TfrmMain.FormatBytes(aSize: Int64): String;
+var
+  dSize: Double;
+begin
+  Result := '';
+  dSize := 0.0;
+  if aSize < 1024 then
+  begin
+    Result := IntToStr(aSize) + 'B';
+    exit;
+  end;
+  if aSize < (1024*1024) then
+  begin
+    dSize := aSize / 1024;
+    Result := FormatFloat('0.##', dSize)+'KB';
+    exit;
+  end;
+  if aSize < (1024*1024*1024) then
+  begin
+    dSize := aSize / 1024 / 1024;
+    Result := FormatFloat('0.##', dSize)+'MB';
+    exit;
+  end;
+  if aSize < (1024*1024*1024*1024) then
+  begin
+    dSize := aSize / 1024 / 1024 / 1024;
+    Result := FormatFloat('0.##', dSize)+'GB';
+    exit;
+  end;
+  if aSize < (1024*1024*1024*1024*1024) then
+  begin
+    dSize := aSize / 1024 / 1024 / 1024 / 1024;
+    Result := FormatFloat('0.##', dSize)+'TB';
+  end;
+end;
+
+function TfrmMain.FormatState(aState: TqBTorrentState): String;
+begin
+  Result := 'Unknown';
+  case aState of
+    tsError:       Result := 'Error';
+    tsPausedUp:    Result := 'Paused Upload';
+    tsPausedDl:    Result := 'Paused Download';
+    tsQueuedUp:    Result := 'Queued Upload';
+    tsQueuedDl:    Result := 'Queued Download';
+    tsUploading:   Result := 'Uploading';
+    tsStalledUp:   Result := 'Stalled Upload';
+    tsStalledDl:   Result := 'Stalled Download';
+    tsCheckingUp:  Result := 'Checking Upload';
+    tsCheckingDl:  Result := 'Checking Download';
+    tsDownloading: Result := 'Downloading';
+    tsMetaDl:      Result := 'Downloading Metadata';
+  end;
 end;
 
 procedure TfrmMain.actFileSetActiveExecute(Sender: TObject);
@@ -162,12 +220,31 @@ begin
       for index := 0 to qbttMain.Torrents.Count - 1 do
       begin
         Info(
-          'Torrent: '+
-          qbttMain.Torrents[index].Name+
-          '('+
-          qbttMain.Torrents[index].Hash+
-          ')'
+          Format(
+            'Torrent: %s (%s)',
+            [
+              qbttMain.Torrents[index].Name,
+              qbttMain.Torrents[index].Hash
+            ]
+          )
         );
+        Info(Format(#9'#: %d', [qbttMain.Torrents[index].Priority]));
+        Info(#9'Size: '+FormatBytes(qbttMain.Torrents[index].Size));
+        Info(#9'Progress: '+FormatFloat('##0.00%', qbttMain.Torrents[index].Progress));
+        Info(#9'DL Speed: '+FormatBytes(qbttMain.Torrents[index].DlSpeed)+'/s');
+        Info(#9'UP Speed: '+FormatBytes(qbttMain.Torrents[index].UpSpeed)+'/s');
+        Info(#9'State: '+FormatState(qbttMain.Torrents[index].State));
+        Info(Format(#9'Seeds: %d', [qbttMain.Torrents[index].NumSeeds]));
+        Info(Format(#9'Leech: %d', [qbttMain.Torrents[index].NumLeechs]));
+        //Info(#9': '+qbttMain.Torrents[index].);
+        //Info(#9': '+qbttMain.Torrents[index].);
+        //Info(#9': '+qbttMain.Torrents[index].);
+        //Info(#9': '+qbttMain.Torrents[index].);
+        //Info(#9': '+qbttMain.Torrents[index].);
+        //Info(#9': '+qbttMain.Torrents[index].);
+        //Info(#9': '+qbttMain.Torrents[index].);
+        //Info(#9': '+qbttMain.Torrents[index].);
+        //Info(#9': '+qbttMain.Torrents[index].);
       end;
     end
     else
