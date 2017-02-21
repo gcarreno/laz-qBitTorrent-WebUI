@@ -11,121 +11,125 @@
       <descr>
         <p>This unit contains a set of objects to suport the torrents data aquired from the API.</p>
       </descr>
-      <!-- enumeration type Visibility: default -->
-      <element name="TqBTorrentState">
-        <short />
-        <descr />
-        <seealso />
-      </element>
-      <!-- enumeration value Visibility: default -->
-      <element name="TqBTorrentState.tsError">
-        <short />
-      </element>
-      <!-- enumeration value Visibility: default -->
-      <element name="TqBTorrentState.tsPausedUp">
-        <short />
-      </element>
-      <!-- enumeration value Visibility: default -->
-      <element name="TqBTorrentState.tsPausedDl">
-        <short />
-      </element>
-      <!-- enumeration value Visibility: default -->
-      <element name="TqBTorrentState.tsQueuedUp">
-        <short />
-      </element>
-      <!-- enumeration value Visibility: default -->
-      <element name="TqBTorrentState.tsQueuedDl">
-        <short />
-      </element>
-      <!-- enumeration value Visibility: default -->
-      <element name="TqBTorrentState.tsUploading">
-        <short />
-      </element>
-      <!-- enumeration value Visibility: default -->
-      <element name="TqBTorrentState.tsStalledUp">
-        <short />
-      </element>
-      <!-- enumeration value Visibility: default -->
-      <element name="TqBTorrentState.tsStalledDl">
-        <short />
-      </element>
-      <!-- enumeration value Visibility: default -->
-      <element name="TqBTorrentState.tsCheckingUp">
-        <short />
-      </element>
-      <!-- enumeration value Visibility: default -->
-      <element name="TqBTorrentState.tsCheckingDl">
-        <short />
-      </element>
-      <!-- enumeration value Visibility: default -->
-      <element name="TqBTorrentState.tsDownloading">
-        <short />
-      </element>
-      <!-- enumeration value Visibility: default -->
-      <element name="TqBTorrentState.tsMetaDl">
-        <short />
-      </element>
-      <!-- enumeration value Visibility: default -->
-      <element name="TqBTorrentState.tsUnknown">
-        <short />
-      </element>
       <!-- unresolved type reference Visibility: default -->
       <element name="System">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short/>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- unresolved type reference Visibility: default -->
       <element name="Classes">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short/>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- unresolved type reference Visibility: default -->
       <element name="Contnrs">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short/>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- unresolved type reference Visibility: default -->
       <element name="SysUtils">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short/>
+        <descr/>
+        <errors/>
+        <seealso/>
+      </element>
+      <!-- enumeration type Visibility: default -->
+      <element name="TqBTorrentState">
+        <short>
+          Torrent States.
+        </short>
+        <descr/>
+        <seealso/>
+      </element>
+      <!-- enumeration value Visibility: default -->
+      <element name="TqBTorrentState.tsError">
+        <short>Some error occurred, applies to paused torrents.</short>
+      </element>
+      <!-- enumeration value Visibility: default -->
+      <element name="TqBTorrentState.tsPausedUp">
+        <short>Torrent is paused and has finished downloading.</short>
+      </element>
+      <!-- enumeration value Visibility: default -->
+      <element name="TqBTorrentState.tsPausedDl">
+        <short>Torrent is paused and has NOT finished downloading.</short>
+      </element>
+      <!-- enumeration value Visibility: default -->
+      <element name="TqBTorrentState.tsQueuedUp">
+        <short>Queuing is enabled and torrent is queued for upload.</short>
+      </element>
+      <!-- enumeration value Visibility: default -->
+      <element name="TqBTorrentState.tsQueuedDl">
+        <short>Queuing is enabled and torrent is queued for download.</short>
+      </element>
+      <!-- enumeration value Visibility: default -->
+      <element name="TqBTorrentState.tsUploading">
+        <short>Torrent is being seeded and data is being transfered.</short>
+      </element>
+      <!-- enumeration value Visibility: default -->
+      <element name="TqBTorrentState.tsStalledUp">
+        <short>Torrent is being seeded, but no connection were made.</short>
+      </element>
+      <!-- enumeration value Visibility: default -->
+      <element name="TqBTorrentState.tsStalledDl">
+        <short>Torrent is being downloaded, but no connection were made.</short>
+      </element>
+      <!-- enumeration value Visibility: default -->
+      <element name="TqBTorrentState.tsCheckingUp">
+        <short>Torrent has finished downloading and is being checked; this status also applies to preallocation (if enabled) and checking resume data on qBt startup.</short>
+      </element>
+      <!-- enumeration value Visibility: default -->
+      <element name="TqBTorrentState.tsCheckingDl">
+        <short>Same as checkingUP, but torrent has NOT finished downloading.</short>
+      </element>
+      <!-- enumeration value Visibility: default -->
+      <element name="TqBTorrentState.tsDownloading">
+        <short>Torrent is being downloaded and data is being transfered.</short>
+      </element>
+      <!-- enumeration value Visibility: default -->
+      <element name="TqBTorrentState.tsMetaDl">
+        <short>Torrent has just started downloading and is fetching metadata.</short>
+      </element>
+      <!-- enumeration value Visibility: default -->
+      <element name="TqBTorrentState.tsUnknown">
+        <short>Catch all state in case something changes in the API.</short>
       </element>
       <!-- object Visibility: default -->
       <element name="TqBTorrent">
-        <short>Container class for a single torrent.</short>
-        <descr />
-        <errors />
-        <seealso />
+        <short>
+          Container class for a single torrent.
+        </short>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- object Visibility: default -->
       <element name="TqBTorrents">
         <short>
           Container class for a list of <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrent">TqBTorrent</link>.
         </short>
-        <descr />
-        <errors />
-        <seealso />
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- function Visibility: default -->
       <element name="StrToqBState">
         <short>
-          Translates from <var>String</var> to <var><link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link></var>.
+          Translates from <var>String</var> to <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link>.
         </short>
-        <descr />
-        <errors />
-        <seealso />
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- function result Visibility: default -->
       <element name="StrToqBState.Result">
         <short>
-          The translated <var><link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link></var>
+          The translated <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link>.
         </short>
       </element>
       <!-- argument Visibility: default -->
@@ -137,22 +141,23 @@
       <!-- function Visibility: default -->
       <element name="qBStateToStr">
         <short>
-          Translates from <var><link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link></var> to <var>String</var>.
+          Translates from <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link> to <var>String</var>.
         </short>
-        <descr />
-        <errors />
-        <seealso />
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- function result Visibility: default -->
       <element name="qBStateToStr.Result">
         <short>
-          The translated <var>String</var>
+          The translated <var>String</var>.
         </short>
       </element>
       <!-- argument Visibility: default -->
       <element name="qBStateToStr.aState">
         <short>
-          The <var><link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link></var> to be translated.
+          The <var><link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link>
+          </var> to be translated.
         </short>
       </element>
     </module>

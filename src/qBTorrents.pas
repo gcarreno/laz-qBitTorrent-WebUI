@@ -47,6 +47,7 @@ type
     tsMetaDl,
     tsUnknown
   );
+
 { TqBTorrent }
   TqBTorrent = class(TObject)
   private
