@@ -52,12 +52,12 @@ prodecure TForm1<span class="sym">.</span>GetTorrentsExecute<span class="sym">(<
     Fqb<span class="sym">.</span>Active <span class="sym">:=</span> True<span class="sym">;</span>
     <span class="kw">if</span> Fqb<span class="sym">.</span>GetTorrents <span class="kw">then</span>
     <span class="kw">begin</span>
-      <span class="cmt">// Do something after a successfull shutdown</span>
+      <span class="cmt">// Do something after a successfull torrents retrival</span>
     <span class="kw">end</span><span class="sym">;</span>
   <span class="kw">except</span>
     <span class="kw">on</span> E<span class="sym">:</span>Exception <span class="kw">do</span>
     <span class="kw">begin</span>
-      <span class="cmt">// If shutdown fails it will raise an exception</span>
+      <span class="cmt">// If torrents retrieval fails it will raise an exception</span>
     <span class="kw">end</span><span class="sym">;</span>
     Fqb<span class="sym">.</span>Active <span class="sym">:=</span> False<span class="sym">;</span>
   <span class="kw">end</span><span class="sym">;</span>

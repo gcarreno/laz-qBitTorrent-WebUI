@@ -23,12 +23,12 @@ begin
     Fqb.Active := True;
     if Fqb.GetTorrents then
     begin
-      // Do something after a successfull shutdown
+      // Do something after a successfull torrents retrival
     end;
   except
     on E:Exception do
     begin
-      // If shutdown fails it will raise an exception
+      // If torrents retrieval fails it will raise an exception
     end;
     Fqb.Active := False;
   end;

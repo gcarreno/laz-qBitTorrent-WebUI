@@ -25,135 +25,11 @@ The package has a path for my personal version of Synapse, so you may want to fi
 
 ## Usage
 
-### Authentication
-
-#### Login
-
-This allows you to login to the WebUI.
-
-You have to login before you can do anything else.
-
-```Pascal
-uses
-  qBitTorrentWebUI;
-
-type
-  TForm1 = class(TForm)
-    {...}
-    Fqb: TqBitTorrentWebUI;
-    {...}
-  public
-    {...}
-    procedure LoginExecute(Sender: TObject);
-    {...}
-  end;
-
-var
-  Form1: TForm1;
-
-implementation
-
-prodecure TForm1.LoginExecute(Sender: TObject);
-begin
-  try
-    if Fqb.Login then
-    begin
-      // Do something after a successfull login
-    end;
-  except
-    on E:Exception do
-    begin
-      // If login fails it will raise an exception
-    end;
-  end;
-end;
-```
-
-#### Logout
-
-This will log you out from the WebbUI.
-
-```Pascal
-uses
-  qBitTorrentWebUI;
-
-type
-  TForm1 = class(TForm)
-    {...}
-    Fqb: TqBitTorrentWebUI;
-    {...}
-  public
-    {...}
-    procedure LogoutExecute(Sender: TObject);
-    {...}
-  end;
-
-var
-  Form1: TForm1;
-
-implementation
-
-prodecure TForm1.LogoutExecute(Sender: TObject);
-begin
-  try
-    if Fqb.Logout then
-    begin
-      // Do something after a successfull logout
-    end;
-  except
-    on E:Exception do
-    begin
-      // If logout fails it will raise an exception
-    end;
-  end;
-end;
-```
-
 ### GET Methods
 
-#### GetApiVersion
+#### GetTorrents
 
-This will retrieve the WebUI version.
-
-```Pascal
-uses
-  qBitTorrentWebUI;
-
-type
-  TForm1 = class(TForm)
-    {...}
-    Fqb: TqBitTorrentWebUI;
-    {...}
-  public
-    {...}
-    procedure GetApiVersionExecute(Sender: TObject);
-    {...}
-  end;
-
-var
-  Form1: TForm1;
-
-implementation
-
-prodecure TForm1.GetApiVersionExecute(Sender: TObject);
-var
-  sVersion: String;
-begin
-  try
-    sversion := Fqb.GetApiVersion
-     // Do something with the version
-  except
-    on E:Exception do
-    begin
-      // If GetApiVersion fails it will raise an exception
-    end;
-  end;
-end;
-```
-
-#### GetMinApiVersion
-
-This will retrieve the minimum WebUI version it supports.
+Retrieves the torrent list.
 
 ```Pascal
 uses
@@ -166,7 +42,7 @@ type
     {...}
   public
     {...}
-    procedure GetMinApiVersionExecute(Sender: TObject);
+    procedure GetTorrentsExecute(Sender: TObject);
     {...}
   end;
 
@@ -175,58 +51,20 @@ var
 
 implementation
 
-prodecure TForm1.GetMinApiVersionExecute(Sender: TObject);
-var
-  sVersion: String;
+prodecure TForm1.GetTorrentsExecute(Sender: TObject);
 begin
   try
-    sversion := Fqb.GetMinApiVersion
-     // Do something with the version
+    Fqb.Active := True;
+    if Fqb.GetTorrents then
+    begin
+      // Do something after a successfull torrents retrival
+    end;
   except
     on E:Exception do
     begin
-      // If GetMinApiVersion fails it will raise an exception
+      // If torrents retrieval fails it will raise an exception
     end;
-  end;
-end;
-```
-
-#### GetqBitTorrentVersion
-
-This will retrieve qBitTorrent's version.
-
-```Pascal
-uses
-  qBitTorrentWebUI;
-
-type
-  TForm1 = class(TForm)
-    {...}
-    Fqb: TqBitTorrentWebUI;
-    {...}
-  public
-    {...}
-    procedure GetqBitTorrentVersionExecute(Sender: TObject);
-    {...}
-  end;
-
-var
-  Form1: TForm1;
-
-implementation
-
-prodecure TForm1.GetqBitTorrentVersionExecute(Sender: TObject);
-var
-  sVersion: String;
-begin
-  try
-    sversion := Fqb.GetqBitTorrentVersion
-     // Do something with the version
-  except
-    on E:Exception do
-    begin
-      // If GetqBitTorrentVersion fails it will raise an exception
-    end;
+    Fqb.Active := False;
   end;
 end;
 ```
@@ -236,6 +74,8 @@ end;
 #### Shutdown
 
 This send a command to shutdown(close) the qBitTorrent client.
+
+It also sets `Active` to `False`.
 
 ```Pascal
 uses
@@ -258,17 +98,19 @@ var
 implementation
 
 prodecure TForm1.ExecShutdownExecute(Sender: TObject);
-var
-  sVersion: String;
 begin
   try
-    sversion := Fqb.GetqBitTorrentVersion
-     // Do something after a successfull shutdown
+    Fqb.Active := True;
+    if Fqb.ExecShutdown then
+    begin
+      // Do something after a successfull shutdown
+    end;
   except
     on E:Exception do
     begin
       // If shutdown fails it will raise an exception
     end;
+    Fqb.Active := False;
   end;
 end;
 ```
