@@ -59,7 +59,7 @@
         <descr />
         <errors />
         <seealso>
-          <link id="qBitTorrentWebUI.TqBitTorrentWebUI.Active">TqBitTorrentWebUI.Active</link>
+          <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.Active">TqBitTorrentWebUI.Active</link>
         </seealso>
       </element>
       <!-- property Visibility: public -->
@@ -68,7 +68,7 @@
         <descr />
         <errors />
         <seealso>
-          <link id="qBitTorrentWebUI.TqBitTorrentWebUI.GetTorrents">TqBitTorrentWebUI.GetTorrents</link>
+          <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.GetTorrents">TqBitTorrentWebUI.GetTorrents</link>
         </seealso>
       </element>
       <!-- property Visibility: public -->
@@ -77,7 +77,7 @@
         <descr />
         <errors />
         <seealso>
-          <link id="qBitTorrentWebUI.TqBitTorrentWebUI.Active">TqBitTorrentWebUI.Active</link>
+          <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.Active">TqBitTorrentWebUI.Active</link>
         </seealso>
       </element>
       <!-- property Visibility: public -->
@@ -86,7 +86,7 @@
         <descr />
         <errors />
         <seealso>
-          <link id="qBitTorrentWebUI.TqBitTorrentWebUI.Active">TqBitTorrentWebUI.Active</link>
+          <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.Active">TqBitTorrentWebUI.Active</link>
         </seealso>
       </element>
       <!-- property Visibility: public -->
@@ -95,7 +95,7 @@
         <descr />
         <errors />
         <seealso>
-          <link id="qBitTorrentWebUI.TqBitTorrentWebUI.Active">TqBitTorrentWebUI.Active</link>
+          <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.Active">TqBitTorrentWebUI.Active</link>
         </seealso>
       </element>
       <!-- property Visibility: published -->
@@ -105,28 +105,28 @@
           <p>Changing this property triggers a series of internal events.</p>
           <p>If you set it to <var>True</var> the component will Login and:</p>
           <ul>
-            <li>Set the <link id="qBitTorrentWebUI.TqBitTorrentWebUI.IsLogged">IsLogged</link> property <var>True</var>.</li>
-            <li>Set the <link id="qBitTorrentWebUI.TqBitTorrentWebUI.LoginCookie">LoginCookie</link> property to what the API returns.</li>
-            <li>Set the <link id="qBitTorrentWebUI.TqBitTorrentWebUI.APIVersion">APIVersion</link> property to what the API returns.</li>
-            <li>Set the <link id="qBitTorrentWebUI.TqBitTorrentWebUI.MinAPIVersion">MinAPIVersion</link> property to what the API returns.</li>
-            <li>Set the <link id="qBitTorrentWebUI.TqBitTorrentWebUI.qBitTorrentVersion">qBitTorrentVersion</link> property to what the API returns.</li>
+            <li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.IsLogged">IsLogged</link> property <var>True</var>.</li>
+            <li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.LoginCookie">LoginCookie</link> property to what the API returns.</li>
+            <li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.APIVersion">APIVersion</link> property to what the API returns.</li>
+            <li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.MinAPIVersion">MinAPIVersion</link> property to what the API returns.</li>
+            <li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.qBitTorrentVersion">qBitTorrentVersion</link> property to what the API returns.</li>
           </ul>
           <p>If you set it to <var>False</var> the component will Logout and:</p>
           <ul>
-            <li>Set the <link id="qBitTorrentWebUI.TqBitTorrentWebUI.IsLogged">IsLogged</link> property to <var>False</var>.</li>
-            <li>Set the <link id="qBitTorrentWebUI.TqBitTorrentWebUI.LoginCookie">LoginCookie</link> property to empty.</li>
-            <li>Set the <link id="qBitTorrentWebUI.TqBitTorrentWebUI.APIVersion">APIVersion</link> property to -1.</li>
-            <li>Set the <link id="qBitTorrentWebUI.TqBitTorrentWebUI.MinAPIVersion">MinAPIVersion</link> property to -1.</li>
-            <li>Set the <link id="qBitTorrentWebUI.TqBitTorrentWebUI.qBitTorrentVersion">qBitTorrentVersion</link> property to empty.</li>
+            <li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.IsLogged">IsLogged</link> property to <var>False</var>.</li>
+            <li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.LoginCookie">LoginCookie</link> property to empty.</li>
+            <li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.APIVersion">APIVersion</link> property to -1.</li>
+            <li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.MinAPIVersion">MinAPIVersion</link> property to -1.</li>
+            <li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.qBitTorrentVersion">qBitTorrentVersion</link> property to empty.</li>
           </ul>
         </descr>
         <errors />
         <seealso>
-          <link id="qBitTorrentWebUI.TqBitTorrentWebUI.IsLogged">TqBitTorrentWebUI.IsLogged</link>
-          <link id="qBitTorrentWebUI.TqBitTorrentWebUI.LoginCookie">TqBitTorrentWebUI.LoginCookie</link>
-          <link id="qBitTorrentWebUI.TqBitTorrentWebUI.APIVersion">TqBitTorrentWebUI.APIVersion</link>
-          <link id="qBitTorrentWebUI.TqBitTorrentWebUI.MinAPIVersion">TqBitTorrentWebUI.MinAPIVersion</link>
-          <link id="qBitTorrentWebUI.TqBitTorrentWebUI.qBitTorrentVersion">TqBitTorrentWebUI.qBitTorrentVersion</link>
+          <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.IsLogged">TqBitTorrentWebUI.IsLogged</link>
+          <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.LoginCookie">TqBitTorrentWebUI.LoginCookie</link>
+          <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.APIVersion">TqBitTorrentWebUI.APIVersion</link>
+          <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.MinAPIVersion">TqBitTorrentWebUI.MinAPIVersion</link>
+          <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.qBitTorrentVersion">TqBitTorrentWebUI.qBitTorrentVersion</link>
         </seealso>
       </element>
       <!-- property Visibility: published -->
