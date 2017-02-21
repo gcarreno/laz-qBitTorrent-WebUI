@@ -9,7 +9,7 @@
 <body>
 <table class="bar" width="100%" border="0" cellpadding="4" cellspacing="0">
 <tr>
-<td><b>[<a href="../qbtorrents/index.html">Overview</a>][<a href="../qbtorrents/index-4.html">Classes</a>][<a href="../qbtorrents/index-8.html">Index</a>]</b></td>
+<td><b>[<a href="../qbtorrents/index.html">Overview</a>][<a href="../qbtorrents/index-3.html">Types</a>][<a href="../qbtorrents/index-4.html">Classes</a>][<a href="../qbtorrents/index-5.html">Procedures and functions</a>][<a href="../qbtorrents/index-8.html">Index</a>]</b></td>
 <td align="right"><span class="bartitle">Reference for unit 'qBTorrents' (<a href="../index.html">#lazqBitTorrentWebUI</a>)</span></td>
 </tr>
 </table>
@@ -17,7 +17,7 @@
 <p>[<a href="../qbtorrents/tqbtorrent-1.html" onClick="window.open('../qbtorrents/tqbtorrent-1.html', 'list', 'dependent=yes,resizable=yes,scrollbars=yes,height=400,width=300'); return false;">Properties</a> (<a href="../qbtorrents/tqbtorrent-2.html" onClick="window.open('../qbtorrents/tqbtorrent-2.html', 'list', 'dependent=yes,resizable=yes,scrollbars=yes,height=400,width=300'); return false;">by Name</a>)] [<a href="../qbtorrents/tqbtorrent-3.html" onClick="window.open('../qbtorrents/tqbtorrent-3.html', 'list', 'dependent=yes,resizable=yes,scrollbars=yes,height=400,width=300'); return false;">Methods</a> (<a href="../qbtorrents/tqbtorrent-4.html" onClick="window.open('../qbtorrents/tqbtorrent-4.html', 'list', 'dependent=yes,resizable=yes,scrollbars=yes,height=400,width=300'); return false;">by Name</a>)] [<a href="../qbtorrents/tqbtorrent-5.html" onClick="window.open('../qbtorrents/tqbtorrent-5.html', 'list', 'dependent=yes,resizable=yes,scrollbars=yes,height=400,width=300'); return false;">Events</a> (<a href="../qbtorrents/tqbtorrent-6.html" onClick="window.open('../qbtorrents/tqbtorrent-6.html', 'list', 'dependent=yes,resizable=yes,scrollbars=yes,height=400,width=300'); return false;">by Name</a>)] </p>
 <p>Container class for a single torrent.</p>
 <h2>Declaration</h2>
-<p>Source position: qBTorrents.pas line 35</p>
+<p>Source position: qBTorrents.pas line 51</p>
 <table cellpadding="0" cellspacing="0">
 <tr>
 <td><p><tt><span class="code"><span class="kw">type</span> TqBTorrent <span class="sym">=</span> <span class="kw">class</span><span class="sym">(</span>TObject<span class="sym">)</span> <span class="kw">end</span><span class="sym">;</span></span></tt></p></td>
@@ -51,6 +51,42 @@
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.priority.html">Priority</a><span class="sym">: </span>Integer<span class="sym">;</span>  [rw]</span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.numseeds.html">NumSeeds</a><span class="sym">: </span>Integer<span class="sym">;</span>  [rw]</span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.numcomplete.html">NumComplete</a><span class="sym">: </span>Integer<span class="sym">;</span>  [rw]</span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.numleechs.html">NumLeechs</a><span class="sym">: </span>Integer<span class="sym">;</span>  [rw]</span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.numincomplete.html">NumIncomplete</a><span class="sym">: </span>Integer<span class="sym">;</span>  [rw]</span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.ratio.html">Ratio</a><span class="sym">: </span>Double<span class="sym">;</span>  [rw]</span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.eta.html">Eta</a><span class="sym">: </span>Integer<span class="sym">;</span>  [rw]</span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.state.html">State</a><span class="sym">: </span><a href="../qbtorrents/tqbtorrentstate.html">TqBTorrentState</a><span class="sym">;</span>  [rw]</span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.seqdl.html">SeqDl</a><span class="sym">: </span>Boolean<span class="sym">;</span>  [rw]</span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.firstlastpieceprioritized.html">FirstLastPiecePrioritized</a><span class="sym">: </span>Boolean<span class="sym">;</span>  [rw]</span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.category.html">Category</a><span class="sym">: </span>string<span class="sym">;</span>  [rw]</span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.superseeding.html">SuperSeeding</a><span class="sym">: </span>Boolean<span class="sym">;</span>  [rw]</span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrent.forcestart.html">ForceStart</a><span class="sym">: </span>Boolean<span class="sym">;</span>  [rw]</span></tt></p></td>
 </tr>
 <tr>
 <td><p><tt><span class="code"></span></tt></p></td>
