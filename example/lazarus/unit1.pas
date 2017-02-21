@@ -13,31 +13,20 @@ type
   { TfrmMain }
 
   TfrmMain = class(TForm)
+    actFileSetActive: TAction;
+    actTestGetTorrents: TAction;
     actTestExecShutdown: TAction;
-    actTestGetqBitTorrentVersion: TAction;
-    actTestGetMinApiVersion: TAction;
-    actTestGetApiVersion: TAction;
-    actTestLogout: TAction;
-    actTestLogin: TAction;
     alMain: TActionList;
-    btnTestLogin: TButton;
     actFileExit: TFileExit;
-    btnTestLogout: TButton;
     btnFileExit: TButton;
-    btnTestGetAPIVersion: TButton;
-    btnTestGetMinAPiVersion: TButton;
-    btnTestGetqBitTorrentVersion: TButton;
-    Button1: TButton;
+    btnTestExecShutdown: TButton;
+    btnTestGetTorrents: TButton;
+    chkFileActive: TCheckBox;
     divbGetMethhods: TDividerBevel;
     divbCommands: TDividerBevel;
+    mnuTestGetTorrents: TMenuItem;
     mnuTestExecShutdown: TMenuItem;
     mnuSep2: TMenuItem;
-    mnuTestGetqBitTorrentVersion: TMenuItem;
-    mnuTestGetMinApiVersion: TMenuItem;
-    mnuTestGetAPIVersion: TMenuItem;
-    mnuSep1: TMenuItem;
-    mnuTestLogout: TMenuItem;
-    mnuTestLogin: TMenuItem;
     mnuTest: TMenuItem;
     mnuFileExit: TMenuItem;
     mnuFile: TMenuItem;
@@ -51,12 +40,9 @@ type
     qbttMain: TqBitTorrentWebUI;
     stLabelLog: TStaticText;
     stLabelInfo: TStaticText;
+    procedure actFileSetActiveExecute(Sender: TObject);
     procedure actTestExecShutdownExecute(Sender: TObject);
-    procedure actTestGetApiVersionExecute(Sender: TObject);
-    procedure actTestGetMinApiVersionExecute(Sender: TObject);
-    procedure actTestGetqBitTorrentVersionExecute(Sender: TObject);
-    procedure actTestLoginExecute(Sender: TObject);
-    procedure actTestLogoutExecute(Sender: TObject);
+    procedure actTestGetTorrentsExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
@@ -112,95 +98,16 @@ begin
   Application.ProcessMessages;
 end;
 
-procedure TfrmMain.actTestLoginExecute(Sender: TObject);
-var
-  bLoginResult: Boolean;
+procedure TfrmMain.actFileSetActiveExecute(Sender: TObject);
 begin
-  Log('About to login.');
-  //qbttMain.UserName := 'qBitTorrentWebUI';
-  //qbttMain.Password := 'Password';
-  try
-    bLoginResult := qbttMain.Login;
-    if bLoginResult then
-    begin
-      Log(#9'Success.');
-      Info('Cookies:');
-      Info(qbttMain.LoginCookie);
-    end
-    else
-    begin
-      Log(#9'Failed.');
-    end;
-  except
-    on E:Exception do
-      Log('Error: ' + E.Message);
-  end;
-end;
-
-procedure TfrmMain.actTestLogoutExecute(Sender: TObject);
-var
-  bLogoutResult: Boolean;
-begin
-  Log('About to logout.');
-  try
-    bLogoutResult := qbttMain.Logout;
-    if bLogoutResult then
-    begin
-      Log(#9'Success.');
-    end
-    else
-    begin
-      Log(#9'Failed.');
-    end;
-  except
-    on E:Exception do
-      Log('Error: ' + E.Message);
-  end;
-end;
-
-procedure TfrmMain.actTestGetApiVersionExecute(Sender: TObject);
-var
-  iAPIVersion: String;
-begin
-  Log('Getting API Version.');
-  try
-    iAPIVersion := qbttMain.GetApiVersion;
-    Log(#9'Success.');
-    Info('API Version: ' + iAPIVersion);
-  except
-    on E:Exception do
-      Log('Error: ' + E.Message);
-  end;
-end;
-
-procedure TfrmMain.actTestGetMinApiVersionExecute(Sender: TObject);
-var
-  iMinAPIVersion: String;
-begin
-  Log('Getting Minimum API Version.');
-  try
-    iMinAPIVersion := qbttMain.GetMinApiVersion;
-    Log(#9'Success.');
-    Info('Min API Version: ' + iMinAPIVersion);
-  except
-    on E:Exception do
-      Log('Error: ' + E.Message);
-  end;
-end;
-
-procedure TfrmMain.actTestGetqBitTorrentVersionExecute(Sender: TObject);
-var
-  iqBitTorrentAPIVersion: String;
-begin
-  Log('Getting qBitTorrent Version.');
-  try
-    iqBitTorrentAPIVersion := qbttMain.GetqBitTorrentVersion;
-    Log(#9'Success.');
-    Info('qBitTorrent Version: ' + iqBitTorrentAPIVersion);
-  except
-    on E:Exception do
-      Log('Error: ' + E.Message);
-  end;
+  if chkFileActive.Checked then
+    Log('Active: True')
+  else
+    Log('Active: False');
+  qbttMain.Active := chkFileActive.Checked;
+  Info('API Version: ' + IntToStr(qbttMain.APIVersion));
+  Info('Min API Version: ' + IntToStr(qbttMain.MinAPIVersion));
+  Info('qBitTorrent Version: ' + qbttMain.qBitTorrentVersion);
 end;
 
 procedure TfrmMain.actTestExecShutdownExecute(Sender: TObject);
@@ -210,7 +117,32 @@ begin
   Log('Shutting client down.');
   try
     bShutdownResult := qbttMain.ExecShutdown;
+    // If we don't do this it will trigger actFileSetActive
+    chkFileActive.Action := nil;
+    chkFileActive.Checked := False;
+    chkFileActive.Action := actFileSetActive;
     if bShutdownResult then
+    begin
+      Log(#9'Success.');
+    end
+    else
+    begin
+      Log(#9'Failed.');
+    end;
+  except
+    on E:Exception do
+      Log('Error: ' + E.Message);
+  end;
+end;
+
+procedure TfrmMain.actTestGetTorrentsExecute(Sender: TObject);
+var
+  bGetTorrentsResult: Boolean;
+begin
+  Log('Asking for torrents.');
+  try
+    bGetTorrentsResult := qbttMain.GetTorrents;
+    if bGetTorrentsResult then
     begin
       Log(#9'Success.');
     end

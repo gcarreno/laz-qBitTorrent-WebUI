@@ -34,7 +34,7 @@ type
 { TqBitTorrentWebUI }
   TqBitTorrentWebUI = class(TComponent)
   private
-    //FActive: Boolean;
+    FActive: Boolean;
     FUserName: String;
     FPassword: String;
     FHost: String;
@@ -42,7 +42,12 @@ type
     FHttp: THTTPSend;
     FIsLogged: Boolean;
     FLoginCookie: String;
+    FAPIVersion: Integer;
+    FMinAPIVersion: Integer;
+    FqBitTorrentVersion: String;
     FTorrents: TqBTorrents;
+
+    procedure SetActive(aValue: Boolean);
 
     // Authentication
     function DoLogin: Boolean;
@@ -52,21 +57,18 @@ type
     function DoGetApiVersion: String;
     function DoGetMinApiVersion: String;
     function DoGetqBitTorrentVersion: String;
+
+    // Commands
     function DoExecShutdown: Boolean;
+
+    // Queries
     function DoGetTorrents: Boolean;
   protected
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
 
-    // Authentication
-    function Login: Boolean;
-    function Logout: Boolean;
-
     // Get methods
-    function GetApiVersion: String;
-    function GetMinApiVersion: String;
-    function GetqBitTorrentVersion: String;
     function ExecShutdown: Boolean;
     function GetTorrents: Boolean;
 
@@ -74,7 +76,19 @@ type
       read FIsLogged;
     property LoginCookie: String
       read FLoginCookie;
+    property APIVersion: Integer
+      read FAPIVersion;
+    property MinAPIVersion: Integer
+      read FMinAPIVersion;
+    property qBitTorrentVersion: String
+      read FqBitTorrentVersion;
+    property Torrents: TqBTorrents
+      read FTorrents;
   published
+    property Active: Boolean
+      read FActive
+      write SetActive
+      default False;
     property UserName: String
       read FUserName
       write FUserName;
@@ -88,8 +102,6 @@ type
       read FPort
       write FPort
       default 8080;
-    property Torrents: TqBTorrents
-      read FTorrents;
     // TODO: Add some Notifications for HTTP access:
     // Like Login and such
   end;
@@ -107,12 +119,17 @@ const
 constructor TqBitTorrentWebUI.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
+  FActive := False;
   FUserName := 'admin';
   FPassword := 'admin';
   FHost := '127.0.0.1';
   FPort := 8080;
   FHttp := THTTPSend.Create;
   FIsLogged := False;
+  FLoginCookie := '';
+  FAPIVersion := -1;
+  FMinAPIVersion := -1;
+  FqBitTorrentVersion := '';
   FTorrents := TqBTorrents.Create(True);
 end;
 
@@ -123,16 +140,30 @@ begin
   inherited Destroy;
 end;
 
-function TqBitTorrentWebUI.Login: Boolean;
+procedure TqBitTorrentWebUI.SetActive(aValue: Boolean);
 begin
-  if FIsLogged then
-  begin
-    Result := True;
-    exit;
+  if FActive = aValue then exit;
+  case aValue of
+    True:begin
+      // Add code to Login and get Versions
+      DoLogin;
+      FAPIVersion := StrToInt(DoGetApiVersion);
+      FMinAPIVersion := StrToInt(DoGetMinApiVersion);
+      FqBitTorrentVersion := DoGetqBitTorrentVersion;
+      FActive := True;
+    end;
+    False:begin
+      // Add code to clear data and Logout
+      DoLogout;
+      FActive := False;
+      FIsLogged := False;
+      FLoginCookie := '';
+      FAPIVersion := -1;
+      FMinAPIVersion := -1;
+      FqBitTorrentVersion := '';
+      FTorrents.Clear;
+    end;
   end;
-  Result := False;
-  Result := DoLogin;
-  FIsLogged := Result;
 end;
 
 function TqBitTorrentWebUI.DoLogin: Boolean;
@@ -164,6 +195,7 @@ begin
   if FHttp.ResultCode = 200 then
   begin
     Result := True;
+    FIsLogged := True;
     sCookie := '';
     FLoginCookie := '';
     for index := 0 to FHttp.Cookies.Count - 1 do
@@ -183,18 +215,6 @@ begin
       'Login failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
     );
   end;
-end;
-
-function TqBitTorrentWebUI.Logout: Boolean;
-begin
-  if not FIsLogged then
-  begin
-    Result := True;
-    exit;
-  end;
-  Result := False;
-  Result := DoLogout;
-  FIsLogged := not Result;
 end;
 
 function TqBitTorrentWebUI.DoLogout: Boolean;
@@ -219,26 +239,12 @@ begin
   if FHttp.ResultCode = 200 then
   begin
     Result := True;
+    FIsLogged := False;
   end
   else
   begin
     raise Exception.Create(
       'Logout failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
-    );
-  end;
-end;
-
-function TqBitTorrentWebUI.GetApiVersion: String;
-begin
-  if FIsLogged then
-  begin
-    Result := DoGetApiVersion;
-  end
-  else
-  begin
-    Result := '';
-    raise Exception.Create(
-      'You need to login first.'
     );
   end;
 end;
@@ -278,21 +284,6 @@ begin
   end;
 end;
 
-function TqBitTorrentWebUI.GetMinApiVersion: String;
-begin
-  if FIsLogged then
-  begin
-    Result := DoGetMinApiVersion;
-  end
-  else
-  begin
-    Result := '';
-    raise Exception.Create(
-      'You need to login first.'
-    );
-  end;
-end;
-
 function TqBitTorrentWebUI.DoGetMinApiVersion: String;
 var
   sURL: String;
@@ -324,21 +315,6 @@ begin
   begin
     raise Exception.Create(
       'Minimum API Version failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
-    );
-  end;
-end;
-
-function TqBitTorrentWebUI.GetqBitTorrentVersion: String;
-begin
-  if FIsLogged then
-  begin
-    Result := DoGetqBitTorrentVersion;
-  end
-  else
-  begin
-    Result := '';
-    raise Exception.Create(
-      'You need to login first.'
     );
   end;
 end;
@@ -387,6 +363,7 @@ begin
   Result := False;
   FHttp.Clear;
   FHttp.UserAgent := sUserAgent;
+  FHttp.Cookies.Add('SID='+FLoginCookie);
   if FPort = 80 then
   begin
     sURL := 'http://'+FHost+sPath;
@@ -410,15 +387,17 @@ end;
 
 function TqBitTorrentWebUI.ExecShutdown: Boolean;
 begin
-  if FIsLogged then
+  if FActive then
   begin
     Result := DoExecShutdown;
+    if Result then
+      Active := False;
   end
   else
   begin
     Result := False;
     raise Exception.Create(
-      'You need to login first.'
+      'You need to set Active True first.'
     );
   end;
 end;
@@ -439,6 +418,7 @@ begin
   FTorrents.Clear;
   FHttp.Clear;
   FHttp.UserAgent := sUserAgent;
+  FHttp.Cookies.Add('SID='+FLoginCookie);
   if FPort = 80 then
   begin
     sURL := 'http://'+FHost+sPath;
@@ -484,7 +464,7 @@ end;
 
 function TqBitTorrentWebUI.GetTorrents: Boolean;
 begin
-  if FIsLogged then
+  if FActive then
   begin
     Result := DoGetTorrents;
   end
@@ -492,7 +472,7 @@ begin
   begin
     Result := False;
     raise Exception.Create(
-      'You need to login first.'
+      'You need to set Active True first.'
     );
   end;
 end;

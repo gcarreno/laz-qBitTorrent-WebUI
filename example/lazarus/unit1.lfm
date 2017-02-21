@@ -86,22 +86,6 @@ object frmMain: TfrmMain
     ClientHeight = 152
     ClientWidth = 699
     TabOrder = 1
-    object btnTestLogin: TButton
-      Left = 8
-      Height = 25
-      Top = 8
-      Width = 75
-      Action = actTestLogin
-      TabOrder = 0
-    end
-    object btnTestLogout: TButton
-      Left = 96
-      Height = 25
-      Top = 8
-      Width = 75
-      Action = actTestLogout
-      TabOrder = 1
-    end
     object btnFileExit: TButton
       Left = 610
       Height = 25
@@ -109,7 +93,7 @@ object frmMain: TfrmMain
       Width = 75
       Action = actFileExit
       Anchors = [akTop, akRight]
-      TabOrder = 2
+      TabOrder = 0
     end
     object divbGetMethhods: TDividerBevel
       Left = 8
@@ -121,30 +105,6 @@ object frmMain: TfrmMain
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object btnTestGetAPIVersion: TButton
-      Left = 8
-      Height = 25
-      Top = 64
-      Width = 75
-      Action = actTestGetApiVersion
-      TabOrder = 3
-    end
-    object btnTestGetMinAPiVersion: TButton
-      Left = 88
-      Height = 25
-      Top = 64
-      Width = 91
-      Action = actTestGetMinApiVersion
-      TabOrder = 4
-    end
-    object btnTestGetqBitTorrentVersion: TButton
-      Left = 184
-      Height = 25
-      Top = 64
-      Width = 120
-      Action = actTestGetqBitTorrentVersion
-      TabOrder = 5
-    end
     object divbCommands: TDividerBevel
       Left = 8
       Height = 17
@@ -155,14 +115,30 @@ object frmMain: TfrmMain
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object Button1: TButton
+    object btnTestExecShutdown: TButton
       Left = 599
       Height = 25
       Top = 120
       Width = 85
       Action = actTestExecShutdown
       Anchors = [akTop, akRight]
-      TabOrder = 6
+      TabOrder = 1
+    end
+    object btnTestGetTorrents: TButton
+      Left = 8
+      Height = 25
+      Top = 64
+      Width = 104
+      Action = actTestGetTorrents
+      TabOrder = 2
+    end
+    object chkFileActive: TCheckBox
+      Left = 8
+      Height = 24
+      Top = 9
+      Width = 69
+      Action = actFileSetActive
+      TabOrder = 3
     end
   end
   object qbttMain: TqBitTorrentWebUI
@@ -184,23 +160,8 @@ object frmMain: TfrmMain
     end
     object mnuTest: TMenuItem
       Caption = '&Test'
-      object mnuTestLogin: TMenuItem
-        Action = actTestLogin
-      end
-      object mnuTestLogout: TMenuItem
-        Action = actTestLogout
-      end
-      object mnuSep1: TMenuItem
-        Caption = '-'
-      end
-      object mnuTestGetAPIVersion: TMenuItem
-        Action = actTestGetApiVersion
-      end
-      object mnuTestGetMinApiVersion: TMenuItem
-        Action = actTestGetMinApiVersion
-      end
-      object mnuTestGetqBitTorrentVersion: TMenuItem
-        Action = actTestGetqBitTorrentVersion
+      object mnuTestGetTorrents: TMenuItem
+        Action = actTestGetTorrents
       end
       object mnuSep2: TMenuItem
         Caption = '-'
@@ -213,46 +174,28 @@ object frmMain: TfrmMain
   object alMain: TActionList
     Left = 378
     Top = 8
-    object actFileExit: TFileExit
-      Category = 'File'
-      Caption = 'E&xit'
-      Hint = 'Exit'
-    end
-    object actTestLogin: TAction
+    object actTestGetTorrents: TAction
       Category = 'Test'
-      Caption = 'Log&in'
+      Caption = 'G&et Torrents'
       DisableIfNoHandler = False
-      OnExecute = actTestLoginExecute
-    end
-    object actTestLogout: TAction
-      Category = 'Test'
-      Caption = 'Log&out'
-      DisableIfNoHandler = False
-      OnExecute = actTestLogoutExecute
-    end
-    object actTestGetApiVersion: TAction
-      Category = 'Test'
-      Caption = '&API Ver'
-      DisableIfNoHandler = False
-      OnExecute = actTestGetApiVersionExecute
-    end
-    object actTestGetMinApiVersion: TAction
-      Category = 'Test'
-      Caption = '&Min Api Ver'
-      DisableIfNoHandler = False
-      OnExecute = actTestGetMinApiVersionExecute
-    end
-    object actTestGetqBitTorrentVersion: TAction
-      Category = 'Test'
-      Caption = '&qBitTorrent Ver'
-      DisableIfNoHandler = False
-      OnExecute = actTestGetqBitTorrentVersionExecute
+      OnExecute = actTestGetTorrentsExecute
     end
     object actTestExecShutdown: TAction
       Category = 'Test'
       Caption = 'S&hutdown'
       DisableIfNoHandler = False
       OnExecute = actTestExecShutdownExecute
+    end
+    object actFileSetActive: TAction
+      Category = 'File'
+      Caption = '&Active'
+      DisableIfNoHandler = False
+      OnExecute = actFileSetActiveExecute
+    end
+    object actFileExit: TFileExit
+      Category = 'File'
+      Caption = 'E&xit'
+      Hint = 'Exit'
     end
   end
 end
