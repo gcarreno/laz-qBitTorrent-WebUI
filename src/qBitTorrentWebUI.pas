@@ -1,7 +1,25 @@
 {
   qBitTorrentWebUI component.
 
-  Copyright 2017 Gustavo Carreno <guscarreno@gmail.com>
+  Copyright (c) 2017 Gustavo Carreno <guscarreno@gmail.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
 }
 unit qBitTorrentWebUI;
 
@@ -10,7 +28,7 @@ unit qBitTorrentWebUI;
 interface
 
 uses
-  Classes, SysUtils, HTTPSend;
+  Classes, SysUtils, HTTPSend, qBTorrents;
 
 type
 { TqBitTorrentWebUI }
@@ -24,6 +42,7 @@ type
     FHttp: THTTPSend;
     FIsLogged: Boolean;
     FLoginCookie: String;
+    FTorrents: TqBTorrents;
 
     // Authentication
     function DoLogin: Boolean;
@@ -34,6 +53,7 @@ type
     function DoGetMinApiVersion: String;
     function DoGetqBitTorrentVersion: String;
     function DoExecShutdown: Boolean;
+    function DoGetTorrents: Boolean;
   protected
   public
     constructor Create(AOwner: TComponent); override;
@@ -48,6 +68,7 @@ type
     function GetMinApiVersion: String;
     function GetqBitTorrentVersion: String;
     function ExecShutdown: Boolean;
+    function GetTorrents: Boolean;
 
     property IsLogged: Boolean
       read FIsLogged;
@@ -67,11 +88,16 @@ type
       read FPort
       write FPort
       default 8080;
+    property Torrents: TqBTorrents
+      read FTorrents;
     // TODO: Add some Notifications for HTTP access:
     // Like Login and such
   end;
 
 implementation
+
+uses
+  fpjson, jsonparser, jsonscanner;
 
 const
   sUserAgent = 'lazqBitTorrentWebUI/0.1.0.6';
@@ -87,10 +113,12 @@ begin
   FPort := 8080;
   FHttp := THTTPSend.Create;
   FIsLogged := False;
+  FTorrents := TqBTorrents.Create(True);
 end;
 
 destructor TqBitTorrentWebUI.Destroy;
 begin
+  FTorrents.Free;
   FHttp.Free;
   inherited Destroy;
 end;
@@ -385,6 +413,80 @@ begin
   if FIsLogged then
   begin
     Result := DoExecShutdown;
+  end
+  else
+  begin
+    Result := False;
+    raise Exception.Create(
+      'You need to login first.'
+    );
+  end;
+end;
+
+function TqBitTorrentWebUI.DoGetTorrents: Boolean;
+var
+  sURL: String;
+  jParser: TJSONParser;
+  jData: TJSONData;
+  jTorrents: TJSONArray;
+  jTorrent: TJSONObject;
+  index: Integer;
+  oTorrent: TqBTorrent;
+const
+  sPath = '/query/torrents';
+begin
+  Result := False;
+  FTorrents.Clear;
+  FHttp.Clear;
+  FHttp.UserAgent := sUserAgent;
+  if FPort = 80 then
+  begin
+    sURL := 'http://'+FHost+sPath;
+  end
+  else
+  begin
+    sURL := 'http://'+FHost+':'+IntToStr(FPort)+sPath;
+  end;
+  FHttp.HTTPMethod('GET', sURL);
+  if FHttp.ResultCode = 200 then
+  begin
+    Result := True;
+    // Implement getting the shtuff
+    try
+      jParser := TJSONParser.Create(FHttp.Document, [joUTF8, joIgnoreTrailingComma]);
+      jData := jParser.Parse;
+    finally
+      jParser.Free;
+    end;
+    if jData.JSONType = jtArray then
+    begin
+      jTorrents := jData as TJSONArray;
+      for index := 0 to jTorrents.Count - 1 do
+      begin
+        if jTorrents[index].JSONType = jtObject then
+        begin
+          jTorrent := jTorrents[index] as TJSONObject;
+          oTorrent := TqBTorrent.Create;
+          oTorrent.Hash := jTorrent.Strings['hash'];
+          oTorrent.Name := jTorrent.Strings['name'];
+          FTorrents.Add(oTorrent);
+        end;
+      end;
+    end;
+  end
+  else
+  begin
+    raise Exception.Create(
+      'Getting torrents failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
+    );
+  end;
+end;
+
+function TqBitTorrentWebUI.GetTorrents: Boolean;
+begin
+  if FIsLogged then
+  begin
+    Result := DoGetTorrents;
   end
   else
   begin
