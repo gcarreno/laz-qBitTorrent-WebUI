@@ -10,7 +10,6 @@ object frmMain: TfrmMain
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
-  LCLVersion = '1.7'
   Visible = False
   object psMain: TPairSplitter
     Cursor = crVSplit
@@ -179,12 +178,14 @@ object frmMain: TfrmMain
       Category = 'Test'
       Caption = 'G&et Torrents'
       DisableIfNoHandler = False
+      Enabled = False
       OnExecute = actTestGetTorrentsExecute
     end
     object actTestExecShutdown: TAction
       Category = 'Test'
       Caption = 'S&hutdown'
       DisableIfNoHandler = False
+      Enabled = False
       OnExecute = actTestExecShutdownExecute
     end
     object actFileSetActive: TAction

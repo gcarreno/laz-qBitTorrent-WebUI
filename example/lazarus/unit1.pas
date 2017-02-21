@@ -47,6 +47,7 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
   private
+    procedure SetActions;
 
   public
     procedure Log(const aMsg: String);
@@ -98,6 +99,12 @@ begin
   Application.ProcessMessages;
 end;
 
+procedure TfrmMain.SetActions;
+begin
+  actTestExecShutdown.Enabled := chkFileActive.Checked;
+  actTestGetTorrents.Enabled := chkFileActive.Checked;
+end;
+
 procedure TfrmMain.actFileSetActiveExecute(Sender: TObject);
 begin
   if chkFileActive.Checked then
@@ -105,9 +112,13 @@ begin
   else
     Log('Active: False');
   qbttMain.Active := chkFileActive.Checked;
-  Info('API Version: ' + IntToStr(qbttMain.APIVersion));
-  Info('Min API Version: ' + IntToStr(qbttMain.MinAPIVersion));
-  Info('qBitTorrent Version: ' + qbttMain.qBitTorrentVersion);
+  SetActions;
+  if chkFileActive.Checked then
+  begin
+    Info('API Version: ' + IntToStr(qbttMain.APIVersion));
+    Info('Min API Version: ' + IntToStr(qbttMain.MinAPIVersion));
+    Info('qBitTorrent Version: ' + qbttMain.qBitTorrentVersion);
+  end;
 end;
 
 procedure TfrmMain.actTestExecShutdownExecute(Sender: TObject);
@@ -120,6 +131,7 @@ begin
     // If we don't do this it will trigger actFileSetActive
     chkFileActive.Action := nil;
     chkFileActive.Checked := False;
+    SetActions;
     chkFileActive.Action := actFileSetActive;
     if bShutdownResult then
     begin
@@ -138,6 +150,7 @@ end;
 procedure TfrmMain.actTestGetTorrentsExecute(Sender: TObject);
 var
   bGetTorrentsResult: Boolean;
+  index: Integer;
 begin
   Log('Asking for torrents.');
   try
@@ -145,6 +158,17 @@ begin
     if bGetTorrentsResult then
     begin
       Log(#9'Success.');
+      Info('Got: ' + IntToStr(qbttMain.Torrents.Count) +' torrents');
+      for index := 0 to qbttMain.Torrents.Count - 1 do
+      begin
+        Info(
+          'Torrent: '+
+          qbttMain.Torrents[index].Name+
+          '('+
+          qbttMain.Torrents[index].Hash+
+          ')'
+        );
+      end;
     end
     else
     begin
