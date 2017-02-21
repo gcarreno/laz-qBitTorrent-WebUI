@@ -68,6 +68,8 @@ type
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
 
+    procedure Clear;
+
     // Get methods
     function ExecShutdown: Boolean;
     function GetTorrents: Boolean;
@@ -157,13 +159,18 @@ begin
       DoLogout;
       FActive := False;
       FIsLogged := False;
-      FLoginCookie := '';
-      FAPIVersion := -1;
-      FMinAPIVersion := -1;
-      FqBitTorrentVersion := '';
-      FTorrents.Clear;
+      Clear;
     end;
   end;
+end;
+
+procedure TqBitTorrentWebUI.Clear;
+begin
+  FLoginCookie := '';
+  FAPIVersion := -1;
+  FMinAPIVersion := -1;
+  FqBitTorrentVersion := '';
+  FTorrents.Clear;
 end;
 
 function TqBitTorrentWebUI.DoLogin: Boolean;
