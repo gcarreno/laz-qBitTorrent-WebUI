@@ -156,8 +156,7 @@
       <!-- argument Visibility: default -->
       <element name="qBStateToStr.aState">
         <short>
-          The <var><link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link>
-          </var> to be translated.
+          The <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link> to be translated.
         </short>
       </element>
     </module>
