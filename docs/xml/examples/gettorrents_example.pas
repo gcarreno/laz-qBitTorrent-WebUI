@@ -20,16 +20,19 @@ implementation
 prodecure TForm1.GetTorrentsExecute(Sender: TObject);
 begin
   try
-    Fqb.Active := True;
-    if Fqb.GetTorrents then
-    begin
-      // Do something after a successfull torrents retrival
+    try
+      Fqb.Active := True;
+      if Fqb.GetTorrents then
+      begin
+        // Do something after a successfull torrents retrival
+      end;
+    except
+      on E:Exception do
+      begin
+        // If torrents retrieval fails it will raise an exception
+      end;
     end;
-  except
-    on E:Exception do
-    begin
-      // If torrents retrieval fails it will raise an exception
-    end;
+  finally
     Fqb.Active := False;
   end;
 end;

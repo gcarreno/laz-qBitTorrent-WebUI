@@ -49,16 +49,19 @@
 prodecure TForm1<span class="sym">.</span>ExecShutdownExecute<span class="sym">(</span>Sender<span class="sym">:</span> TObject<span class="sym">)</span><span class="sym">;</span>
 <span class="kw">begin</span>
   <span class="kw">try</span>
-    Fqb<span class="sym">.</span>Active <span class="sym">:=</span> True<span class="sym">;</span>
-    <span class="kw">if</span> Fqb<span class="sym">.</span>ExecShutdown <span class="kw">then</span>
-    <span class="kw">begin</span>
-      <span class="cmt">// Do something after a successfull shutdown</span>
+    <span class="kw">try</span>
+      Fqb<span class="sym">.</span>Active <span class="sym">:=</span> True<span class="sym">;</span>
+      <span class="kw">if</span> Fqb<span class="sym">.</span>ExecShutdown <span class="kw">then</span>
+      <span class="kw">begin</span>
+        <span class="cmt">// Do something after a successfull shutdown</span>
+      <span class="kw">end</span><span class="sym">;</span>
+    <span class="kw">except</span>
+      <span class="kw">on</span> E<span class="sym">:</span>Exception <span class="kw">do</span>
+      <span class="kw">begin</span>
+        <span class="cmt">// If shutdown fails it will raise an exception</span>
+      <span class="kw">end</span><span class="sym">;</span>
     <span class="kw">end</span><span class="sym">;</span>
-  <span class="kw">except</span>
-    <span class="kw">on</span> E<span class="sym">:</span>Exception <span class="kw">do</span>
-    <span class="kw">begin</span>
-      <span class="cmt">// If shutdown fails it will raise an exception</span>
-    <span class="kw">end</span><span class="sym">;</span>
+  <span class="kw">finally</span>
     Fqb<span class="sym">.</span>Active <span class="sym">:=</span> False<span class="sym">;</span>
   <span class="kw">end</span><span class="sym">;</span>
 <span class="kw">end</span><span class="sym">;</span>

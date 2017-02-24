@@ -20,16 +20,19 @@ implementation
 prodecure TForm1.ExecShutdownExecute(Sender: TObject);
 begin
   try
-    Fqb.Active := True;
-    if Fqb.ExecShutdown then
-    begin
-      // Do something after a successfull shutdown
+    try
+      Fqb.Active := True;
+      if Fqb.ExecShutdown then
+      begin
+        // Do something after a successfull shutdown
+      end;
+    except
+      on E:Exception do
+      begin
+        // If shutdown fails it will raise an exception
+      end;
     end;
-  except
-    on E:Exception do
-    begin
-      // If shutdown fails it will raise an exception
-    end;
+  finally
     Fqb.Active := False;
   end;
 end;
