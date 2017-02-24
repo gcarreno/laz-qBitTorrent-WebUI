@@ -181,6 +181,22 @@
       <element name="TqBitTorrentWebUI.GetTorrents.Result">
         <short>True if query of torrents succeded.</short>
       </element>
+      <!-- function Visibility: public -->
+      <element name="TqBitTorrentWebUI.GetTorrentsFiltered">
+        <short>Queries the API for torrents applying a filter.</short>
+        <descr />
+        <errors>Will throw an exception if not successfull.</errors>
+        <example file="examples/gettorrents_example.pas" />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBitTorrentWebUI.GetTorrentsFiltered.aFilter">
+        <short>The filter to be applied.</short>
+      </element>
+      <!-- function result Visibility: default -->
+      <element name="TqBitTorrentWebUI.GetTorrentsFiltered.Result">
+        <short>True if query of torrents succeded.</short>
+      </element>
     </module>
   </package>
 </fpdoc-descriptions>

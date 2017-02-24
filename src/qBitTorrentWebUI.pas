@@ -62,7 +62,7 @@ type
     function DoExecShutdown: Boolean;
 
     // Queries
-    function DoGetTorrents: Boolean;
+    function DoGetTorrents(const aFilter: TqBTorrentsFilter): Boolean;
   protected
   public
     constructor Create(AOwner: TComponent); override;
@@ -73,6 +73,7 @@ type
     // Get methods
     function ExecShutdown: Boolean;
     function GetTorrents: Boolean;
+    function GetTorrentsFiltered(const aFilter: TqBTorrentsFilter): Boolean;
 
     property IsLogged: Boolean
       read FIsLogged;
@@ -104,8 +105,6 @@ type
       read FPort
       write FPort
       default 8080;
-    // TODO: Add some Notifications for HTTP access:
-    // Like Login and such
   end;
 
 implementation
@@ -115,7 +114,7 @@ uses
 
 const
   iMyAPIVersion = 11;
-  sUserAgent = 'lazqBitTorrentWebUI/0.1.0.6';
+  sUserAgent = 'lazqBitTorrentWebUI/0.8.0.12';
 
 { TqBitTorrentWebUI }
 
@@ -420,7 +419,7 @@ begin
   end;
 end;
 
-function TqBitTorrentWebUI.DoGetTorrents: Boolean;
+function TqBitTorrentWebUI.DoGetTorrents(const aFilter: TqBTorrentsFilter): Boolean;
 var
   sURL: String;
   jParser: TJSONParser;
@@ -470,6 +469,10 @@ begin
   begin
     sURL := 'http://'+FHost+':'+IntToStr(FPort)+sPath;
   end;
+  if Assigned(aFilter) then
+  begin
+    sURL := sURL + '?' + aFilter.Filters;
+  end;
   FHttp.HTTPMethod('GET', sURL);
   if FHttp.ResultCode = 200 then
   begin
@@ -515,7 +518,32 @@ begin
   begin
     if iMyAPIVersion >= FMinAPIVersion then
     begin
-      Result := DoGetTorrents;
+      Result := DoGetTorrents(nil);
+    end
+    else
+    begin
+      Result := False;
+      raise Exception.Create(
+        'Cannot manage this API version.'
+      );
+    end;
+  end
+  else
+  begin
+    Result := False;
+    raise Exception.Create(
+      'You need to set Active True first.'
+    );
+  end;
+end;
+
+function TqBitTorrentWebUI.GetTorrentsFiltered(const aFilter: TqBTorrentsFilter): Boolean;
+begin
+  if FActive then
+  begin
+    if iMyAPIVersion >= FMinAPIVersion then
+    begin
+      Result := DoGetTorrents(aFilter);
     end
     else
     begin

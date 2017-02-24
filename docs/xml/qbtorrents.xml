@@ -39,6 +39,27 @@
         <errors />
         <seealso />
       </element>
+      <!-- object Visibility: default -->
+      <element name="TqBTorrentsFilter">
+        <short>An object to manage filters for the function <link id="#lazqBitTorrentWebUI.TqBitTorrentWebUI.GetTorrentsFiltered">GetTorrentsFileterd</link>.</short>
+        <descr />
+        <errors />
+        <seealso>
+          <link id="#lazqBitTorrentWebUI.TqBitTorrentWebUI.GetTorrentsFiltered">GetTorrentsFileterd</link>
+        </seealso>
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsFilter.Filters">
+        <short>A <var>String</var> with the filters already delimited by '&quot;'.</short>
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsFilter.Count">
+        <short>The amount of filters contained in the object.</short>
+        <descr />
+        <seealso />
+      </element>
       <!-- enumeration type Visibility: default -->
       <element name="TqBTorrentState">
         <short>Torrent States.</short>

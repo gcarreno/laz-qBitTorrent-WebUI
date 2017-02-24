@@ -48,6 +48,38 @@ type
     tsUnknown
   );
 
+{ TqBTorrentsFilter }
+  TqBTorrentsFilter = class(TObject)
+  private
+    FFilters: TStringList;
+
+    function GetFilters: String;
+    function GetCount: Integer;
+  protected
+  public
+    constructor Create;
+    destructor Destroy; override;
+
+    function Clear: TqBTorrentsFilter;
+    function withFilter(const aFilter: String): TqBTorrentsFilter;
+    function withOutFilter: TqBTorrentsFilter;
+    function withCategory(const aFilter: String): TqBTorrentsFilter;
+    function withOutCategory: TqBTorrentsFilter;
+    function withSort(const aFilter: String): TqBTorrentsFilter;
+    function withOutSort: TqBTorrentsFilter;
+    function withReverse(const aFilter: Boolean): TqBTorrentsFilter;
+    function withOutReverse: TqBTorrentsFilter;
+    function withLimit(const aLimit: Integer): TqBTorrentsFilter;
+    function withOutLimit: TqBTorrentsFilter;
+    function withOffset(const aOffset: Integer): TqBTorrentsFilter;
+    function withOutOffset: TqBTorrentsFilter;
+
+    property Filters: String
+      read GetFilters;
+    property Count: Integer
+      read GetCount;
+  end;
+
 { TqBTorrent }
   TqBTorrent = class(TObject)
   private
@@ -234,6 +266,99 @@ begin
     tsDownloading: Result := 'downloading';
     tsMetaDl:      Result := 'metaDL';
   end;
+end;
+
+{ TqBTorrentsFilter }
+
+function TqBTorrentsFilter.GetFilters: String;
+begin
+  Result := FFilters.DelimitedText;
+end;
+
+function TqBTorrentsFilter.GetCount: Integer;
+begin
+  Result := FFilters.Count;
+end;
+
+constructor TqBTorrentsFilter.Create;
+begin
+  FFilters := TStringList.Create;
+  FFilters.AlwaysQuote := False;
+  FFilters.Delimiter := '&';
+end;
+
+destructor TqBTorrentsFilter.Destroy;
+begin
+  FFilters.Free;
+  inherited Destroy;
+end;
+
+function TqBTorrentsFilter.Clear: TqBTorrentsFilter;
+begin
+  FFilters.Clear;
+  Result := Self;
+end;
+
+function TqBTorrentsFilter.withFilter(const aFilter: String): TqBTorrentsFilter;
+begin
+  Result := Self;
+end;
+
+function TqBTorrentsFilter.withOutFilter: TqBTorrentsFilter;
+begin
+  Result := Self;
+end;
+
+function TqBTorrentsFilter.withCategory(const aFilter: String
+  ): TqBTorrentsFilter;
+begin
+  Result := Self;
+end;
+
+function TqBTorrentsFilter.withOutCategory: TqBTorrentsFilter;
+begin
+  Result := Self;
+end;
+
+function TqBTorrentsFilter.withSort(const aFilter: String): TqBTorrentsFilter;
+begin
+  Result := Self;
+end;
+
+function TqBTorrentsFilter.withOutSort: TqBTorrentsFilter;
+begin
+  Result := Self;
+end;
+
+function TqBTorrentsFilter.withReverse(const aFilter: Boolean
+  ): TqBTorrentsFilter;
+begin
+  Result := Self;
+end;
+
+function TqBTorrentsFilter.withOutReverse: TqBTorrentsFilter;
+begin
+  Result := Self;
+end;
+
+function TqBTorrentsFilter.withLimit(const aLimit: Integer): TqBTorrentsFilter;
+begin
+  Result := Self;
+end;
+
+function TqBTorrentsFilter.withOutLimit: TqBTorrentsFilter;
+begin
+  Result := Self;
+end;
+
+function TqBTorrentsFilter.withOffset(const aOffset: Integer): TqBTorrentsFilter;
+begin
+  Result := Self;
+end;
+
+function TqBTorrentsFilter.withOutOffset: TqBTorrentsFilter;
+begin
+  Result := Self;
 end;
 
 { TqBTorrent }
