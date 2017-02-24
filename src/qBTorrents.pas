@@ -106,6 +106,9 @@ type
     FCategory: String;
     FSuperSeeding: Boolean;
     FForceStart: Boolean;
+    FSavePath: String;
+    FAddedOn: TDateTime;
+    FCompletionOn: TDateTime;
   protected
   public
     constructor Create;
@@ -168,6 +171,15 @@ type
     property ForceStart: Boolean
       read FForceStart
       write FForceStart;
+    property SavePath: String
+      read FSavePath
+      write FSavePath;
+    property AddedOn: TDateTime
+      read FAddedOn
+      write FAddedOn;
+    property CompletionOn: TDateTime
+      read FCompletionOn
+      write FCompletionOn;
   end;
 
 { TqBTorrents }

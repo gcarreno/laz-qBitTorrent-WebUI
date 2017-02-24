@@ -427,7 +427,6 @@ var
   jTorrents: TJSONArray;
   jTorrent: TJSONObject;
   index: Integer;
-  //oTorrent: TqBTorrent;
 const
   sPath = '/query/torrents';
 
@@ -453,6 +452,11 @@ const
     Result.Category := aTorrent.Get('category', '');
     Result.SuperSeeding := aTorrent.Get('super_seeding', False);
     Result.ForceStart := aTorrent.Get('force_start', False);
+    Result.SavePath := aTorrent.Get('save_path', '');
+{
+    Result.AddedOn := aTorrent.Get('added_on', !!TDateTime!!);
+    Result.CompletionOn := aTorrent.Get('completion_on', !!TDateTime!!);
+}
   end;
 
 begin
