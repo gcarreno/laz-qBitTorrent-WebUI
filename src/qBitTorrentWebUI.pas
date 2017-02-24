@@ -434,25 +434,25 @@ const
   function CreateTorrent(const aTorrent: TJSONObject): TqBTorrent;
   begin
     Result := TqBTorrent.Create;
-    Result.Hash := aTorrent.Strings['hash'];
-    Result.Name := aTorrent.Strings['name'];
-    Result.Size := aTorrent.Integers['size'];
-    Result.Progress := aTorrent.Floats['progress'];
-    Result.DlSpeed := aTorrent.Integers['dlspeed'];
-    Result.UpSpeed := aTorrent.Integers['upspeed'];
-    Result.Priority := aTorrent.Integers['priority'];
-    Result.NumSeeds := aTorrent.Integers['num_seeds'];
-    Result.NumComplete := aTorrent.Integers['num_complete'];
-    Result.NumLeechs := aTorrent.Integers['num_leechs'];
-    Result.NumIncomplete := aTorrent.Integers['num_incomplete'];
-    Result.Ratio := aTorrent.Floats['ratio'];
-    Result.Eta := aTorrent.Integers['eta'];
-    Result.State := StrToqBState(aTorrent.Strings['state']);
-    Result.SeqDl := aTorrent.Booleans['seq_dl'];
-    Result.FirstLastPiecePrioritized := aTorrent.Booleans['f_l_piece_prio'];
-    Result.Category := aTorrent.Strings['category'];
-    Result.SuperSeeding := aTorrent.Booleans['super_seeding'];
-    Result.ForceStart := aTorrent.Booleans['force_start'];
+    Result.Hash := aTorrent.Get('hash', '');
+    Result.Name := aTorrent.Get('name', '');
+    Result.Size := aTorrent.Get('size', 0);
+    Result.Progress := aTorrent.Get('progress', 0);
+    Result.DlSpeed := aTorrent.Get('dlspeed', 0);
+    Result.UpSpeed := aTorrent.Get('upspeed', 0);
+    Result.Priority := aTorrent.Get('priority', 0);
+    Result.NumSeeds := aTorrent.Get('num_seeds', 0);
+    Result.NumComplete := aTorrent.Get('num_complete', 0);
+    Result.NumLeechs := aTorrent.Get('num_leechs', 0);
+    Result.NumIncomplete := aTorrent.Get('num_incomplete', 0);
+    Result.Ratio := aTorrent.Get('ratio', 0.0);
+    Result.Eta := aTorrent.Get('eta', 0);
+    Result.State := StrToqBState(aTorrent.Get('state', 'unknown'));
+    Result.SeqDl := aTorrent.Get('seq_dl', False);
+    Result.FirstLastPiecePrioritized := aTorrent.Get('f_l_piece_prio', False);
+    Result.Category := aTorrent.Get('category', '');
+    Result.SuperSeeding := aTorrent.Get('super_seeding', False);
+    Result.ForceStart := aTorrent.Get('force_start', False);
   end;
 
 begin
@@ -477,11 +477,31 @@ begin
   if FHttp.ResultCode = 200 then
   begin
     Result := True;
-    // Implement getting the shtuff
     try
       jParser := TJSONParser.Create(FHttp.Document, [joUTF8, joIgnoreTrailingComma]);
       //jParser := TJSONParser.Create(
-      //  '[{"dlspeed":9681262,"eta":87,"f_l_piece_prio":false,"force_start":false,"hash":"8c212779b4abde7c6bc608063a0d008b7e40ce32","category":"","name":"debian-8.1.0-amd64-CD-1.iso","num_complete":-1,"num_incomplete":-1,"num_leechs":2,"num_seeds":54,"priority":1,"progress":0.16108787059783936,"ratio":0,"seq_dl":false,"size":657457152,"state":"downloading","super_seeding":false,"upspeed":0}]',
+      //  '['+
+      //     '{'+
+      //       '"dlspeed":9681262,'+
+      //       '"eta":87,'+
+      //       //'"f_l_piece_prio":false,'+
+      //       '"force_start":false,'+
+      //       '"hash":"8c212779b4abde7c6bc608063a0d008b7e40ce32",'+
+      //       '"category":"",'+
+      //       '"name":"debian-8.1.0-amd64-CD-1.iso","num_complete":-1,'+
+      //       '"num_incomplete":-1,'+
+      //       '"num_leechs":2,'+
+      //       '"num_seeds":54,'+
+      //       '"priority":1,'+
+      //       '"progress":0.16108787059783936,'+
+      //       '"ratio":0,'+
+      //       '"seq_dl":false,'+
+      //       '"size":657457152,'+
+      //       '"state":"downloading",'+
+      //       '"super_seeding":false,'+
+      //       '"upspeed":0'+
+      //     '}'+
+      //  ']',
       //  [joUTF8, joIgnoreTrailingComma]);
       jData := jParser.Parse;
     finally
