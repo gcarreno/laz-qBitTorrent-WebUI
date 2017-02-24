@@ -437,7 +437,7 @@ const
     Result.Hash := aTorrent.Get('hash', '');
     Result.Name := aTorrent.Get('name', '');
     Result.Size := aTorrent.Get('size', 0);
-    Result.Progress := aTorrent.Get('progress', 0);
+    Result.Progress := aTorrent.Get('progress', 0.0);
     Result.DlSpeed := aTorrent.Get('dlspeed', 0);
     Result.UpSpeed := aTorrent.Get('upspeed', 0);
     Result.Priority := aTorrent.Get('priority', 0);
