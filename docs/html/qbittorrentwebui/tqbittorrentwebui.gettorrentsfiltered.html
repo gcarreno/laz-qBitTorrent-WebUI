@@ -61,18 +61,33 @@
 <span class="kw">implementation</span>
 
 prodecure TForm1<span class="sym">.</span>GetTorrentsExecute<span class="sym">(</span>Sender<span class="sym">:</span> TObject<span class="sym">)</span><span class="sym">;</span>
+<span class="kw">var</span>
+  oFilter<span class="sym">:</span> TqBTorrentsFilter<span class="sym">;</span>
 <span class="kw">begin</span>
   <span class="kw">try</span>
-    Fqb<span class="sym">.</span>Active <span class="sym">:=</span> True<span class="sym">;</span>
-    <span class="kw">if</span> Fqb<span class="sym">.</span>GetTorrents <span class="kw">then</span>
-    <span class="kw">begin</span>
-      <span class="cmt">// Do something after a successfull torrents retrival</span>
+    <span class="kw">try</span>
+      Fqb<span class="sym">.</span>Active <span class="sym">:=</span> True<span class="sym">;</span>
+      oFilter <span class="sym">:=</span> TqBTorrentsFilter<span class="sym">.</span>Create<span class="sym">;</span>
+      <span class="kw">try</span>
+        oFilter
+          <span class="sym">.</span>withFilter<span class="sym">(</span><span class="str">'all'</span><span class="sym">)</span>
+          <span class="sym">.</span>withSort<span class="sym">(</span><span class="str">'priority'</span><span class="sym">)</span>
+          <span class="sym">.</span>withLimit<span class="sym">(</span><span class="num">10</span><span class="sym">)</span><span class="sym">;</span>
+        oFilter<span class="sym">.</span>Free<span class="sym">;</span>
+        <span class="kw">if</span> Fqb<span class="sym">.</span>GetTorrents <span class="kw">then</span>
+        <span class="kw">begin</span>
+          <span class="cmt">// Do something after a successfull torrents retrival</span>
+        <span class="kw">end</span><span class="sym">;</span>
+      <span class="kw">finally</span>
+        oFilter<span class="sym">.</span>Free<span class="sym">;</span>
+      <span class="kw">end</span><span class="sym">;</span>
+    <span class="kw">except</span>
+      <span class="kw">on</span> E<span class="sym">:</span>Exception <span class="kw">do</span>
+      <span class="kw">begin</span>
+        <span class="cmt">// If torrents retrieval fails it will raise an exception</span>
+      <span class="kw">end</span><span class="sym">;</span>
     <span class="kw">end</span><span class="sym">;</span>
-  <span class="kw">except</span>
-    <span class="kw">on</span> E<span class="sym">:</span>Exception <span class="kw">do</span>
-    <span class="kw">begin</span>
-      <span class="cmt">// If torrents retrieval fails it will raise an exception</span>
-    <span class="kw">end</span><span class="sym">;</span>
+  <span class="kw">finally</span>
     Fqb<span class="sym">.</span>Active <span class="sym">:=</span> False<span class="sym">;</span>
   <span class="kw">end</span><span class="sym">;</span>
 <span class="kw">end</span><span class="sym">;</span>

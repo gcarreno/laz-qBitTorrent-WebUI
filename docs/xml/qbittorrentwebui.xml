@@ -186,7 +186,7 @@
         <short>Queries the API for torrents applying a filter.</short>
         <descr />
         <errors>Will throw an exception if not successfull.</errors>
-        <example file="examples/gettorrents_example.pas" />
+        <example file="examples/gettorrentsfiltered_example.pas" />
         <seealso />
       </element>
       <!-- argument Visibility: default -->
