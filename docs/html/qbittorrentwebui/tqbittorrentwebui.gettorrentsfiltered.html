@@ -51,7 +51,7 @@
     <span class="cmt">{...}</span>
   <span class="kw">public</span>
     <span class="cmt">{...}</span>
-    <span class="kw">procedure</span> GetTorrentsExecute<span class="sym">(</span>Sender<span class="sym">:</span> TObject<span class="sym">)</span><span class="sym">;</span>
+    <span class="kw">procedure</span> GetTorrentsFilteredExecute<span class="sym">(</span>Sender<span class="sym">:</span> TObject<span class="sym">)</span><span class="sym">;</span>
     <span class="cmt">{...}</span>
   <span class="kw">end</span><span class="sym">;</span>
 
@@ -60,7 +60,7 @@
 
 <span class="kw">implementation</span>
 
-prodecure TForm1<span class="sym">.</span>GetTorrentsExecute<span class="sym">(</span>Sender<span class="sym">:</span> TObject<span class="sym">)</span><span class="sym">;</span>
+prodecure TForm1<span class="sym">.</span>GetTorrentsFilteredExecute<span class="sym">(</span>Sender<span class="sym">:</span> TObject<span class="sym">)</span><span class="sym">;</span>
 <span class="kw">var</span>
   oFilter<span class="sym">:</span> TqBTorrentsFilter<span class="sym">;</span>
 <span class="kw">begin</span>
@@ -74,7 +74,7 @@ prodecure TForm1<span class="sym">.</span>GetTorrentsExecute<span class="sym">(<
           <span class="sym">.</span>withSort<span class="sym">(</span><span class="str">'priority'</span><span class="sym">)</span>
           <span class="sym">.</span>withLimit<span class="sym">(</span><span class="num">10</span><span class="sym">)</span><span class="sym">;</span>
         oFilter<span class="sym">.</span>Free<span class="sym">;</span>
-        <span class="kw">if</span> Fqb<span class="sym">.</span>GetTorrents <span class="kw">then</span>
+        <span class="kw">if</span> Fqb<span class="sym">.</span>GetTorrentsFiltered<span class="sym">(</span>oFilter<span class="sym">)</span> <span class="kw">then</span>
         <span class="kw">begin</span>
           <span class="cmt">// Do something after a successfull torrents retrival</span>
         <span class="kw">end</span><span class="sym">;</span>

@@ -8,7 +8,7 @@ type
     {...}
   public
     {...}
-    procedure GetTorrentsExecute(Sender: TObject);
+    procedure GetTorrentsFilteredExecute(Sender: TObject);
     {...}
   end;
 
@@ -17,7 +17,7 @@ var
 
 implementation
 
-prodecure TForm1.GetTorrentsExecute(Sender: TObject);
+prodecure TForm1.GetTorrentsFilteredExecute(Sender: TObject);
 var
   oFilter: TqBTorrentsFilter;
 begin
@@ -31,7 +31,7 @@ begin
           .withSort('priority')
           .withLimit(10);
         oFilter.Free;
-        if Fqb.GetTorrents then
+        if Fqb.GetTorrentsFiltered(oFilter) then
         begin
           // Do something after a successfull torrents retrival
         end;
