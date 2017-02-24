@@ -55,6 +55,10 @@ type
 
     function GetFilters: String;
     function GetCount: Integer;
+    procedure Add(const aName:String; const aValue: String);
+    procedure Add(const aName:String; const aValue: Boolean);
+    procedure Add(const aName:String; const aValue: Integer);
+    procedure Remove(const aName: String);
   protected
   public
     constructor Create;
@@ -184,6 +188,14 @@ function qBStateToStr(aState: TqBTorrentState): String;
 
 implementation
 
+const
+  cNameFilter = 'filter';
+  cNameCategory = 'category';
+  cNameSort = 'sort';
+  cNameReverse = 'reverse';
+  cNameLimit = 'limit';
+  cNameOffset = 'offset';
+
 function StrToqBState(const aState: String): TqBTorrentState;
 begin
   Result := tsUnknown;
@@ -280,6 +292,114 @@ begin
   Result := FFilters.Count;
 end;
 
+procedure TqBTorrentsFilter.Add(const aName:String; const aValue: String);
+var
+  sFilter: String;
+  i, index: integer;
+begin
+  index := -1;
+  for i := 0 to FFilters.Count - 1 do
+  begin
+    if FFilters.Names[i] = aName then
+    begin
+      index := i;
+      break;
+    end;
+  end;
+  if index > -1 then
+  begin
+    FFilters.ValueFromIndex[index] := aValue;
+  end
+  else
+  begin
+    sFilter := aName + '=' + aValue;
+    FFilters.Add(sFilter);
+  end;
+end;
+
+procedure TqBTorrentsFilter.Add(const aName: String; const aValue: Boolean);
+var
+  sFilter: String;
+  i, index: integer;
+begin
+  index := -1;
+  for i := 0 to FFilters.Count - 1 do
+  begin
+    if FFilters.Names[i] = aName then
+    begin
+      index := i;
+      break;
+    end;
+  end;
+  if index > -1 then
+  begin
+    if aValue then
+    begin
+      FFilters.ValueFromIndex[index] := 'true';
+    end
+    else
+    begin
+      FFilters.ValueFromIndex[index] := 'false';
+    end;
+  end
+  else
+  begin
+    if aValue then
+    begin
+      sFilter := aName + '=true';
+    end
+    else
+    begin
+      sFilter := aName + '=false';
+    end;
+    FFilters.Add(sFilter);
+  end;
+end;
+
+procedure TqBTorrentsFilter.Add(const aName: String; const aValue: Integer);
+var
+  sFilter: String;
+  i, index: integer;
+begin
+  index := -1;
+  for i := 0 to FFilters.Count - 1 do
+  begin
+    if FFilters.Names[i] = aName then
+    begin
+      index := i;
+      break;
+    end;
+  end;
+  if index > -1 then
+  begin
+    FFilters.ValueFromIndex[index] := IntToStr(aValue);
+  end
+  else
+  begin
+    sFilter := aName + '=' + IntToStr(aValue);
+    FFilters.Add(sFilter);
+  end;
+end;
+
+procedure TqBTorrentsFilter.Remove(const aName: String);
+var
+  i, index: Integer;
+begin
+  index := -1;
+  for i := 0 to FFilters.Count - 1 do
+  begin
+    if FFilters.Names[i] = aName then
+    begin
+      index := i;
+      break;
+    end;
+  end;
+  if index > -1 then
+  begin
+    FFilters.Delete(index);
+  end;
+end;
+
 constructor TqBTorrentsFilter.Create;
 begin
   FFilters := TStringList.Create;
@@ -301,125 +421,74 @@ begin
 end;
 
 function TqBTorrentsFilter.withFilter(const aFilter: String): TqBTorrentsFilter;
-var
-  sFilter: String;
-  i, index: integer;
-const
-  cName = 'filter';
 begin
-  index := -1;
-  for i := 0 to FFilters.Count - 1 do
-  begin
-    if FFilters.Names[i] = cName then
-    begin
-      index := i;
-      break;
-    end;
-  end;
-  if index > -1 then
-  begin
-    FFilters.ValueFromIndex[index] := aFilter;
-  end
-  else
-  begin
-    sFilter := cName + '=' + aFilter;
-    FFilters.Add(sFilter);
-  end;
+  Add(cNameFilter, aFilter);
   Result := Self;
 end;
 
 function TqBTorrentsFilter.withOutFilter: TqBTorrentsFilter;
-var
-  i, index: Integer;
-const
-  cName = 'filter';
 begin
-  index := -1;
-  for i := 0 to FFilters.Count - 1 do
-  begin
-    if FFilters.Names[i] = cName then
-    begin
-      index := i;
-      break;
-    end;
-  end;
-  if index > -1 then
-  begin
-    FFilters.Delete(index);
-  end;
+  Remove(cNameFilter);
   Result := Self;
 end;
 
 function TqBTorrentsFilter.withCategory(const aCategory: String): TqBTorrentsFilter;
 begin
+  Add(cNameCategory, aCategory);
   Result := Self;
 end;
 
 function TqBTorrentsFilter.withOutCategory: TqBTorrentsFilter;
 begin
+  Remove(cNameCategory);
   Result := Self;
 end;
 
 function TqBTorrentsFilter.withSort(const aSort: String): TqBTorrentsFilter;
-var
-  sFilter: String;
-  i, index: integer;
-const
-  cName = 'sort';
 begin
-  index := -1;
-  for i := 0 to FFilters.Count - 1 do
-  begin
-    if FFilters.Names[i] = cName then
-    begin
-      index := i;
-      break;
-    end;
-  end;
-  if index > -1 then
-  begin
-    FFilters.ValueFromIndex[index] := aSort;
-  end
-  else
-  begin
-    sFilter := cName + '=' + aSort;
-    FFilters.Add(sFilter);
-  end;
+  Add(cNameSort, aSort);
   Result := Self;
 end;
 
 function TqBTorrentsFilter.withOutSort: TqBTorrentsFilter;
 begin
+  Remove(cNameSort);
   Result := Self;
 end;
 
 function TqBTorrentsFilter.withReverse(const aReverse: Boolean): TqBTorrentsFilter;
 begin
+  Add(cNameReverse, aReverse);
   Result := Self;
 end;
 
 function TqBTorrentsFilter.withOutReverse: TqBTorrentsFilter;
 begin
+  Remove(cNameReverse);
   Result := Self;
 end;
 
 function TqBTorrentsFilter.withLimit(const aLimit: Integer): TqBTorrentsFilter;
 begin
+  Add(cNameLimit, aLimit);
   Result := Self;
 end;
 
 function TqBTorrentsFilter.withOutLimit: TqBTorrentsFilter;
 begin
+  Remove(cNameLimit);
   Result := Self;
 end;
 
 function TqBTorrentsFilter.withOffset(const aOffset: Integer): TqBTorrentsFilter;
 begin
+  Add(cNameOffset, aOffset);
   Result := Self;
 end;
 
 function TqBTorrentsFilter.withOutOffset: TqBTorrentsFilter;
 begin
+  Remove(cNameOffset);
   Result := Self;
 end;
 
