@@ -63,11 +63,11 @@ type
     function Clear: TqBTorrentsFilter;
     function withFilter(const aFilter: String): TqBTorrentsFilter;
     function withOutFilter: TqBTorrentsFilter;
-    function withCategory(const aFilter: String): TqBTorrentsFilter;
+    function withCategory(const aCategory: String): TqBTorrentsFilter;
     function withOutCategory: TqBTorrentsFilter;
-    function withSort(const aFilter: String): TqBTorrentsFilter;
+    function withSort(const aSort: String): TqBTorrentsFilter;
     function withOutSort: TqBTorrentsFilter;
-    function withReverse(const aFilter: Boolean): TqBTorrentsFilter;
+    function withReverse(const aReverse: Boolean): TqBTorrentsFilter;
     function withOutReverse: TqBTorrentsFilter;
     function withLimit(const aLimit: Integer): TqBTorrentsFilter;
     function withOutLimit: TqBTorrentsFilter;
@@ -283,6 +283,7 @@ end;
 constructor TqBTorrentsFilter.Create;
 begin
   FFilters := TStringList.Create;
+  FFilters.NameValueSeparator := '=';
   FFilters.AlwaysQuote := False;
   FFilters.Delimiter := '&';
 end;
@@ -300,17 +301,56 @@ begin
 end;
 
 function TqBTorrentsFilter.withFilter(const aFilter: String): TqBTorrentsFilter;
+var
+  sFilter: String;
+  i, index: integer;
+const
+  cName = 'filter';
 begin
+  index := -1;
+  for i := 0 to FFilters.Count - 1 do
+  begin
+    if FFilters.Names[i] = cName then
+    begin
+      index := i;
+      break;
+    end;
+  end;
+  if index > -1 then
+  begin
+    FFilters.ValueFromIndex[index] := aFilter;
+  end
+  else
+  begin
+    sFilter := cName + '=' + aFilter;
+    FFilters.Add(sFilter);
+  end;
   Result := Self;
 end;
 
 function TqBTorrentsFilter.withOutFilter: TqBTorrentsFilter;
+var
+  i, index: Integer;
+const
+  cName = 'filter';
 begin
+  index := -1;
+  for i := 0 to FFilters.Count - 1 do
+  begin
+    if FFilters.Names[i] = cName then
+    begin
+      index := i;
+      break;
+    end;
+  end;
+  if index > -1 then
+  begin
+    FFilters.Delete(index);
+  end;
   Result := Self;
 end;
 
-function TqBTorrentsFilter.withCategory(const aFilter: String
-  ): TqBTorrentsFilter;
+function TqBTorrentsFilter.withCategory(const aCategory: String): TqBTorrentsFilter;
 begin
   Result := Self;
 end;
@@ -320,8 +360,31 @@ begin
   Result := Self;
 end;
 
-function TqBTorrentsFilter.withSort(const aFilter: String): TqBTorrentsFilter;
+function TqBTorrentsFilter.withSort(const aSort: String): TqBTorrentsFilter;
+var
+  sFilter: String;
+  i, index: integer;
+const
+  cName = 'sort';
 begin
+  index := -1;
+  for i := 0 to FFilters.Count - 1 do
+  begin
+    if FFilters.Names[i] = cName then
+    begin
+      index := i;
+      break;
+    end;
+  end;
+  if index > -1 then
+  begin
+    FFilters.ValueFromIndex[index] := aSort;
+  end
+  else
+  begin
+    sFilter := cName + '=' + aSort;
+    FFilters.Add(sFilter);
+  end;
   Result := Self;
 end;
 
@@ -330,8 +393,7 @@ begin
   Result := Self;
 end;
 
-function TqBTorrentsFilter.withReverse(const aFilter: Boolean
-  ): TqBTorrentsFilter;
+function TqBTorrentsFilter.withReverse(const aReverse: Boolean): TqBTorrentsFilter;
 begin
   Result := Self;
 end;

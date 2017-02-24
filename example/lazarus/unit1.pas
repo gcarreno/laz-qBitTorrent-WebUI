@@ -209,10 +209,20 @@ procedure TfrmMain.actTestGetTorrentsExecute(Sender: TObject);
 var
   bGetTorrentsResult: Boolean;
   index: Integer;
+  oFilter: TqBTorrentsFilter;
 begin
-  Log('Asking for torrents.');
+  Log('Asking for torrents with filters.');
   try
-    bGetTorrentsResult := qbttMain.GetTorrents;
+    oFilter := TqBTorrentsFilter.Create;
+    oFilter
+      .withFilter('all')
+      .withSort('priority');
+    Log('Filter: ' + oFilter.Filters);
+    try
+      bGetTorrentsResult := qbttMain.GetTorrentsFiltered(oFilter);
+    finally
+      oFilter.Free;
+    end;
     if bGetTorrentsResult then
     begin
       Log(#9'Success.');

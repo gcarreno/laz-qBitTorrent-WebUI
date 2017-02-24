@@ -41,16 +41,16 @@
       </element>
       <!-- object Visibility: default -->
       <element name="TqBTorrentsFilter">
-        <short>An object to manage filters for the function <link id="#lazqBitTorrentWebUI.TqBitTorrentWebUI.GetTorrentsFiltered">GetTorrentsFileterd</link>.</short>
+        <short>An object to manage filters for the function <link id="#lazqBitTorrentWebUI.TqBitTorrentWebUI.GetTorrentsFiltered">GetTorrentsFiltered</link>.</short>
         <descr />
         <errors />
         <seealso>
-          <link id="#lazqBitTorrentWebUI.TqBitTorrentWebUI.GetTorrentsFiltered">GetTorrentsFileterd</link>
+          <link id="#lazqBitTorrentWebUI.TqBitTorrentWebUI.GetTorrentsFiltered">GetTorrentsFiltered</link>
         </seealso>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsFilter.Filters">
-        <short>A <var>String</var> with the filters already delimited by '&quot;'.</short>
+        <short>A <var>String</var> with the filters already delimited by '&amp;'.</short>
         <descr />
         <seealso />
       </element>
@@ -59,6 +59,52 @@
         <short>The amount of filters contained in the object.</short>
         <descr />
         <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsFilter.Count">
+        <short>The amount of filters contained in the object.</short>
+        <descr />
+        <seealso />
+      </element>
+      <!-- function Visibility: public -->
+      <element name="TqBTorrentsFilter.Clear">
+        <short>Clears the filters.</short>
+        <descr />
+        <errors />
+        <example />
+        <seealso />
+      </element>
+      <!-- function result Visibility: default -->
+      <element name="TqBTorrentsFilter.Clear.Result">
+        <short>Returns <var>Self</var> so the filters can be chained.</short>
+      </element>
+      <!-- function Visibility: public -->
+      <element name="TqBTorrentsFilter.withFilter">
+        <short>Adds the filter named 'filter'.</short>
+        <descr />
+        <errors />
+        <example />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsFilter.withFilter.aFilter">
+        <short>The value for the filter named 'filter'.</short>
+      </element>
+      <!-- function result Visibility: default -->
+      <element name="TqBTorrentsFilter.withFilter.Result">
+        <short>Returns <var>Self</var> so the filters can be chained.</short>
+      </element>
+      <!-- function Visibility: public -->
+      <element name="TqBTorrentsFilter.withOutFilter">
+        <short>Removes the filter named 'filter'.</short>
+        <descr />
+        <errors />
+        <example />
+        <seealso />
+      </element>
+      <!-- function result Visibility: default -->
+      <element name="TqBTorrentsFilter.withOutFilter.Result">
+        <short>Returns <var>Self</var> so the filters can be chained.</short>
       </element>
       <!-- enumeration type Visibility: default -->
       <element name="TqBTorrentState">
