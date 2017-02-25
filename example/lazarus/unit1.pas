@@ -217,8 +217,9 @@ begin
     oFilter
       .withFilter('all')
       .withSort('priority')
-      .withLimit(10)
-      .withReverse(True);
+      //.withLimit(10)
+      //.withReverse(True)
+      ;
     Log('Filter: ' + oFilter.Filters);
     try
       bGetTorrentsResult := qbttMain.GetTorrentsFiltered(oFilter);

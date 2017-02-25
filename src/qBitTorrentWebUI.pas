@@ -527,6 +527,9 @@ begin
     begin
       raise Exception.Create('First object is not an array.');
     end;
+    jTorrent := nil;
+    jTorrents := nil;
+    jData.Free;
   end
   else
   begin
