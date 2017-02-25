@@ -422,10 +422,6 @@ end;
 function TqBitTorrentWebUI.DoGetTorrents(const aFilter: TqBTorrentsFilter): Boolean;
 var
   sURL: String;
-  jParser: TJSONParser;
-  jData: TJSONData;
-  jTorrents: TJSONArray;
-  index: Integer;
 const
   sPath = '/query/torrents';
 begin
@@ -450,57 +446,57 @@ begin
   if FHttp.ResultCode = 200 then
   begin
     Result := True;
-    //FTorrents.LoadFromStream(FHttp.Document);
-    FTorrents.LoadFromJSON(
-      '['+
-        '{'+
-            '"added_on": 1488047649,'+
-            '"category": "TV",'+
-            '"completion_on": 4294967295,'+
-            '"dlspeed": 0,'+
-            '"eta": 8640000,'+
-            '"force_start": false,'+
-            '"hash": "d7856095949febddc0770edba48eca341cca6f94",'+
-            '"name": "Arrow.S05E14.HDTV.XviD-FUM[ettv]",'+
-            '"num_complete": 748,'+
-            '"num_incomplete": 119,'+
-            '"num_leechs": 0,'+
-            '"num_seeds": 0,'+
-            '"priority": 1,'+
-            '"progress": 0,'+
-            '"ratio": 0,'+
-            '"save_path": "/home/gcarreno/Videos/TVSeries/",'+
-            '"seq_dl": false,'+
-            '"size": 0,'+
-            '"state": "pausedDL",'+
-            '"super_seeding": false,'+
-            '"upspeed": 0'+
-        '},'+
-        '{'+
-            '"added_on": 1488047687,'+
-            '"category": "TV",'+
-            '"completion_on": 4294967295,'+
-            '"dlspeed": 0,'+
-            '"eta": 8640000,'+
-            '"force_start": false,'+
-            '"hash": "82d81fe7ea9b9e495d6f1f866a2e12b0ee72042e",'+
-            '"name": "Blindspot.S02E15.HDTV.XviD-FUM[ettv]",'+
-            '"num_complete": 396,'+
-            '"num_incomplete": 55,'+
-            '"num_leechs": 0,'+
-            '"num_seeds": 0,'+
-            '"priority": 2,'+
-            '"progress": 0,'+
-            '"ratio": 0,'+
-            '"save_path": "/home/gcarreno/Videos/TVSeries/",'+
-            '"seq_dl": false,'+
-            '"size": 0,'+
-            '"state": "pausedDL",'+
-            '"super_seeding": false,'+
-            '"upspeed": 0'+
-        '},'+
-      ']'
-    );
+    FTorrents.LoadFromStream(FHttp.Document);
+    //FTorrents.LoadFromJSON(
+    //  '['+
+    //    '{'+
+    //        '"added_on": 1488047649,'+
+    //        '"category": "TV",'+
+    //        '"completion_on": 4294967295,'+
+    //        '"dlspeed": 0,'+
+    //        '"eta": 8640000,'+
+    //        '"force_start": false,'+
+    //        '"hash": "d7856095949febddc0770edba48eca341cca6f94",'+
+    //        '"name": "Arrow.S05E14.HDTV.XviD-FUM[ettv]",'+
+    //        '"num_complete": 748,'+
+    //        '"num_incomplete": 119,'+
+    //        '"num_leechs": 0,'+
+    //        '"num_seeds": 0,'+
+    //        '"priority": 1,'+
+    //        '"progress": 0,'+
+    //        '"ratio": 0,'+
+    //        '"save_path": "/home/gcarreno/Videos/TVSeries/",'+
+    //        '"seq_dl": false,'+
+    //        '"size": 0,'+
+    //        '"state": "pausedDL",'+
+    //        '"super_seeding": false,'+
+    //        '"upspeed": 0'+
+    //    '},'+
+    //    '{'+
+    //        '"added_on": 1488047687,'+
+    //        '"category": "TV",'+
+    //        '"completion_on": 4294967295,'+
+    //        '"dlspeed": 0,'+
+    //        '"eta": 8640000,'+
+    //        '"force_start": false,'+
+    //        '"hash": "82d81fe7ea9b9e495d6f1f866a2e12b0ee72042e",'+
+    //        '"name": "Blindspot.S02E15.HDTV.XviD-FUM[ettv]",'+
+    //        '"num_complete": 396,'+
+    //        '"num_incomplete": 55,'+
+    //        '"num_leechs": 0,'+
+    //        '"num_seeds": 0,'+
+    //        '"priority": 2,'+
+    //        '"progress": 0,'+
+    //        '"ratio": 0,'+
+    //        '"save_path": "/home/gcarreno/Videos/TVSeries/",'+
+    //        '"seq_dl": false,'+
+    //        '"size": 0,'+
+    //        '"state": "pausedDL",'+
+    //        '"super_seeding": false,'+
+    //        '"upspeed": 0'+
+    //    '},'+
+    //  ']'
+    //);
   end
   else
   begin

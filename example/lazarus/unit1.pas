@@ -241,16 +241,92 @@ begin
             ]
           )
         );
-        Info(Format(#9'#: %d', [qbttMain.Torrents[index].Priority]));
-        Info(#9'Size: '+FormatBytes(qbttMain.Torrents[index].Size));
-        Info(#9'Progress: '+FormatFloat('##0.00%', qbttMain.Torrents[index].Progress));
-        Info(#9'DL Speed: '+FormatBytes(qbttMain.Torrents[index].DlSpeed)+'/s');
-        Info(#9'UP Speed: '+FormatBytes(qbttMain.Torrents[index].UpSpeed)+'/s');
-        Info(#9'State: '+FormatState(qbttMain.Torrents[index].State));
-        Info(Format(#9'Seeds: %d', [qbttMain.Torrents[index].NumSeeds]));
-        Info(Format(#9'Leech: %d', [qbttMain.Torrents[index].NumLeechs]));
-        Info(Format(#9'Added: %s', [FormatDateTime('YYYY/MM/DD HH:MM:SS', qbttMain.Torrents[index].AddedOn)]));
-        Info(Format(#9'Completion: %s', [FormatDateTime('YYYY/MM/DD HH:MM:SS', qbttMain.Torrents[index].CompletionOn)]));
+        Info(
+          Format(
+            #9'#: %d',
+            [
+              qbttMain.Torrents[index].Priority
+            ]
+          )
+        );
+        Info(
+          Format(
+            #9'Size: %s',
+            [
+              FormatBytes(qbttMain.Torrents[index].Size)
+            ]
+          )
+        );
+        Info(
+          Format(
+            #9'Progress: %s',
+            [
+              FormatFloat('##0.00%', qbttMain.Torrents[index].Progress)
+            ]
+          )
+        );
+        Info(
+          Format(
+            #9'DL Speed: %s/s',
+            [
+              FormatBytes(qbttMain.Torrents[index].DlSpeed)
+            ]
+          )
+        );
+        Info(
+          Format(
+            #9'UP Speed: %s/s',
+            [
+              FormatBytes(qbttMain.Torrents[index].UpSpeed)
+            ]
+          )
+        );
+        Info(
+          Format(
+            #9'State: %s',
+            [
+              FormatState(qbttMain.Torrents[index].State)
+            ]
+          )
+        );
+        Info(
+          Format(
+            #9'Seeds: %d',
+            [
+              qbttMain.Torrents[index].NumSeeds
+            ]
+          )
+        );
+        Info(
+          Format(
+            #9'Leech: %d',
+            [
+              qbttMain.Torrents[index].NumLeechs
+            ]
+          )
+        );
+        Info(
+          Format(
+            #9'Added: %s',
+            [
+              FormatDateTime(
+                'YYYY/MM/DD HH:MM:SS',
+                qbttMain.Torrents[index].AddedOn
+              )
+            ]
+          )
+        );
+        Info(
+          Format(
+            #9'Completion: %s',
+            [
+              FormatDateTime(
+                'YYYY/MM/DD HH:MM:SS',
+                qbttMain.Torrents[index].CompletionOn
+              )
+            ]
+          )
+        );
       end;
     end
     else
