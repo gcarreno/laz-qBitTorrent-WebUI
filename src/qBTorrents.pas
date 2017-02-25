@@ -28,7 +28,7 @@ unit qBTorrents;
 interface
 
 uses
-  Classes, Contnrs, SysUtils;
+  Classes, Contnrs, SysUtils, DateUtils, fpjson, jsonparser, jsonscanner;
 
 type
 { TqBTorrentStates }
@@ -93,7 +93,7 @@ type
     FProgress: Double;
     FDlSpeed: Integer;
     FUpSpeed: Integer;
-    FPriority: Integer;
+    FPriority: Integer; // -1 if no priority of is seeding
     FNumSeeds: Integer;
     FNumComplete: Integer;
     FNumLeechs: Integer;
@@ -109,10 +109,22 @@ type
     FSavePath: String;
     FAddedOn: TDateTime;
     FCompletionOn: TDateTime;
+
+    procedure DoLoadFromJSON(const aJSON: String);
+    procedure DoLoadFromJSONObj(const aJSONObj: TJSONObject);
+    procedure DoLoadFromStream(const aStream: TStream);
   protected
   public
     constructor Create;
+    constructor Create(const aJSON: String);
+    constructor Create(const aJSONObj: TJSONObject);
+    constructor Create(const aStream: TStream);
+
     destructor Destroy; override;
+
+    //procedure LoadFromJSON(const aJSON: String);
+    //procedure LoadFromJSONObj(const aJSONObj: TJSONObject);
+    //procedure LoadFromStream(const aStream: TStream);
 
     property Hash: String
       read FHash
@@ -189,6 +201,13 @@ type
     procedure SetItem(Index: Integer; AObject: TqBTorrent);
   protected
   public
+    procedure LoadFromJSON(const aJSON: String);
+    procedure LoadFromJSONArray(const aJSONArray: TJSONArray);
+    procedure LoadFromStream(const aStream: TStream);
+    procedure UpdateFromJSON(const aJSON: String);
+    procedure UpdateFromJSONArray(const aJSONArray: TJSONArray);
+    procedure UpdateFromStream(const aStream: TStream);
+
     property Items[Index: Integer]: TqBTorrent
       read GetItem
       write SetItem; default;
@@ -506,9 +525,128 @@ end;
 
 { TqBTorrent }
 
+procedure TqBTorrent.DoLoadFromJSON(const aJSON: String);
+var
+  jParser: TJSONParser;
+  jData: TJSONData;
+begin
+  jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
+  try
+    jData := jParser.Parse;
+    try
+      if jData.JSONType = jtObject then
+      begin
+        DoLoadFromJSONObj(jData as TJSONObject);
+      end;
+    finally
+      jData.Free;
+    end;
+  finally
+    jParser.Free;
+  end;
+end;
+
+procedure TqBTorrent.DoLoadFromJSONObj(const aJSONObj: TJSONObject);
+var
+  iUnixTime: Integer;
+begin
+  FHash := aJSONObj.Get('hash', '');
+  FName := aJSONObj.Get('name', '');
+  FSize := aJSONObj.Get('size', 0);
+  FProgress := aJSONObj.Get('progress', 0.0);
+  FDlSpeed := aJSONObj.Get('dlspeed', 0);
+  FUpSpeed := aJSONObj.Get('upspeed', 0);
+  FPriority := aJSONObj.Get('priority', 0);
+  FNumSeeds := aJSONObj.Get('num_seeds', 0);
+  FNumComplete := aJSONObj.Get('num_complete', 0);
+  FNumLeechs := aJSONObj.Get('num_leechs', 0);
+  FNumIncomplete := aJSONObj.Get('num_incomplete', 0);
+  FRatio := aJSONObj.Get('ratio', 0.0);
+  FEta := aJSONObj.Get('eta', 0);
+  FState := StrToqBState(aJSONObj.Get('state', 'unknown'));
+  FSeqDl := aJSONObj.Get('seq_dl', False);
+  FFirstLastPiecePrioritized := aJSONObj.Get('f_l_piece_prio', False);
+  FCategory := aJSONObj.Get('category', '');
+  FSuperSeeding := aJSONObj.Get('super_seeding', False);
+  FForceStart := aJSONObj.Get('force_start', False);
+  FSavePath := aJSONObj.Get('save_path', '');
+
+  iUnixTime := aJSONObj.Get('added_on', 0);
+  if iUnixTime > 0 then
+  begin
+    FAddedOn := UnixToDateTime(iUnixTime);
+  end;
+
+  iUnixTime := aJSONObj.Get('completion_on', 0);
+  if iUnixTime > 0 then
+  begin
+    FCompletionOn := UnixToDateTime(iUnixTime);
+  end;
+end;
+
+procedure TqBTorrent.DoLoadFromStream(const aStream: TStream);
+var
+  jParser: TJSONParser;
+  jData: TJSONData;
+begin
+  jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
+  try
+    jData := jParser.Parse;
+    try
+      if jData.JSONType = jtObject then
+      begin
+        DoLoadFromJSONObj(jData as TJSONObject);
+      end;
+    finally
+      jData.Free;
+    end;
+  finally
+    jParser.Free;
+  end;
+end;
+
 constructor TqBTorrent.Create;
 begin
-  //
+  FName := '';
+  FHash := '';
+  FSize := 0;
+  FProgress := 0.0;
+  FDlSpeed := 0;
+  FUpSpeed := 0;
+  FPriority := -1;
+  FNumSeeds := 0;
+  FNumComplete := 0;
+  FNumLeechs := 0;
+  FNumIncomplete := 0;
+  FRatio := 0.0;
+  FEta := 0;
+  FState := tsUnknown;
+  FSeqDl := False;
+  FFirstLastPiecePrioritized := False;
+  FCategory := '';
+  FSuperSeeding := False;
+  FForceStart := False;
+  FSavePath := '';
+  FAddedOn := Now;
+  FCompletionOn := Now;
+end;
+
+constructor TqBTorrent.Create(const aJSON: String);
+begin
+  Self.Create;
+  DoLoadFromJSON(aJSON);
+end;
+
+constructor TqBTorrent.Create(const aJSONObj: TJSONObject);
+begin
+  Self.Create;
+  DoLoadFromJSONObj(aJSONObj);
+end;
+
+constructor TqBTorrent.Create(const aStream: TStream);
+begin
+  Self.Create;
+  DoLoadFromStream(aStream);
 end;
 
 destructor TqBTorrent.Destroy;
@@ -526,6 +664,76 @@ end;
 procedure TqBTorrents.SetItem(Index: Integer; AObject: TqBTorrent);
 begin
   inherited SetItem(Index, AObject);
+end;
+
+procedure TqBTorrents.LoadFromJSON(const aJSON: String);
+var
+  jParser: TJSONParser;
+  jData: TJSONData;
+begin
+  jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
+  try
+    jData := jParser.Parse;
+    try
+      if jData.JSONType = jtArray then
+      begin
+        LoadFromJSONArray(jData as TJSONArray);
+      end;
+    finally
+      jData.Free;
+    end;
+  finally
+    jParser.Free;
+  end;
+end;
+
+procedure TqBTorrents.LoadFromJSONArray(const aJSONArray: TJSONArray);
+var
+  index: Integer;
+begin
+  Clear;
+  for index := 0 to aJSONArray.Count - 1 do
+  begin
+    if aJSONArray[index].JSONType = jtObject then
+    begin
+      Add(TqBTorrent.Create(aJSONArray[index] as TJSONObject));
+    end;
+  end;
+end;
+
+procedure TqBTorrents.LoadFromStream(const aStream: TStream);
+var
+  jParser: TJSONParser;
+  jData: TJSONData;
+begin
+  jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
+  try
+    jData := jParser.Parse;
+    try
+      if jData.JSONType = jtArray then
+      begin
+        LoadFromJSONArray(jData as TJSONArray);
+      end;
+    finally
+      jData.Free;
+    end;
+  finally
+    jParser.Free;
+  end;
+end;
+
+procedure TqBTorrents.UpdateFromJSON(const aJSON: String);
+begin
+end;
+
+procedure TqBTorrents.UpdateFromJSONArray(const aJSONArray: TJSONArray);
+begin
+
+end;
+
+procedure TqBTorrents.UpdateFromStream(const aStream: TStream);
+begin
+
 end;
 
 end.

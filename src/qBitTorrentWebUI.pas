@@ -425,40 +425,9 @@ var
   jParser: TJSONParser;
   jData: TJSONData;
   jTorrents: TJSONArray;
-  jTorrent: TJSONObject;
   index: Integer;
 const
   sPath = '/query/torrents';
-
-  function CreateTorrent(const aTorrent: TJSONObject): TqBTorrent;
-  begin
-    Result := TqBTorrent.Create;
-    Result.Hash := aTorrent.Get('hash', '');
-    Result.Name := aTorrent.Get('name', '');
-    Result.Size := aTorrent.Get('size', 0);
-    Result.Progress := aTorrent.Get('progress', 0.0);
-    Result.DlSpeed := aTorrent.Get('dlspeed', 0);
-    Result.UpSpeed := aTorrent.Get('upspeed', 0);
-    Result.Priority := aTorrent.Get('priority', 0);
-    Result.NumSeeds := aTorrent.Get('num_seeds', 0);
-    Result.NumComplete := aTorrent.Get('num_complete', 0);
-    Result.NumLeechs := aTorrent.Get('num_leechs', 0);
-    Result.NumIncomplete := aTorrent.Get('num_incomplete', 0);
-    Result.Ratio := aTorrent.Get('ratio', 0.0);
-    Result.Eta := aTorrent.Get('eta', 0);
-    Result.State := StrToqBState(aTorrent.Get('state', 'unknown'));
-    Result.SeqDl := aTorrent.Get('seq_dl', False);
-    Result.FirstLastPiecePrioritized := aTorrent.Get('f_l_piece_prio', False);
-    Result.Category := aTorrent.Get('category', '');
-    Result.SuperSeeding := aTorrent.Get('super_seeding', False);
-    Result.ForceStart := aTorrent.Get('force_start', False);
-    Result.SavePath := aTorrent.Get('save_path', '');
-{
-    Result.AddedOn := aTorrent.Get('added_on', !!TDateTime!!);
-    Result.CompletionOn := aTorrent.Get('completion_on', !!TDateTime!!);
-}
-  end;
-
 begin
   Result := False;
   FTorrents.Clear;
@@ -481,55 +450,57 @@ begin
   if FHttp.ResultCode = 200 then
   begin
     Result := True;
-    try
-      jParser := TJSONParser.Create(FHttp.Document, [joUTF8, joIgnoreTrailingComma]);
-      //jParser := TJSONParser.Create(
-      //  '['+
-      //     '{'+
-      //       '"dlspeed":9681262,'+
-      //       '"eta":87,'+
-      //       //'"f_l_piece_prio":false,'+
-      //       '"force_start":false,'+
-      //       '"hash":"8c212779b4abde7c6bc608063a0d008b7e40ce32",'+
-      //       '"category":"",'+
-      //       '"name":"debian-8.1.0-amd64-CD-1.iso","num_complete":-1,'+
-      //       '"num_incomplete":-1,'+
-      //       '"num_leechs":2,'+
-      //       '"num_seeds":54,'+
-      //       '"priority":1,'+
-      //       '"progress":0.16108787059783936,'+
-      //       '"ratio":0,'+
-      //       '"seq_dl":false,'+
-      //       '"size":657457152,'+
-      //       '"state":"downloading",'+
-      //       '"super_seeding":false,'+
-      //       '"upspeed":0'+
-      //     '}'+
-      //  ']',
-      //  [joUTF8, joIgnoreTrailingComma]);
-      jData := jParser.Parse;
-    finally
-      jParser.Free;
-    end;
-    if jData.JSONType = jtArray then
-    begin
-      jTorrents := jData as TJSONArray;
-      for index := 0 to jTorrents.Count - 1 do
-      begin
-        if jTorrents[index].JSONType = jtObject then
-        begin
-          jTorrent := jTorrents[index] as TJSONObject;
-          FTorrents.Add(CreateTorrent(jTorrent));
-        end;
-      end;
-    end
-    else
-    begin
-      raise Exception.Create('First object is not an array.');
-    end;
-    jTorrent := nil;
-    jTorrents := nil;
-    jData.Free;
+    //FTorrents.LoadFromStream(FHttp.Document);
+    FTorrents.LoadFromJSON(
+      '['+
+        '{'+
+            '"added_on": 1488047649,'+
+            '"category": "TV",'+
+            '"completion_on": 4294967295,'+
+            '"dlspeed": 0,'+
+            '"eta": 8640000,'+
+            '"force_start": false,'+
+            '"hash": "d7856095949febddc0770edba48eca341cca6f94",'+
+            '"name": "Arrow.S05E14.HDTV.XviD-FUM[ettv]",'+
+            '"num_complete": 748,'+
+            '"num_incomplete": 119,'+
+            '"num_leechs": 0,'+
+            '"num_seeds": 0,'+
+            '"priority": 1,'+
+            '"progress": 0,'+
+            '"ratio": 0,'+
+            '"save_path": "/home/gcarreno/Videos/TVSeries/",'+
+            '"seq_dl": false,'+
+            '"size": 0,'+
+            '"state": "pausedDL",'+
+            '"super_seeding": false,'+
+            '"upspeed": 0'+
+        '},'+
+        '{'+
+            '"added_on": 1488047687,'+
+            '"category": "TV",'+
+            '"completion_on": 4294967295,'+
+            '"dlspeed": 0,'+
+            '"eta": 8640000,'+
+            '"force_start": false,'+
+            '"hash": "82d81fe7ea9b9e495d6f1f866a2e12b0ee72042e",'+
+            '"name": "Blindspot.S02E15.HDTV.XviD-FUM[ettv]",'+
+            '"num_complete": 396,'+
+            '"num_incomplete": 55,'+
+            '"num_leechs": 0,'+
+            '"num_seeds": 0,'+
+            '"priority": 2,'+
+            '"progress": 0,'+
+            '"ratio": 0,'+
+            '"save_path": "/home/gcarreno/Videos/TVSeries/",'+
+            '"seq_dl": false,'+
+            '"size": 0,'+
+            '"state": "pausedDL",'+
+            '"super_seeding": false,'+
+            '"upspeed": 0'+
+        '},'+
+      ']'
+    );
   end
   else
   begin
