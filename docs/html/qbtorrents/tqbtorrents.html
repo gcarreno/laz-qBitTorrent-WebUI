@@ -17,13 +17,46 @@
 <p>[<a href="../qbtorrents/tqbtorrents-1.html" onClick="window.open('../qbtorrents/tqbtorrents-1.html', 'list', 'dependent=yes,resizable=yes,scrollbars=yes,height=400,width=300'); return false;">Properties</a> (<a href="../qbtorrents/tqbtorrents-2.html" onClick="window.open('../qbtorrents/tqbtorrents-2.html', 'list', 'dependent=yes,resizable=yes,scrollbars=yes,height=400,width=300'); return false;">by Name</a>)] [<a href="../qbtorrents/tqbtorrents-3.html" onClick="window.open('../qbtorrents/tqbtorrents-3.html', 'list', 'dependent=yes,resizable=yes,scrollbars=yes,height=400,width=300'); return false;">Methods</a> (<a href="../qbtorrents/tqbtorrents-4.html" onClick="window.open('../qbtorrents/tqbtorrents-4.html', 'list', 'dependent=yes,resizable=yes,scrollbars=yes,height=400,width=300'); return false;">by Name</a>)] [<a href="../qbtorrents/tqbtorrents-5.html" onClick="window.open('../qbtorrents/tqbtorrents-5.html', 'list', 'dependent=yes,resizable=yes,scrollbars=yes,height=400,width=300'); return false;">Events</a> (<a href="../qbtorrents/tqbtorrents-6.html" onClick="window.open('../qbtorrents/tqbtorrents-6.html', 'list', 'dependent=yes,resizable=yes,scrollbars=yes,height=400,width=300'); return false;">by Name</a>)] </p>
 <p>Container class for a list of           <a href="../qbtorrents/tqbtorrent.html">TqBTorrent</a>           .         </p>
 <h2>Declaration</h2>
-<p>Source position: qBTorrents.pas line 174</p>
+<p>Source position: qBTorrents.pas line 168</p>
 <table cellpadding="0" cellspacing="0">
 <tr>
 <td><p><tt><span class="code"><span class="kw">type</span> TqBTorrents <span class="sym">=</span> <span class="kw">class</span><span class="sym">(</span>TFPObjectList<span class="sym">)</span> <span class="kw">end</span><span class="sym">;</span></span></tt></p></td>
 </tr>
 <tr>
 <td><p><tt><span class="code"><span class="kw">public</span></span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">function </span><a href="../qbtorrents/tqbtorrents.hastorrenthash.html">HasTorrentHASH</a><span class="sym">();</span></span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">procedure </span><a href="../qbtorrents/tqbtorrents.loadtorrentsfromjson.html">LoadTorrentsFromJSON</a><span class="sym">();</span></span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">procedure </span><a href="../qbtorrents/tqbtorrents.loadtorrentsfromjsonarray.html">LoadTorrentsFromJSONArray</a><span class="sym">();</span></span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">procedure </span><a href="../qbtorrents/tqbtorrents.loadtorrentsfromstream.html">LoadTorrentsFromStream</a><span class="sym">();</span></span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">procedure </span><a href="../qbtorrents/tqbtorrents.updatetorrentsfromjson.html">UpdateTorrentsFromJSON</a><span class="sym">();</span></span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">procedure </span><a href="../qbtorrents/tqbtorrents.updatetorrentsfromjsonarray.html">UpdateTorrentsFromJSONArray</a><span class="sym">();</span></span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">procedure </span><a href="../qbtorrents/tqbtorrents.updatetorrentsfromstream.html">UpdateTorrentsFromStream</a><span class="sym">();</span></span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">procedure </span><a href="../qbtorrents/tqbtorrents.updatetorrent.html">UpdateTorrent</a><span class="sym">();</span></span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">procedure </span><a href="../qbtorrents/tqbtorrents.updatetorrentproperties.html">UpdateTorrentProperties</a><span class="sym">();</span></span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">procedure </span><a href="../qbtorrents/tqbtorrents.deletetorrent.html">DeleteTorrent</a><span class="sym">();</span></span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">function </span><a href="../qbtorrents/tqbtorrents.byhash.html">ByHash</a><span class="sym">();</span></span></tt></p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrents/tqbtorrents.items.html">Items</a> []<span class="sym">: </span><a href="../qbtorrents/tqbtorrent.html">TqBTorrent</a><span class="sym">;</span><span class="kw"> default</span><span class="sym">;</span>  [rw]</span></tt></p></td>

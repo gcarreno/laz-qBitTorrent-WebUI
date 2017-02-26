@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<fpdoc-descriptions>
+  <package name="lazqBitTorrentWebUI">
+    <!--
+         ====================================================================
+         qBTorrentsProperties
+         ====================================================================
+    -->
+    <module name="qBTorrentsProperties">
+      <short>Unit containing torrent's generic properties.</short>
+      <descr>
+        <p>This unit implements an object that contains the torrent's generic properties.</p>
+      </descr>
+
+    <!-- object Visibility: default -->
+    <element name="TqBTorrentsProperties">
+      <sort>The object that contains torrent's generic properties.</sort>
+      <descr />
+      <errors />
+      <sealso />
+    </element>
+    </module>
+    <!-- qBTorrentsProperties -->
+  </package>
+</fpdoc-descriptions>

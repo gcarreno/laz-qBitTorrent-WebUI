@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, FileUtil, DividerBevel, Forms, Controls, Graphics, Dialogs,
   PairSplitter, ExtCtrls, StdCtrls, Menus, ActnList, StdActns,
-  qBitTorrentWebUI, qBTorrents;
+  qBitTorrentWebUI, qBTorrents, qBTorrentsFilters, qBTorrentsProperties;
 
 type
 

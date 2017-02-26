@@ -28,7 +28,8 @@ unit qBitTorrentWebUI;
 interface
 
 uses
-  Classes, SysUtils, HTTPSend, qBTorrents;
+  Classes, SysUtils, HTTPSend,
+  qBTorrents, qBTorrentsFilters, qBTorrentsProperties;
 
 type
 { TqBitTorrentWebUI }
