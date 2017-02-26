@@ -233,7 +233,7 @@
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrents.Items">
-        <short>Propert to access the list of <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrent">TqBTorrent</link>.</short>
+        <short>Property to access the list of <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrent">TqBTorrent</link>.</short>
         <descr />
         <seealso />
       </element>
