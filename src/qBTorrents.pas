@@ -97,11 +97,137 @@ type
     FTotalDownloaded: Integer;
     FTotalDownloadedSession: Integer;
     FUpLimit: Integer;
-
+    FDlLimit: Integer;
+    FTimeElapsed: Integer; // seconds
+    FSeedingTime: Integer; // seconds
+    FNbConnections: Integer;
+    FNbConnectionsLimit: Integer;
+    FShareRatio: Double;
+    FAdditionDate: TDateTime;
+    FCompletionDate: TDateTime;
+    FCreatedBy: String;
+    FDlSpeed: Integer;
+    FDlSpeedAvg: Integer;
+    FUpSpeed: Integer;
+    FUpSpeedAvg: Integer;
+    FEta: Integer; // seconds
+    FLastSeen: TDateTime;
+    FPeers: Integer;
+    FPeersTotal: Integer;
+    FPiecesHave: Integer;
+    FPiecesNum: Integer;
+    FReannounce: Integer;
+    FSeeds: Integer;
+    FSeedsTotal: Integer;
+    FTotalSize: Integer;
   protected
   public
     constructor Create;
     destructor Destroy; override;
+
+    procedure LoadFromJSON(const aJSON: String);
+    procedure LoadFromJSONObj(const aJSONObj: TJSONObject);
+    procedure LoadFromStream(const aStream: TStream);
+
+    property SavePath: String
+      read FSavePath
+      write FSavePath;
+    property CreationDate: TDateTime
+      read FCreationDate
+      write FCreationDate;
+    property PieceSize: Integer
+      read FPieceSize
+      write FPieceSize;
+    property Comment: String
+      read FComment
+      write FComment;
+    property TotalWasted: Integer
+      read FTotalWasted
+      write FTotalWasted;
+    property TotalUploaded: Integer
+      read FTotalUploaded
+      write FTotalUploaded;
+    property TotalUploadedSession: Integer
+      read FTotalUploadedSession
+      write FTotalUploadedSession;
+    property TotalDownloaded: Integer
+      read FTotalDownloaded
+      write FTotalDownloaded;
+    property TotalDownloadedSession: Integer
+      read FTotalDownloadedSession
+      write FTotalDownloadedSession;
+    property UpLimit: Integer
+      read FUpLimit
+      write FUpLimit;
+    property DlLimit: Integer
+      read FDlLimit
+      write FDlLimit;
+    property TimeElapsed: Integer
+      read FTimeElapsed
+      write FTimeElapsed;
+    property SeedingTime: Integer
+      read FSeedingTime
+      write FSeedingTime;
+    property NbConnections: Integer
+      read FNbConnections
+      write FNbConnections;
+    property NbConnectionsLimit: Integer
+      read FNbConnectionsLimit
+      write FNbConnectionsLimit;
+    property ShareRatio: Double
+      read FShareRatio
+      write FShareRatio;
+    property AdditionDate: TDateTime
+      read FAdditionDate
+      write FAdditionDate;
+    property CompletionDate: TDateTime
+      read FCompletionDate
+      write FCompletionDate;
+    property CreatedBy: String
+      read FCreatedBy
+      write FCreatedBy;
+    property DlSpeed: Integer
+      read FDlSpeed
+      write FDlSpeed;
+    property DlSpeedAvg: Integer
+      read FDlSpeedAvg
+      write FDlSpeedAvg;
+    property UpSpeed: Integer
+      read FUpSpeed
+      write FUpSpeed;
+    property UpSpeedAvg: Integer
+      read FUpSpeedAvg
+      write FUpSpeedAvg;
+    property Eta: Integer
+      read FEta
+      write FEta;
+    property LastSeen: TDateTime
+      read FLastSeen
+      write FLastSeen;
+    property Peers: Integer
+      read FPeers
+      write FPeers;
+    property PeersTotal: Integer
+      read FPeersTotal
+      write FPeersTotal;
+    property PiecesHave: Integer
+      read FPiecesHave
+      write FPiecesHave;
+    property PiecesNum: Integer
+      read FPiecesNum
+      write FPiecesNum;
+    property Reannounce: Integer
+      read FReannounce
+      write FReannounce;
+    property Seeds: Integer
+      read FSeeds
+      write FSeeds;
+    property SeedsTotal: Integer
+      read FSeedsTotal
+      write FSeedsTotal;
+    property TotalSize: Integer
+      read FTotalSize
+      write FTotalSize;
   end;
 
 { TqBTorrent }
@@ -240,7 +366,14 @@ type
     procedure UpdateTorrent(const aHash: String; const aJSONObj: TJSONObject);
     procedure UpdateTorrent(const aHash: String; const aStream: TStream);
 
+    procedure UpdateTorrentProperties(const aHash: String; const aJSON: String);
+    procedure UpdateTorrentProperties(const aHash: String; const aJSONObj: TJSONObject);
+    procedure UpdateTorrentProperties(const aHash: String; const aStream: TStream);
+
     procedure DeleteTorrent(const aHash: String);
+
+    // This should probably be a property
+    function ByHash(const aHash: String): TqBTorrent;
 
     property Items[Index: Integer]: TqBTorrent
       read GetItem
@@ -349,12 +482,153 @@ end;
 
 constructor TqBTorrentProperties.Create;
 begin
-  //
+  FSavePath := '';
+  FCreationDate := 0.0;
+  FPieceSize := -1;
+  FComment := '';
+  FTotalWasted := -1;
+  FTotalUploaded := -1;
+  FTotalUploadedSession := -1;
+  FTotalDownloaded := -1;
+  FTotalDownloadedSession := -1;
+  FUpLimit := -1;
+  FDlLimit := -1;
+  FTimeElapsed := -1;
+  FSeedingTime := -1;
+  FNbConnections := -1;
+  FNbConnectionsLimit := -1;
+  FShareRatio := 0.0;
+  FAdditionDate := 0.0;
+  FCompletionDate := 0.0;
+  FCreatedBy := '';
+  FDlSpeed := -1;
+  FDlSpeedAvg := -1;
+  FUpSpeed := -1;
+  FUpSpeedAvg := -1;
+  FEta := -1;
+  FLastSeen := 0.0;
+  FPeers := -1;
+  FPeersTotal := -1;
+  FPiecesHave := -1;
+  FPiecesNum := -1;
+  FReannounce := -1;
+  FSeeds := -1;
+  FSeedsTotal := -1;
+  FTotalSize := -1;
 end;
 
 destructor TqBTorrentProperties.Destroy;
 begin
   inherited Destroy;
+end;
+
+procedure TqBTorrentProperties.LoadFromJSON(const aJSON: String);
+var
+  jParser: TJSONParser;
+  jData: TJSONData;
+begin
+  jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
+  try
+    jData := jParser.Parse;
+    try
+      if jData.JSONType = jtObject then
+      begin
+        LoadFromJSONObj(jData as TJSONObject);
+      end;
+    finally
+      jData.Free;
+    end;
+  finally
+    jParser.Free;
+  end;
+end;
+
+procedure TqBTorrentProperties.LoadFromJSONObj(const aJSONObj: TJSONObject);
+var
+  iUnixTime: Integer;
+  dtTime: TDateTime;
+begin
+  FSavePath := aJSONObj.Get('save_path', FSavePath);
+
+  iUnixTime := aJSONObj.Get('save_path', DateTimeToUnix(FCreationDate));
+  dtTime := UnixToDateTime(iUnixTime);
+  if (FCreationDate <> dtTime) and (iUnixTime > 0) then
+  begin
+   FCreationDate := dtTime;
+  end;
+
+  FPieceSize := aJSONObj.Get('piece_size', FPieceSize);
+  FComment := aJSONObj.Get('comment', FComment);
+  FTotalWasted := aJSONObj.Get('total_wasted', FTotalWasted);
+  FTotalUploaded := aJSONObj.Get('total_uploaded', FTotalUploaded);
+  FTotalUploadedSession := aJSONObj.Get('total_uploaded_session', FTotalUploadedSession);
+  FTotalDownloaded := aJSONObj.Get('total_downloaded', FTotalDownloaded);
+  FTotalDownloadedSession := aJSONObj.Get('total_downloaded_session', FTotalDownloadedSession);
+  FUpLimit := aJSONObj.Get('up_limit', FUpLimit);
+  FDlLimit := aJSONObj.Get('dl_limit', FDlLimit);
+  FTimeElapsed := aJSONObj.Get('time_elapsed', FTimeElapsed);
+  FSeedingTime := aJSONObj.Get('seeding_time', FSeedingTime);
+  FNbConnections := aJSONObj.Get('nb_connections', FNbConnections);
+  FNbConnectionsLimit := aJSONObj.Get('nb_connections_limit', FNbConnectionsLimit);
+  FShareRatio := aJSONObj.Get('share_ratio', FShareRatio);
+
+  iUnixTime := aJSONObj.Get('addition_date', DateTimeToUnix(FAdditionDate));
+  dtTime := UnixToDateTime(iUnixTime);
+  if (FAdditionDate <> dtTime) and (iUnixTime > 0) then
+  begin
+    FAdditionDate := dtTime;
+  end;
+
+  iUnixTime := aJSONObj.Get('completion_date', DateTimeToUnix(FCompletionDate));
+  dtTime := UnixToDateTime(iUnixTime);
+  if (FCompletionDate <> dtTime) and (iUnixTime > 0) then
+  begin
+   FCompletionDate := dtTime;
+  end;
+
+  FCreatedBy := aJSONObj.Get('created_by', FCreatedBy);
+  FDlSpeed := aJSONObj.Get('dl_speed', FDlSpeed);
+  FDlSpeedAvg := aJSONObj.Get('dl_speed_avg', FDlSpeedAvg);
+  FUpSpeed := aJSONObj.Get('up_speed', FUpSpeed);
+  FUpSpeedAvg := aJSONObj.Get('up_speed_avg', FUpSpeedAvg);
+  FEta := aJSONObj.Get('eta', FEta);
+
+  iUnixTime := aJSONObj.Get('last_seen', DateTimeToUnix(FLastSeen));
+  dtTime := UnixToDateTime(iUnixTime);
+  if (FLastSeen <> dtTime) and (iUnixTime > 0) then
+  begin
+    FLastSeen := dtTime;
+  end;
+
+  FPeers := aJSONObj.Get('peers', FPeers);
+  FPeersTotal := aJSONObj.Get('peers_total', FPeersTotal);
+  FPiecesHave := aJSONObj.Get('pieces_have', FPiecesHave);
+  FPiecesNum := aJSONObj.Get('pieces_num', FPiecesNum);
+  FReannounce := aJSONObj.Get('reannounce', FReannounce);
+  FSeeds := aJSONObj.Get('seeds', FSeeds);
+  FSeedsTotal := aJSONObj.Get('seeds_total', FSeedsTotal);
+  FTotalSize := aJSONObj.Get('total_size', FTotalSize);
+end;
+
+procedure TqBTorrentProperties.LoadFromStream(const aStream: TStream);
+var
+  jParser: TJSONParser;
+  jData: TJSONData;
+begin
+  jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
+  try
+    jData := jParser.Parse;
+    try
+      if jData.JSONType = jtObject then
+      begin
+        LoadFromJSONObj(jData as TJSONObject);
+      end;
+    finally
+      jData.Free;
+    end;
+  finally
+    jParser.Free;
+  end;
 end;
 
 { TqBTorrentsFilter }
@@ -884,6 +1158,8 @@ procedure TqBTorrents.UpdateTorrent(const aHash: String; const aJSON: String);
 var
   index: Integer;
 begin
+  if Length(aHash) <> 40 then
+    exit;
   for index := 0 to Count - 1 do
   begin
     if Self[index].Hash = aHash then
@@ -898,6 +1174,8 @@ procedure TqBTorrents.UpdateTorrent(const aHash: String; const aJSONObj: TJSONOb
 var
   index: Integer;
 begin
+  if Length(aHash) <> 40 then
+    exit;
   for index := 0 to Count - 1 do
   begin
     if Self[index].Hash = aHash then
@@ -912,6 +1190,8 @@ procedure TqBTorrents.UpdateTorrent(const aHash: String; const aStream: TStream)
 var
   index: Integer;
 begin
+  if Length(aHash) <> 40 then
+    exit;
   for index := 0 to Count - 1 do
   begin
     if Self[index].Hash = aHash then
@@ -922,15 +1202,96 @@ begin
   end;
 end;
 
+procedure TqBTorrents.UpdateTorrentProperties(const aHash: String; const aJSON: String);
+var
+  jParser: TJSONParser;
+  jData: TJSONData;
+begin
+  if Length(aHash) <> 40 then
+    exit;
+  jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
+  try
+    jData := jParser.Parse;
+    try
+      if jData.JSONType = jtObject then
+      begin
+        UpdateTorrentProperties(aHash, jData as TJSONObject);
+      end;
+    finally
+      jData.Free;
+    end;
+  finally
+    jParser.Free;
+  end;
+end;
+
+procedure TqBTorrents.UpdateTorrentProperties(const aHash: String; const aJSONObj: TJSONObject);
+var
+  index: Integer;
+begin
+  if Length(aHash) <> 40 then
+    exit;
+  for index := 0 to Count - 1 do
+  begin
+    if Self[index].Hash = aHash then
+    begin
+      Self[index].Properties.LoadFromJSONObj(aJSONObj);
+      break;
+    end;
+  end;
+end;
+
+procedure TqBTorrents.UpdateTorrentProperties(const aHash: String; const aStream: TStream);
+var
+  jParser: TJSONParser;
+  jData: TJSONData;
+begin
+  if Length(aHash) <> 40 then
+    exit;
+  jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
+  try
+    jData := jParser.Parse;
+    try
+      if jData.JSONType = jtObject then
+      begin
+        UpdateTorrentProperties(aHash, jData as TJSONObject);
+      end;
+    finally
+      jData.Free;
+    end;
+  finally
+    jParser.Free;
+  end;
+end;
+
 procedure TqBTorrents.DeleteTorrent(const aHash: String);
 var
   index: Integer;
 begin
+  if Length(aHash) <> 40 then
+    exit;
   for index := 0 to Count - 1 do
   begin
     if Self[index].Hash = aHash then
     begin
       Delete(index);
+      break;
+    end;
+  end;
+end;
+
+function TqBTorrents.ByHash(const aHash: String): TqBTorrent;
+var
+  index: Integer;
+begin
+  Result := nil;
+  if Length(aHash) <> 40 then
+    exit;
+  for index := 0 to Count - 1 do
+  begin
+    if Self[index].Hash = aHash then
+    begin
+      Result := Self[index];
       break;
     end;
   end;

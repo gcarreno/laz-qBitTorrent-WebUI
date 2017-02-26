@@ -10,7 +10,6 @@ object frmMain: TfrmMain
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
-  LCLVersion = '1.7'
   Visible = False
   object psMain: TPairSplitter
     Cursor = crVSplit
@@ -141,6 +140,14 @@ object frmMain: TfrmMain
       Action = actFileSetActive
       TabOrder = 3
     end
+    object Button1: TButton
+      Left = 120
+      Height = 25
+      Top = 64
+      Width = 168
+      Action = actTestGetGenericProperties
+      TabOrder = 4
+    end
   end
   object qbttMain: TqBitTorrentWebUI
     UserName = 'qBitTorrentWebUI'
@@ -164,6 +171,9 @@ object frmMain: TfrmMain
       object mnuTestGetTorrents: TMenuItem
         Action = actTestGetTorrents
       end
+      object mnuTestGetGenericProperties: TMenuItem
+        Action = actTestGetGenericProperties
+      end
       object mnuSep2: TMenuItem
         Caption = '-'
       end
@@ -177,17 +187,10 @@ object frmMain: TfrmMain
     Top = 8
     object actTestGetTorrents: TAction
       Category = 'Test'
-      Caption = 'G&et Torrents'
+      Caption = 'Get &Torrents'
       DisableIfNoHandler = False
       Enabled = False
       OnExecute = actTestGetTorrentsExecute
-    end
-    object actTestExecShutdown: TAction
-      Category = 'Test'
-      Caption = 'S&hutdown'
-      DisableIfNoHandler = False
-      Enabled = False
-      OnExecute = actTestExecShutdownExecute
     end
     object actFileSetActive: TAction
       Category = 'File'
@@ -199,6 +202,20 @@ object frmMain: TfrmMain
       Category = 'File'
       Caption = 'E&xit'
       Hint = 'Exit'
+    end
+    object actTestGetGenericProperties: TAction
+      Category = 'Test'
+      Caption = 'Get &Generic Properties'
+      DisableIfNoHandler = False
+      Enabled = False
+      OnExecute = actTestGetGenericPropertiesExecute
+    end
+    object actTestExecShutdown: TAction
+      Category = 'Test'
+      Caption = 'S&hutdown'
+      DisableIfNoHandler = False
+      Enabled = False
+      OnExecute = actTestExecShutdownExecute
     end
   end
 end

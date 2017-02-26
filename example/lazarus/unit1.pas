@@ -15,6 +15,7 @@ type
 
   TfrmMain = class(TForm)
     actFileSetActive: TAction;
+    actTestGetGenericProperties: TAction;
     actTestGetTorrents: TAction;
     actTestExecShutdown: TAction;
     alMain: TActionList;
@@ -22,9 +23,11 @@ type
     btnFileExit: TButton;
     btnTestExecShutdown: TButton;
     btnTestGetTorrents: TButton;
+    Button1: TButton;
     chkFileActive: TCheckBox;
     divbGetMethhods: TDividerBevel;
     divbCommands: TDividerBevel;
+    mnuTestGetGenericProperties: TMenuItem;
     mnuTestGetTorrents: TMenuItem;
     mnuTestExecShutdown: TMenuItem;
     mnuSep2: TMenuItem;
@@ -43,6 +46,7 @@ type
     stLabelInfo: TStaticText;
     procedure actFileSetActiveExecute(Sender: TObject);
     procedure actTestExecShutdownExecute(Sender: TObject);
+    procedure actTestGetGenericPropertiesExecute(Sender: TObject);
     procedure actTestGetTorrentsExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
@@ -106,6 +110,7 @@ procedure TfrmMain.SetActions;
 begin
   actTestExecShutdown.Enabled := chkFileActive.Checked;
   actTestGetTorrents.Enabled := chkFileActive.Checked;
+  actTestGetGenericProperties.Enabled := chkFileActive.Checked;
 end;
 
 function TfrmMain.FormatBytes(aSize: Int64): String;
@@ -186,11 +191,12 @@ begin
   Log('Shutting client down.');
   try
     bShutdownResult := qbttMain.ExecShutdown;
-    // If we don't do this it will trigger actFileSetActive
+    // If we don't do this it will trigger actFileSetActive ...
     chkFileActive.Action := nil;
     chkFileActive.Checked := False;
     SetActions;
     chkFileActive.Action := actFileSetActive;
+    // ... on a frickin loop
     if bShutdownResult then
     begin
       Log(#9'Success.');
@@ -202,6 +208,67 @@ begin
   except
     on E:Exception do
       Log('Error: ' + E.Message);
+  end;
+end;
+
+procedure TfrmMain.actTestGetGenericPropertiesExecute(Sender: TObject);
+var
+  bGetGenericPropertiesResult: Boolean;
+  oTorrent: TqBTorrent;
+begin
+  if qbttMain.Torrents.Count > 0 then
+  begin
+    Log('Asking for generic properties for "' + qbttMain.Torrents[1].Hash + '"');
+    try
+      bGetGenericPropertiesResult := qbttMain.GetGenericProperties(qbttMain.Torrents[1].Hash);
+      if bGetGenericPropertiesResult then
+      begin
+        Log(#9'Success.');
+        oTorrent := qbttMain.Torrents[1];
+        if Assigned(oTorrent) then
+        begin
+          Info(
+            Format(
+              'Torrent: %s (%s)',
+              [
+                oTorrent.Name,
+                oTorrent.Hash
+              ]
+            )
+          );
+          Info(
+            Format(
+              #9'Added: %s',
+              [
+                FormatDateTime(
+                  'YYYY/MM/DD HH:MM:SS',
+                  oTorrent.Properties.AdditionDate
+                )
+              ]
+            )
+          );
+          Info(
+            Format(
+              #9'Comment: "%s"',
+              [
+                oTorrent.Properties.Comment
+              ]
+            )
+          );
+        end;
+      end
+      else
+      begin
+        Log(#9'Failed.');
+      end;
+    except
+      on E:Exception do
+        Log('Error: ' + E.Message);
+    end;
+  end
+  else
+  begin
+    Log('Torrent list is empty');
   end;
 end;
 
