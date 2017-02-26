@@ -449,8 +449,8 @@ begin
   if FHttp.ResultCode = 200 then
   begin
     Result := True;
-    //FTorrents.LoadTorrentsFromStream(FHttp.Document);
-    FTorrents.LoadTorrentsFromJSON(
+    //FTorrents.LoadTorrents(FHttp.Document);
+    FTorrents.LoadTorrents(
       '['+
         '{'+
             '"added_on": 1488047649,'+

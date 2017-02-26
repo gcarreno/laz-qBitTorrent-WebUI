@@ -89,9 +89,9 @@ type
 
     destructor Destroy; override;
 
-    procedure LoadFromJSON(const aJSON: String);
-    procedure LoadFromJSONObj(const aJSONObj: TJSONObject);
-    procedure LoadFromStream(const aStream: TStream);
+    procedure Load(const aJSON: String);
+    procedure Load(const aJSONObj: TJSONObject);
+    procedure Load(const aStream: TStream);
 
     property Hash: String
       read FHash
@@ -173,13 +173,13 @@ type
   public
     function HasTorrentHASH(const aHASH: String):Boolean;
 
-    procedure LoadTorrentsFromJSON(const aJSON: String);
-    procedure LoadTorrentsFromJSONArray(const aJSONArray: TJSONArray);
-    procedure LoadTorrentsFromStream(const aStream: TStream);
+    procedure LoadTorrents(const aJSON: String);
+    procedure LoadTorrents(const aJSONArray: TJSONArray);
+    procedure LoadTorrents(const aStream: TStream);
 
-    procedure UpdateTorrentsFromJSON(const aJSON: String);
-    procedure UpdateTorrentsFromJSONArray(const aJSONArray: TJSONArray);
-    procedure UpdateTorrentsFromStream(const aStream: TStream);
+    procedure UpdateTorrents(const aJSON: String);
+    procedure UpdateTorrents(const aJSONArray: TJSONArray);
+    procedure UpdateTorrents(const aStream: TStream);
 
     procedure UpdateTorrent(const aHash: String; const aJSON: String);
     procedure UpdateTorrent(const aHash: String; const aJSONObj: TJSONObject);
@@ -312,7 +312,7 @@ begin
   end;
 end;
 
-procedure TqBTorrent.LoadFromJSON(const aJSON: String);
+procedure TqBTorrent.Load(const aJSON: String);
 begin
   DoLoadFromJSON(aJSON);
 end;
@@ -358,7 +358,7 @@ begin
   end;
 end;
 
-procedure TqBTorrent.LoadFromJSONObj(const aJSONObj: TJSONObject);
+procedure TqBTorrent.Load(const aJSONObj: TJSONObject);
 begin
   DoLoadFromJSONObj(aJSONObj);
 end;
@@ -384,7 +384,7 @@ begin
   end;
 end;
 
-procedure TqBTorrent.LoadFromStream(const aStream: TStream);
+procedure TqBTorrent.Load(const aStream: TStream);
 begin
   DoLoadFromStream(aStream);
 end;
@@ -470,7 +470,7 @@ begin
   end;
 end;
 
-procedure TqBTorrents.LoadTorrentsFromJSON(const aJSON: String);
+procedure TqBTorrents.LoadTorrents(const aJSON: String);
 var
   jParser: TJSONParser;
   jData: TJSONData;
@@ -481,7 +481,7 @@ begin
     try
       if jData.JSONType = jtArray then
       begin
-        LoadTorrentsFromJSONArray(jData as TJSONArray);
+        LoadTorrents(jData as TJSONArray);
       end;
     finally
       jData.Free;
@@ -491,7 +491,7 @@ begin
   end;
 end;
 
-procedure TqBTorrents.LoadTorrentsFromJSONArray(const aJSONArray: TJSONArray);
+procedure TqBTorrents.LoadTorrents(const aJSONArray: TJSONArray);
 var
   index: Integer;
 begin
@@ -505,7 +505,7 @@ begin
   end;
 end;
 
-procedure TqBTorrents.LoadTorrentsFromStream(const aStream: TStream);
+procedure TqBTorrents.LoadTorrents(const aStream: TStream);
 var
   jParser: TJSONParser;
   jData: TJSONData;
@@ -516,7 +516,7 @@ begin
     try
       if jData.JSONType = jtArray then
       begin
-        LoadTorrentsFromJSONArray(jData as TJSONArray);
+        LoadTorrents(jData as TJSONArray);
       end;
     finally
       jData.Free;
@@ -526,7 +526,7 @@ begin
   end;
 end;
 
-procedure TqBTorrents.UpdateTorrentsFromJSON(const aJSON: String);
+procedure TqBTorrents.UpdateTorrents(const aJSON: String);
 var
   jParser: TJSONParser;
   jData: TJSONData;
@@ -537,7 +537,7 @@ begin
     try
       if jData.JSONType = jtArray then
       begin
-        UpdateTorrentsFromJSONArray(jData as TJSONArray);
+        UpdateTorrents(jData as TJSONArray);
       end;
     finally
       jData.Free;
@@ -547,7 +547,7 @@ begin
   end;
 end;
 
-procedure TqBTorrents.UpdateTorrentsFromJSONArray(const aJSONArray: TJSONArray);
+procedure TqBTorrents.UpdateTorrents(const aJSONArray: TJSONArray);
 var
   index, index1: Integer;
   oTorrent: TqBTorrent;
@@ -569,7 +569,7 @@ begin
       end;
       if Assigned(oTorrent) then
       begin
-        oTorrent.LoadFromJSONObj(jData as TJSONObject);
+        oTorrent.Load(jData as TJSONObject);
       end
       else
       begin
@@ -579,7 +579,7 @@ begin
   end;
 end;
 
-procedure TqBTorrents.UpdateTorrentsFromStream(const aStream: TStream);
+procedure TqBTorrents.UpdateTorrents(const aStream: TStream);
 var
   jParser: TJSONParser;
   jData: TJSONData;
@@ -590,7 +590,7 @@ begin
     try
       if jData.JSONType = jtArray then
       begin
-        UpdateTorrentsFromJSONArray(jData as TJSONArray);
+        UpdateTorrents(jData as TJSONArray);
       end;
     finally
       jData.Free;
@@ -610,7 +610,7 @@ begin
   begin
     if Self[index].Hash = aHash then
     begin
-      Self[index].LoadFromJSON(aJSON);
+      Self[index].Load(aJSON);
       break;
     end;
   end;
@@ -626,7 +626,7 @@ begin
   begin
     if Self[index].Hash = aHash then
     begin
-      Self[index].LoadFromJSONObj(aJSONObj);
+      Self[index].Load(aJSONObj);
       break;
     end;
   end;
@@ -642,7 +642,7 @@ begin
   begin
     if Self[index].Hash = aHash then
     begin
-      Self[index].LoadFromStream(aStream);
+      Self[index].Load(aStream);
       break;
     end;
   end;
