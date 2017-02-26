@@ -13,11 +13,11 @@
       </descr>
       <!-- object Visibility: default -->
       <element name="TqBTorrentsFilter">
-        <short>An object to manage filters for the function <link id="#lazqBitTorrentWebUI.TqBitTorrentWebUI.GetTorrentsFiltered">GetTorrentsFiltered</link>.</short>
+        <short>An object to manage filters for the function <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.GetTorrentsFiltered">GetTorrentsFiltered</link>.</short>
         <descr />
         <errors />
         <seealso>
-          <link id="#lazqBitTorrentWebUI.TqBitTorrentWebUI.GetTorrentsFiltered">GetTorrentsFiltered</link>
+          <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.GetTorrentsFiltered">GetTorrentsFiltered</link>
         </seealso>
       </element>
       <!-- property Visibility: public -->
