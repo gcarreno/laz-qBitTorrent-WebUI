@@ -1,5 +1,5 @@
 {
-  Torrent List Filters
+  Torrent Filters Container
 
   Copyright (c) 2017 Gustavo Carreno <guscarreno@gmail.com>
 

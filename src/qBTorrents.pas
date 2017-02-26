@@ -29,7 +29,7 @@ interface
 
 uses
   Classes, Contnrs, SysUtils, DateUtils, fpjson, jsonparser, jsonscanner,
-  qBTorrentsFilters, qBTorrentsProperties;
+  qBTorrentsFilters, qBTorrentsProperties, qBTorrentsTrackers;
 
 type
 { TqBTorrentStates }
@@ -76,6 +76,7 @@ type
     FCompletionOn: TDateTime;
 
     FProperties: TqBTorrentProperties;
+    FTrackers: TqBTorrentsTrackers;
 
     procedure DoLoadFromJSON(const aJSON: String);
     procedure DoLoadFromJSONObj(const aJSONObj: TJSONObject);
@@ -162,6 +163,8 @@ type
 
     property Properties: TqBTorrentProperties
       read FProperties;
+    property Trackers: TqBTorrentsTrackers
+      read FTrackers;
   end;
 
 { TqBTorrents }
@@ -416,6 +419,7 @@ begin
   FCompletionOn := 0.0;
 
   FProperties := TqBTorrentProperties.Create;
+  FTrackers := TqBTorrentsTrackers.Create(True);
 end;
 
 constructor TqBTorrent.Create(const aJSON: String);
@@ -438,6 +442,7 @@ end;
 
 destructor TqBTorrent.Destroy;
 begin
+  FTrackers.Free;
   FProperties.Free;
   inherited Destroy;
 end;

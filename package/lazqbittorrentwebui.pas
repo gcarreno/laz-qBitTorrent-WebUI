@@ -9,7 +9,7 @@ interface
 
 uses
   Register_qBitTorrentWebUI, qBitTorrentWebUI, qBTorrents, qBTorrentsFilters, 
-  qBTorrentsProperties, LazarusPackageIntf;
+  qBTorrentsProperties, qBTorrentsTrackers, LazarusPackageIntf;
 
 implementation
 

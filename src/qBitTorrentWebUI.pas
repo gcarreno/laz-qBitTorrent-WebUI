@@ -46,6 +46,8 @@ type
     FAPIVersion: Integer;
     FMinAPIVersion: Integer;
     FqBitTorrentVersion: String;
+    FRefreshID: Integer;
+
     FTorrents: TqBTorrents;
 
     procedure SetActive(aValue: Boolean);
@@ -88,6 +90,9 @@ type
       read FMinAPIVersion;
     property qBitTorrentVersion: String
       read FqBitTorrentVersion;
+    //property RefreshID: Integer
+    //  read FRefreshID;
+
     property Torrents: TqBTorrents
       read FTorrents;
   published
@@ -135,6 +140,8 @@ begin
   FAPIVersion := -1;
   FMinAPIVersion := -1;
   FqBitTorrentVersion := '';
+  FRefreshID := 0;
+
   FTorrents := TqBTorrents.Create(True);
 end;
 

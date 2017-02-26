@@ -1,5 +1,5 @@
 {
-  Torrent Generic Properties
+  Torrent Generic Properties Container
 
   Copyright (c) 2017 Gustavo Carreno <guscarreno@gmail.com>
 

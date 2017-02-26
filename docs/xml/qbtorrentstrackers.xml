@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fpdoc-descriptions>
+  <package name="lazqBitTorrentWebUI">
+    <!--
+         ====================================================================
+         qBTorrentsTrackers
+         ====================================================================
+    -->
+    <module name="qBTorrentsTrackers">
+      <short>Unit containing a container for torrent's trackers.</short>
+      <descr>
+        <p>This unit contains a set of objects that contain the torrent's trackers.</p>
+      </descr>
+      <!-- object Visibility: default -->
+      <element name="TqBTorrentTrackers">
+        <short>Container class for the torrent's trackers.</short>
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+    </module>
+  </package>
+</fpdoc-descriptions>
