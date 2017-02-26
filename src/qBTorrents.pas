@@ -167,8 +167,10 @@ type
 { TqBTorrents }
   TqBTorrents = class(TFPObjectList)
   private
-    function GetItem(Index: Integer): TqBTorrent;
-    procedure SetItem(Index: Integer; AObject: TqBTorrent);
+    function GetTorrent(Index: Integer): TqBTorrent;
+    procedure SetTorrent(Index: Integer; AObject: TqBTorrent);
+
+    function GetByHash(const Hash:String): TqBTorrent;
   protected
   public
     function HasTorrentHASH(const aHASH: String):Boolean;
@@ -191,12 +193,11 @@ type
 
     procedure DeleteTorrent(const aHash: String);
 
-    // This should probably be a property
-    function ByHash(const aHash: String): TqBTorrent;
-
-    property Items[Index: Integer]: TqBTorrent
-      read GetItem
-      write SetItem; default;
+    property Torrents[Index: Integer]: TqBTorrent
+      read GetTorrent
+      write SetTorrent; default;
+    property Hashes[Hash: String]: TqBTorrent
+      read GetByHash;
   end;
 
 // Helper functions
@@ -443,14 +444,31 @@ end;
 
 { TqBTorrents }
 
-function TqBTorrents.GetItem(Index: Integer): TqBTorrent;
+function TqBTorrents.GetTorrent(Index: Integer): TqBTorrent;
 begin
   Result := TqBTorrent(inherited GetItem(Index));
 end;
 
-procedure TqBTorrents.SetItem(Index: Integer; AObject: TqBTorrent);
+procedure TqBTorrents.SetTorrent(Index: Integer; AObject: TqBTorrent);
 begin
   inherited SetItem(Index, AObject);
+end;
+
+function TqBTorrents.GetByHash(const Hash: String): TqBTorrent;
+var
+  index: Integer;
+begin
+  Result := nil;
+  if Length(Hash) <> 40 then
+    exit;
+  for index := 0 to Count - 1 do
+  begin
+    if Torrents[index].Hash = Hash then
+    begin
+      Result := Torrents[index];
+      break;
+    end;
+  end;
 end;
 
 function TqBTorrents.HasTorrentHASH(const aHASH: String): Boolean;
@@ -462,7 +480,7 @@ begin
     exit;
   for index := 0 to Count - 1 do
   begin
-    if Self[index].Hash = aHASH then
+    if Torrents[index].Hash = aHASH then
     begin
       Result := True;
       break;
@@ -561,7 +579,7 @@ begin
     begin
       for index1 := 0 to Count - 1 do
       begin
-        oTorrent := Self[index1];
+        oTorrent := Torrents[index1];
         if oTorrent.Hash = TJSONObject(jData).Get('hash', '') then
         begin
           break;
@@ -608,9 +626,9 @@ begin
     exit;
   for index := 0 to Count - 1 do
   begin
-    if Self[index].Hash = aHash then
+    if Torrents[index].Hash = aHash then
     begin
-      Self[index].Load(aJSON);
+      Torrents[index].Load(aJSON);
       break;
     end;
   end;
@@ -624,9 +642,9 @@ begin
     exit;
   for index := 0 to Count - 1 do
   begin
-    if Self[index].Hash = aHash then
+    if Torrents[index].Hash = aHash then
     begin
-      Self[index].Load(aJSONObj);
+      Torrents[index].Load(aJSONObj);
       break;
     end;
   end;
@@ -640,9 +658,9 @@ begin
     exit;
   for index := 0 to Count - 1 do
   begin
-    if Self[index].Hash = aHash then
+    if Torrents[index].Hash = aHash then
     begin
-      Self[index].Load(aStream);
+      Torrents[index].Load(aStream);
       break;
     end;
   end;
@@ -679,9 +697,9 @@ begin
     exit;
   for index := 0 to Count - 1 do
   begin
-    if Self[index].Hash = aHash then
+    if Torrents[index].Hash = aHash then
     begin
-      Self[index].Properties.LoadFromJSONObj(aJSONObj);
+      Torrents[index].Properties.LoadFromJSONObj(aJSONObj);
       break;
     end;
   end;
@@ -718,26 +736,9 @@ begin
     exit;
   for index := 0 to Count - 1 do
   begin
-    if Self[index].Hash = aHash then
+    if Torrents[index].Hash = aHash then
     begin
       Delete(index);
-      break;
-    end;
-  end;
-end;
-
-function TqBTorrents.ByHash(const aHash: String): TqBTorrent;
-var
-  index: Integer;
-begin
-  Result := nil;
-  if Length(aHash) <> 40 then
-    exit;
-  for index := 0 to Count - 1 do
-  begin
-    if Self[index].Hash = aHash then
-    begin
-      Result := Self[index];
       break;
     end;
   end;
