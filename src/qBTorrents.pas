@@ -171,7 +171,6 @@ type
   TqBTorrents = class(TFPObjectList)
   private
     function GetTorrent(Index: Integer): TqBTorrent;
-    procedure SetTorrent(Index: Integer; AObject: TqBTorrent);
 
     function GetByHash(const Hash:String): TqBTorrent;
   protected
@@ -196,9 +195,8 @@ type
 
     procedure DeleteTorrent(const aHash: String);
 
-    property Torrents[Index: Integer]: TqBTorrent
-      read GetTorrent
-      write SetTorrent; default;
+    property Items[Index: Integer]: TqBTorrent
+      read GetTorrent; default;
     property Hashes[Hash: String]: TqBTorrent
       read GetByHash;
   end;
@@ -454,11 +452,6 @@ begin
   Result := TqBTorrent(inherited GetItem(Index));
 end;
 
-procedure TqBTorrents.SetTorrent(Index: Integer; AObject: TqBTorrent);
-begin
-  inherited SetItem(Index, AObject);
-end;
-
 function TqBTorrents.GetByHash(const Hash: String): TqBTorrent;
 var
   index: Integer;
@@ -468,9 +461,9 @@ begin
     exit;
   for index := 0 to Count - 1 do
   begin
-    if Torrents[index].Hash = Hash then
+    if Items[index].Hash = Hash then
     begin
-      Result := Torrents[index];
+      Result := Items[index];
       break;
     end;
   end;
@@ -485,7 +478,7 @@ begin
     exit;
   for index := 0 to Count - 1 do
   begin
-    if Torrents[index].Hash = aHASH then
+    if Items[index].Hash = aHASH then
     begin
       Result := True;
       break;
@@ -584,7 +577,7 @@ begin
     begin
       for index1 := 0 to Count - 1 do
       begin
-        oTorrent := Torrents[index1];
+        oTorrent := Items[index1];
         if oTorrent.Hash = TJSONObject(jData).Get('hash', '') then
         begin
           break;
@@ -631,9 +624,9 @@ begin
     exit;
   for index := 0 to Count - 1 do
   begin
-    if Torrents[index].Hash = aHash then
+    if Items[index].Hash = aHash then
     begin
-      Torrents[index].Load(aJSON);
+      Items[index].Load(aJSON);
       break;
     end;
   end;
@@ -647,9 +640,9 @@ begin
     exit;
   for index := 0 to Count - 1 do
   begin
-    if Torrents[index].Hash = aHash then
+    if Items[index].Hash = aHash then
     begin
-      Torrents[index].Load(aJSONObj);
+      Items[index].Load(aJSONObj);
       break;
     end;
   end;
@@ -663,9 +656,9 @@ begin
     exit;
   for index := 0 to Count - 1 do
   begin
-    if Torrents[index].Hash = aHash then
+    if Items[index].Hash = aHash then
     begin
-      Torrents[index].Load(aStream);
+      Items[index].Load(aStream);
       break;
     end;
   end;
@@ -702,9 +695,9 @@ begin
     exit;
   for index := 0 to Count - 1 do
   begin
-    if Torrents[index].Hash = aHash then
+    if Items[index].Hash = aHash then
     begin
-      Torrents[index].Properties.LoadFromJSONObj(aJSONObj);
+      Items[index].Properties.LoadFromJSONObj(aJSONObj);
       break;
     end;
   end;
@@ -741,7 +734,7 @@ begin
     exit;
   for index := 0 to Count - 1 do
   begin
-    if Torrents[index].Hash = aHash then
+    if Items[index].Hash = aHash then
     begin
       Delete(index);
       break;
