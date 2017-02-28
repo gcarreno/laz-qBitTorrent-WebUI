@@ -220,7 +220,7 @@ begin
   begin
     Log('Asking for generic properties for "' + qbttMain.Torrents[1].Hash + '"');
     try
-      bGetGenericPropertiesResult := qbttMain.GetGenericProperties(qbttMain.Torrents[1].Hash);
+      bGetGenericPropertiesResult := qbttMain.GetTorrentProperties(qbttMain.Torrents[1].Hash);
       if bGetGenericPropertiesResult then
       begin
         Log(#9'Success.');

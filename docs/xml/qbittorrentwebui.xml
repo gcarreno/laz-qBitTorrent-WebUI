@@ -197,6 +197,22 @@
       <element name="TqBitTorrentWebUI.GetTorrentsFiltered.Result">
         <short>True if query of torrents succeded.</short>
       </element>
+      <!-- function Visibility: public -->
+      <element name="TqBitTorrentWebUI.GetTorrentProperties">
+        <short>Queries the API for torrent's properties.</short>
+        <descr />
+        <errors>Will throw an exception if not successfull.</errors>
+        <example file="examples/gettorrentproperties_example.pas" />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBitTorrentWebUI.GetTorrentProperties.aHash">
+        <short>The hash of the torrent we want the properties from.</short>
+      </element>
+      <!-- function result Visibility: default -->
+      <element name="TqBitTorrentWebUI.GetTorrentProperties.Result">
+        <short>True if query of torrent's properties succeded.</short>
+      </element>
     </module>
   </package>
 </fpdoc-descriptions>

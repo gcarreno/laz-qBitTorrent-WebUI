@@ -233,13 +233,23 @@
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrents.Items">
-        <short>Property to access the list of <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrent">TqBTorrent</link>.</short>
+        <short>Property to access the list of <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrent">TqBTorrent</link> by index.</short>
         <descr />
         <seealso />
       </element>
       <!-- argument Visibility: public -->
       <element name="TqBTorrents.Items.Index">
-        <short />
+        <short>Numerical index of the <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrent">TqBTorrent</link>.</short>
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrents.Hashes">
+        <short>Property to access the list of <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrent">TqBTorrent</link> by hash.</short>
+        <descr />
+        <seealso />
+      </element>
+      <!-- argument Visibility: public -->
+      <element name="TqBTorrents.Hashes.Hash">
+        <short>Hash of the <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrent">TqBTorrent</link>.</short>
       </element>
       <!-- function Visibility: default -->
       <element name="StrToqBState">

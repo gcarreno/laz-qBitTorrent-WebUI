@@ -8,7 +8,7 @@
         <Filename Value="project1.lpr"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="151"/>
+        <UsageCount Value="152"/>
       </Unit0>
       <Unit1>
         <Filename Value="unit1.pas"/>
@@ -18,15 +18,15 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
         <CursorPos X="34" Y="15"/>
-        <UsageCount Value="151"/>
+        <UsageCount Value="152"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="../../src/qBTorrents.pas"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="720"/>
-        <CursorPos X="12" Y="737"/>
+        <TopLine Value="160"/>
+        <CursorPos X="18" Y="173"/>
         <UsageCount Value="69"/>
         <Loaded Value="True"/>
       </Unit2>
@@ -40,8 +40,8 @@
         <Filename Value="../../src/qBitTorrentWebUI.pas"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="19"/>
-        <CursorPos X="34" Y="32"/>
+        <TopLine Value="493"/>
+        <CursorPos Y="510"/>
         <UsageCount Value="75"/>
         <Loaded Value="True"/>
       </Unit4>
@@ -125,7 +125,8 @@
       <Unit16>
         <Filename Value="../../src/qBTorrentsProperties.pas"/>
         <EditorIndex Value="4"/>
-        <CursorPos X="39" Y="2"/>
+        <TopLine Value="310"/>
+        <CursorPos X="38" Y="315"/>
         <UsageCount Value="41"/>
         <Loaded Value="True"/>
       </Unit16>
@@ -143,118 +144,119 @@
       </Position1>
       <Position2>
         <Filename Value="../../src/qBTorrents.pas"/>
-        <Caret Line="486" Column="12" TopLine="464"/>
+        <Caret Line="761" Column="26" TopLine="445"/>
       </Position2>
       <Position3>
         <Filename Value="../../src/qBTorrents.pas"/>
+        <Caret Line="469" Column="16" TopLine="456"/>
       </Position3>
       <Position4>
         <Filename Value="../../src/qBTorrents.pas"/>
-        <Caret Line="761" Column="26" TopLine="445"/>
+        <Caret Line="470" Column="25" TopLine="458"/>
       </Position4>
       <Position5>
-        <Filename Value="../../src/qBTorrents.pas"/>
-        <Caret Line="469" Column="16" TopLine="456"/>
+        <Filename Value="../../src/qBTorrentsProperties.pas"/>
+        <Caret Line="31" Column="32" TopLine="15"/>
       </Position5>
       <Position6>
         <Filename Value="../../src/qBTorrents.pas"/>
-        <Caret Line="470" Column="25" TopLine="458"/>
+        <Caret Line="196" TopLine="178"/>
       </Position6>
       <Position7>
-        <Filename Value="../../src/qBTorrentsProperties.pas"/>
-        <Caret Line="31" Column="32" TopLine="15"/>
+        <Filename Value="../../src/qBTorrents.pas"/>
+        <Caret Line="200" Column="21" TopLine="178"/>
       </Position7>
       <Position8>
         <Filename Value="../../src/qBTorrents.pas"/>
-        <Caret Line="196" TopLine="178"/>
+        <Caret Line="473" TopLine="448"/>
       </Position8>
       <Position9>
         <Filename Value="../../src/qBTorrents.pas"/>
-        <Caret Line="200" Column="21" TopLine="178"/>
+        <Caret Line="747" TopLine="664"/>
       </Position9>
       <Position10>
         <Filename Value="../../src/qBTorrents.pas"/>
-        <Caret Line="473" TopLine="448"/>
+        <Caret Line="25" Column="27" TopLine="13"/>
       </Position10>
       <Position11>
-        <Filename Value="../../src/qBTorrents.pas"/>
-        <Caret Line="747" TopLine="664"/>
+        <Filename Value="../../src/qBitTorrentWebUI.pas"/>
+        <Caret Line="143" Column="18" TopLine="128"/>
       </Position11>
       <Position12>
         <Filename Value="../../src/qBTorrents.pas"/>
-        <Caret Line="25" Column="27" TopLine="13"/>
+        <Caret Line="421" Column="46" TopLine="402"/>
       </Position12>
       <Position13>
-        <Filename Value="../../src/qBitTorrentWebUI.pas"/>
-        <Caret Line="143" Column="18" TopLine="128"/>
+        <Filename Value="../../src/qBTorrents.pas"/>
+        <Caret Line="445" Column="17" TopLine="426"/>
       </Position13>
       <Position14>
         <Filename Value="../../src/qBTorrents.pas"/>
-        <Caret Line="421" Column="46" TopLine="402"/>
+        <Caret Line="174" Column="17" TopLine="166"/>
       </Position14>
       <Position15>
         <Filename Value="../../src/qBTorrents.pas"/>
-        <Caret Line="445" Column="17" TopLine="426"/>
+        <Caret Line="456" TopLine="455"/>
       </Position15>
       <Position16>
-        <Filename Value="../../src/qBTorrents.pas"/>
-        <Caret Line="174" Column="17" TopLine="166"/>
+        <Filename Value="../../src/qBitTorrentWebUI.pas"/>
+        <Caret Line="69" Column="22" TopLine="58"/>
       </Position16>
       <Position17>
         <Filename Value="../../src/qBTorrents.pas"/>
-        <Caret Line="456" TopLine="455"/>
+        <Caret Line="198" Column="19" TopLine="179"/>
       </Position17>
       <Position18>
-        <Filename Value="../../src/qBitTorrentWebUI.pas"/>
-        <Caret Line="69" Column="22" TopLine="58"/>
+        <Filename Value="../../src/qBTorrents.pas"/>
+        <Caret Line="465" Column="12" TopLine="451"/>
       </Position18>
       <Position19>
         <Filename Value="../../src/qBTorrents.pas"/>
-        <Caret Line="198" Column="19" TopLine="179"/>
+        <Caret Line="466" Column="21" TopLine="453"/>
       </Position19>
       <Position20>
         <Filename Value="../../src/qBTorrents.pas"/>
-        <Caret Line="465" Column="12" TopLine="451"/>
+        <Caret Line="481" Column="12" TopLine="468"/>
       </Position20>
       <Position21>
         <Filename Value="../../src/qBTorrents.pas"/>
-        <Caret Line="466" Column="21" TopLine="453"/>
+        <Caret Line="580" Column="25" TopLine="567"/>
       </Position21>
       <Position22>
         <Filename Value="../../src/qBTorrents.pas"/>
-        <Caret Line="481" Column="12" TopLine="468"/>
+        <Caret Line="629" Column="11" TopLine="614"/>
       </Position22>
       <Position23>
         <Filename Value="../../src/qBTorrents.pas"/>
-        <Caret Line="580" Column="25" TopLine="567"/>
+        <Caret Line="645" Column="11" TopLine="630"/>
       </Position23>
       <Position24>
         <Filename Value="../../src/qBTorrents.pas"/>
-        <Caret Line="629" Column="11" TopLine="614"/>
+        <Caret Line="661" Column="11" TopLine="646"/>
       </Position24>
       <Position25>
         <Filename Value="../../src/qBTorrents.pas"/>
-        <Caret Line="645" Column="11" TopLine="630"/>
+        <Caret Line="659" Column="12" TopLine="646"/>
       </Position25>
       <Position26>
         <Filename Value="../../src/qBTorrents.pas"/>
-        <Caret Line="661" Column="11" TopLine="646"/>
+        <Caret Line="661" Column="11" TopLine="648"/>
       </Position26>
       <Position27>
         <Filename Value="../../src/qBTorrents.pas"/>
-        <Caret Line="659" Column="12" TopLine="646"/>
+        <Caret Line="700" Column="11" TopLine="687"/>
       </Position27>
       <Position28>
         <Filename Value="../../src/qBTorrents.pas"/>
-        <Caret Line="661" Column="11" TopLine="648"/>
+        <Caret Line="737" Column="12" TopLine="720"/>
       </Position28>
       <Position29>
         <Filename Value="../../src/qBTorrents.pas"/>
-        <Caret Line="700" Column="11" TopLine="687"/>
+        <Caret Line="731" Column="25" TopLine="717"/>
       </Position29>
       <Position30>
-        <Filename Value="../../src/qBTorrents.pas"/>
-        <Caret Line="737" Column="12" TopLine="720"/>
+        <Filename Value="../../src/qBitTorrentWebUI.pas"/>
+        <Caret Line="81" Column="25" TopLine="59"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>

@@ -170,7 +170,7 @@ type
 { TqBTorrents }
   TqBTorrents = class(TFPObjectList)
   private
-    function GetTorrent(Index: Integer): TqBTorrent;
+    function GetByIndex(Index: Integer): TqBTorrent;
 
     function GetByHash(const Hash:String): TqBTorrent;
   protected
@@ -196,7 +196,7 @@ type
     procedure DeleteTorrent(const aHash: String);
 
     property Items[Index: Integer]: TqBTorrent
-      read GetTorrent; default;
+      read GetByIndex; default;
     property Hashes[Hash: String]: TqBTorrent
       read GetByHash;
   end;
@@ -447,7 +447,7 @@ end;
 
 { TqBTorrents }
 
-function TqBTorrents.GetTorrent(Index: Integer): TqBTorrent;
+function TqBTorrents.GetByIndex(Index: Integer): TqBTorrent;
 begin
   Result := TqBTorrent(inherited GetItem(Index));
 end;
