@@ -22,67 +22,67 @@
 <td><p><tt><span class="code"><span class="kw">type </span>TqBTorrentState<span class="sym"> = </span><span class="sym">(</span></span></tt></p></td>
 </tr>
 <tr>
-<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;tsError<span class="sym">,</span></span></tt></p></td>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;qtsError<span class="sym">,</span></span></tt></p></td>
 <td><p>&nbsp;&nbsp;</p></td>
 <td><p class="cmt">Some error occurred, applies to paused torrents.</p></td>
 </tr>
 <tr>
-<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;tsPausedUp<span class="sym">,</span></span></tt></p></td>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;qtsPausedUp<span class="sym">,</span></span></tt></p></td>
 <td><p>&nbsp;&nbsp;</p></td>
 <td><p class="cmt">Torrent is paused and has finished downloading.</p></td>
 </tr>
 <tr>
-<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;tsPausedDl<span class="sym">,</span></span></tt></p></td>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;qtsPausedDl<span class="sym">,</span></span></tt></p></td>
 <td><p>&nbsp;&nbsp;</p></td>
 <td><p class="cmt">Torrent is paused and has NOT finished downloading.</p></td>
 </tr>
 <tr>
-<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;tsQueuedUp<span class="sym">,</span></span></tt></p></td>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;qtsQueuedUp<span class="sym">,</span></span></tt></p></td>
 <td><p>&nbsp;&nbsp;</p></td>
 <td><p class="cmt">Queuing is enabled and torrent is queued for upload.</p></td>
 </tr>
 <tr>
-<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;tsQueuedDl<span class="sym">,</span></span></tt></p></td>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;qtsQueuedDl<span class="sym">,</span></span></tt></p></td>
 <td><p>&nbsp;&nbsp;</p></td>
 <td><p class="cmt">Queuing is enabled and torrent is queued for download.</p></td>
 </tr>
 <tr>
-<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;tsUploading<span class="sym">,</span></span></tt></p></td>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;qtsUploading<span class="sym">,</span></span></tt></p></td>
 <td><p>&nbsp;&nbsp;</p></td>
 <td><p class="cmt">Torrent is being seeded and data is being transfered.</p></td>
 </tr>
 <tr>
-<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;tsStalledUp<span class="sym">,</span></span></tt></p></td>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;qtsStalledUp<span class="sym">,</span></span></tt></p></td>
 <td><p>&nbsp;&nbsp;</p></td>
 <td><p class="cmt">Torrent is being seeded, but no connection were made.</p></td>
 </tr>
 <tr>
-<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;tsStalledDl<span class="sym">,</span></span></tt></p></td>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;qtsStalledDl<span class="sym">,</span></span></tt></p></td>
 <td><p>&nbsp;&nbsp;</p></td>
 <td><p class="cmt">Torrent is being downloaded, but no connection were made.</p></td>
 </tr>
 <tr>
-<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;tsCheckingUp<span class="sym">,</span></span></tt></p></td>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;qtsCheckingUp<span class="sym">,</span></span></tt></p></td>
 <td><p>&nbsp;&nbsp;</p></td>
 <td><p class="cmt">Torrent has finished downloading and is being checked; this status also applies to preallocation (if enabled) and checking resume data on qBt startup.</p></td>
 </tr>
 <tr>
-<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;tsCheckingDl<span class="sym">,</span></span></tt></p></td>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;qtsCheckingDl<span class="sym">,</span></span></tt></p></td>
 <td><p>&nbsp;&nbsp;</p></td>
 <td><p class="cmt">Same as checkingUP, but torrent has NOT finished downloading.</p></td>
 </tr>
 <tr>
-<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;tsDownloading<span class="sym">,</span></span></tt></p></td>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;qtsDownloading<span class="sym">,</span></span></tt></p></td>
 <td><p>&nbsp;&nbsp;</p></td>
 <td><p class="cmt">Torrent is being downloaded and data is being transfered.</p></td>
 </tr>
 <tr>
-<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;tsMetaDl<span class="sym">,</span></span></tt></p></td>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;qtsMetaDl<span class="sym">,</span></span></tt></p></td>
 <td><p>&nbsp;&nbsp;</p></td>
 <td><p class="cmt">Torrent has just started downloading and is fetching metadata.</p></td>
 </tr>
 <tr>
-<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;tsUnknown</span></tt></p></td>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;qtsUnknown</span></tt></p></td>
 <td><p>&nbsp;&nbsp;</p></td>
 <td><p class="cmt">Catch all state in case something changes in the API.</p></td>
 </tr>

@@ -46,55 +46,55 @@
         <seealso />
       </element>
       <!-- enumeration value Visibility: default -->
-      <element name="TqBTorrentState.tsError">
+      <element name="TqBTorrentState.qtsError">
         <short>Some error occurred, applies to paused torrents.</short>
       </element>
       <!-- enumeration value Visibility: default -->
-      <element name="TqBTorrentState.tsPausedUp">
+      <element name="TqBTorrentState.qtsPausedUp">
         <short>Torrent is paused and has finished downloading.</short>
       </element>
       <!-- enumeration value Visibility: default -->
-      <element name="TqBTorrentState.tsPausedDl">
+      <element name="TqBTorrentState.qtsPausedDl">
         <short>Torrent is paused and has NOT finished downloading.</short>
       </element>
       <!-- enumeration value Visibility: default -->
-      <element name="TqBTorrentState.tsQueuedUp">
+      <element name="TqBTorrentState.qtsQueuedUp">
         <short>Queuing is enabled and torrent is queued for upload.</short>
       </element>
       <!-- enumeration value Visibility: default -->
-      <element name="TqBTorrentState.tsQueuedDl">
+      <element name="TqBTorrentState.qtsQueuedDl">
         <short>Queuing is enabled and torrent is queued for download.</short>
       </element>
       <!-- enumeration value Visibility: default -->
-      <element name="TqBTorrentState.tsUploading">
+      <element name="TqBTorrentState.qtsUploading">
         <short>Torrent is being seeded and data is being transfered.</short>
       </element>
       <!-- enumeration value Visibility: default -->
-      <element name="TqBTorrentState.tsStalledUp">
+      <element name="TqBTorrentState.qtsStalledUp">
         <short>Torrent is being seeded, but no connection were made.</short>
       </element>
       <!-- enumeration value Visibility: default -->
-      <element name="TqBTorrentState.tsStalledDl">
+      <element name="TqBTorrentState.qtsStalledDl">
         <short>Torrent is being downloaded, but no connection were made.</short>
       </element>
       <!-- enumeration value Visibility: default -->
-      <element name="TqBTorrentState.tsCheckingUp">
+      <element name="TqBTorrentState.qtsCheckingUp">
         <short>Torrent has finished downloading and is being checked; this status also applies to preallocation (if enabled) and checking resume data on qBt startup.</short>
       </element>
       <!-- enumeration value Visibility: default -->
-      <element name="TqBTorrentState.tsCheckingDl">
+      <element name="TqBTorrentState.qtsCheckingDl">
         <short>Same as checkingUP, but torrent has NOT finished downloading.</short>
       </element>
       <!-- enumeration value Visibility: default -->
-      <element name="TqBTorrentState.tsDownloading">
+      <element name="TqBTorrentState.qtsDownloading">
         <short>Torrent is being downloaded and data is being transfered.</short>
       </element>
       <!-- enumeration value Visibility: default -->
-      <element name="TqBTorrentState.tsMetaDl">
+      <element name="TqBTorrentState.qtsMetaDl">
         <short>Torrent has just started downloading and is fetching metadata.</short>
       </element>
       <!-- enumeration value Visibility: default -->
-      <element name="TqBTorrentState.tsUnknown">
+      <element name="TqBTorrentState.qtsUnknown">
         <short>Catch all state in case something changes in the API.</short>
       </element>
       <!-- object Visibility: default -->

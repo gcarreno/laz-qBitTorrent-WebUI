@@ -153,18 +153,18 @@ function TfrmMain.FormatState(aState: TqBTorrentState): String;
 begin
   Result := 'Unknown';
   case aState of
-    tsError:       Result := 'Error';
-    tsPausedUp:    Result := 'Paused Upload';
-    tsPausedDl:    Result := 'Paused Download';
-    tsQueuedUp:    Result := 'Queued Upload';
-    tsQueuedDl:    Result := 'Queued Download';
-    tsUploading:   Result := 'Uploading';
-    tsStalledUp:   Result := 'Stalled Upload';
-    tsStalledDl:   Result := 'Stalled Download';
-    tsCheckingUp:  Result := 'Checking Upload';
-    tsCheckingDl:  Result := 'Checking Download';
-    tsDownloading: Result := 'Downloading';
-    tsMetaDl:      Result := 'Downloading Metadata';
+    qtsError:       Result := 'Error';
+    qtsPausedUp:    Result := 'Paused Upload';
+    qtsPausedDl:    Result := 'Paused Download';
+    qtsQueuedUp:    Result := 'Queued Upload';
+    qtsQueuedDl:    Result := 'Queued Download';
+    qtsUploading:   Result := 'Uploading';
+    qtsStalledUp:   Result := 'Stalled Upload';
+    qtsStalledDl:   Result := 'Stalled Download';
+    qtsCheckingUp:  Result := 'Checking Upload';
+    qtsCheckingDl:  Result := 'Checking Download';
+    qtsDownloading: Result := 'Downloading';
+    qtsMetaDl:      Result := 'Downloading Metadata';
   end;
 end;
 

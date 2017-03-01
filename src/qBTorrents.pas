@@ -34,19 +34,19 @@ uses
 type
 { TqBTorrentStates }
   TqBTorrentState = (
-    tsError,
-    tsPausedUp,
-    tsPausedDl,
-    tsQueuedUp,
-    tsQueuedDl,
-    tsUploading,
-    tsStalledUp,
-    tsStalledDl,
-    tsCheckingUp,
-    tsCheckingDl,
-    tsDownloading,
-    tsMetaDl,
-    tsUnknown
+    qtsError,
+    qtsPausedUp,
+    qtsPausedDl,
+    qtsQueuedUp,
+    qtsQueuedDl,
+    qtsUploading,
+    qtsStalledUp,
+    qtsStalledDl,
+    qtsCheckingUp,
+    qtsCheckingDl,
+    qtsDownloading,
+    qtsMetaDl,
+    qtsUnknown
   );
 
 { TqBTorrent }
@@ -177,6 +177,7 @@ type
   public
     function HasTorrentHASH(const aHASH: String):Boolean;
 
+    // Torrents
     procedure LoadTorrents(const aJSON: String);
     procedure LoadTorrents(const aJSONArray: TJSONArray);
     procedure LoadTorrents(const aStream: TStream);
@@ -189,11 +190,18 @@ type
     procedure UpdateTorrent(const aHash: String; const aJSONObj: TJSONObject);
     procedure UpdateTorrent(const aHash: String; const aStream: TStream);
 
+    procedure DeleteTorrent(const aHash: String);
+
+    // Torrent Properties
     procedure UpdateTorrentProperties(const aHash: String; const aJSON: String);
     procedure UpdateTorrentProperties(const aHash: String; const aJSONObj: TJSONObject);
     procedure UpdateTorrentProperties(const aHash: String; const aStream: TStream);
 
-    procedure DeleteTorrent(const aHash: String);
+    // Torrent Trackers
+    procedure UpdateTorrentTrackers(const aHash: String; const aJSON: String);
+    procedure UpdateTorrentTrackers(const aHash: String; const aJSONArray: TJSONArray);
+    procedure UpdateTorrentTrackers(const aHash: String; const aStream: TStream);
+
 
     property Items[Index: Integer]: TqBTorrent
       read GetByIndex; default;
@@ -202,92 +210,109 @@ type
   end;
 
 // Helper functions
-function StrToqBState(const aState: String): TqBTorrentState;
-function qBStateToStr(aState: TqBTorrentState): String;
+function StrToqBTorrentState(const aState: String): TqBTorrentState;
+function qBTorrentStateToStr(aState: TqBTorrentState): String;
 
 implementation
 
-function StrToqBState(const aState: String): TqBTorrentState;
+const
+  csStateError = 'error';
+  csStatePausedUp = 'pausedUP';
+  csStatePausedDl = 'pausedDL';
+  csStateQueuedUp = 'queuedUP';
+  csStateQueuedDl = 'queuedDL';
+  csStateUploading = 'uploading';
+  csStateStalledUp = 'stalledUP';
+  csStateStalledDl = 'stalledDL';
+  csStateCheckingUp = 'checkingUP';
+  csStateCheckingDl = 'checkingDL';
+  csStateDownloading = 'downloading';
+  csStateMetaDl = 'metaDL';
+  csStateUnknown = 'unknown';
+
+// Helper functions
+
+function StrToqBTorrentState(const aState: String): TqBTorrentState;
 begin
-  Result := tsUnknown;
-  if aState = 'error' then
+  Result := qtsUnknown;
+  if aState = csStateError then
   begin
-    Result := tsError;
+    Result := qtsError;
     exit;
   end;
-  if aState = 'pausedUP' then
+  if aState = csStatePausedUp then
   begin
-    Result := tsPausedUp;
+    Result := qtsPausedUp;
     exit;
   end;
-  if aState = 'pausedDL' then
+  if aState = csStatePausedDl then
   begin
-    Result := tsPausedDl;
+    Result := qtsPausedDl;
     exit;
   end;
-  if aState = 'queuedUP' then
+  if aState = csStateQueuedUp then
   begin
-    Result := tsQueuedUp;
+    Result := qtsQueuedUp;
     exit;
   end;
-  if aState = 'queuedDL' then
+  if aState = csStateQueuedDl then
   begin
-    Result := tsQueuedDl;
+    Result := qtsQueuedDl;
     exit;
   end;
-  if aState = 'uploading' then
+  if aState = csStateUploading then
   begin
-    Result := tsUploading;
+    Result := qtsUploading;
     exit;
   end;
-  if aState = 'stalledUP' then
+  if aState = csStateStalledUp then
   begin
-    Result := tsStalledUp;
+    Result := qtsStalledUp;
     exit;
   end;
-  if aState = 'stalledDL' then
+  if aState = csStateStalledDl then
   begin
-    Result := tsStalledDl;
+    Result := qtsStalledDl;
     exit;
   end;
-  if aState = 'checkingUP' then
+  if aState = csStateCheckingUp then
   begin
-    Result := tsCheckingUp;
+    Result := qtsCheckingUp;
     exit;
   end;
-  if aState = 'checkingDL' then
+  if aState = csStateCheckingDl then
   begin
-    Result := tsCheckingDl;
+    Result := qtsCheckingDl;
     exit;
   end;
-  if aState = 'downloading' then
+  if aState = csStateDownloading then
   begin
-    Result := tsDownloading;
+    Result := qtsDownloading;
     exit;
   end;
-  if aState = 'metaDL' then
+  if aState = csStateMetaDl then
   begin
-    Result := tsMetaDl;
+    Result := qtsMetaDl;
     exit;
   end;
 end;
 
-function qBStateToStr(aState: TqBTorrentState): String;
+function qBTorrentStateToStr(aState: TqBTorrentState): String;
 begin
-  Result := 'unknown';
+  Result := csStateUnknown;
   case aState of
-    tsError:       Result := 'error';
-    tsPausedUp:    Result := 'pausedUP';
-    tsPausedDl:    Result := 'pausedDL';
-    tsQueuedUp:    Result := 'queuedUP';
-    tsQueuedDl:    Result := 'queuedDL';
-    tsUploading:   Result := 'uploading';
-    tsStalledUp:   Result := 'stalledUP';
-    tsStalledDl:   Result := 'stalledDL';
-    tsCheckingUp:  Result := 'checkingUP';
-    tsCheckingDl:  Result := 'checkingDL';
-    tsDownloading: Result := 'downloading';
-    tsMetaDl:      Result := 'metaDL';
+    qtsError:       Result := csStateError;
+    qtsPausedUp:    Result := csStatePausedUp;
+    qtsPausedDl:    Result := csStatePausedDl;
+    qtsQueuedUp:    Result := csStateQueuedUp;
+    qtsQueuedDl:    Result := csStateQueuedDl;
+    qtsUploading:   Result := csStateUploading;
+    qtsStalledUp:   Result := csStateStalledUp;
+    qtsStalledDl:   Result := csStateStalledDl;
+    qtsCheckingUp:  Result := csStateCheckingUp;
+    qtsCheckingDl:  Result := csStateCheckingDl;
+    qtsDownloading: Result := csStateDownloading;
+    qtsMetaDl:      Result := csStateMetaDl;
   end;
 end;
 
@@ -337,7 +362,7 @@ begin
   FNumIncomplete := aJSONObj.Get('num_incomplete', FNumIncomplete);
   FRatio := aJSONObj.Get('ratio', FRatio);
   FEta := aJSONObj.Get('eta', FEta);
-  FState := StrToqBState(aJSONObj.Get('state', qBStateToStr(FState)));
+  FState := StrToqBTorrentState(aJSONObj.Get('state', qBTorrentStateToStr(FState)));
   FSeqDl := aJSONObj.Get('seq_dl', FSeqDl);
   FFirstLastPiecePrioritized := aJSONObj.Get('f_l_piece_prio', FFirstLastPiecePrioritized);
   FCategory := aJSONObj.Get('category', FCategory);
@@ -406,7 +431,7 @@ begin
   FNumIncomplete := 0;
   FRatio := 0.0;
   FEta := 0;
-  FState := tsUnknown;
+  FState := qtsUnknown;
   FSeqDl := False;
   FFirstLastPiecePrioritized := False;
   FCategory := '';
@@ -449,7 +474,7 @@ end;
 
 function TqBTorrents.GetByIndex(Index: Integer): TqBTorrent;
 begin
-  Result := TqBTorrent(inherited GetItem(Index));
+  Result := inherited Items[Index] as TqBTorrent;
 end;
 
 function TqBTorrents.GetByHash(const Hash: String): TqBTorrent;
@@ -664,6 +689,22 @@ begin
   end;
 end;
 
+procedure TqBTorrents.DeleteTorrent(const aHash: String);
+var
+  index: Integer;
+begin
+  if Length(aHash) <> 40 then
+    exit;
+  for index := 0 to Count - 1 do
+  begin
+    if Items[index].Hash = aHash then
+    begin
+      Delete(index);
+      break;
+    end;
+  end;
+end;
+
 procedure TqBTorrents.UpdateTorrentProperties(const aHash: String; const aJSON: String);
 var
   jParser: TJSONParser;
@@ -726,17 +767,43 @@ begin
   end;
 end;
 
-procedure TqBTorrents.DeleteTorrent(const aHash: String);
+procedure TqBTorrents.UpdateTorrentTrackers(const aHash: String; const aJSON: String);
 var
   index: Integer;
 begin
-  if Length(aHash) <> 40 then
-    exit;
   for index := 0 to Count - 1 do
   begin
     if Items[index].Hash = aHash then
     begin
-      Delete(index);
+      Items[index].Trackers.UpdateTrackers(aJSON);
+      break;
+    end;
+  end;
+end;
+
+procedure TqBTorrents.UpdateTorrentTrackers(const aHash: String; const aJSONArray: TJSONArray);
+var
+  index: Integer;
+begin
+  for index := 0 to Count - 1 do
+  begin
+    if Items[index].Hash = aHash then
+    begin
+      Items[index].Trackers.UpdateTrackers(aJSONArray);
+      break;
+    end;
+  end;
+end;
+
+procedure TqBTorrents.UpdateTorrentTrackers(const aHash: String; const aStream: TStream);
+var
+  index: Integer;
+begin
+  for index := 0 to Count - 1 do
+  begin
+    if Items[index].Hash = aHash then
+    begin
+      Items[index].Trackers.UpdateTrackers(aStream);
       break;
     end;
   end;

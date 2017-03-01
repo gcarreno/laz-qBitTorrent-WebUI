@@ -9,7 +9,7 @@
 <body>
 <table class="bar" width="100%" border="0" cellpadding="4" cellspacing="0">
 <tr>
-<td><b>[<a href="../qbtorrentstrackers/index.html">Overview</a>][<a href="../qbtorrentstrackers/index-4.html">Classes</a>][<a href="../qbtorrentstrackers/index-8.html">Index</a>]</b></td>
+<td><b>[<a href="../qbtorrentstrackers/index.html">Overview</a>][<a href="../qbtorrentstrackers/index-3.html">Types</a>][<a href="../qbtorrentstrackers/index-4.html">Classes</a>][<a href="../qbtorrentstrackers/index-5.html">Procedures and functions</a>][<a href="../qbtorrentstrackers/index-8.html">Index</a>]</b></td>
 <td align="right"><span class="bartitle">Reference for unit 'qBTorrentsTrackers' (<a href="../index.html">#lazqBitTorrentWebUI</a>)</span></td>
 </tr>
 </table>
@@ -17,10 +17,37 @@
 <p>[<a href="../qbtorrentstrackers/tqbtorrentstracker-1.html" onClick="window.open('../qbtorrentstrackers/tqbtorrentstracker-1.html', 'list', 'dependent=yes,resizable=yes,scrollbars=yes,height=400,width=300'); return false;">Properties</a> (<a href="../qbtorrentstrackers/tqbtorrentstracker-2.html" onClick="window.open('../qbtorrentstrackers/tqbtorrentstracker-2.html', 'list', 'dependent=yes,resizable=yes,scrollbars=yes,height=400,width=300'); return false;">by Name</a>)] [<a href="../qbtorrentstrackers/tqbtorrentstracker-3.html" onClick="window.open('../qbtorrentstrackers/tqbtorrentstracker-3.html', 'list', 'dependent=yes,resizable=yes,scrollbars=yes,height=400,width=300'); return false;">Methods</a> (<a href="../qbtorrentstrackers/tqbtorrentstracker-4.html" onClick="window.open('../qbtorrentstrackers/tqbtorrentstracker-4.html', 'list', 'dependent=yes,resizable=yes,scrollbars=yes,height=400,width=300'); return false;">by Name</a>)] [<a href="../qbtorrentstrackers/tqbtorrentstracker-5.html" onClick="window.open('../qbtorrentstrackers/tqbtorrentstracker-5.html', 'list', 'dependent=yes,resizable=yes,scrollbars=yes,height=400,width=300'); return false;">Events</a> (<a href="../qbtorrentstrackers/tqbtorrentstracker-6.html" onClick="window.open('../qbtorrentstrackers/tqbtorrentstracker-6.html', 'list', 'dependent=yes,resizable=yes,scrollbars=yes,height=400,width=300'); return false;">by Name</a>)] </p>
 <p></p>
 <h2>Declaration</h2>
-<p>Source position: qBTorrentsTrackers.pas line 36</p>
+<p>Source position: qBTorrentsTrackers.pas line 45</p>
 <table cellpadding="0" cellspacing="0">
 <tr>
 <td><p><tt><span class="code"><span class="kw">type</span> TqBTorrentsTracker <span class="sym">=</span> <span class="kw">class</span><span class="sym">(</span>TObject<span class="sym">)</span> <span class="kw">end</span><span class="sym">;</span></span></tt></p></td>
+</tr>
+<tr>
+<td><p><tt><span class="code"><span class="kw">public</span></span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">constructor </span><a href="../qbtorrentstrackers/tqbtorrentstracker.create.html">Create</a><span class="sym">();</span></span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">destructor </span><a href="../qbtorrentstrackers/tqbtorrentstracker.destroy.html">Destroy</a><span class="sym">;</span><span class="kw"> override</span><span class="sym">;</span></span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">procedure </span><a href="../qbtorrentstrackers/tqbtorrentstracker.load.html">Load</a><span class="sym">();</span></span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrentstrackers/tqbtorrentstracker.url.html">Url</a><span class="sym">: </span>string<span class="sym">;</span>  [rw]</span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrentstrackers/tqbtorrentstracker.status.html">Status</a><span class="sym">: </span><a href="../qbtorrentstrackers/tqbtrackerstatus.html">TqBTrackerStatus</a><span class="sym">;</span>  [rw]</span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrentstrackers/tqbtorrentstracker.numpeers.html">NumPeers</a><span class="sym">: </span>Integer<span class="sym">;</span>  [rw]</span></tt></p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">property </span><a href="../qbtorrentstrackers/tqbtorrentstracker.msg.html">Msg</a><span class="sym">: </span>string<span class="sym">;</span>  [rw]</span></tt></p></td>
+</tr>
+<tr>
+<td><p><tt><span class="code"></span></tt></p></td>
 </tr>
 </table>
 <h2>Inheritance</h2>

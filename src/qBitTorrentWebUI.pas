@@ -122,7 +122,20 @@ uses
 
 const
   iMyAPIVersion = 11;
-  sUserAgent = 'lazqBitTorrentWebUI/0.8.0.12';
+{$IFDEF linux}
+  {$IFDEF CPUX64}
+  sUserAgent = 'lazqBitTorrentWebUI/0.12.0.35 (X11; Linux x86_64;) Synapse/40.1';
+  {$ELSE}
+  sUserAgent = 'lazqBitTorrentWebUI/0.12.0.35 (X11; Linux x86_32;) Synapse/40.1';
+  {$ENDIF}
+{$ENDIF}
+{$IFDEF windows}
+  {$IFDEF CPUX64}
+  sUserAgent = 'lazqBitTorrentWebUI/0.12.0.35 (Windows x86_64;) Synapse/40.1';
+  {$ELSE}
+  sUserAgent = 'lazqBitTorrentWebUI/0.12.0.35 (Windows x86_32;) Synapse/40.1';
+  {$ENDIF}
+{$ENDIF}
 
 { TqBitTorrentWebUI }
 
