@@ -126,16 +126,16 @@ const
   ciMyAPIVersion = 11;
 {$IFDEF linux}
   {$IFDEF CPUX64}
-  sUserAgent = 'lazqBitTorrentWebUI/0.12.0.35 (X11; Linux x86_64;) Synapse/40.1';
+  sUserAgent = 'lazqBitTorrentWebUI/0.13.0.50 (X11; Linux x86_64;) Synapse/40.1';
   {$ELSE}
-  sUserAgent = 'lazqBitTorrentWebUI/0.12.0.35 (X11; Linux x86_32;) Synapse/40.1';
+  sUserAgent = 'lazqBitTorrentWebUI/0.13.0.50 (X11; Linux x86_32;) Synapse/40.1';
   {$ENDIF}
 {$ENDIF}
 {$IFDEF windows}
   {$IFDEF CPUX64}
-  sUserAgent = 'lazqBitTorrentWebUI/0.12.0.35 (Windows x86_64;) Synapse/40.1';
+  sUserAgent = 'lazqBitTorrentWebUI/0.13.0.50 (Windows x86_64;) Synapse/40.1';
   {$ELSE}
-  sUserAgent = 'lazqBitTorrentWebUI/0.12.0.35 (Windows x86_32;) Synapse/40.1';
+  sUserAgent = 'lazqBitTorrentWebUI/0.13.0.50 (Windows x86_32;) Synapse/40.1';
   {$ENDIF}
 {$ENDIF}
 
