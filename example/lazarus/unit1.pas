@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, FileUtil, DividerBevel, Forms, Controls, Graphics, Dialogs,
   PairSplitter, ExtCtrls, StdCtrls, Menus, ActnList, StdActns,
-  qBitTorrentWebUI, qBTorrents, qBTorrentsFilters, qBTorrentsProperties;
+  qBitTorrentWebUI, qBUtils, qBTorrents, qBTorrentsFilters;
 
 type
 
@@ -15,7 +15,8 @@ type
 
   TfrmMain = class(TForm)
     actFileSetActive: TAction;
-    actTestGetGenericProperties: TAction;
+    actTestGetTorrentTrackers: TAction;
+    actTestGetTorrentProperties: TAction;
     actTestGetTorrents: TAction;
     actTestExecShutdown: TAction;
     alMain: TActionList;
@@ -23,11 +24,13 @@ type
     btnFileExit: TButton;
     btnTestExecShutdown: TButton;
     btnTestGetTorrents: TButton;
-    Button1: TButton;
+    btnTestGetTorrentProperties: TButton;
+    btnTestGetTorrentTrackers: TButton;
     chkFileActive: TCheckBox;
     divbGetMethhods: TDividerBevel;
     divbCommands: TDividerBevel;
-    mnuTestGetGenericProperties: TMenuItem;
+    mnuTestGetTorrentTrackers: TMenuItem;
+    mnuTestGetTorrentProperties: TMenuItem;
     mnuTestGetTorrents: TMenuItem;
     mnuTestExecShutdown: TMenuItem;
     mnuSep2: TMenuItem;
@@ -46,14 +49,13 @@ type
     stLabelInfo: TStaticText;
     procedure actFileSetActiveExecute(Sender: TObject);
     procedure actTestExecShutdownExecute(Sender: TObject);
-    procedure actTestGetGenericPropertiesExecute(Sender: TObject);
+    procedure actTestGetTorrentPropertiesExecute(Sender: TObject);
     procedure actTestGetTorrentsExecute(Sender: TObject);
+    procedure actTestGetTorrentTrackersExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
   private
-    function FormatBytes(aSize: Int64): String;
-    function FormatState(aState: TqBTorrentState): String;
     procedure SetActions;
 
   public
@@ -110,62 +112,8 @@ procedure TfrmMain.SetActions;
 begin
   actTestExecShutdown.Enabled := chkFileActive.Checked;
   actTestGetTorrents.Enabled := chkFileActive.Checked;
-  actTestGetGenericProperties.Enabled := chkFileActive.Checked;
-end;
-
-function TfrmMain.FormatBytes(aSize: Int64): String;
-var
-  dSize: Double;
-begin
-  Result := '';
-  dSize := 0.0;
-  if aSize < 1024 then
-  begin
-    Result := IntToStr(aSize) + 'B';
-    exit;
-  end;
-  if aSize < (1024*1024) then
-  begin
-    dSize := aSize / 1024;
-    Result := FormatFloat('0.##', dSize)+'KB';
-    exit;
-  end;
-  if aSize < (1024*1024*1024) then
-  begin
-    dSize := aSize / 1024 / 1024;
-    Result := FormatFloat('0.##', dSize)+'MB';
-    exit;
-  end;
-  if aSize < (1024*1024*1024*1024) then
-  begin
-    dSize := aSize / 1024 / 1024 / 1024;
-    Result := FormatFloat('0.##', dSize)+'GB';
-    exit;
-  end;
-  if aSize < (1024*1024*1024*1024*1024) then
-  begin
-    dSize := aSize / 1024 / 1024 / 1024 / 1024;
-    Result := FormatFloat('0.##', dSize)+'TB';
-  end;
-end;
-
-function TfrmMain.FormatState(aState: TqBTorrentState): String;
-begin
-  Result := 'Unknown';
-  case aState of
-    qtsError:       Result := 'Error';
-    qtsPausedUp:    Result := 'Paused Upload';
-    qtsPausedDl:    Result := 'Paused Download';
-    qtsQueuedUp:    Result := 'Queued Upload';
-    qtsQueuedDl:    Result := 'Queued Download';
-    qtsUploading:   Result := 'Uploading';
-    qtsStalledUp:   Result := 'Stalled Upload';
-    qtsStalledDl:   Result := 'Stalled Download';
-    qtsCheckingUp:  Result := 'Checking Upload';
-    qtsCheckingDl:  Result := 'Checking Download';
-    qtsDownloading: Result := 'Downloading';
-    qtsMetaDl:      Result := 'Downloading Metadata';
-  end;
+  actTestGetTorrentProperties.Enabled := chkFileActive.Checked;
+  actTestGetTorrentTrackers.Enabled := chkFileActive.Checked;
 end;
 
 procedure TfrmMain.actFileSetActiveExecute(Sender: TObject);
@@ -211,51 +159,57 @@ begin
   end;
 end;
 
-procedure TfrmMain.actTestGetGenericPropertiesExecute(Sender: TObject);
+procedure TfrmMain.actTestGetTorrentPropertiesExecute(Sender: TObject);
 var
-  bGetGenericPropertiesResult: Boolean;
+  bGetTorrentPropertiesResult: Boolean;
   oTorrent: TqBTorrent;
 begin
   if qbttMain.Torrents.Count > 0 then
   begin
-    Log('Asking for generic properties for "' + qbttMain.Torrents[1].Hash + '"');
+    oTorrent := qbttMain.Torrents[0];
+    Log('Asking torrent properties for hash "' + oTorrent.Hash + '"');
     try
-      bGetGenericPropertiesResult := qbttMain.GetTorrentProperties(qbttMain.Torrents[1].Hash);
-      if bGetGenericPropertiesResult then
+      bGetTorrentPropertiesResult := qbttMain.GetTorrentProperties(oTorrent.Hash);
+      if bGetTorrentPropertiesResult then
       begin
         Log(#9'Success.');
-        oTorrent := qbttMain.Torrents[1];
-        if Assigned(oTorrent) then
-        begin
-          Info(
-            Format(
-              'Torrent: %s (%s)',
-              [
-                oTorrent.Name,
-                oTorrent.Hash
-              ]
-            )
-          );
-          Info(
-            Format(
-              #9'Added: %s',
-              [
-                FormatDateTime(
-                  'YYYY/MM/DD HH:MM:SS',
-                  oTorrent.Properties.AdditionDate
-                )
-              ]
-            )
-          );
-          Info(
-            Format(
-              #9'Comment: "%s"',
-              [
-                oTorrent.Properties.Comment
-              ]
-            )
-          );
-        end;
+        Info('========Properties');
+        Info(
+          Format(
+            'Torrent: %s (%s)',
+            [
+              oTorrent.Name,
+              oTorrent.Hash
+            ]
+          )
+        );
+        Info(
+          Format(
+            #9'Save Path: %s',
+            [
+              oTorrent.Properties.SavePath
+            ]
+          )
+        );
+        Info(
+          Format(
+            #9'Added: %s',
+            [
+              FormatDateTime(
+                'YYYY/MM/DD HH:MM:SS',
+                oTorrent.Properties.AdditionDate
+              )
+            ]
+          )
+        );
+        Info(
+          Format(
+            #9'Comment: "%s"',
+            [
+              oTorrent.Properties.Comment
+            ]
+          )
+        );
       end
       else
       begin
@@ -299,6 +253,7 @@ begin
       Info('Got: ' + IntToStr(qbttMain.Torrents.Count) +' torrents');
       for index := 0 to qbttMain.Torrents.Count - 1 do
       begin
+        Info('========Torrents');
         Info(
           Format(
             'Torrent: %s (%s)',
@@ -334,17 +289,17 @@ begin
         );
         Info(
           Format(
-            #9'DL Speed: %s/s',
+            #9'DL Speed: %s',
             [
-              FormatBytes(qbttMain.Torrents[index].DlSpeed)
+              FormatBytesPerSecond(qbttMain.Torrents[index].DlSpeed)
             ]
           )
         );
         Info(
           Format(
-            #9'UP Speed: %s/s',
+            #9'UP Speed: %s',
             [
-              FormatBytes(qbttMain.Torrents[index].UpSpeed)
+              FormatBytesPerSecond(qbttMain.Torrents[index].UpSpeed)
             ]
           )
         );
@@ -352,7 +307,7 @@ begin
           Format(
             #9'State: %s',
             [
-              FormatState(qbttMain.Torrents[index].State)
+              FormatTorrentState(qbttMain.Torrents[index].State)
             ]
           )
         );
@@ -403,6 +358,82 @@ begin
   except
     on E:Exception do
       Log('Error: ' + E.Message);
+  end;
+end;
+
+procedure TfrmMain.actTestGetTorrentTrackersExecute(Sender: TObject);
+var
+  bGetTorrentTrackersResult: Boolean;
+  oTorrent: TqBTorrent;
+  index: Integer;
+begin
+  if qbttMain.Torrents.Count > 0 then
+  begin
+    oTorrent := qbttMain.Torrents[0];
+    Log('Asking torrent trackers for hash "' + oTorrent.Hash + '"');
+    try
+      bGetTorrentTrackersResult := qbttMain.GetTorrentTrackers(oTorrent.Hash);
+      if bGetTorrentTrackersResult then
+      begin
+        Log(#9'Success.');
+        Info('========Trackers');
+        Info(
+          Format(
+            'Torrent: %s (%s)',
+            [
+              oTorrent.Name,
+              oTorrent.Hash
+            ]
+          )
+        );
+        for index := 0 to oTorrent.Trackers.Count - 1 do
+        begin
+          Info(
+            Format(
+              #9'Url: %s',
+              [
+                oTorrent.Trackers[index].Url
+              ]
+            )
+          );
+          Info(
+            Format(
+              #9'Status: %s',
+              [
+                FormatTrackerStatus(oTorrent.Trackers[index].Status)
+              ]
+            )
+          );
+          Info(
+            Format(
+              #9'Peers: %d',
+              [
+                oTorrent.Trackers[index].NumPeers
+              ]
+            )
+          );
+          Info(
+            Format(
+              #9'Msg: %s',
+              [
+                oTorrent.Trackers[index].Msg
+              ]
+            )
+          );
+        end;
+      end
+      else
+      begin
+        Log(#9'Failed.');
+      end;
+    except
+      on E:Exception do
+        Log('Error: ' + E.Message);
+    end;
+  end
+  else
+  begin
+    Log('Torrent list is empty');
   end;
 end;
 

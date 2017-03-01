@@ -35,7 +35,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE."/>
     <Version Minor="12" Build="35"/>
-    <Files Count="6">
+    <Files Count="7">
       <Item1>
         <Filename Value="../src/Register_qBitTorrentWebUI.pas"/>
         <HasRegisterProc Value="True"/>
@@ -47,21 +47,25 @@ SOFTWARE."/>
         <UnitName Value="qBitTorrentWebUI"/>
       </Item2>
       <Item3>
-        <Filename Value="../src/qBTorrents.pas"/>
-        <UnitName Value="qBTorrents"/>
+        <Filename Value="../src/qBUtils.pas"/>
+        <UnitName Value="qBUtils"/>
       </Item3>
       <Item4>
-        <Filename Value="../src/qBTorrentsFilters.pas"/>
-        <UnitName Value="qBTorrentsFilters"/>
+        <Filename Value="../src/qBTorrents.pas"/>
+        <UnitName Value="qBTorrents"/>
       </Item4>
       <Item5>
-        <Filename Value="../src/qBTorrentsProperties.pas"/>
-        <UnitName Value="qBTorrentsProperties"/>
+        <Filename Value="../src/qBTorrentsFilters.pas"/>
+        <UnitName Value="qBTorrentsFilters"/>
       </Item5>
       <Item6>
+        <Filename Value="../src/qBTorrentsProperties.pas"/>
+        <UnitName Value="qBTorrentsProperties"/>
+      </Item6>
+      <Item7>
         <Filename Value="../src/qBTorrentsTrackers.pas"/>
         <UnitName Value="qBTorrentsTrackers"/>
-      </Item6>
+      </Item7>
     </Files>
     <LazDoc Paths="../docs/xml"/>
     <RequiredPkgs Count="2">

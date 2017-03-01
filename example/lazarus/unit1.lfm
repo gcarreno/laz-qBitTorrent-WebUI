@@ -141,13 +141,21 @@ object frmMain: TfrmMain
       Action = actFileSetActive
       TabOrder = 3
     end
-    object Button1: TButton
+    object btnTestGetTorrentProperties: TButton
       Left = 120
       Height = 25
       Top = 64
       Width = 168
-      Action = actTestGetGenericProperties
+      Action = actTestGetTorrentProperties
       TabOrder = 4
+    end
+    object btnTestGetTorrentTrackers: TButton
+      Left = 296
+      Height = 25
+      Top = 64
+      Width = 152
+      Action = actTestGetTorrentTrackers
+      TabOrder = 5
     end
   end
   object qbttMain: TqBitTorrentWebUI
@@ -172,8 +180,11 @@ object frmMain: TfrmMain
       object mnuTestGetTorrents: TMenuItem
         Action = actTestGetTorrents
       end
-      object mnuTestGetGenericProperties: TMenuItem
-        Action = actTestGetGenericProperties
+      object mnuTestGetTorrentProperties: TMenuItem
+        Action = actTestGetTorrentProperties
+      end
+      object mnuTestGetTorrentTrackers: TMenuItem
+        Action = actTestGetTorrentTrackers
       end
       object mnuSep2: TMenuItem
         Caption = '-'
@@ -204,12 +215,19 @@ object frmMain: TfrmMain
       Caption = 'E&xit'
       Hint = 'Exit'
     end
-    object actTestGetGenericProperties: TAction
+    object actTestGetTorrentProperties: TAction
       Category = 'Test'
-      Caption = 'Get &Generic Properties'
+      Caption = 'Get T&orrent Properties'
       DisableIfNoHandler = False
       Enabled = False
-      OnExecute = actTestGetGenericPropertiesExecute
+      OnExecute = actTestGetTorrentPropertiesExecute
+    end
+    object actTestGetTorrentTrackers: TAction
+      Category = 'Test'
+      Caption = 'Get Torrent T&rackers'
+      DisableIfNoHandler = False
+      Enabled = False
+      OnExecute = actTestGetTorrentTrackersExecute
     end
     object actTestExecShutdown: TAction
       Category = 'Test'

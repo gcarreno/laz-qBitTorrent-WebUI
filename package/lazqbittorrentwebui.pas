@@ -8,8 +8,9 @@ unit lazqBitTorrentWebUI;
 interface
 
 uses
-  Register_qBitTorrentWebUI, qBitTorrentWebUI, qBTorrents, qBTorrentsFilters, 
-  qBTorrentsProperties, qBTorrentsTrackers, LazarusPackageIntf;
+  Register_qBitTorrentWebUI, qBitTorrentWebUI, qBUtils, qBTorrents, 
+  qBTorrentsFilters, qBTorrentsProperties, qBTorrentsTrackers, 
+  LazarusPackageIntf;
 
 implementation
 

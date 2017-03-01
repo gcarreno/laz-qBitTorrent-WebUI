@@ -29,7 +29,7 @@ interface
 
 uses
   Classes, SysUtils, HTTPSend,
-  qBTorrents, qBTorrentsFilters, qBTorrentsProperties;
+  qBTorrents, qBTorrentsFilters{, qBTorrentsProperties}{, qBTorrentsTrackers};
 
 type
 { TqBitTorrentWebUI }
@@ -61,6 +61,7 @@ type
     function DoGetMinApiVersion: String;
     function DoGetqBitTorrentVersion: String;
     function DoGetTorrentProperties(const aHash: String): Boolean;
+    function DoGetTorrentTrackers(const aHash: String): Boolean;
 
     // Commands
     function DoExecShutdown: Boolean;
@@ -79,6 +80,7 @@ type
     function GetTorrents: Boolean;
     function GetTorrentsFiltered(const aFilter: TqBTorrentsFilter): Boolean;
     function GetTorrentProperties(const aHash: String): Boolean;
+    function GetTorrentTrackers(const aHash: String): Boolean;
 
     property IsLogged: Boolean
       read FIsLogged;
@@ -121,7 +123,7 @@ uses
   fpjson, jsonparser, jsonscanner;
 
 const
-  iMyAPIVersion = 11;
+  ciMyAPIVersion = 11;
 {$IFDEF linux}
   {$IFDEF CPUX64}
   sUserAgent = 'lazqBitTorrentWebUI/0.12.0.35 (X11; Linux x86_64;) Synapse/40.1';
@@ -419,7 +421,7 @@ function TqBitTorrentWebUI.ExecShutdown: Boolean;
 begin
   if FActive then
   begin
-    if iMyAPIVersion >= FMinAPIVersion then
+    if ciMyAPIVersion >= FMinAPIVersion then
     begin
       Result := DoExecShutdown;
       if Result then
@@ -484,7 +486,7 @@ function TqBitTorrentWebUI.GetTorrents: Boolean;
 begin
   if FActive then
   begin
-    if iMyAPIVersion >= FMinAPIVersion then
+    if ciMyAPIVersion >= FMinAPIVersion then
     begin
       Result := DoGetTorrents(nil);
     end
@@ -509,7 +511,7 @@ function TqBitTorrentWebUI.GetTorrentsFiltered(const aFilter: TqBTorrentsFilter)
 begin
   if FActive then
   begin
-    if iMyAPIVersion >= FMinAPIVersion then
+    if ciMyAPIVersion >= FMinAPIVersion then
     begin
       Result := DoGetTorrents(aFilter);
     end
@@ -534,7 +536,7 @@ function TqBitTorrentWebUI.DoGetTorrentProperties(const aHash: String): Boolean;
 var
   sURL: String;
 const
-  sPath = '/query/torrents';
+  sPath = '/query/propertiesGeneral';
 begin
   Result := False;
   FHttp.Clear;
@@ -559,7 +561,7 @@ begin
   else
   begin
     raise Exception.Create(
-      'Getting generic properties failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
+      'Getting torrent properties failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
     );
   end;
 end;
@@ -568,9 +570,68 @@ function TqBitTorrentWebUI.GetTorrentProperties(const aHash: String): Boolean;
 begin
   if FActive then
   begin
-    if iMyAPIVersion >= FMinAPIVersion then
+    if ciMyAPIVersion >= FMinAPIVersion then
     begin
       Result := DoGetTorrentProperties(aHash);
+    end
+    else
+    begin
+      Result := False;
+      raise Exception.Create(
+        'Cannot manage this API version.'
+      );
+    end;
+  end
+  else
+  begin
+    Result := False;
+    raise Exception.Create(
+      'You need to set Active True first.'
+    );
+  end;
+end;
+
+function TqBitTorrentWebUI.DoGetTorrentTrackers(const aHash: String): Boolean;
+var
+  sURL: String;
+const
+  sPath = '/query/propertiesTrackers';
+begin
+  Result := False;
+  FHttp.Clear;
+  FHttp.UserAgent := sUserAgent;
+  FHttp.Cookies.Add('SID='+FLoginCookie);
+  if FPort = 80 then
+  begin
+    sURL := 'http://'+FHost+sPath;
+  end
+  else
+  begin
+    sURL := 'http://'+FHost+':'+IntToStr(FPort)+sPath;
+  end;
+  sURL := sURL + '/' + aHash;
+  // TDOD: On debug get a file from sessions
+  FHttp.HTTPMethod('GET', sURL);
+  if FHttp.ResultCode = 200 then
+  begin
+    Result := True;
+    FTorrents.UpdateTorrentTrackers(aHash, FHttp.Document);
+  end
+  else
+  begin
+    raise Exception.Create(
+      'Getting torrent trackers failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
+    );
+  end;
+end;
+
+function TqBitTorrentWebUI.GetTorrentTrackers(const aHash: String): Boolean;
+begin
+  if FActive then
+  begin
+    if ciMyAPIVersion >= FMinAPIVersion then
+    begin
+      Result := DoGetTorrentTrackers(aHash);
     end
     else
     begin
