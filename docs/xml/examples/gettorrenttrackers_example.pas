@@ -8,7 +8,7 @@ type
     {...}
   public
     {...}
-    procedure GetTorrentsFilteredExecute(Sender: TObject);
+    procedure GetTorrentTrackersExecute(Sender: TObject);
     {...}
   end;
 
@@ -17,7 +17,7 @@ var
 
 implementation
 
-prodecure TForm1.GetTorrentsFilteredExecute(Sender: TObject);
+prodecure TForm1.GetTorrentTrackersExecute(Sender: TObject);
 var
   oFilter: TqBTorrentsFilter;
 begin
@@ -33,7 +33,13 @@ begin
         oFilter.Free;
         if Fqb.GetTorrentsFiltered(oFilter) then
         begin
-          // Do something after a successfull torrents retrieval
+          if Fqb.Items.Count > 0 then
+          begin
+            if Fqb.GetTorrentTrackers(Fqb[0].Hash) then
+            begin
+              // Do something after a successfull torrent's trackers retrieval
+            end;
+          end;
         end;
       finally
         oFilter.Free;

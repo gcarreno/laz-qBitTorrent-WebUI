@@ -215,9 +215,7 @@
         <short>Queries the API for torrent's trackers</short>
         <descr />
         <errors>Will throw an execption if not successfull.</errors>
-        <!--  Needs Example
         <example file="examples/gettorrenttrackers_example.pas" />
-        -->
         <seealso />
       </element>
       <!-- argument Visibility: default -->

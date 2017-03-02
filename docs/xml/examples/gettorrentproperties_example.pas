@@ -37,7 +37,7 @@ begin
           begin
             if Fqb.GetTorrentProperties(Fqb[0].Hash) then
             begin
-              // Do something after a successfull torrent's properties retrival
+              // Do something after a successfull torrent's properties retrieval
             end;
           end;
         end;
