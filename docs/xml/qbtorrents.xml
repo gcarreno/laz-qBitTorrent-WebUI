@@ -14,8 +14,8 @@
       <!-- enumeration type Visibility: default -->
       <element name="TqBTorrentState">
         <short>Torrent States.</short>
-        <descr />
-        <seealso />
+        <descr/>
+        <seealso/>
       </element>
       <!-- enumeration value Visibility: default -->
       <element name="TqBTorrentState.qtsError">
@@ -72,92 +72,92 @@
       <!-- object Visibility: default -->
       <element name="TqBTorrent">
         <short>Container class for a single torrent.</short>
-        <descr />
-        <errors />
-        <seealso />
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrent.Hash">
         <short>Torrent hash.</short>
-        <descr />
-        <seealso />
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrent.Name">
         <short>Torrent name.</short>
-        <descr />
-        <seealso />
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrent.Size">
         <short>Total size (bytes) of files selected for download.</short>
-        <descr />
-        <seealso />
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrent.Progress">
         <short>Torrent progress (percentage/100).</short>
-        <descr />
-        <seealso />
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrent.DlSpeed">
         <short>Torrent download speed (bytes/s).</short>
-        <descr />
-        <seealso />
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrent.UpSpeed">
         <short>Torrent upload speed (bytes/s).</short>
-        <descr />
-        <seealso />
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrent.Priority">
         <short>Torrent priority. Returns -1 if queuing is disabled or torrent is in seed mode.</short>
-        <descr />
-        <seealso />
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrent.NumSeeds">
         <short>Number of seeds connected to.</short>
-        <descr />
-        <seealso />
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrent.NumComplete">
         <short>Number of seeds in the swarm.</short>
-        <descr />
-        <seealso />
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrent.NumLeechs">
         <short>Number of leechers connected to.</short>
-        <descr />
-        <seealso />
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrent.NumIncomplete">
         <short>Number of leechers in the swarm.</short>
-        <descr />
-        <seealso />
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrent.Ratio">
         <short>Torrent share ratio. Max ratio value: 9999.</short>
-        <descr />
-        <seealso />
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrent.Eta">
         <short>Torrent ETA (seconds).</short>
-        <descr />
-        <seealso />
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrent.State">
         <short>Torrent state.</short>
-        <descr />
+        <descr/>
         <seealso>
           <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link>
         </seealso>
@@ -165,107 +165,107 @@
       <!-- property Visibility: public -->
       <element name="TqBTorrent.SeqDl">
         <short>True if sequential download is enabled.</short>
-        <descr />
-        <seealso />
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrent.FirstLastPiecePrioritized">
         <short>True if first last piece are prioritized.</short>
-        <descr />
-        <seealso />
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrent.Category">
         <short>Category of the torrent.</short>
-        <descr />
-        <seealso />
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrent.SuperSeeding">
         <short>True if super seeding is enabled.</short>
-        <descr />
-        <seealso />
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrent.ForceStart">
         <short>True if force start is enabled for this torrent.</short>
-        <descr />
-        <seealso />
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrent.SavePath">
-        <short />
-        <descr />
-        <seealso />
+        <short>The folder where the torrent is being downloaded.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrent.AddedOn">
-        <short />
-        <descr />
-        <seealso />
+        <short>Date of the torrent's addition.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrent.CompletionOn">
-        <short />
-        <descr />
-        <seealso />
+        <short>Date of the torrent's completion.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrent.Properties">
-        <short />
-        <descr />
-        <seealso />
+        <short>Torrent's properties.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrent.Trackers">
-        <short />
-        <descr />
-        <seealso />
+        <short>Torrent's trackers.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- constructor Visibility: public -->
       <element name="TqBTorrent.Create">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short/>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrent.Create.aJSON">
-        <short />
+        <short/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrent.Create.aJSONObj">
-        <short />
+        <short/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrent.Create.aStream">
-        <short />
+        <short/>
       </element>
       <!-- destructor Visibility: public -->
       <element name="TqBTorrent.Destroy">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short/>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- procedure Visibility: public -->
       <element name="TqBTorrent.Load">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short/>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrent.Load.aJSON">
-        <short />
+        <short/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrent.Load.aJSONObj">
-        <short />
+        <short/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrent.Load.aStream">
-        <short />
+        <short/>
       </element>
       <!-- object Visibility: default -->
       <element name="TqBTorrents">
@@ -274,15 +274,15 @@
           <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrent">TqBTorrent</link>
           .
         </short>
-        <descr />
-        <errors />
-        <seealso />
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrents.Items">
         <short>Property to access the list of <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrent">TqBTorrent</link> by index.</short>
-        <descr />
-        <seealso />
+        <descr/>
+        <seealso/>
       </element>
       <!-- argument Visibility: public -->
       <element name="TqBTorrents.Items.Index">
@@ -291,141 +291,141 @@
       <!-- property Visibility: public -->
       <element name="TqBTorrents.Hashes">
         <short>Property to access the list of <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrent">TqBTorrent</link> by hash.</short>
-        <descr />
-        <seealso />
+        <descr/>
+        <seealso/>
       </element>
       <!-- function Visibility: public -->
       <element name="TqBTorrents.HasTorrentHASH">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short>Returns <var>True</var> if the hash identifies one of the contained torrents.</short>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- function result Visibility: public -->
       <element name="TqBTorrents.HasTorrentHASH.Result">
-        <short />
+        <short>True if the torrent identified by the Hash is present.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.HasTorrentHASH.aHASH">
-        <short />
+        <short>The Hash to investigate.</short>
       </element>
       <!-- procedure Visibility: public -->
       <element name="TqBTorrents.LoadTorrents">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short>Clears the torrent list and loads new torrents.</short>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.LoadTorrents.aJSON">
-        <short />
+        <short>A JSON <var>String</var> containing an <var>Array</var> of torrents.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.LoadTorrents.aJSONArray">
-        <short />
+        <short>A JSON <var>Array</var> containing the torrents.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.LoadTorrents.aStream">
-        <short />
+        <short>A <var>TStream</var> containing an <var>Array</var> of torrents.</short>
       </element>
       <!-- procedure Visibility: public -->
       <element name="TqBTorrents.UpdateTorrents">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short>Updates the contained torrents with new values.</short>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.UpdateTorrents.aJSON">
-        <short />
+        <short>A JSON <var>String</var> containing an <var>Array</var> of torrents.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.UpdateTorrents.aJSONArray">
-        <short />
+        <short>A JSON <var>Array</var> containing the torrents.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.UpdateTorrents.aStream">
-        <short />
+        <short>A <var>TStream</var> containing an <var>Array</var> of torrents.</short>
       </element>
       <!-- procedure Visibility: public -->
       <element name="TqBTorrents.UpdateTorrent">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short>Update a single torrent identified by Hash.</short>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.UpdateTorrent.aHash">
-        <short />
+        <short>The Hash of the torrent to be updated.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.UpdateTorrent.aJSON">
-        <short />
+        <short>A JSON <var>String</var> containing a JSON <var>Object</var> of a torrent.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.UpdateTorrent.aJSONObj">
-        <short />
+        <short>A JSON <var>Object</var> containing the torrent.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.UpdateTorrent.aStream">
-        <short />
+        <short>A <var>TStream</var> containing a JSON <var>Object</var> of a torrent.</short>
       </element>
       <!-- procedure Visibility: public -->
       <element name="TqBTorrents.DeleteTorrent">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short>Deletes a torrent by Hash.</short>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.DeleteTorrent.aHash">
-        <short />
+        <short>The Hash of the torrent to be deleted.</short>
       </element>
       <!-- procedure Visibility: public -->
       <element name="TqBTorrents.UpdateTorrentProperties">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short>Updates the properties of a torrent identified by a Hash.</short>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.UpdateTorrentProperties.aHash">
-        <short />
+        <short>The Hash of the torrent to be updated.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.UpdateTorrentProperties.aJSON">
-        <short />
+        <short>A JSON <var>String</var> containing a JSON <var>Object</var> of a torrent's properties.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.UpdateTorrentProperties.aJSONObj">
-        <short />
+        <short>A JSON <var>Object</var> containing the torrent's properties.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.UpdateTorrentProperties.aStream">
-        <short />
+        <short>A <var>TStream</var> containing a JSON <var>Object</var> of a torrent's properties.</short>
       </element>
       <!-- procedure Visibility: public -->
       <element name="TqBTorrents.UpdateTorrentTrackers">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short>Updates the trackers of a torrent identified by a Hash.</short>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.UpdateTorrentTrackers.aHash">
-        <short />
+        <short>The Hash of the torrent to be updated.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.UpdateTorrentTrackers.aJSON">
-        <short />
+        <short>A JSON <var>String</var> containing a JSON <var>Array</var> of a torrent's trackers.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.UpdateTorrentTrackers.aJSONArray">
-        <short />
+        <short>A JSON <var>Array</var> containing the torrent's trackers.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.UpdateTorrentTrackers.aStream">
-        <short />
+        <short>A <var>TStream</var> containing a JSON <var>Array</var> of a torrent's trackers.</short>
       </element>
       <!-- argument Visibility: public -->
       <element name="TqBTorrents.Hashes.Hash">
@@ -440,9 +440,9 @@
           <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link>
           .
         </short>
-        <descr />
-        <errors />
-        <seealso />
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="StrToqBTorrentState.aState">
@@ -469,9 +469,9 @@
           <var>String</var>
           .
         </short>
-        <descr />
-        <errors />
-        <seealso />
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="qBTorrentStateToStr.aState">

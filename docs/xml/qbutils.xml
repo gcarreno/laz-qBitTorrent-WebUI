@@ -7,65 +7,71 @@
          ====================================================================
     -->
     <module name="qBUtils">
+      <short>Collection of functions to help in formating things.</short>
+      <descr>A collections of utility functions to format various poerty values on this package.</descr>
       <!-- function Visibility: default -->
       <element name="FormatBytes">
-        <short />
+        <short>Formats Integer into Bytes, KiloBytes, MegaBytes, GigaBytes, TeraBytes and PetaBytes.</short>
         <descr />
         <errors />
         <seealso />
-      </element>
-      <!-- function result Visibility: default -->
-      <element name="FormatBytes.Result">
-        <short />
       </element>
       <!-- argument Visibility: default -->
       <element name="FormatBytes.aSize">
-        <short />
+        <short>The amount to be formatted into K/M/G/T/PB.</short>
+      </element>
+      <!-- function result Visibility: default -->
+      <element name="FormatBytes.Result">
+        <short>A string with the formatted K/M/G/T/PB.</short>
       </element>
       <!-- function Visibility: default -->
       <element name="FormatBytesPerSecond">
-        <short />
+        <short>Formats Integer into Bytes, KiloBytes, MegaBytes, GigaBytes, TeraBytes and PetaBytes per second.</short>
         <descr />
         <errors />
         <seealso />
-      </element>
-      <!-- function result Visibility: default -->
-      <element name="FormatBytesPerSecond.Result">
-        <short />
       </element>
       <!-- argument Visibility: default -->
       <element name="FormatBytesPerSecond.aSize">
-        <short />
+        <short>The amount to be formatted into K/M/G/T/PB per second.</short>
+      </element>
+      <!-- function result Visibility: default -->
+      <element name="FormatBytesPerSecond.Result">
+        <short>A string with the formatted K/M/G/T/PB per second.</short>
       </element>
       <!-- function Visibility: default -->
       <element name="FormatTorrentState">
-        <short />
+        <short>Returns a human readable, capitalized <var>String</var> with the torrent status.</short>
         <descr />
         <errors />
-        <seealso />
-      </element>
-      <!-- function result Visibility: default -->
-      <element name="FormatTorrentState.Result">
-        <short />
+        <seealso>
+          <link id="#lazqbittorrentwebui.qBTorrents.qBTorrentStateToStr">qBTorrentStateToStr</link>
+        </seealso>
       </element>
       <!-- argument Visibility: default -->
       <element name="FormatTorrentState.aState">
-        <short />
+        <short>The state of the torrent</short>
+      </element>
+      <!-- function result Visibility: default -->
+      <element name="FormatTorrentState.Result">
+        <short>The capitalized <var>String</var> with a human readable torrent state.</short>
       </element>
       <!-- function Visibility: default -->
       <element name="FormatTrackerStatus">
-        <short />
+        <short>Wrapper for function <link id="#lazqbittorrentwebui.qBTorrentsTrackers.qBTrackerStatusToStr">qBTrackerStatusToStr</link>.</short>
         <descr />
         <errors />
-        <seealso />
-      </element>
-      <!-- function result Visibility: default -->
-      <element name="FormatTrackerStatus.Result">
-        <short />
+        <seealso>
+          <link id="#lazqbittorrentwebui.qBTorrentsTrackers.qBTrackerStatusToStr">qBTrackerStatusToStr</link>
+        </seealso>
       </element>
       <!-- argument Visibility: default -->
       <element name="FormatTrackerStatus.aStatus">
-        <short />
+        <short>The status of the tracker.</short>
+      </element>
+      <!-- function result Visibility: default -->
+      <element name="FormatTrackerStatus.Result">
+        <short>A <var>String</var> with a human readable tracker status.</short>
       </element>
     </module>
     <!-- qBUtils -->

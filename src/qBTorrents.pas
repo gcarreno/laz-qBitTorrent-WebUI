@@ -738,7 +738,7 @@ begin
   begin
     if Items[index].Hash = aHash then
     begin
-      Items[index].Properties.LoadFromJSONObj(aJSONObj);
+      Items[index].Properties.Load(aJSONObj);
       break;
     end;
   end;

@@ -224,6 +224,18 @@
         <errors />
         <seealso />
       </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsProperties.Create.aJSON">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsProperties.Create.aJSONObj">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsProperties.Create.aStream">
+        <short />
+      </element>
       <!-- destructor Visibility: public -->
       <element name="TqBTorrentsProperties.Destroy">
         <short />
@@ -232,36 +244,22 @@
         <seealso />
       </element>
       <!-- procedure Visibility: public -->
-      <element name="TqBTorrentsProperties.LoadFromJSON">
+      <element name="TqBTorrentsProperties.Load">
         <short />
         <descr />
         <errors />
         <seealso />
       </element>
       <!-- argument Visibility: default -->
-      <element name="TqBTorrentsProperties.LoadFromJSON.aJSON">
+      <element name="TqBTorrentsProperties.Load.aJSON">
         <short />
-      </element>
-      <!-- procedure Visibility: public -->
-      <element name="TqBTorrentsProperties.LoadFromJSONObj">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
       </element>
       <!-- argument Visibility: default -->
-      <element name="TqBTorrentsProperties.LoadFromJSONObj.aJSONObj">
+      <element name="TqBTorrentsProperties.Load.aJSONObj">
         <short />
-      </element>
-      <!-- procedure Visibility: public -->
-      <element name="TqBTorrentsProperties.LoadFromStream">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
       </element>
       <!-- argument Visibility: default -->
-      <element name="TqBTorrentsProperties.LoadFromStream.aStream">
+      <element name="TqBTorrentsProperties.Load.aStream">
         <short />
       </element>
     </module>

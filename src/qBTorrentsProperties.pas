@@ -68,14 +68,23 @@ type
     FSeeds: Integer;
     FSeedsTotal: Integer;
     FTotalSize: Integer;
+
+
+    procedure DoLoadFromJSON(const aJSON: String);
+    procedure DoLoadFromJSONObj(const aJSONObj: TJSONObject);
+    procedure DoLoadFromStream(const aStream: TStream);
   protected
   public
     constructor Create;
+    constructor Create(const aJSON: String);
+    constructor Create(const aJSONObj: TJSONObject);
+    constructor Create(const aStream: TStream);
+
     destructor Destroy; override;
 
-    procedure LoadFromJSON(const aJSON: String);
-    procedure LoadFromJSONObj(const aJSONObj: TJSONObject);
-    procedure LoadFromStream(const aStream: TStream);
+    procedure Load(const aJSON: String);
+    procedure Load(const aJSONObj: TJSONObject);
+    procedure Load(const aStream: TStream);
 
     property SavePath: String
       read FSavePath
@@ -219,12 +228,30 @@ begin
   FTotalSize := -1;
 end;
 
+constructor TqBTorrentsProperties.Create(const aJSON: String);
+begin
+  Create;
+  DoLoadFromJSON(aJSON);
+end;
+
+constructor TqBTorrentsProperties.Create(const aJSONObj: TJSONObject);
+begin
+  Create;
+  DoLoadFromJSONObj(aJSONObj);
+end;
+
+constructor TqBTorrentsProperties.Create(const aStream: TStream);
+begin
+  Create;
+  DoLoadFromStream(aStream);
+end;
+
 destructor TqBTorrentsProperties.Destroy;
 begin
   inherited Destroy;
 end;
 
-procedure TqBTorrentsProperties.LoadFromJSON(const aJSON: String);
+procedure TqBTorrentsProperties.DoLoadFromJSON(const aJSON: String);
 var
   jParser: TJSONParser;
   jData: TJSONData;
@@ -235,7 +262,7 @@ begin
     try
       if jData.JSONType = jtObject then
       begin
-        LoadFromJSONObj(jData as TJSONObject);
+        Load(jData as TJSONObject);
       end;
     finally
       jData.Free;
@@ -245,7 +272,12 @@ begin
   end;
 end;
 
-procedure TqBTorrentsProperties.LoadFromJSONObj(const aJSONObj: TJSONObject);
+procedure TqBTorrentsProperties.Load(const aJSON: String);
+begin
+  DoLoadFromJSON(aJSON);
+end;
+
+procedure TqBTorrentsProperties.DoLoadFromJSONObj(const aJSONObj: TJSONObject);
 var
   iUnixTime: Integer;
   dtTime: TDateTime;
@@ -312,7 +344,12 @@ begin
   FTotalSize := aJSONObj.Get('total_size', FTotalSize);
 end;
 
-procedure TqBTorrentsProperties.LoadFromStream(const aStream: TStream);
+procedure TqBTorrentsProperties.Load(const aJSONObj: TJSONObject);
+begin
+  DoLoadFromJSONObj(aJSONObj);
+end;
+
+procedure TqBTorrentsProperties.DoLoadFromStream(const aStream: TStream);
 var
   jParser: TJSONParser;
   jData: TJSONData;
@@ -323,7 +360,7 @@ begin
     try
       if jData.JSONType = jtObject then
       begin
-        LoadFromJSONObj(jData as TJSONObject);
+        Load(jData as TJSONObject);
       end;
     finally
       jData.Free;
@@ -331,6 +368,11 @@ begin
   finally
     jParser.Free;
   end;
+end;
+
+procedure TqBTorrentsProperties.Load(const aStream: TStream);
+begin
+  DoLoadFromStream(aStream);
 end;
 
 end.
