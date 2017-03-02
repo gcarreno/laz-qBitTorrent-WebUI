@@ -250,22 +250,22 @@
       </element>
       <!-- procedure Visibility: public -->
       <element name="TqBTorrent.Load">
-        <short/>
+        <short>Loads the contents of a torrent.</short>
         <descr/>
         <errors/>
         <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrent.Load.aJSON">
-        <short/>
+        <short>A JSON <var>String</var> contaning a JSON <var>Object</var> with a torrent.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrent.Load.aJSONObj">
-        <short/>
+        <short>A JSON <var>Object</var> contaning a torrent.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrent.Load.aStream">
-        <short/>
+        <short>A <var>TStream</var> contaning a JSON <var>Object</var> with a torrent.</short>
       </element>
       <!-- object Visibility: default -->
       <element name="TqBTorrents">
@@ -433,61 +433,33 @@
       </element>
       <!-- function Visibility: default -->
       <element name="StrToqBTorrentState">
-        <short>
-          Translates from
-          <var>String</var>
-          to
-          <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link>
-          .
-        </short>
+        <short>Translates from <var>String</var> to <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link>.</short>
         <descr/>
         <errors/>
         <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="StrToqBTorrentState.aState">
-        <short>
-          The
-          <var>String</var>
-          to be translated.
-        </short>
+        <short>The <var>String</var> to be translated.</short>
       </element>
       <!-- function result Visibility: default -->
       <element name="StrToqBTorrentState.Result">
-        <short>
-          The translated
-          <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link>
-          .
-        </short>
+        <short>The translated <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link>.</short>
       </element>
       <!-- function Visibility: default -->
       <element name="qBTorrentStateToStr">
-        <short>
-          Translates from
-          <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link>
-          to
-          <var>String</var>
-          .
-        </short>
+        <short>Translates from <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link> to <var>String</var>.</short>
         <descr/>
         <errors/>
         <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="qBTorrentStateToStr.aState">
-        <short>
-          The
-          <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link>
-          to be translated.
-        </short>
+        <short>The <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link> to be translated.</short>
       </element>
       <!-- function result Visibility: default -->
       <element name="qBTorrentStateToStr.Result">
-        <short>
-          The translated
-          <var>String</var>
-          .
-        </short>
+        <short>The translated <var>String</var>.</short>
       </element>
     </module>
   </package>

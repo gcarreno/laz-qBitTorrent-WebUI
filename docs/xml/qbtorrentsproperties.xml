@@ -18,7 +18,8 @@
       <descr/>
       <errors/>
       <sealso/>
-    </element>
+    <short>Container class for torrent's properties.</short>
+      </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.SavePath">
         <short>The path where the torrent is being downloaded.</short>
