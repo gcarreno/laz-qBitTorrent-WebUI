@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <fpdoc-descriptions>
   <package name="lazqBitTorrentWebUI">
     <!--
@@ -15,252 +15,252 @@
     <!-- object Visibility: default -->
     <element name="TqBTorrentsProperties">
       <sort>The object that contains torrent's generic properties.</sort>
-      <descr />
-      <errors />
-      <sealso />
+      <descr/>
+      <errors/>
+      <sealso/>
     </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.SavePath">
-        <short />
-        <descr />
-        <seealso />
+        <short>The path where the torrent is being downloaded.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.CreationDate">
-        <short />
-        <descr />
-        <seealso />
+        <short>The date of creation of the torrent.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.PieceSize">
-        <short />
-        <descr />
-        <seealso />
+        <short>The torrent's piece size.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.Comment">
-        <short />
-        <descr />
-        <seealso />
+        <short>The torrent's comment.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.TotalWasted">
-        <short />
-        <descr />
-        <seealso />
+        <short>How many bytes wasted.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.TotalUploaded">
-        <short />
-        <descr />
-        <seealso />
+        <short>Total of bytes uploaded.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.TotalUploadedSession">
-        <short />
-        <descr />
-        <seealso />
+        <short>Total bytes uploaded in this session.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.TotalDownloaded">
-        <short />
-        <descr />
-        <seealso />
+        <short>Total bytes downloaded.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.TotalDownloadedSession">
-        <short />
-        <descr />
-        <seealso />
+        <short>Total bytes downloaded in this session.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.UpLimit">
-        <short />
-        <descr />
-        <seealso />
+        <short>Upload speed limit.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.DlLimit">
-        <short />
-        <descr />
-        <seealso />
+        <short>Download speed limit.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.TimeElapsed">
-        <short />
-        <descr />
-        <seealso />
+        <short>Time elapsed since torrent was added.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.SeedingTime">
-        <short />
-        <descr />
-        <seealso />
+        <short>Seeding time.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.NbConnections">
-        <short />
-        <descr />
-        <seealso />
+        <short>Need to investigate.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.NbConnectionsLimit">
-        <short />
-        <descr />
-        <seealso />
+        <short>Need to investigate.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.ShareRatio">
-        <short />
-        <descr />
-        <seealso />
+        <short>The share ration of this torrent.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.AdditionDate">
-        <short />
-        <descr />
-        <seealso />
+        <short>When the torrent was added.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.CompletionDate">
-        <short />
-        <descr />
-        <seealso />
+        <short>When the torrent was completed.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.CreatedBy">
-        <short />
-        <descr />
-        <seealso />
+        <short>Torrent created by.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.DlSpeed">
-        <short />
-        <descr />
-        <seealso />
+        <short>Download speed.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.DlSpeedAvg">
-        <short />
-        <descr />
-        <seealso />
+        <short>Average download speed.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.UpSpeed">
-        <short />
-        <descr />
-        <seealso />
+        <short>Upload speed.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.UpSpeedAvg">
-        <short />
-        <descr />
-        <seealso />
+        <short>Average upload speed.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.Eta">
-        <short />
-        <descr />
-        <seealso />
+        <short>Torrent ETA (seconds).</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.LastSeen">
-        <short />
-        <descr />
-        <seealso />
+        <short>When the torrent was lasst seen with seeds.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.Peers">
-        <short />
-        <descr />
-        <seealso />
+        <short>Amount of peers.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.PeersTotal">
-        <short />
-        <descr />
-        <seealso />
+        <short>Total peers in the swarm.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.PiecesHave">
-        <short />
-        <descr />
-        <seealso />
+        <short>How many pieces of the torrent are downloaded.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.PiecesNum">
-        <short />
-        <descr />
-        <seealso />
+        <short>Total number of pieces of the torrent.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.Reannounce">
-        <short />
-        <descr />
-        <seealso />
+        <short>When this torrent is going to be re-annouced.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.Seeds">
-        <short />
-        <descr />
-        <seealso />
+        <short>Amount of seeds.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.SeedsTotal">
-        <short />
-        <descr />
-        <seealso />
+        <short>Amount of seeds in the swarm.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsProperties.TotalSize">
-        <short />
-        <descr />
-        <seealso />
+        <short>Size in bytes of the torrent.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- constructor Visibility: public -->
       <element name="TqBTorrentsProperties.Create">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short/>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrentsProperties.Create.aJSON">
-        <short />
+        <short/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrentsProperties.Create.aJSONObj">
-        <short />
+        <short/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrentsProperties.Create.aStream">
-        <short />
+        <short/>
       </element>
       <!-- destructor Visibility: public -->
       <element name="TqBTorrentsProperties.Destroy">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short/>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- procedure Visibility: public -->
       <element name="TqBTorrentsProperties.Load">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short>Loads torrent's properties.</short>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrentsProperties.Load.aJSON">
-        <short />
+        <short>A JSON <var>String</var> with the properties.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrentsProperties.Load.aJSONObj">
-        <short />
+        <short>A JSON <var>Object</var> with the properties.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrentsProperties.Load.aStream">
-        <short />
+        <short>A <var>Tstream</var> with the properties.</short>
       </element>
     </module>
     <!-- qBTorrentsProperties -->
