@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<fpdoc-descriptions>
+  <package name="lazqBitTorrentWebUI">
+    <!--
+         ====================================================================
+         qBUtils
+         ====================================================================
+    -->
+    <module name="qBUtils">
+      <!-- function Visibility: default -->
+      <element name="FormatBytes">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- function result Visibility: default -->
+      <element name="FormatBytes.Result">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="FormatBytes.aSize">
+        <short />
+      </element>
+      <!-- function Visibility: default -->
+      <element name="FormatBytesPerSecond">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- function result Visibility: default -->
+      <element name="FormatBytesPerSecond.Result">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="FormatBytesPerSecond.aSize">
+        <short />
+      </element>
+      <!-- function Visibility: default -->
+      <element name="FormatTorrentState">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- function result Visibility: default -->
+      <element name="FormatTorrentState.Result">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="FormatTorrentState.aState">
+        <short />
+      </element>
+      <!-- function Visibility: default -->
+      <element name="FormatTrackerStatus">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- function result Visibility: default -->
+      <element name="FormatTrackerStatus.Result">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="FormatTrackerStatus.aStatus">
+        <short />
+      </element>
+    </module>
+    <!-- qBUtils -->
+  </package>
+</fpdoc-descriptions>

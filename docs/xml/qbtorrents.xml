@@ -11,34 +11,6 @@
       <descr>
         <p>This unit contains a set of objects to suport the torrents data aquired from the API.</p>
       </descr>
-      <!-- unresolved type reference Visibility: default -->
-      <element name="System">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
-      </element>
-      <!-- unresolved type reference Visibility: default -->
-      <element name="Classes">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
-      </element>
-      <!-- unresolved type reference Visibility: default -->
-      <element name="Contnrs">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
-      </element>
-      <!-- unresolved type reference Visibility: default -->
-      <element name="SysUtils">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
-      </element>
       <!-- enumeration type Visibility: default -->
       <element name="TqBTorrentState">
         <short>Torrent States.</short>
@@ -220,6 +192,81 @@
         <descr />
         <seealso />
       </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrent.SavePath">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrent.AddedOn">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrent.CompletionOn">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrent.Properties">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrent.Trackers">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- constructor Visibility: public -->
+      <element name="TqBTorrent.Create">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrent.Create.aJSON">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrent.Create.aJSONObj">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrent.Create.aStream">
+        <short />
+      </element>
+      <!-- destructor Visibility: public -->
+      <element name="TqBTorrent.Destroy">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- procedure Visibility: public -->
+      <element name="TqBTorrent.Load">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrent.Load.aJSON">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrent.Load.aJSONObj">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrent.Load.aStream">
+        <short />
+      </element>
       <!-- object Visibility: default -->
       <element name="TqBTorrents">
         <short>
@@ -247,12 +294,145 @@
         <descr />
         <seealso />
       </element>
+      <!-- function Visibility: public -->
+      <element name="TqBTorrents.HasTorrentHASH">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- function result Visibility: public -->
+      <element name="TqBTorrents.HasTorrentHASH.Result">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrents.HasTorrentHASH.aHASH">
+        <short />
+      </element>
+      <!-- procedure Visibility: public -->
+      <element name="TqBTorrents.LoadTorrents">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrents.LoadTorrents.aJSON">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrents.LoadTorrents.aJSONArray">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrents.LoadTorrents.aStream">
+        <short />
+      </element>
+      <!-- procedure Visibility: public -->
+      <element name="TqBTorrents.UpdateTorrents">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrents.UpdateTorrents.aJSON">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrents.UpdateTorrents.aJSONArray">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrents.UpdateTorrents.aStream">
+        <short />
+      </element>
+      <!-- procedure Visibility: public -->
+      <element name="TqBTorrents.UpdateTorrent">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrents.UpdateTorrent.aHash">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrents.UpdateTorrent.aJSON">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrents.UpdateTorrent.aJSONObj">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrents.UpdateTorrent.aStream">
+        <short />
+      </element>
+      <!-- procedure Visibility: public -->
+      <element name="TqBTorrents.DeleteTorrent">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrents.DeleteTorrent.aHash">
+        <short />
+      </element>
+      <!-- procedure Visibility: public -->
+      <element name="TqBTorrents.UpdateTorrentProperties">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrents.UpdateTorrentProperties.aHash">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrents.UpdateTorrentProperties.aJSON">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrents.UpdateTorrentProperties.aJSONObj">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrents.UpdateTorrentProperties.aStream">
+        <short />
+      </element>
+      <!-- procedure Visibility: public -->
+      <element name="TqBTorrents.UpdateTorrentTrackers">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrents.UpdateTorrentTrackers.aHash">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrents.UpdateTorrentTrackers.aJSON">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrents.UpdateTorrentTrackers.aJSONArray">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrents.UpdateTorrentTrackers.aStream">
+        <short />
+      </element>
       <!-- argument Visibility: public -->
       <element name="TqBTorrents.Hashes.Hash">
         <short>Hash of the <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrent">TqBTorrent</link>.</short>
       </element>
       <!-- function Visibility: default -->
-      <element name="StrToqBState">
+      <element name="StrToqBTorrentState">
         <short>
           Translates from
           <var>String</var>
@@ -264,24 +444,24 @@
         <errors />
         <seealso />
       </element>
-      <!-- function result Visibility: default -->
-      <element name="StrToqBState.Result">
-        <short>
-          The translated
-          <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link>
-          .
-        </short>
-      </element>
       <!-- argument Visibility: default -->
-      <element name="StrToqBState.aState">
+      <element name="StrToqBTorrentState.aState">
         <short>
           The
           <var>String</var>
           to be translated.
+        </short>
+      </element>
+      <!-- function result Visibility: default -->
+      <element name="StrToqBTorrentState.Result">
+        <short>
+          The translated
+          <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link>
+          .
         </short>
       </element>
       <!-- function Visibility: default -->
-      <element name="qBStateToStr">
+      <element name="qBTorrentStateToStr">
         <short>
           Translates from
           <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link>
@@ -293,20 +473,20 @@
         <errors />
         <seealso />
       </element>
-      <!-- function result Visibility: default -->
-      <element name="qBStateToStr.Result">
-        <short>
-          The translated
-          <var>String</var>
-          .
-        </short>
-      </element>
       <!-- argument Visibility: default -->
-      <element name="qBStateToStr.aState">
+      <element name="qBTorrentStateToStr.aState">
         <short>
           The
           <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrentState">TqBTorrentState</link>
           to be translated.
+        </short>
+      </element>
+      <!-- function result Visibility: default -->
+      <element name="qBTorrentStateToStr.Result">
+        <short>
+          The translated
+          <var>String</var>
+          .
         </short>
       </element>
     </module>

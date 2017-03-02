@@ -11,13 +11,232 @@
       <descr>
         <p>This unit contains a set of objects that contain the torrent's trackers.</p>
       </descr>
+
+      <!-- enumeration type Visibility: default -->
+      <element name="TqBTrackerStatus">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- enumeration value Visibility: default -->
+      <element name="TqBTrackerStatus.qtrsWorking">
+        <short />
+      </element>
+      <!-- enumeration value Visibility: default -->
+      <element name="TqBTrackerStatus.qtrsUpdating">
+        <short />
+      </element>
+      <!-- enumeration value Visibility: default -->
+      <element name="TqBTrackerStatus.qtrsNotWorking">
+        <short />
+      </element>
+      <!-- enumeration value Visibility: default -->
+      <element name="TqBTrackerStatus.qtrsNotContactedYet">
+        <short />
+      </element>
+      <!-- enumeration value Visibility: default -->
+      <element name="TqBTrackerStatus.qtrsUnknown">
+        <short />
+      </element>
+
+      <!-- class Visibility: default -->
+      <element name="TqBTorrentsTracker">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsTracker.Url">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsTracker.Status">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsTracker.NumPeers">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsTracker.Msg">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- constructor Visibility: public -->
+      <element name="TqBTorrentsTracker.Create">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsTracker.Create.aJSON">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsTracker.Create.aJSONObj">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsTracker.Create.aStream">
+        <short />
+      </element>
+      <!-- destructor Visibility: public -->
+      <element name="TqBTorrentsTracker.Destroy">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- procedure Visibility: public -->
+      <element name="TqBTorrentsTracker.Load">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsTracker.Load.aJSON">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsTracker.Load.aJSONObj">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsTracker.Load.aStream">
+        <short />
+      </element>
+
       <!-- object Visibility: default -->
-      <element name="TqBTorrentTrackers">
+      <element name="TqBTorrentsTrackers">
         <short>Container class for the torrent's trackers.</short>
         <descr />
         <errors />
         <seealso />
       </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsTrackers.Items">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- argument Visibility: public -->
+      <element name="TqBTorrentsTrackers.Items.Index">
+        <short />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsTrackers.Urls">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- argument Visibility: public -->
+      <element name="TqBTorrentsTrackers.Urls.Url">
+        <short />
+      </element>
+      <!-- procedure Visibility: public -->
+      <element name="TqBTorrentsTrackers.LoadTrackers">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsTrackers.LoadTrackers.aJSON">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsTrackers.LoadTrackers.aJSONArray">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsTrackers.LoadTrackers.aStream">
+        <short />
+      </element>
+      <!-- procedure Visibility: public -->
+      <element name="TqBTorrentsTrackers.UpdateTrackers">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsTrackers.UpdateTrackers.aJSON">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsTrackers.UpdateTrackers.aJSONArray">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsTrackers.UpdateTrackers.aStream">
+        <short />
+      </element>
+      <!-- procedure Visibility: public -->
+      <element name="TqBTorrentsTrackers.UpdateTracker">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsTrackers.UpdateTracker.aUrl">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsTrackers.UpdateTracker.aJSON">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsTrackers.UpdateTracker.aJSONObj">
+        <short />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsTrackers.UpdateTracker.aStream">
+        <short />
+      </element>
+
+      <!-- function Visibility: default -->
+      <element name="StrToqBTrackerStatus">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="StrToqBTrackerStatus.aStatus">
+        <short />
+      </element>
+      <!-- function result Visibility: default -->
+      <element name="StrToqBTrackerStatus.Result">
+        <short />
+      </element>
+
+      <!-- function Visibility: default -->
+      <element name="qBTrackerStatusToStr">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="qBTrackerStatusToStr.aStatus">
+        <short />
+      </element>
+      <!-- function result Visibility: default -->
+      <element name="qBTrackerStatusToStr.Result">
+        <short />
+      </element>
+
     </module>
   </package>
 </fpdoc-descriptions>

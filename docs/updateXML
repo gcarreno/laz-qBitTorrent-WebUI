@@ -1,0 +1,40 @@
+#!/bin/bash
+
+MAKESKEL=~/FreePascal/fpc/bin/x86_64-linux/makeskel
+FLAGS="--disable-private --disable-protected --update"
+
+PACKAGE=lazqBitTorrentWebUI
+
+XML=~/Programming/laz-qBitTorrent-WebUI/docs/xml
+SRC=~/Programming/laz-qBitTorrent-WebUI/src
+OUT=~/Programming
+
+$MAKESKEL $FLAGS --package=$PACKAGE \
+                 --descr=$XML/qbittorrentwebui.xml \
+                 --input=$SRC/qBitTorrentWebUI.pas \
+                 --output=$OUT/qbittorrentwebui.xml
+
+$MAKESKEL $FLAGS --package=$PACKAGE \
+                 --descr=$XML/qbutils.xml \
+                 --input=$SRC/qBUtils.pas \
+                 --output=$OUT/qbutils.xml
+
+$MAKESKEL $FLAGS --package=$PACKAGE \
+                 --descr=$XML/qbtorrents.xml \
+                 --input=$SRC/qBTorrents.pas \
+                 --output=$OUT/qbtorrents.xml
+
+$MAKESKEL $FLAGS --package=$PACKAGE \
+                 --descr=$XML/qbtorrentsfilters.xml \
+                 --input=$SRC/qBTorrentsFilters.pas \
+                 --output=$OUT/qbtorrentsfilters.xml
+
+$MAKESKEL $FLAGS --package=$PACKAGE \
+                 --descr=$XML/qbtorrentsproperties.xml \
+                 --input=$SRC/qBTorrentsProperties.pas \
+                 --output=$OUT/qbtorrentsproperties.xml
+
+$MAKESKEL $FLAGS --package=$PACKAGE \
+                 --descr=$XML/qbtorrentstrackers.xml \
+                 --input=$SRC/qBTorrentsTrackers.pas \
+                 --output=$OUT/qbtorrentstrackers.xml

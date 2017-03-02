@@ -38,6 +38,20 @@
         <descr/>
         <seealso/>
       </element>
+      <!-- constructor Visibility: public -->
+      <element name="TqBTorrentsFilter.Create">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- destructor Visibility: public -->
+      <element name="TqBTorrentsFilter.Destroy">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
       <!-- function Visibility: public -->
       <element name="TqBTorrentsFilter.Clear">
         <short>Clears the filters.</short>

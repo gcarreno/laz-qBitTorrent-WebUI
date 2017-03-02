@@ -11,34 +11,6 @@
       <descr>
         <p>In this unit you can find an implementation of component to access the WebUI of qBitTorrent.</p>
       </descr>
-      <!-- unresolved type reference Visibility: default -->
-      <element name="Classes">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
-      </element>
-      <!-- unresolved type reference Visibility: default -->
-      <element name="SysUtils">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
-      </element>
-      <!-- unresolved type reference Visibility: default -->
-      <element name="HTTPSend">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
-      </element>
-      <!-- unresolved type reference Visibility: default -->
-      <element name="qBTorrents">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
-      </element>
       <!-- object Visibility: default -->
       <element name="TqBitTorrentWebUI">
         <short>Implements an interface to access the WebUI of qBitTorrent.</short>
@@ -157,6 +129,31 @@
         <errors />
         <seealso />
       </element>
+      <!-- constructor Visibility: public -->
+      <element name="TqBitTorrentWebUI.Create">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBitTorrentWebUI.Create.AOwner">
+        <short />
+      </element>
+      <!-- destructor Visibility: public -->
+      <element name="TqBitTorrentWebUI.Destroy">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- procedure Visibility: public -->
+      <element name="TqBitTorrentWebUI.Clear">
+        <short>Clears all contained torrents and resets API values to the default.</short>
+        <descr />
+        <errors />
+        <seealso />
+      </element>
       <!-- function Visibility: public -->
       <element name="TqBitTorrentWebUI.ExecShutdown">
         <short>Executes the command to shutdown(close) the qBitTorrent client.</short>
@@ -212,6 +209,24 @@
       <!-- function result Visibility: default -->
       <element name="TqBitTorrentWebUI.GetTorrentProperties.Result">
         <short>True if query of torrent's properties succeded.</short>
+      </element>
+      <!-- function Visibility: public -->
+      <element name="TqBitTorrentWebUI.GetTorrentTrackers">
+        <short>Queries the API for torrent's trackers</short>
+        <descr />
+        <errors>Will throw an execption if not successfull.</errors>
+        <!--  Needs Example
+        <example file="examples/gettorrenttrackers_example.pas" />
+        -->
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBitTorrentWebUI.GetTorrentTrackers.aHash">
+        <short>The hash of the torrent we want the trackers from.</short>
+      </element>
+      <!-- function result Visibility: public -->
+      <element name="TqBitTorrentWebUI.GetTorrentTrackers.Result">
+        <short>True if query of torrent's trackers succeded.</short>
       </element>
     </module>
   </package>

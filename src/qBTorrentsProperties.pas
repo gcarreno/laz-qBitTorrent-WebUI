@@ -32,8 +32,8 @@ uses
 
 type
 
-{ TqBTorrentProperties }
-  TqBTorrentProperties = class(TObject)
+{ TqBTorrentsProperties }
+  TqBTorrentsProperties = class(TObject)
   private
     FSavePath: String;
     FCreationDate: TDateTime;
@@ -180,9 +180,9 @@ type
 
 implementation
 
-{ TqBTorrentProperties }
+{ TqBTorrentsProperties }
 
-constructor TqBTorrentProperties.Create;
+constructor TqBTorrentsProperties.Create;
 begin
   FSavePath := '';
   FCreationDate := 0.0;
@@ -219,12 +219,12 @@ begin
   FTotalSize := -1;
 end;
 
-destructor TqBTorrentProperties.Destroy;
+destructor TqBTorrentsProperties.Destroy;
 begin
   inherited Destroy;
 end;
 
-procedure TqBTorrentProperties.LoadFromJSON(const aJSON: String);
+procedure TqBTorrentsProperties.LoadFromJSON(const aJSON: String);
 var
   jParser: TJSONParser;
   jData: TJSONData;
@@ -245,7 +245,7 @@ begin
   end;
 end;
 
-procedure TqBTorrentProperties.LoadFromJSONObj(const aJSONObj: TJSONObject);
+procedure TqBTorrentsProperties.LoadFromJSONObj(const aJSONObj: TJSONObject);
 var
   iUnixTime: Integer;
   dtTime: TDateTime;
@@ -312,7 +312,7 @@ begin
   FTotalSize := aJSONObj.Get('total_size', FTotalSize);
 end;
 
-procedure TqBTorrentProperties.LoadFromStream(const aStream: TStream);
+procedure TqBTorrentsProperties.LoadFromStream(const aStream: TStream);
 var
   jParser: TJSONParser;
   jData: TJSONData;

@@ -19,6 +19,251 @@
       <errors />
       <sealso />
     </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.SavePath">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.CreationDate">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.PieceSize">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.Comment">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.TotalWasted">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.TotalUploaded">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.TotalUploadedSession">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.TotalDownloaded">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.TotalDownloadedSession">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.UpLimit">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.DlLimit">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.TimeElapsed">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.SeedingTime">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.NbConnections">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.NbConnectionsLimit">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.ShareRatio">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.AdditionDate">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.CompletionDate">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.CreatedBy">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.DlSpeed">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.DlSpeedAvg">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.UpSpeed">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.UpSpeedAvg">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.Eta">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.LastSeen">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.Peers">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.PeersTotal">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.PiecesHave">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.PiecesNum">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.Reannounce">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.Seeds">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.SeedsTotal">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsProperties.TotalSize">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- constructor Visibility: public -->
+      <element name="TqBTorrentsProperties.Create">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- destructor Visibility: public -->
+      <element name="TqBTorrentsProperties.Destroy">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- procedure Visibility: public -->
+      <element name="TqBTorrentsProperties.LoadFromJSON">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsProperties.LoadFromJSON.aJSON">
+        <short />
+      </element>
+      <!-- procedure Visibility: public -->
+      <element name="TqBTorrentsProperties.LoadFromJSONObj">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsProperties.LoadFromJSONObj.aJSONObj">
+        <short />
+      </element>
+      <!-- procedure Visibility: public -->
+      <element name="TqBTorrentsProperties.LoadFromStream">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsProperties.LoadFromStream.aStream">
+        <short />
+      </element>
     </module>
     <!-- qBTorrentsProperties -->
   </package>

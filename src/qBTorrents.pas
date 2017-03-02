@@ -75,7 +75,7 @@ type
     FAddedOn: TDateTime;
     FCompletionOn: TDateTime;
 
-    FProperties: TqBTorrentProperties;
+    FProperties: TqBTorrentsProperties;
     FTrackers: TqBTorrentsTrackers;
 
     procedure DoLoadFromJSON(const aJSON: String);
@@ -161,7 +161,7 @@ type
       read FCompletionOn
       write FCompletionOn;
 
-    property Properties: TqBTorrentProperties
+    property Properties: TqBTorrentsProperties
       read FProperties;
     property Trackers: TqBTorrentsTrackers
       read FTrackers;
@@ -441,7 +441,7 @@ begin
   FAddedOn := 0.0;
   FCompletionOn := 0.0;
 
-  FProperties := TqBTorrentProperties.Create;
+  FProperties := TqBTorrentsProperties.Create;
   FTrackers := TqBTorrentsTrackers.Create(True);
 end;
 
