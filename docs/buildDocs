@@ -3,14 +3,14 @@
     --package=lazqBitTorrentWebUI \
     --output=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/docs/html \
     --format=html \
-    --descr=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/docs/xml/qbutils.xml \
     --descr=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/docs/xml/qbittorrentwebui.xml \
+    --descr=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/docs/xml/qbutils.xml \
     --descr=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/docs/xml/qbtorrents.xml \
     --descr=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/docs/xml/qbtorrentsfilters.xml \
     --descr=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/docs/xml/qbtorrentsproperties.xml \
     --descr=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/docs/xml/qbtorrentstrackers.xml \
-    --input=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/src/qBUtils.pas \
     --input=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/src/qBitTorrentWebUI.pas \
+    --input=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/src/qBUtils.pas \
     --input=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/src/qBTorrents.pas \
     --input=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/src/qBTorrentsFilters.pas \
     --input=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/src/qBTorrentsProperties.pas \
