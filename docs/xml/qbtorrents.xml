@@ -224,26 +224,30 @@
       </element>
       <!-- constructor Visibility: public -->
       <element name="TqBTorrent.Create">
-        <short/>
+        <short>Creates the torrent object.</short>
         <descr/>
         <errors/>
         <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrent.Create.aJSON">
-        <short/>
+        <short>A JSON <var>String</var> contaning a JSON <var>Object</var> with a torrent.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrent.Create.aJSONData">
+        <short>A JSON <var>Data</var> contaning a torrent.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrent.Create.aJSONObj">
-        <short/>
+        <short>A JSON <var>Object</var> contaning a torrent.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrent.Create.aStream">
-        <short/>
+        <short>A <var>TStream</var> contaning a JSON <var>Object</var> with a torrent.</short>
       </element>
       <!-- destructor Visibility: public -->
       <element name="TqBTorrent.Destroy">
-        <short/>
+        <short>Destroys the torrent object.</short>
         <descr/>
         <errors/>
         <seealso/>
@@ -258,6 +262,10 @@
       <!-- argument Visibility: default -->
       <element name="TqBTorrent.Load.aJSON">
         <short>A JSON <var>String</var> contaning a JSON <var>Object</var> with a torrent.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrent.Load.aJSONData">
+        <short>A JSON <var>Data</var> contaning a torrent.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrent.Load.aJSONObj">

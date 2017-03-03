@@ -79,18 +79,21 @@ type
     FTrackers: TqBTorrentsTrackers;
 
     procedure DoLoadFromJSON(const aJSON: String);
+    procedure DoLoadFromJSONData(const aJSONData: TJSONData);
     procedure DoLoadFromJSONObj(const aJSONObj: TJSONObject);
     procedure DoLoadFromStream(const aStream: TStream);
   protected
   public
     constructor Create;
     constructor Create(const aJSON: String);
+    constructor Create(const aJSONData: TJSONData);
     constructor Create(const aJSONObj: TJSONObject);
     constructor Create(const aStream: TStream);
 
     destructor Destroy; override;
 
     procedure Load(const aJSON: String);
+    procedure Load(const aJSONData: TJSONData);
     procedure Load(const aJSONObj: TJSONObject);
     procedure Load(const aStream: TStream);
 
@@ -171,8 +174,10 @@ type
   TqBTorrents = class(TFPObjectList)
   private
     function GetByIndex(Index: Integer): TqBTorrent;
+    procedure SetByIndex(Index: Integer; const Value: TqBTorrent);
 
     function GetByHash(const Hash:String): TqBTorrent;
+    procedure SetByHash(Hash: String; const Value: TqBTorrent);
   protected
   public
     function HasTorrentHASH(const aHASH: String):Boolean;
@@ -204,9 +209,11 @@ type
 
 
     property Items[Index: Integer]: TqBTorrent
-      read GetByIndex; default;
+      read GetByIndex
+      write SetByIndex; default;
     property Hashes[Hash: String]: TqBTorrent
-      read GetByHash;
+      read GetByHash
+      write SetByHash;
   end;
 
 // Helper functions
@@ -344,6 +351,19 @@ begin
   DoLoadFromJSON(aJSON);
 end;
 
+procedure TqBTorrent.DoLoadFromJSONData(const aJSONData: TJSONData);
+begin
+  if aJSONData.JSONType = jtObject then
+  begin
+    DoLoadFromJSONObj(aJSONData as TJSONObject);
+  end;
+end;
+
+procedure TqBTorrent.Load(const aJSONData: TJSONData);
+begin
+  DoLoadFromJSONData(aJSONData);
+end;
+
 procedure TqBTorrent.DoLoadFromJSONObj(const aJSONObj: TJSONObject);
 var
   iUnixTime: Integer;
@@ -447,19 +467,25 @@ end;
 
 constructor TqBTorrent.Create(const aJSON: String);
 begin
-  Self.Create;
+  Create;
   DoLoadFromJSON(aJSON);
+end;
+
+constructor TqBTorrent.Create(const aJSONData: TJSONData);
+begin
+  Create;
+  DoLoadFromJSONData(aJSONData);
 end;
 
 constructor TqBTorrent.Create(const aJSONObj: TJSONObject);
 begin
-  Self.Create;
+  Create;
   DoLoadFromJSONObj(aJSONObj);
 end;
 
 constructor TqBTorrent.Create(const aStream: TStream);
 begin
-  Self.Create;
+  Create;
   DoLoadFromStream(aStream);
 end;
 
@@ -477,6 +503,11 @@ begin
   Result := inherited Items[Index] as TqBTorrent;
 end;
 
+procedure TqBTorrents.SetByIndex(Index: Integer; const Value: TqBTorrent);
+begin
+  inherited Items[Index] := Value;
+end;
+
 function TqBTorrents.GetByHash(const Hash: String): TqBTorrent;
 var
   index: Integer;
@@ -488,7 +519,24 @@ begin
   begin
     if Items[index].Hash = Hash then
     begin
-      Result := Items[index];
+      Result := inherited Items[index] as TqBTorrent;
+      break;
+    end;
+  end;
+end;
+
+procedure TqBTorrents.SetByHash(Hash: String; const Value: TqBTorrent);
+var
+  index: Integer;
+begin
+  //Result := nil;
+  if Length(Hash) <> 40 then
+    exit;
+  for index := 0 to Count - 1 do
+  begin
+    if Items[index].Hash = Hash then
+    begin
+      inherited Items[index] := Value;
       break;
     end;
   end;
