@@ -129,6 +129,7 @@
         <errors />
         <seealso />
       </element>
+
       <!-- constructor Visibility: public -->
       <element name="TqBitTorrentWebUI.Create">
         <short />
@@ -147,6 +148,7 @@
         <errors />
         <seealso />
       </element>
+
       <!-- procedure Visibility: public -->
       <element name="TqBitTorrentWebUI.Clear">
         <short>Clears all contained torrents and resets API values to the default.</short>
@@ -212,7 +214,7 @@
       </element>
       <!-- function Visibility: public -->
       <element name="TqBitTorrentWebUI.GetTorrentTrackers">
-        <short>Queries the API for torrent's trackers</short>
+        <short>Queries the API for torrent's trackers.</short>
         <descr />
         <errors>Will throw an execption if not successfull.</errors>
         <example file="examples/gettorrenttrackers_example.pas" />
@@ -226,6 +228,23 @@
       <element name="TqBitTorrentWebUI.GetTorrentTrackers.Result">
         <short>True if query of torrent's trackers succeded.</short>
       </element>
+      <!-- function Visibility: public -->
+      <element name="TqBitTorrentWebUI.GetTorrentWebSeeds">
+        <short>Queries the API for torrent's web seeds.</short>
+        <descr />
+        <errors>Will throw an execption if not successfull.</errors>
+        <example file="examples/gettorrentwebseeds_example.pas" />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBitTorrentWebUI.GetTorrentWebSeeds.aHash">
+        <short>The hash of the torrent we want the web seeds from.</short>
+      </element>
+      <!-- function result Visibility: public -->
+      <element name="TqBitTorrentWebUI.GetTorrentWebSeeds.Result">
+        <short>True if query of torrent's web seeds succeded.</short>
+      </element>
+
     </module>
   </package>
 </fpdoc-descriptions>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<fpdoc-descriptions>
+  <package name="lazqBitTorrentWebUI">
+    <!--
+         ====================================================================
+         qBTorrentsWebSeeds
+         ====================================================================
+    -->
+    <module name="qBTorrentsWebSeeds">
+      <short>Unit containing a container for torrent's web seeds.</short>
+      <descr>
+        <p>This unit contains an object that contain the torrent's web seeds.</p>
+      </descr>
+
+      <!-- class Visibility: default -->
+      <element name="TqBTorrentsWebSeeds">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsWebSeeds.Items">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+      <!-- argument Visibility: public -->
+      <element name="TqBTorrentsWebSeeds.Items.Index">
+        <short />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsWebSeeds.Count">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+
+      <!-- constructor Visibility: public -->
+      <element name="TqBTorrentsWebSeeds.Create">
+        <short>Creates the web seeds container object.</short>
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsWebSeeds.Create.aJSON">
+        <short>A JSON <var>String</var> contaning a JSON <var>Array</var> with a torrent's web seeds.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsWebSeeds.Create.aJSONData">
+        <short>A JSON <var>Data</var> contaning a JSON <var>Array</var> with a torrent's web seeds.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsWebSeeds.Create.aJSONArray">
+        <short>A JSON <var>Array</var> with a torrent's web seeds.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsWebSeeds.Create.aStream">
+        <short>A <var>TStream</var> contaning a JSON <var>Array</var> with a torrent's web seeds.</short>
+      </element>
+      <!-- destructor Visibility: public -->
+      <element name="TqBTorrentsWebSeeds.Destroy">
+        <short>Destroys the object.</short>
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+
+      <!-- procedure Visibility: public -->
+      <element name="TqBTorrentsWebSeeds.Clear">
+        <short>Clears the contents of the object.</short>
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- procedure Visibility: public -->
+      <element name="TqBTorrentsWebSeeds.Load">
+        <short>Loads the contents of a torrent's web seeds.</short>
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsWebSeeds.Load.aJSON">
+        <short>A JSON <var>String</var> contaning a JSON <var>Array</var> with a torrent's web seeds.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsWebSeeds.Load.aJSONData">
+        <short>A JSON <var>Data</var> contaning a JSON <var>Array</var> with a torrent's web seeds.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsWebSeeds.Load.aJSONArray">
+        <short>A JSON <var>Array</var> with a torrent's web seeds.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsWebSeeds.Load.aStream">
+        <short>A <var>TStream</var> contaning a JSON <var>Array</var> with a torrent's web seeds.</short>
+      </element>
+
+    </module>
+  </package>
+</fpdoc-descriptions>

@@ -29,7 +29,8 @@ interface
 
 uses
   Classes, Contnrs, SysUtils, DateUtils, fpjson, jsonparser, jsonscanner,
-  qBTorrentsFilters, qBTorrentsProperties, qBTorrentsTrackers;
+  qBTorrentsFilters, qBTorrentsProperties, qBTorrentsTrackers,
+  qBTorrentsWebSeeds;
 
 type
 { TqBTorrentStates }
@@ -77,6 +78,7 @@ type
 
     FProperties: TqBTorrentsProperties;
     FTrackers: TqBTorrentsTrackers;
+    FWebSeeds: TqBTorrentsWebSeeds;
 
     procedure DoLoadFromJSON(const aJSON: String);
     procedure DoLoadFromJSONData(const aJSONData: TJSONData);
@@ -168,6 +170,8 @@ type
       read FProperties;
     property Trackers: TqBTorrentsTrackers
       read FTrackers;
+    property WebSeeds: TqBTorrentsWebSeeds
+      read FWebSeeds;
   end;
 
 { TqBTorrents }
@@ -212,6 +216,8 @@ type
     procedure UpdateTorrentTrackers(const aHash: String; const aJSONArray: TJSONArray);
     procedure UpdateTorrentTrackers(const aHash: String; const aStream: TStream);
 
+    // Torrent Web Seeds
+    // TODO: Evaluate the need for Updates
 
     property Items[Index: Integer]: TqBTorrent
       read GetByIndex
@@ -468,6 +474,7 @@ begin
 
   FProperties := TqBTorrentsProperties.Create;
   FTrackers := TqBTorrentsTrackers.Create(True);
+  FWebSeeds := TqBTorrentsWebSeeds.Create;
 end;
 
 constructor TqBTorrent.Create(const aJSON: String);
@@ -496,6 +503,7 @@ end;
 
 destructor TqBTorrent.Destroy;
 begin
+  FWebSeeds.Free;
   FTrackers.Free;
   FProperties.Free;
   inherited Destroy;

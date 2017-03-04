@@ -16,7 +16,7 @@
 <h1>TqBitTorrentWebUI.GetTorrentsFiltered</h1>
 <p>Queries the API for torrents applying a filter.</p>
 <h2>Declaration</h2>
-<p>Source position: qBitTorrentWebUI.pas line 81</p>
+<p>Source position: qBitTorrentWebUI.pas line 82</p>
 <table cellpadding="0" cellspacing="0">
 <tr>
 <td><p><tt><span class="code"> <span class="kw">public</span> <span class="kw">function</span> <a href="../qbittorrentwebui/tqbittorrentwebui.html">TqBitTorrentWebUI</a><span class="sym">.</span>GetTorrentsFiltered<span class="sym">(</span></span></tt></p></td>
@@ -73,7 +73,6 @@ prodecure TForm1<span class="sym">.</span>GetTorrentsFilteredExecute<span class=
           <span class="sym">.</span>withFilter<span class="sym">(</span><span class="str">'all'</span><span class="sym">)</span>
           <span class="sym">.</span>withSort<span class="sym">(</span><span class="str">'priority'</span><span class="sym">)</span>
           <span class="sym">.</span>withLimit<span class="sym">(</span><span class="num">10</span><span class="sym">)</span><span class="sym">;</span>
-        oFilter<span class="sym">.</span>Free<span class="sym">;</span>
         <span class="kw">if</span> Fqb<span class="sym">.</span>GetTorrentsFiltered<span class="sym">(</span>oFilter<span class="sym">)</span> <span class="kw">then</span>
         <span class="kw">begin</span>
           <span class="cmt">// Do something after a successfull torrents retrieval</span>

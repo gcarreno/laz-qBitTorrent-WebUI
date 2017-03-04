@@ -30,7 +30,6 @@ begin
           .withFilter('all')
           .withSort('priority')
           .withLimit(10);
-        oFilter.Free;
         if Fqb.GetTorrentsFiltered(oFilter) then
         begin
           if Fqb.Items.Count > 0 then

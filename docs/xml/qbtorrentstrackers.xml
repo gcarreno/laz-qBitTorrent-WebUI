@@ -95,7 +95,7 @@
       </element>
       <!-- destructor Visibility: public -->
       <element name="TqBTorrentsTracker.Destroy">
-        <short/>
+        <short>Destroys the object.</short>
         <descr/>
         <errors/>
         <seealso/>

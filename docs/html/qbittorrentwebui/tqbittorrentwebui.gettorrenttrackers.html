@@ -14,9 +14,9 @@
 </tr>
 </table>
 <h1>TqBitTorrentWebUI.GetTorrentTrackers</h1>
-<p>Queries the API for torrent's trackers</p>
+<p>Queries the API for torrent's trackers.</p>
 <h2>Declaration</h2>
-<p>Source position: qBitTorrentWebUI.pas line 83</p>
+<p>Source position: qBitTorrentWebUI.pas line 84</p>
 <table cellpadding="0" cellspacing="0">
 <tr>
 <td><p><tt><span class="code"> <span class="kw">public</span> <span class="kw">function</span> <a href="../qbittorrentwebui/tqbittorrentwebui.html">TqBitTorrentWebUI</a><span class="sym">.</span>GetTorrentTrackers<span class="sym">(</span></span></tt></p></td>
@@ -73,7 +73,6 @@ prodecure TForm1<span class="sym">.</span>GetTorrentTrackersExecute<span class="
           <span class="sym">.</span>withFilter<span class="sym">(</span><span class="str">'all'</span><span class="sym">)</span>
           <span class="sym">.</span>withSort<span class="sym">(</span><span class="str">'priority'</span><span class="sym">)</span>
           <span class="sym">.</span>withLimit<span class="sym">(</span><span class="num">10</span><span class="sym">)</span><span class="sym">;</span>
-        oFilter<span class="sym">.</span>Free<span class="sym">;</span>
         <span class="kw">if</span> Fqb<span class="sym">.</span>GetTorrentsFiltered<span class="sym">(</span>oFilter<span class="sym">)</span> <span class="kw">then</span>
         <span class="kw">begin</span>
           <span class="kw">if</span> Fqb<span class="sym">.</span>Items<span class="sym">.</span>Count <span class="sym">&gt;</span> <span class="num">0</span> <span class="kw">then</span>

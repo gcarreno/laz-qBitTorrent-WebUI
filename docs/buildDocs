@@ -9,9 +9,11 @@
     --descr=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/docs/xml/qbtorrentsfilters.xml \
     --descr=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/docs/xml/qbtorrentsproperties.xml \
     --descr=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/docs/xml/qbtorrentstrackers.xml \
+    --descr=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/docs/xml/qbtorrentswebseeds.xml \
     --input=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/src/qBitTorrentWebUI.pas \
     --input=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/src/qBUtils.pas \
     --input=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/src/qBTorrents.pas \
     --input=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/src/qBTorrentsFilters.pas \
     --input=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/src/qBTorrentsProperties.pas \
-    --input=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/src/qBTorrentsTrackers.pas
+    --input=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/src/qBTorrentsTrackers.pas \
+    --input=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/src/qBTorrentsWebSeeds.pas

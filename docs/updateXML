@@ -38,3 +38,8 @@ $MAKESKEL $FLAGS --package=$PACKAGE \
                  --descr=$XML/qbtorrentstrackers.xml \
                  --input=$SRC/qBTorrentsTrackers.pas \
                  --output=$OUT/qbtorrentstrackers.xml
+
+$MAKESKEL $FLAGS --package=$PACKAGE \
+                 --descr=$XML/qbtorrentswebseeds.xml \
+                 --input=$SRC/qBTorrentsWebSeeds.pas \
+                 --output=$OUT/qbtorrentswebseeds.xml
