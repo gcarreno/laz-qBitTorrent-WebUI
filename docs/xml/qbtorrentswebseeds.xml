@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <fpdoc-descriptions>
   <package name="lazqBitTorrentWebUI">
     <!--
@@ -14,34 +14,34 @@
 
       <!-- class Visibility: default -->
       <element name="TqBTorrentsWebSeeds">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short>Container class for torrent's web seeds.</short>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsWebSeeds.Items">
-        <short />
-        <descr />
-        <seealso />
+        <short>Property to acces the list of web seeds by index.</short>
+        <descr/>
+        <seealso/>
       </element>
       <!-- argument Visibility: public -->
       <element name="TqBTorrentsWebSeeds.Items.Index">
-        <short />
+        <short/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsWebSeeds.Count">
-        <short />
-        <descr />
-        <seealso />
+        <short>Returns the amount of items in the list.</short>
+        <descr/>
+        <seealso/>
       </element>
 
       <!-- constructor Visibility: public -->
       <element name="TqBTorrentsWebSeeds.Create">
         <short>Creates the web seeds container object.</short>
-        <descr />
-        <errors />
-        <seealso />
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrentsWebSeeds.Create.aJSON">
@@ -62,24 +62,24 @@
       <!-- destructor Visibility: public -->
       <element name="TqBTorrentsWebSeeds.Destroy">
         <short>Destroys the object.</short>
-        <descr />
-        <errors />
-        <seealso />
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
 
       <!-- procedure Visibility: public -->
       <element name="TqBTorrentsWebSeeds.Clear">
         <short>Clears the contents of the object.</short>
-        <descr />
-        <errors />
-        <seealso />
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- procedure Visibility: public -->
       <element name="TqBTorrentsWebSeeds.Load">
         <short>Loads the contents of a torrent's web seeds.</short>
-        <descr />
-        <errors />
-        <seealso />
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrentsWebSeeds.Load.aJSON">

@@ -277,11 +277,7 @@
       </element>
       <!-- object Visibility: default -->
       <element name="TqBTorrents">
-        <short>
-          Container class for a list of
-          <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrent">TqBTorrent</link>
-          .
-        </short>
+        <short>Container class for a list of <link id="#lazqBitTorrentWebUI.qBTorrents.TqBTorrent">TqBTorrent</link>.</short>
         <descr/>
         <errors/>
         <seealso/>
