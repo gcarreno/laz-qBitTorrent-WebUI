@@ -50,18 +50,21 @@ type
     FMsg: String;
 
     procedure DoLoadFromJSON(const aJSON: String);
+    procedure DoLoadFromJSONData(const aJSONData: TJSONData);
     procedure DoLoadFromJSONObj(const aJSONObj: TJSONObject);
     procedure DoLoadFromStream(const aStream: TStream);
   protected
   public
     constructor Create;
     constructor Create(const aJSON: String);
+    constructor Create(const aJSONData: TJSONData);
     constructor Create(const aJSONObj: TJSONObject);
     constructor Create(const aStream: TStream);
 
     destructor Destroy; override;
 
     procedure Load(const aJSON: String);
+    procedure Load(const aJSONData: TJSONData);
     procedure Load(const aJSONObj: TJSONObject);
     procedure Load(const aStream: TStream);
 
@@ -84,24 +87,31 @@ type
   private
     function GetByIndex(Index: Integer): TqBTorrentsTracker;
     function GetByUrl(Url: String): TqBTorrentsTracker;
+    procedure SetByIndex(Index: Integer; AValue: TqBTorrentsTracker);
+    procedure SetByUrl(Url: String; AValue: TqBTorrentsTracker);
   protected
   public
     procedure LoadTrackers(const aJSON: String);
+    procedure LoadTrackers(const aJSONData: TJSONData);
     procedure LoadTrackers(const aJSONArray: TJSONArray);
     procedure LoadTrackers(const aStream: TStream);
 
     procedure UpdateTrackers(const aJSON: String);
+    procedure UpdateTrackers(const aJSONData: TJSONData);
     procedure UpdateTrackers(const aJSONArray: TJSONArray);
     procedure UpdateTrackers(const aStream: TStream);
 
     procedure UpdateTracker(const aUrl: String; const aJSON: String);
+    procedure UpdateTracker(const aUrl: String; const aJSONData: TJSONData);
     procedure UpdateTracker(const aUrl: String; const aJSONObj: TJSONObject);
     procedure UpdateTracker(const aUrl: String; const aStream: TStream);
 
     property Items[Index: Integer]: TqBTorrentsTracker
-      read GetByIndex; default;
+      read GetByIndex
+      write SetByIndex; default;
     property Urls[Url: String]: TqBTorrentsTracker
-      read GetByUrl;
+      read GetByUrl
+      write SetByUrl;
   end;
 
 // Helper functions
@@ -178,6 +188,14 @@ begin
   end;
 end;
 
+procedure TqBTorrentsTracker.DoLoadFromJSONData(const aJSONData: TJSONData);
+begin
+  if aJSONData.JSONType = jtObject then
+  begin
+    DoLoadFromJSONObj(aJSONData as TJSONObject);
+  end;
+end;
+
 procedure TqBTorrentsTracker.DoLoadFromJSONObj(const aJSONObj: TJSONObject);
 begin
   FUrl := aJSONObj.Get('url', FUrl);
@@ -221,6 +239,12 @@ begin
   DoLoadFromJSON(aJSON);
 end;
 
+constructor TqBTorrentsTracker.Create(const aJSONData: TJSONData);
+begin
+  Create;
+  DoLoadFromJSONData(aJSONData);
+end;
+
 constructor TqBTorrentsTracker.Create(const aJSONObj: TJSONObject);
 begin
   Create;
@@ -243,6 +267,11 @@ begin
   DoLoadFromJSON(aJSON);
 end;
 
+procedure TqBTorrentsTracker.Load(const aJSONData: TJSONData);
+begin
+  DoLoadFromJSONData(aJSONData);
+end;
+
 procedure TqBTorrentsTracker.Load(const aJSONObj: TJSONObject);
 begin
   DoLoadFromJSONObj(aJSONObj);
@@ -260,6 +289,11 @@ begin
   Result := inherited Items[Index] as TqBTorrentsTracker;
 end;
 
+procedure TqBTorrentsTrackers.SetByIndex(Index: Integer; AValue: TqBTorrentsTracker);
+begin
+  inherited Items[Index] := AValue;
+end;
+
 function TqBTorrentsTrackers.GetByUrl(Url: String): TqBTorrentsTracker;
 var
   index: Integer;
@@ -270,6 +304,20 @@ begin
     if Items[index].Url = Url then
     begin
       Result := Items[index];
+      break;
+    end;
+  end;
+end;
+
+procedure TqBTorrentsTrackers.SetByUrl(Url: String; AValue: TqBTorrentsTracker);
+var
+  index: Integer;
+begin
+  for index := 0 to Count - 1 do
+  begin
+    if Items[index].Url = Url then
+    begin
+      inherited Items[index] := aValue;
       break;
     end;
   end;
@@ -289,6 +337,14 @@ begin
     end;
   finally
     jParser.Free;
+  end;
+end;
+
+procedure TqBTorrentsTrackers.LoadTrackers(const aJSONData: TJSONData);
+begin
+  if aJSONData.JSONType = jtArray then
+  begin
+    LoadTrackers(aJSONData as TJSONArray);
   end;
 end;
 
@@ -339,6 +395,14 @@ begin
     end;
   finally
     jParser.Free;
+  end;
+end;
+
+procedure TqBTorrentsTrackers.UpdateTrackers(const aJSONData: TJSONData);
+begin
+  if aJSONData.JSONType = jtArray then
+  begin
+    UpdateTrackers(aJSONData as TJSONArray);
   end;
 end;
 
@@ -404,6 +468,20 @@ begin
     if Items[index].Url = aUrl then
     begin
       Items[index].Load(aJSON);
+      break;
+    end;
+  end;
+end;
+
+procedure TqBTorrentsTrackers.UpdateTracker(const aUrl: String; const aJSONData: TJSONData);
+var
+  index: Integer;
+begin
+  for index := 0 to Count - 1 do
+  begin
+    if Items[index].Url = aUrl then
+    begin
+      Items[index].Load(aJSONData);
       break;
     end;
   end;

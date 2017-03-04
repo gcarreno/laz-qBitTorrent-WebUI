@@ -72,14 +72,18 @@
       </element>
       <!-- constructor Visibility: public -->
       <element name="TqBTorrentsTracker.Create">
-        <short/>
+        <short>Creates the tracker object.</short>
         <descr/>
         <errors/>
         <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrentsTracker.Create.aJSON">
-        <short/>
+        <short>A JSON <var>String</var> contaning a JSON <var>Object</var> with a torrent's tracker.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsTracker.Create.aJSONData">
+        <short>A JSON <var>Data</var> contaning a torrent's tracker.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrentsTracker.Create.aJSONObj">
@@ -106,6 +110,10 @@
       <!-- argument Visibility: default -->
       <element name="TqBTorrentsTracker.Load.aJSON">
         <short>A JSON <var>String</var> contaning a JSON <var>Object</var> with a torrent's tracker.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsTracker.Load.aJSONData">
+        <short>A JSON <var>Data</var> contaning a torrent's tracker.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrentsTracker.Load.aJSONObj">
@@ -155,6 +163,10 @@
         <short>A JSON <var>String</var> containing an <var>Array</var> of trackers.</short>
       </element>
       <!-- argument Visibility: default -->
+      <element name="TqBTorrentsTrackers.LoadTrackers.aJSONData">
+        <short>A JSON <var>Data</var> containing the trackers.</short>
+      </element>
+      <!-- argument Visibility: default -->
       <element name="TqBTorrentsTrackers.LoadTrackers.aJSONArray">
         <short>A JSON <var>Array</var> containing the trackers.</short>
       </element>
@@ -172,6 +184,10 @@
       <!-- argument Visibility: default -->
       <element name="TqBTorrentsTrackers.UpdateTrackers.aJSON">
         <short>A JSON <var>String</var> containing an <var>Array</var> of trackers.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsTrackers.UpdateTrackers.aJSONData">
+        <short>A JSON <var>Data</var> containing the trackers.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrentsTrackers.UpdateTrackers.aJSONArray">
@@ -197,6 +213,10 @@
         <short>A JSON <var>String</var> contaning a JSON <var>Object</var> with a torrent's tracker.</short>
       </element>
       <!-- argument Visibility: default -->
+      <element name="TqBTorrentsTrackers.UpdateTracker.aJSONData">
+        <short>A JSON <var>Data</var> containing the trackers.</short>
+      </element>
+      <!-- argument Visibility: default -->
       <element name="TqBTorrentsTrackers.UpdateTracker.aJSONObj">
         <short>A JSON <var>Object</var> contaning a torrent's tracker.</short>
       </element>
@@ -214,7 +234,6 @@
       </element>
       <!-- argument Visibility: default -->
       <element name="StrToqBTrackerStatus.aStatus">
-        
       <short>The <var>String</var> to be translated.</short>
       </element>
       <!-- function result Visibility: default -->

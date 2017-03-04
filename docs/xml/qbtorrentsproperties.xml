@@ -220,22 +220,26 @@
       </element>
       <!-- constructor Visibility: public -->
       <element name="TqBTorrentsProperties.Create">
-        <short/>
+        <short>Creates the properties object.</short>
         <descr/>
         <errors/>
         <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrentsProperties.Create.aJSON">
-        <short/>
+        <short>A JSON <var>String</var> with the properties.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsProperties.Create.aJSONData">
+        <short>A JSON <var>Data</var> with the properties.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrentsProperties.Create.aJSONObj">
-        <short/>
+        <short>A JSON <var>Object</var> with the properties.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrentsProperties.Create.aStream">
-        <short/>
+        <short>A <var>Tstream</var> with the properties.</short>
       </element>
       <!-- destructor Visibility: public -->
       <element name="TqBTorrentsProperties.Destroy">
@@ -254,6 +258,10 @@
       <!-- argument Visibility: default -->
       <element name="TqBTorrentsProperties.Load.aJSON">
         <short>A JSON <var>String</var> with the properties.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsProperties.Load.aJSONData">
+        <short>A JSON <var>Data</var> with the properties.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrentsProperties.Load.aJSONObj">

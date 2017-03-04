@@ -329,6 +329,10 @@
         <short>A JSON <var>String</var> containing an <var>Array</var> of torrents.</short>
       </element>
       <!-- argument Visibility: default -->
+      <element name="TqBTorrents.LoadTorrents.aJSONData">
+        <short>A JSON <var>Data</var> containing the torrents.</short>
+      </element>
+      <!-- argument Visibility: default -->
       <element name="TqBTorrents.LoadTorrents.aJSONArray">
         <short>A JSON <var>Array</var> containing the torrents.</short>
       </element>
@@ -346,6 +350,10 @@
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.UpdateTorrents.aJSON">
         <short>A JSON <var>String</var> containing an <var>Array</var> of torrents.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrents.UpdateTorrents.aJSONData">
+        <short>A JSON <var>Data</var> containing the torrents.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.UpdateTorrents.aJSONArray">
@@ -369,6 +377,10 @@
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.UpdateTorrent.aJSON">
         <short>A JSON <var>String</var> containing a JSON <var>Object</var> of a torrent.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrents.UpdateTorrent.aJSONData">
+        <short>A JSON <var>Data</var> containing the torrent.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.UpdateTorrent.aJSONObj">
@@ -405,6 +417,10 @@
         <short>A JSON <var>String</var> containing a JSON <var>Object</var> of a torrent's properties.</short>
       </element>
       <!-- argument Visibility: default -->
+      <element name="TqBTorrents.UpdateTorrentProperties.aJSONData">
+        <short>A JSON <var>Data</var> containing the torrent's properties.</short>
+      </element>
+      <!-- argument Visibility: default -->
       <element name="TqBTorrents.UpdateTorrentProperties.aJSONObj">
         <short>A JSON <var>Object</var> containing the torrent's properties.</short>
       </element>
@@ -426,6 +442,10 @@
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.UpdateTorrentTrackers.aJSON">
         <short>A JSON <var>String</var> containing a JSON <var>Array</var> of a torrent's trackers.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrents.UpdateTorrentTrackers.aJSONData">
+        <short>A JSON <var>Data</var> containing the torrent's trackers.</short>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.UpdateTorrentTrackers.aJSONArray">

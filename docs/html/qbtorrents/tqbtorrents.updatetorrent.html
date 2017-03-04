@@ -16,7 +16,7 @@
 <h1>TqBTorrents.UpdateTorrent</h1>
 <p>Update a single torrent identified by Hash.</p>
 <h2>Declaration</h2>
-<p>Source position: qBTorrents.pas line 194</p>
+<p>Source position: qBTorrents.pas line 196</p>
 <table cellpadding="0" cellspacing="0">
 <tr>
 <td><p><tt><span class="code"> <span class="kw">public</span> <span class="kw">procedure</span> <a href="../qbtorrents/tqbtorrents.html">TqBTorrents</a><span class="sym">.</span>UpdateTorrent<span class="sym">(</span></span></tt></p></td>
@@ -26,6 +26,15 @@
 </tr>
 <tr>
 <td><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">const </span>aJSON<span class="sym">: </span>string</span></tt></p></td>
+</tr>
+<tr>
+<td><p><tt><span class="code"><span class="sym">)</span><span class="sym">;</span><br><br><span class="kw">procedure</span> <a href="../qbtorrents/tqbtorrents.html">TqBTorrents</a><span class="sym">.</span>UpdateTorrent<span class="sym">(</span></span></tt></p></td>
+</tr>
+<tr>
+<td><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">const </span>aHash<span class="sym">: </span>string<span class="sym">;</span></span></tt></p></td>
+</tr>
+<tr>
+<td><p><tt><span class="code">&nbsp;&nbsp;<span class="kw">const </span>aJSONData<span class="sym">: </span>TJSONData</span></tt></p></td>
 </tr>
 <tr>
 <td><p><tt><span class="code"><span class="sym">)</span><span class="sym">;</span><br><br><span class="kw">procedure</span> <a href="../qbtorrents/tqbtorrents.html">TqBTorrents</a><span class="sym">.</span>UpdateTorrent<span class="sym">(</span></span></tt></p></td>
@@ -60,6 +69,19 @@
 <td valign="top"><p><tt><span class="code">aJSON</span></tt></p></td>
 <td><p>&nbsp;&nbsp;</p></td>
 <td><p class="cmt">A JSON <var>String</var> containing a JSON <var>Object</var> of a torrent.</p></td>
+</tr>
+</table>
+<h2>Arguments</h2>
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td valign="top"><p><tt><span class="code">aHash</span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">The Hash of the torrent to be updated.</p></td>
+</tr>
+<tr>
+<td valign="top"><p><tt><span class="code">aJSONData</span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">A JSON <var>Data</var> containing the torrent.</p></td>
 </tr>
 </table>
 <h2>Arguments</h2>

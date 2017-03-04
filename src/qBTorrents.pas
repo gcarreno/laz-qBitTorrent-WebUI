@@ -174,24 +174,27 @@ type
   TqBTorrents = class(TFPObjectList)
   private
     function GetByIndex(Index: Integer): TqBTorrent;
-    procedure SetByIndex(Index: Integer; const Value: TqBTorrent);
+    procedure SetByIndex(Index: Integer; const AValue: TqBTorrent);
 
     function GetByHash(const Hash:String): TqBTorrent;
-    procedure SetByHash(Hash: String; const Value: TqBTorrent);
+    procedure SetByHash(Hash: String; const AValue: TqBTorrent);
   protected
   public
     function HasTorrentHASH(const aHASH: String):Boolean;
 
     // Torrents
     procedure LoadTorrents(const aJSON: String);
+    procedure LoadTorrents(const aJSONData: TJSONData);
     procedure LoadTorrents(const aJSONArray: TJSONArray);
     procedure LoadTorrents(const aStream: TStream);
 
     procedure UpdateTorrents(const aJSON: String);
+    procedure UpdateTorrents(const aJSONData: TJSONData);
     procedure UpdateTorrents(const aJSONArray: TJSONArray);
     procedure UpdateTorrents(const aStream: TStream);
 
     procedure UpdateTorrent(const aHash: String; const aJSON: String);
+    procedure UpdateTorrent(const aHash: String; const aJSONData: TJSONData);
     procedure UpdateTorrent(const aHash: String; const aJSONObj: TJSONObject);
     procedure UpdateTorrent(const aHash: String; const aStream: TStream);
 
@@ -199,11 +202,13 @@ type
 
     // Torrent Properties
     procedure UpdateTorrentProperties(const aHash: String; const aJSON: String);
+    procedure UpdateTorrentProperties(const aHash: String; const aJSONData: TJSONData);
     procedure UpdateTorrentProperties(const aHash: String; const aJSONObj: TJSONObject);
     procedure UpdateTorrentProperties(const aHash: String; const aStream: TStream);
 
     // Torrent Trackers
     procedure UpdateTorrentTrackers(const aHash: String; const aJSON: String);
+    procedure UpdateTorrentTrackers(const aHash: String; const aJSONData: TJSONData);
     procedure UpdateTorrentTrackers(const aHash: String; const aJSONArray: TJSONArray);
     procedure UpdateTorrentTrackers(const aHash: String; const aStream: TStream);
 
@@ -503,9 +508,9 @@ begin
   Result := inherited Items[Index] as TqBTorrent;
 end;
 
-procedure TqBTorrents.SetByIndex(Index: Integer; const Value: TqBTorrent);
+procedure TqBTorrents.SetByIndex(Index: Integer; const AValue: TqBTorrent);
 begin
-  inherited Items[Index] := Value;
+  inherited Items[Index] := AValue;
 end;
 
 function TqBTorrents.GetByHash(const Hash: String): TqBTorrent;
@@ -525,18 +530,17 @@ begin
   end;
 end;
 
-procedure TqBTorrents.SetByHash(Hash: String; const Value: TqBTorrent);
+procedure TqBTorrents.SetByHash(Hash: String; const AValue: TqBTorrent);
 var
   index: Integer;
 begin
-  //Result := nil;
   if Length(Hash) <> 40 then
     exit;
   for index := 0 to Count - 1 do
   begin
     if Items[index].Hash = Hash then
     begin
-      inherited Items[index] := Value;
+      inherited Items[index] := AValue;
       break;
     end;
   end;
@@ -577,6 +581,14 @@ begin
     end;
   finally
     jParser.Free;
+  end;
+end;
+
+procedure TqBTorrents.LoadTorrents(const aJSONData: TJSONData);
+begin
+  if aJSONData.JSONType = jtArray then
+  begin
+    LoadTorrents(aJSONData as TJSONArray);
   end;
 end;
 
@@ -633,6 +645,14 @@ begin
     end;
   finally
     jParser.Free;
+  end;
+end;
+
+procedure TqBTorrents.UpdateTorrents(const aJSONData: TJSONData);
+begin
+  if aJSONData.JSONType = jtArray then
+  begin
+    UpdateTorrents(aJSONData as TJSONArray);
   end;
 end;
 
@@ -700,6 +720,22 @@ begin
     if Items[index].Hash = aHash then
     begin
       Items[index].Load(aJSON);
+      break;
+    end;
+  end;
+end;
+
+procedure TqBTorrents.UpdateTorrent(const aHash: String; const aJSONData: TJSONData);
+var
+  index: Integer;
+begin
+  if Length(aHash) <> 40 then
+    exit;
+  for index := 0 to Count - 1 do
+  begin
+    if Items[index].Hash = aHash then
+    begin
+      Items[index].Load(aJSONData);
       break;
     end;
   end;
@@ -776,6 +812,16 @@ begin
   end;
 end;
 
+procedure TqBTorrents.UpdateTorrentProperties(const aHash: String; const aJSONData: TJSONData);
+begin
+  if Length(aHash) <> 40 then
+    exit;
+  if aJSONData.JSONType = jtObject then
+  begin
+    UpdateTorrentProperties(aHash, aJSONData as TJSONObject);
+  end;
+end;
+
 procedure TqBTorrents.UpdateTorrentProperties(const aHash: String; const aJSONObj: TJSONObject);
 var
   index: Integer;
@@ -824,6 +870,20 @@ begin
     if Items[index].Hash = aHash then
     begin
       Items[index].Trackers.UpdateTrackers(aJSON);
+      break;
+    end;
+  end;
+end;
+
+procedure TqBTorrents.UpdateTorrentTrackers(const aHash: String; const aJSONData: TJSONData);
+var
+  index: Integer;
+begin
+  for index := 0 to Count - 1 do
+  begin
+    if Items[index].Hash = aHash then
+    begin
+      Items[index].Trackers.UpdateTrackers(aJSONData);
       break;
     end;
   end;

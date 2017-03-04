@@ -71,18 +71,21 @@ type
 
 
     procedure DoLoadFromJSON(const aJSON: String);
+    procedure DoLoadFromJSONData(const aJSONData: TJSONData);
     procedure DoLoadFromJSONObj(const aJSONObj: TJSONObject);
     procedure DoLoadFromStream(const aStream: TStream);
   protected
   public
     constructor Create;
     constructor Create(const aJSON: String);
+    constructor Create(const aJSONData: TJSONData);
     constructor Create(const aJSONObj: TJSONObject);
     constructor Create(const aStream: TStream);
 
     destructor Destroy; override;
 
     procedure Load(const aJSON: String);
+    procedure Load(const aJSONData: TJSONData);
     procedure Load(const aJSONObj: TJSONObject);
     procedure Load(const aStream: TStream);
 
@@ -234,6 +237,12 @@ begin
   DoLoadFromJSON(aJSON);
 end;
 
+constructor TqBTorrentsProperties.Create(const aJSONData: TJSONData);
+begin
+  Create;
+  DoLoadFromJSONData(aJSONData);
+end;
+
 constructor TqBTorrentsProperties.Create(const aJSONObj: TJSONObject);
 begin
   Create;
@@ -275,6 +284,19 @@ end;
 procedure TqBTorrentsProperties.Load(const aJSON: String);
 begin
   DoLoadFromJSON(aJSON);
+end;
+
+procedure TqBTorrentsProperties.DoLoadFromJSONData(const aJSONData: TJSONData);
+begin
+  if aJSONData.JSONType = jtObject then
+  begin
+    Load(aJSONData as TJSONObject);
+  end;
+end;
+
+procedure TqBTorrentsProperties.Load(const aJSONData: TJSONData);
+begin
+  DoLoadFromJSONData(aJSONData);
 end;
 
 procedure TqBTorrentsProperties.DoLoadFromJSONObj(const aJSONObj: TJSONObject);
