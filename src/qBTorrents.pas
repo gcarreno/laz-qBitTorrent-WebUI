@@ -349,7 +349,7 @@ var
   jParser: TJSONParser;
   jData: TJSONData;
 begin
-  jParser := TJSONParser.Create(aJSON, [jsonscanner.joUTF8, jsonscanner.joIgnoreTrailingComma]);
+  jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
   //jParser := TJSONParser.Create(aJSON);
   try
     jData := jParser.Parse;
