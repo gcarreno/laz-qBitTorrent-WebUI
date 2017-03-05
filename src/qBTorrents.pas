@@ -349,7 +349,8 @@ var
   jParser: TJSONParser;
   jData: TJSONData;
 begin
-  jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
+  //jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
+  jParser := TJSONParser.Create(aJSON);
   try
     jData := jParser.Parse;
     try
@@ -434,7 +435,8 @@ var
   jParser: TJSONParser;
   jData: TJSONData;
 begin
-  jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
+  //jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
+  jParser := TJSONParser.Create(aStream);
   try
     jData := jParser.Parse;
     try
@@ -586,7 +588,8 @@ var
   jParser: TJSONParser;
   jData: TJSONData;
 begin
-  jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
+  //jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
+  jParser := TJSONParser.Create(aJSON);
   try
     jData := jParser.Parse;
     try
@@ -629,7 +632,8 @@ var
   jParser: TJSONParser;
   jData: TJSONData;
 begin
-  jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
+  //jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
+  jParser := TJSONParser.Create(aStream);
   try
     jData := jParser.Parse;
     try
@@ -650,7 +654,8 @@ var
   jParser: TJSONParser;
   jData: TJSONData;
 begin
-  jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
+  //jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
+  jParser := TJSONParser.Create(aJSON);
   try
     jData := jParser.Parse;
     try
@@ -711,7 +716,8 @@ var
   jParser: TJSONParser;
   jData: TJSONData;
 begin
-  jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
+  //jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
+  jParser := TJSONParser.Create(aStream);
   try
     jData := jParser.Parse;
     try
@@ -814,7 +820,8 @@ var
 begin
   if Length(aHash) <> 40 then
     exit;
-  jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
+  //jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
+  jParser := TJSONParser.Create(aJSON);
   try
     jData := jParser.Parse;
     try
@@ -863,7 +870,8 @@ var
 begin
   if Length(aHash) <> 40 then
     exit;
-  jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
+  //jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
+  jParser := TJSONParser.Create(aStream);
   try
     jData := jParser.Parse;
     try

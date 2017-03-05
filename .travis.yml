@@ -30,9 +30,9 @@ matrix:
     - os: linux
       env: LAZ_VER=1.6.2  LAZ_ENV=qemu-arm LAZ_OPT="--os=linux --cpu=arm"
 
-before_install:
+#before_install:
   # Start virtual display server
-  - Xvfb $DISPLAY &
+  #- Xvfb $DISPLAY &
 
 install:
   # Install prerequisites (fpc/lazarus/wine/qemu)
