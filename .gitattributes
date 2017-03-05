@@ -35,3 +35,4 @@
 .gitattributes  export-ignore
 /docs/buildDocs export-ignore
 /docs/updateXML export-ignore
+/tests          export-ignore
