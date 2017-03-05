@@ -119,10 +119,11 @@ const
   csPriorityOne   = 'Normal priority';
   csPriorityTwo   = 'High priority';
   csPrioritySeven = 'Maximal priority';
+  csPriorityUnknonwn = 'Unknown';
 
 function PriorityToStr(aPriority: Integer): String;
 begin
-  Result := '';
+  Result := csPriorityUnknonwn;
   case aPriority of
     0: Result := csPriorityZero;
     1: Result := csPriorityOne;

@@ -3,7 +3,9 @@ program lazqbtest;
 {$mode objfpc}{$H+}
 
 uses
-  Classes, consoletestrunner, jsonscanner, TestqButils, TestTqBTorrents;
+  Classes, consoletestrunner, TestqButils, TestTqBTorrents,
+  qBTorrents, qBTorrentsFiles, qBTorrentsProperties, qBTorrentsTrackers,
+  qBTorrentsWebSeeds, qBUtils;
 
 type
 

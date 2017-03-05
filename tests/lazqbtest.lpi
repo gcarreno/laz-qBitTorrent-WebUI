@@ -28,7 +28,7 @@
         <PackageName Value="FCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="3">
+    <Units Count="9">
       <Unit0>
         <Filename Value="lazqbtest.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -39,10 +39,34 @@
         <UnitName Value="TestqButils"/>
       </Unit1>
       <Unit2>
+        <Filename Value="../src/qBUtils.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="../src/qBTorrentsTrackers.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="../src/qBTorrents.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="../src/qBTorrentsFiles.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit5>
+      <Unit6>
         <Filename Value="testtqbtorrents.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="TestTqBTorrents"/>
-      </Unit2>
+      </Unit6>
+      <Unit7>
+        <Filename Value="../src/qBTorrentsProperties.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="../src/qBTorrentsWebSeeds.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit8>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
