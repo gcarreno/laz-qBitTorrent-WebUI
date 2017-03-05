@@ -620,7 +620,7 @@ begin
   if FHttp.ResultCode = 200 then
   begin
     Result := True;
-    FTorrents.Hashes[aHash].Trackers.LoadTrackers(FHttp.Document);
+    FTorrents.UpdateTorrentTrackers(aHash, FHttp.Document);//Hashes[aHash].Trackers.LoadTrackers();
   end
   else
   begin
@@ -738,7 +738,7 @@ begin
   if FHttp.ResultCode = 200 then
   begin
     Result := True;
-    FTorrents.Hashes[aHash].Files.LoadFiles(FHttp.Document);
+    FTorrents.UpdateTorrentFiles(aHash, FHttp.Document); //Hashes[aHash].Files.LoadFiles(FHttp.Document);
   end
   else
   begin

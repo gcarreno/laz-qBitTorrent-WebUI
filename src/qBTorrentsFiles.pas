@@ -383,7 +383,6 @@ begin
   for index := 0 to aJSONArray.Count - 1 do
   begin
     jData := aJSONArray[index];
-    oTracker:= nil;
     if jData.JSONType = jtObject then
     begin
       for index1 := 0 to Count - 1 do
@@ -392,6 +391,10 @@ begin
         if oTracker.Name = TJSONObject(jData).Get('name', '') then
         begin
           break;
+        end
+        else
+        begin
+          oTracker:= nil;
         end;
       end;
       if Assigned(oTracker) then
