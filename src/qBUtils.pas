@@ -45,6 +45,8 @@ const
   ciTera: Int64 = 1099511627776;
   ciPeta: Int64 = 1125899906842624;
 
+  csFormatFloat = '#,0.##';
+
   csByte = 'B';
   csKilo = 'KB';
   csMega = 'MB';
@@ -52,7 +54,21 @@ const
   csTera = 'TB';
   csPeta = 'PB';
 
-function FormatBytes(aSize: Int64): String;
+  csStateError       = 'Error';
+  csStatePausedUp    = 'Paused Upload';
+  csStatePausedDl    = 'Paused Download';
+  csStateQueuedUp    = 'Queued Upload';
+  csStateQueuedDl    = 'Queued Download';
+  csStateUploading   = 'Uploading';
+  csStateStalledUp   = 'Stalled Upload';
+  csStateStalledDl   = 'Stalled Download';
+  csStateCheckingUp  = 'Checking Upload';
+  csStateCheckingDl  = 'Checking Download';
+  csStateDownloading = 'Downloading';
+  csStateMetaDl      = 'Downloading Metadata';
+  csStateUnknown     = 'Unknown';
+
+  function FormatBytes(aSize: Int64): String;
 var
   dSize: Double;
 begin
@@ -60,35 +76,35 @@ begin
   dSize := 0.0;
   if aSize < ciKilo then
   begin
-    Result := IntToStr(aSize) + csByte;
+    Result := FormatFloat(csFormatFloat, aSize) + csByte;
     exit;
   end;
   if aSize < ciMega then
   begin
     dSize := aSize / ciKilo;
-    Result := FormatFloat('0.##'+csKilo, dSize);
+    Result := FormatFloat(csFormatFloat+csKilo, dSize);
     exit;
   end;
   if aSize < ciGiga then
   begin
     dSize := aSize / ciMega;
-    Result := FormatFloat('0.##'+csMega, dSize);
+    Result := FormatFloat(csFormatFloat+csMega, dSize);
     exit;
   end;
   if aSize < ciTera then
   begin
     dSize := aSize / ciGiga;
-    Result := FormatFloat('0.##'+csGiga, dSize);
+    Result := FormatFloat(csFormatFloat+csGiga, dSize);
     exit;
   end;
   if aSize < ciPeta then
   begin
     dSize := aSize / ciTera;
-    Result := FormatFloat('0.##'+csTera, dSize);
+    Result := FormatFloat(csFormatFloat+csTera, dSize);
     exit;
   end;
   dSize := aSize / ciPeta;
-  Result := FormatFloat('0.##'+csPeta, dSize);
+  Result := FormatFloat(csFormatFloat+csPeta, dSize);
 end;
 
 function FormatBytesPerSecond(aSize: Int64): String;
@@ -98,20 +114,20 @@ end;
 
 function FormatTorrentState(aState: TqBTorrentState): String;
 begin
-  Result := 'Unknown';
+  Result := csStateUnknown;
   case aState of
-    qtsError:       Result := 'Error';
-    qtsPausedUp:    Result := 'Paused Upload';
-    qtsPausedDl:    Result := 'Paused Download';
-    qtsQueuedUp:    Result := 'Queued Upload';
-    qtsQueuedDl:    Result := 'Queued Download';
-    qtsUploading:   Result := 'Uploading';
-    qtsStalledUp:   Result := 'Stalled Upload';
-    qtsStalledDl:   Result := 'Stalled Download';
-    qtsCheckingUp:  Result := 'Checking Upload';
-    qtsCheckingDl:  Result := 'Checking Download';
-    qtsDownloading: Result := 'Downloading';
-    qtsMetaDl:      Result := 'Downloading Metadata';
+    qtsError:       Result := csStateError;
+    qtsPausedUp:    Result := csStatePausedUp;
+    qtsPausedDl:    Result := csStatePausedDl;
+    qtsQueuedUp:    Result := csStateQueuedUp;
+    qtsQueuedDl:    Result := csStateQueuedDl;
+    qtsUploading:   Result := csStateUploading;
+    qtsStalledUp:   Result := csStateStalledUp;
+    qtsStalledDl:   Result := csStateStalledDl;
+    qtsCheckingUp:  Result := csStateCheckingUp;
+    qtsCheckingDl:  Result := csStateCheckingDl;
+    qtsDownloading: Result := csStateDownloading;
+    qtsMetaDl:      Result := csStateMetaDl;
   end;
 end;
 
