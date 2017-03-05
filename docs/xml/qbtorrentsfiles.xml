@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fpdoc-descriptions>
+  <package name="lazqBitTorrentWebUI">
+    <!--
+         ====================================================================
+         qBTorrentsFiles
+         ====================================================================
+    -->
+    <module name="qBTorrentsFiles">
+      <short>Unit containing a container for torrent's files.</short>
+      <descr>
+        <p>This unit contains a set of objects that contain the torrent's files.</p>
+      </descr>
+
+      <!-- class Visibility: default -->
+      <element name="TqBTorrentsFile">
+        <short>Container class for a single file.</short>
+        <descr/>
+        <errors/>
+        <seealso/>
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsFile.Name">
+        <short>The name of the file.</short>
+        <descr/>
+        <seealso/>
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsFile.Size">
+        <short>The size in bytes of the file.</short>
+        <descr/>
+        <seealso/>
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsFile.Progress">
+        <short>How much percent of the file has been downloaded.</short>
+        <descr/>
+        <seealso/>
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsFile.Priority">
+        <short>The priority for this file.</short>
+        <descr/>
+        <seealso/>
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsFile.IsSeed">
+        <short>If this file is seed.</short>
+        <descr/>
+        <seealso/>
+      </element>
+      <!-- constructor Visibility: public -->
+      <element name="TqBTorrentsFile.Create">
+        <short>Creates the file object.</short>
+        <descr/>
+        <errors/>
+        <seealso/>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsFile.Create.aJSON">
+        <short>A JSON <var>String</var> contaning a JSON <var>Object</var> with a torrent's file.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsFile.Create.aJSONData">
+        <short>A JSON <var>Data</var> contaning a torrent's file.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsFile.Create.aJSONObj">
+        <short>A JSON <var>Object</var> contaning a torrent's file.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsFile.Create.aStream">
+        <short>A <var>TStream</var> contaning a JSON <var>Object</var> with a torrent's file.</short>
+      </element>
+      <!-- destructor Visibility: public -->
+      <element name="TqBTorrentsFile.Destroy">
+        <short>Destroys the object.</short>
+        <descr/>
+        <errors/>
+        <seealso/>
+      </element>
+      <!-- procedure Visibility: public -->
+      <element name="TqBTorrentsFile.Load">
+        <short>Loads the contents of a torrent's file.</short>
+        <descr/>
+        <errors/>
+        <seealso/>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsFile.Load.aJSON">
+        <short>A JSON <var>String</var> contaning a JSON <var>Object</var> with a torrent's file.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsFile.Load.aJSONData">
+        <short>A JSON <var>Data</var> contaning a torrent's file.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsFile.Load.aJSONObj">
+        <short>A JSON <var>Object</var> contaning a torrent's file.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsFile.Load.aStream">
+        <short>A <var>TStream</var> contaning a JSON <var>Object</var> with a torrent's file.</short>
+      </element>
+      <!-- class Visibility: default -->
+      <element name="TqBTorrentsFiles">
+        <short>Container class for the torrent's files.</short>
+        <descr/>
+        <errors/>
+        <seealso/>
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsFiles.Items">
+        <short>Property to access the list of <link id="#lazqBitTorrentWebUI.qBTorrentsFiles.TqBTorrentsFile">TqBTorrentsFile</link> by index.</short>
+        <descr/>
+        <seealso/>
+      </element>
+      <!-- argument Visibility: public -->
+      <element name="TqBTorrentsFiles.Items.Index">
+        <short/>
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsFiles.Files">
+        <short>Property to access the list of <link id="#lazqBitTorrentWebUI.qBTorrentsFiles.TqBTorrentsFile">TqBTorrentsFile</link> by file name.</short>
+        <descr/>
+        <seealso/>
+      </element>
+      <!-- argument Visibility: public -->
+      <element name="TqBTorrentsFiles.Files.FileName">
+        <short/>
+      </element>
+      <!-- procedure Visibility: public -->
+      <element name="TqBTorrentsFiles.LoadFiles">
+        <short>Loads the contents of a series of files.</short>
+        <descr/>
+        <errors/>
+        <seealso/>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsFiles.LoadFiles.aJSON">
+        <short>A JSON <var>String</var> containing an <var>Array</var> of files.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsFiles.LoadFiles.aJSONData">
+        <short>A JSON <var>Data</var> containing the files.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsFiles.LoadFiles.aJSONArray">
+        <short>A JSON <var>Array</var> containing the files.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsFiles.LoadFiles.aStream">
+        <short>A <var>TStream</var> containing an <var>Array</var> of files.</short>
+      </element>
+      <!-- procedure Visibility: public -->
+      <element name="TqBTorrentsFiles.UpdateFiles">
+        <short>Updates the contents of a series of files.</short>
+        <descr/>
+        <errors/>
+        <seealso/>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsFiles.UpdateFiles.aJSON">
+        <short>A JSON <var>String</var> containing an <var>Array</var> of files.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsFiles.UpdateFiles.aJSONData">
+        <short>A JSON <var>Data</var> containing the files.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsFiles.UpdateFiles.aJSONArray">
+        <short>A JSON <var>Array</var> containing the files.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsFiles.UpdateFiles.aStream">
+        <short>A <var>TStream</var> containing an <var>Array</var> of files.</short>
+      </element>
+      <!-- procedure Visibility: public -->
+      <element name="TqBTorrentsFiles.UpdateFile">
+        <short>Updates the contents of a single files identified by a URL.</short>
+        <descr/>
+        <errors/>
+        <seealso/>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsFiles.UpdateFile.aFileName">
+        <short>The url of the file to be updated.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsFiles.UpdateFile.aJSON">
+        <short>A JSON <var>String</var> contaning a JSON <var>Object</var> with a torrent's file.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsFiles.UpdateFile.aJSONData">
+        <short>A JSON <var>Data</var> containing the files.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsFiles.UpdateFile.aJSONObj">
+        <short>A JSON <var>Object</var> contaning a torrent's file.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsFiles.UpdateFile.aStream">
+        <short>A <var>TStream</var> contaning a JSON <var>Object</var> with a torrent's file.</short>
+      </element>
+
+    <element name="PriorityToStr"><short>Translates from a numerical value priority into a human readable <var>String</var>.</short>
+      </element><element name="PriorityToStr.aPriority"><short>The priority to be translated.</short>
+      </element>
+    </module>
+    <!-- qBTorrentsFiles -->
+  </package>
+</fpdoc-descriptions>

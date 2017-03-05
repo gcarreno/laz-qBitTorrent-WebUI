@@ -60,15 +60,17 @@ type
     function DoGetApiVersion: String;
     function DoGetMinApiVersion: String;
     function DoGetqBitTorrentVersion: String;
+
+    // Queries
+    function DoGetTorrents(const aFilter: TqBTorrentsFilter): Boolean;
     function DoGetTorrentProperties(const aHash: String): Boolean;
     function DoGetTorrentTrackers(const aHash: String): Boolean;
     function DoGetTorrentWebSeeds(const aHash: String): Boolean;
+    function DoGetTorrentFiles(const aHash: String): Boolean;
 
     // Commands
     function DoExecShutdown: Boolean;
 
-    // Queries
-    function DoGetTorrents(const aFilter: TqBTorrentsFilter): Boolean;
   protected
   public
     constructor Create(AOwner: TComponent); override;
@@ -83,6 +85,7 @@ type
     function GetTorrentProperties(const aHash: String): Boolean;
     function GetTorrentTrackers(const aHash: String): Boolean;
     function GetTorrentWebSeeds(const aHash: String): Boolean;
+    function GetTorrentFiles(const aHash: String): Boolean;
 
     property IsLogged: Boolean
       read FIsLogged;
@@ -128,16 +131,16 @@ const
   ciMyAPIVersion = 11;
 {$IFDEF linux}
   {$IFDEF CPUX64}
-  sUserAgent = 'lazqBitTorrentWebUI/0.14.0.55 (X11; Linux x86_64;) Synapse/40.1';
+  sUserAgent = 'lazqBitTorrentWebUI/0.15.0.65 (X11; Linux x86_64;) Synapse/40.1';
   {$ELSE}
-  sUserAgent = 'lazqBitTorrentWebUI/0.14.0.55 (X11; Linux x86_32;) Synapse/40.1';
+  sUserAgent = 'lazqBitTorrentWebUI/0.15.0.65 (X11; Linux x86_32;) Synapse/40.1';
   {$ENDIF}
 {$ENDIF}
 {$IFDEF windows}
   {$IFDEF CPUX64}
-  sUserAgent = 'lazqBitTorrentWebUI/0.14.0.55 (Windows x86_64;) Synapse/40.1';
+  sUserAgent = 'lazqBitTorrentWebUI/0.15.0.65 (Windows x86_64;) Synapse/40.1';
   {$ELSE}
-  sUserAgent = 'lazqBitTorrentWebUI/0.14.0.55 (Windows x86_32;) Synapse/40.1';
+  sUserAgent = 'lazqBitTorrentWebUI/0.15.0.65 (Windows x86_32;) Synapse/40.1';
   {$ENDIF}
 {$ENDIF}
 
@@ -558,7 +561,7 @@ begin
   if FHttp.ResultCode = 200 then
   begin
     Result := True;
-    FTorrents.UpdateTorrentProperties(aHash, FHttp.Document);
+    FTorrents.Hashes[aHash].Properties.Load(FHttp.Document);
   end
   else
   begin
@@ -617,7 +620,7 @@ begin
   if FHttp.ResultCode = 200 then
   begin
     Result := True;
-    FTorrents.UpdateTorrentTrackers(aHash, FHttp.Document);
+    FTorrents.Hashes[aHash].Trackers.LoadTrackers(FHttp.Document);
   end
   else
   begin
@@ -693,6 +696,65 @@ begin
     if ciMyAPIVersion >= FMinAPIVersion then
     begin
       Result := DoGetTorrentWebSeeds(aHash);
+    end
+    else
+    begin
+      Result := False;
+      raise Exception.Create(
+        'Cannot manage this API version.'
+      );
+    end;
+  end
+  else
+  begin
+    Result := False;
+    raise Exception.Create(
+      'You need to set Active True first.'
+    );
+  end;
+end;
+
+function TqBitTorrentWebUI.DoGetTorrentFiles(const aHash: String): Boolean;
+var
+  sURL: String;
+const
+  sPath = '/query/propertiesFiles';
+begin
+  Result := False;
+  FHttp.Clear;
+  FHttp.UserAgent := sUserAgent;
+  FHttp.Cookies.Add('SID='+FLoginCookie);
+  if FPort = 80 then
+  begin
+    sURL := 'http://'+FHost+sPath;
+  end
+  else
+  begin
+    sURL := 'http://'+FHost+':'+IntToStr(FPort)+sPath;
+  end;
+  sURL := sURL + '/' + aHash;
+  // TDOD: On debug get a file from sessions
+  FHttp.HTTPMethod('GET', sURL);
+  if FHttp.ResultCode = 200 then
+  begin
+    Result := True;
+    FTorrents.Hashes[aHash].Files.LoadFiles(FHttp.Document);
+  end
+  else
+  begin
+    raise Exception.Create(
+      'Getting torrent files failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
+    );
+  end;
+end;
+
+function TqBitTorrentWebUI.GetTorrentFiles(const aHash: String): Boolean;
+begin
+  if FActive then
+  begin
+    if ciMyAPIVersion >= FMinAPIVersion then
+    begin
+      Result := DoGetTorrentFiles(aHash);
     end
     else
     begin

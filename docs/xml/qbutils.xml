@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <fpdoc-descriptions>
   <package name="lazqBitTorrentWebUI">
     <!--
@@ -12,9 +12,9 @@
       <!-- function Visibility: default -->
       <element name="FormatBytes">
         <short>Formats Integer into Bytes, KiloBytes, MegaBytes, GigaBytes, TeraBytes and PetaBytes.</short>
-        <descr />
-        <errors />
-        <seealso />
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="FormatBytes.aSize">
@@ -27,9 +27,9 @@
       <!-- function Visibility: default -->
       <element name="FormatBytesPerSecond">
         <short>Formats Integer into Bytes, KiloBytes, MegaBytes, GigaBytes, TeraBytes and PetaBytes per second.</short>
-        <descr />
-        <errors />
-        <seealso />
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="FormatBytesPerSecond.aSize">
@@ -42,8 +42,8 @@
       <!-- function Visibility: default -->
       <element name="FormatTorrentState">
         <short>Returns a human readable, capitalized <var>String</var> with the torrent status.</short>
-        <descr />
-        <errors />
+        <descr/>
+        <errors/>
         <seealso>
           <link id="#lazqbittorrentwebui.qBTorrents.qBTorrentStateToStr">qBTorrentStateToStr</link>
         </seealso>
@@ -59,8 +59,8 @@
       <!-- function Visibility: default -->
       <element name="FormatTrackerStatus">
         <short>Wrapper for function <link id="#lazqbittorrentwebui.qBTorrentsTrackers.qBTrackerStatusToStr">qBTrackerStatusToStr</link>.</short>
-        <descr />
-        <errors />
+        <descr/>
+        <errors/>
         <seealso>
           <link id="#lazqbittorrentwebui.qBTorrentsTrackers.qBTrackerStatusToStr">qBTrackerStatusToStr</link>
         </seealso>
@@ -72,6 +72,9 @@
       <!-- function result Visibility: default -->
       <element name="FormatTrackerStatus.Result">
         <short>A <var>String</var> with a human readable tracker status.</short>
+      </element>
+    <element name="FormatFilesPriority"><short>Wrapper for function <link id="#lazqbittorrentwebui.qBTorrentsFiles.PriorityToStr">PriorityToStr</link>.</short>
+      </element><element name="FormatFilesPriority.aPriority"><short>The priority of the file.</short>
       </element>
     </module>
     <!-- qBUtils -->

@@ -29,8 +29,7 @@ interface
 
 uses
   Classes, Contnrs, SysUtils, DateUtils, fpjson, jsonparser, jsonscanner,
-  qBTorrentsFilters, qBTorrentsProperties, qBTorrentsTrackers,
-  qBTorrentsWebSeeds;
+  qBTorrentsProperties, qBTorrentsTrackers, qBTorrentsWebSeeds, qBTorrentsFiles;
 
 type
 { TqBTorrentStates }
@@ -79,6 +78,7 @@ type
     FProperties: TqBTorrentsProperties;
     FTrackers: TqBTorrentsTrackers;
     FWebSeeds: TqBTorrentsWebSeeds;
+    FFiles: TqBTorrentsFiles;
 
     procedure DoLoadFromJSON(const aJSON: String);
     procedure DoLoadFromJSONData(const aJSONData: TJSONData);
@@ -172,6 +172,8 @@ type
       read FTrackers;
     property WebSeeds: TqBTorrentsWebSeeds
       read FWebSeeds;
+    property Files: TqBTorrentsFiles
+      read FFiles;
   end;
 
 { TqBTorrents }
@@ -218,6 +220,12 @@ type
 
     // Torrent Web Seeds
     // TODO: Evaluate the need for Updates
+
+    // Torrent Trackers
+    procedure UpdateTorrentFiles(const aHash: String; const aJSON: String);
+    procedure UpdateTorrentFiles(const aHash: String; const aJSONData: TJSONData);
+    procedure UpdateTorrentFiles(const aHash: String; const aJSONArray: TJSONArray);
+    procedure UpdateTorrentFiles(const aHash: String; const aStream: TStream);
 
     property Items[Index: Integer]: TqBTorrent
       read GetByIndex
@@ -475,6 +483,7 @@ begin
   FProperties := TqBTorrentsProperties.Create;
   FTrackers := TqBTorrentsTrackers.Create(True);
   FWebSeeds := TqBTorrentsWebSeeds.Create;
+  FFiles := TqBTorrentsFiles.Create(True);
 end;
 
 constructor TqBTorrent.Create(const aJSON: String);
@@ -503,6 +512,7 @@ end;
 
 destructor TqBTorrent.Destroy;
 begin
+  FFiles.Free;
   FWebSeeds.Free;
   FTrackers.Free;
   FProperties.Free;
@@ -920,6 +930,62 @@ begin
     if Items[index].Hash = aHash then
     begin
       Items[index].Trackers.UpdateTrackers(aStream);
+      break;
+    end;
+  end;
+end;
+
+procedure TqBTorrents.UpdateTorrentFiles(const aHash: String; const aJSON: String);
+var
+  index: Integer;
+begin
+  for index := 0 to Count - 1 do
+  begin
+    if Items[index].Hash = aHash then
+    begin
+      Items[index].Files.UpdateFiles(aJSON);
+      break;
+    end;
+  end;
+end;
+
+procedure TqBTorrents.UpdateTorrentFiles(const aHash: String; const aJSONData: TJSONData);
+var
+  index: Integer;
+begin
+  for index := 0 to Count - 1 do
+  begin
+    if Items[index].Hash = aHash then
+    begin
+      Items[index].Files.UpdateFiles(aJSONData);
+      break;
+    end;
+  end;
+end;
+
+procedure TqBTorrents.UpdateTorrentFiles(const aHash: String; const aJSONArray: TJSONArray);
+var
+  index: Integer;
+begin
+  for index := 0 to Count - 1 do
+  begin
+    if Items[index].Hash = aHash then
+    begin
+      Items[index].Files.UpdateFiles(aJSONArray);
+      break;
+    end;
+  end;
+end;
+
+procedure TqBTorrents.UpdateTorrentFiles(const aHash: String; const aStream: TStream);
+var
+  index: Integer;
+begin
+  for index := 0 to Count - 1 do
+  begin
+    if Items[index].Hash = aHash then
+    begin
+      Items[index].Files.UpdateFiles(aStream);
       break;
     end;
   end;

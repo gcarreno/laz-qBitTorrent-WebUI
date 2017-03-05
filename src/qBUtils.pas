@@ -28,12 +28,13 @@ unit qBUtils;
 interface
 
 uses
-  SysUtils, qBTorrents, qBTorrentsTrackers;
+  SysUtils, qBTorrents, qBTorrentsTrackers, qBTorrentsFiles;
 
 function FormatBytes(aSize: Int64): String;
 function FormatBytesPerSecond(aSize: Int64): String;
 function FormatTorrentState(aState: TqBTorrentState): String;
 function FormatTrackerStatus(aStatus: TqBTrackerStatus): String;
+function FormatFilesPriority(aPriority: Integer): String;
 
 implementation
 
@@ -117,6 +118,11 @@ end;
 function FormatTrackerStatus(aStatus: TqBTrackerStatus): String;
 begin
   Result := qBTrackerStatusToStr(aStatus);
+end;
+
+function FormatFilesPriority(aPriority: Integer): String;
+begin
+  Result := PriorityToStr(aPriority);
 end;
 
 end.

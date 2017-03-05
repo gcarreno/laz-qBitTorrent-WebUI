@@ -244,6 +244,22 @@
       <element name="TqBitTorrentWebUI.GetTorrentWebSeeds.Result">
         <short>True if query of torrent's web seeds succeded.</short>
       </element>
+      <!-- function Visibility: public -->
+      <element name="TqBitTorrentWebUI.GetTorrentFiles">
+        <short>Queries the API for torrent's files.</short>
+        <descr />
+        <errors>Will throw an execption if not successfull.</errors>
+        <example file="examples/gettorrentfiles_example.pas" />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBitTorrentWebUI.GetTorrentFiles.aHash">
+        <short>The hash of the torrent we want the files from.</short>
+      </element>
+      <!-- function result Visibility: public -->
+      <element name="TqBitTorrentWebUI.GetTorrentFiles.Result">
+        <short>True if query of torrent's files succeded.</short>
+      </element>
 
     </module>
   </package>

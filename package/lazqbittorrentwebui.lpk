@@ -34,8 +34,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE."/>
-    <Version Minor="14" Build="55"/>
-    <Files Count="8">
+    <Version Minor="15" Build="65"/>
+    <Files Count="9">
       <Item1>
         <Filename Value="../src/Register_qBitTorrentWebUI.pas"/>
         <HasRegisterProc Value="True"/>
@@ -70,6 +70,10 @@ SOFTWARE."/>
         <Filename Value="../src/qBTorrentsWebSeeds.pas"/>
         <UnitName Value="qBTorrentsWebSeeds"/>
       </Item8>
+      <Item9>
+        <Filename Value="../src/qBTorrentsFiles.pas"/>
+        <UnitName Value="qBTorrentsFiles"/>
+      </Item9>
     </Files>
     <LazDoc Paths="../docs/xml"/>
     <RequiredPkgs Count="2">

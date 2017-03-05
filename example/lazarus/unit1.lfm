@@ -1,23 +1,22 @@
 object frmMain: TfrmMain
   Left = 419
-  Height = 421
+  Height = 573
   Top = 115
-  Width = 699
+  Width = 752
   Caption = 'frmMain'
-  ClientHeight = 421
-  ClientWidth = 699
+  ClientHeight = 573
+  ClientWidth = 752
   Menu = mmMain
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
-  LCLVersion = '1.7'
   Visible = False
   object psMain: TPairSplitter
     Cursor = crVSplit
     Left = 0
-    Height = 269
+    Height = 421
     Top = 152
-    Width = 699
+    Width = 752
     Align = alClient
     Position = 200
     SplitterType = pstVertical
@@ -26,14 +25,14 @@ object frmMain: TfrmMain
       Left = 0
       Height = 200
       Top = 0
-      Width = 699
-      ClientWidth = 699
+      Width = 752
+      ClientWidth = 752
       ClientHeight = 200
       object memInfo: TMemo
         Left = 0
         Height = 180
         Top = 20
-        Width = 699
+        Width = 752
         Align = alClient
         ReadOnly = True
         ScrollBars = ssAutoVertical
@@ -43,7 +42,7 @@ object frmMain: TfrmMain
         Left = 0
         Height = 20
         Top = 0
-        Width = 699
+        Width = 752
         Align = alTop
         Caption = 'Info:'
         FocusControl = memInfo
@@ -53,16 +52,16 @@ object frmMain: TfrmMain
     object pssLog: TPairSplitterSide
       Cursor = crArrow
       Left = 0
-      Height = 64
+      Height = 216
       Top = 205
-      Width = 699
-      ClientWidth = 699
-      ClientHeight = 64
+      Width = 752
+      ClientWidth = 752
+      ClientHeight = 216
       object memLog: TMemo
         Left = 0
-        Height = 42
+        Height = 194
         Top = 22
-        Width = 699
+        Width = 752
         Align = alClient
         ScrollBars = ssAutoVertical
         TabOrder = 0
@@ -71,7 +70,7 @@ object frmMain: TfrmMain
         Left = 0
         Height = 22
         Top = 0
-        Width = 699
+        Width = 752
         Align = alTop
         Caption = 'Log:'
         TabOrder = 1
@@ -82,13 +81,13 @@ object frmMain: TfrmMain
     Left = 0
     Height = 152
     Top = 0
-    Width = 699
+    Width = 752
     Align = alTop
     ClientHeight = 152
-    ClientWidth = 699
+    ClientWidth = 752
     TabOrder = 1
     object btnFileExit: TButton
-      Left = 610
+      Left = 663
       Height = 25
       Top = 8
       Width = 75
@@ -100,7 +99,7 @@ object frmMain: TfrmMain
       Left = 8
       Height = 17
       Top = 40
-      Width = 676
+      Width = 729
       Caption = 'Get Methods'
       Anchors = [akTop, akLeft, akRight]
       Font.Style = [fsBold]
@@ -110,14 +109,14 @@ object frmMain: TfrmMain
       Left = 8
       Height = 17
       Top = 96
-      Width = 676
+      Width = 729
       Caption = 'Commands'
       Anchors = [akTop, akLeft, akRight]
       Font.Style = [fsBold]
       ParentFont = False
     end
     object btnTestExecShutdown: TButton
-      Left = 599
+      Left = 652
       Height = 25
       Top = 120
       Width = 85
@@ -157,6 +156,22 @@ object frmMain: TfrmMain
       Action = actTestGetTorrentTrackers
       TabOrder = 5
     end
+    object btnTestGetTorrentWebSeeds: TButton
+      Left = 456
+      Height = 25
+      Top = 64
+      Width = 168
+      Action = actTestGetTorrentWebSeeds
+      TabOrder = 6
+    end
+    object btnTestGetTorrentFiles: TButton
+      Left = 632
+      Height = 25
+      Top = 64
+      Width = 120
+      Action = actTestGetTorrentFiles
+      TabOrder = 7
+    end
   end
   object qbttMain: TqBitTorrentWebUI
     UserName = 'qBitTorrentWebUI'
@@ -176,7 +191,7 @@ object frmMain: TfrmMain
       end
     end
     object mnuTest: TMenuItem
-      Caption = '&Test'
+      Caption = 'T&est'
       object mnuTestGetTorrents: TMenuItem
         Action = actTestGetTorrents
       end
@@ -185,6 +200,12 @@ object frmMain: TfrmMain
       end
       object mnuTestGetTorrentTrackers: TMenuItem
         Action = actTestGetTorrentTrackers
+      end
+      object mnuTestGetTorrentWebSeeds: TMenuItem
+        Action = actTestGetTorrentWebSeeds
+      end
+      object mnuTestGetTorrentFiles: TMenuItem
+        Action = actTestGetTorrentFiles
       end
       object mnuSep2: TMenuItem
         Caption = '-'
@@ -217,7 +238,7 @@ object frmMain: TfrmMain
     end
     object actTestGetTorrentProperties: TAction
       Category = 'Test'
-      Caption = 'Get T&orrent Properties'
+      Caption = 'Get Torrent &Properties'
       DisableIfNoHandler = False
       Enabled = False
       OnExecute = actTestGetTorrentPropertiesExecute
@@ -228,6 +249,20 @@ object frmMain: TfrmMain
       DisableIfNoHandler = False
       Enabled = False
       OnExecute = actTestGetTorrentTrackersExecute
+    end
+    object actTestGetTorrentWebSeeds: TAction
+      Category = 'Test'
+      Caption = 'Get Torrent &Web Seeds'
+      DisableIfNoHandler = False
+      Enabled = False
+      OnExecute = actTestGetTorrentWebSeedsExecute
+    end
+    object actTestGetTorrentFiles: TAction
+      Category = 'Test'
+      Caption = 'Get Torrent &Files'
+      DisableIfNoHandler = False
+      Enabled = False
+      OnExecute = actTestGetTorrentFilesExecute
     end
     object actTestExecShutdown: TAction
       Category = 'Test'

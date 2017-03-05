@@ -15,6 +15,8 @@ type
 
   TfrmMain = class(TForm)
     actFileSetActive: TAction;
+    actTestGetTorrentWebSeeds: TAction;
+    actTestGetTorrentFiles: TAction;
     actTestGetTorrentTrackers: TAction;
     actTestGetTorrentProperties: TAction;
     actTestGetTorrents: TAction;
@@ -26,9 +28,13 @@ type
     btnTestGetTorrents: TButton;
     btnTestGetTorrentProperties: TButton;
     btnTestGetTorrentTrackers: TButton;
+    btnTestGetTorrentWebSeeds: TButton;
+    btnTestGetTorrentFiles: TButton;
     chkFileActive: TCheckBox;
     divbGetMethhods: TDividerBevel;
     divbCommands: TDividerBevel;
+    mnuTestGetTorrentWebSeeds: TMenuItem;
+    mnuTestGetTorrentFiles: TMenuItem;
     mnuTestGetTorrentTrackers: TMenuItem;
     mnuTestGetTorrentProperties: TMenuItem;
     mnuTestGetTorrents: TMenuItem;
@@ -49,9 +55,11 @@ type
     stLabelInfo: TStaticText;
     procedure actFileSetActiveExecute(Sender: TObject);
     procedure actTestExecShutdownExecute(Sender: TObject);
+    procedure actTestGetTorrentFilesExecute(Sender: TObject);
     procedure actTestGetTorrentPropertiesExecute(Sender: TObject);
     procedure actTestGetTorrentsExecute(Sender: TObject);
     procedure actTestGetTorrentTrackersExecute(Sender: TObject);
+    procedure actTestGetTorrentWebSeedsExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
@@ -114,6 +122,8 @@ begin
   actTestGetTorrents.Enabled := chkFileActive.Checked;
   actTestGetTorrentProperties.Enabled := chkFileActive.Checked;
   actTestGetTorrentTrackers.Enabled := chkFileActive.Checked;
+  actTestGetTorrentWebSeeds.Enabled := chkFileActive.Checked;
+  actTestGetTorrentFiles.Enabled := chkFileActive.Checked;
 end;
 
 procedure TfrmMain.actFileSetActiveExecute(Sender: TObject);
@@ -156,6 +166,66 @@ begin
   except
     on E:Exception do
       Log('Error: ' + E.Message);
+  end;
+end;
+
+procedure TfrmMain.actTestGetTorrentFilesExecute(Sender: TObject);
+var
+  bGetTorrentFilesResult: Boolean;
+  oTorrent: TqBTorrent;
+  index: Integer;
+begin
+  if qbttMain.Torrents.Count > 0 then
+  begin
+    oTorrent := qbttMain.Torrents[0];
+    Log('Asking torrent files for hash "' + oTorrent.Hash + '"');
+    try
+      bGetTorrentFilesResult := qbttMain.GetTorrentFiles(oTorrent.Hash);
+      if bGetTorrentFilesResult then
+      begin
+        Log(#9'Success.');
+        Info('========Files');
+        Info(
+          Format(
+            'Torrent: %s (%s)',
+            [
+              oTorrent.Name,
+              oTorrent.Hash
+            ]
+          )
+        );
+        for index := 0 to oTorrent.Files.Count - 1 do
+        begin
+          Info(
+            Format(
+              #9'Name: %s',
+              [
+                oTorrent.Files[index].Name
+              ]
+            )
+          );
+          Info(
+            Format(
+              #9'Size: %s',
+              [
+                FormatBytes(oTorrent.Files[index].Size)
+              ]
+            )
+          );
+        end;
+      end
+      else
+      begin
+        Log(#9'Failed.');
+      end;
+    except
+      on E:Exception do
+        Log('Error: ' + E.Message);
+    end;
+  end
+  else
+  begin
+    Log('Torrent list is empty');
   end;
 end;
 
@@ -417,6 +487,58 @@ begin
               #9'Msg: %s',
               [
                 oTorrent.Trackers[index].Msg
+              ]
+            )
+          );
+        end;
+      end
+      else
+      begin
+        Log(#9'Failed.');
+      end;
+    except
+      on E:Exception do
+        Log('Error: ' + E.Message);
+    end;
+  end
+  else
+  begin
+    Log('Torrent list is empty');
+  end;
+end;
+
+procedure TfrmMain.actTestGetTorrentWebSeedsExecute(Sender: TObject);
+var
+  bGetTorrentWebSeedsResult: Boolean;
+  oTorrent: TqBTorrent;
+  index: Integer;
+begin
+  if qbttMain.Torrents.Count > 0 then
+  begin
+    oTorrent := qbttMain.Torrents[0];
+    Log('Asking torrent web seeds for hash "' + oTorrent.Hash + '"');
+    try
+      bGetTorrentWebSeedsResult := qbttMain.GetTorrentWebSeeds(oTorrent.Hash);
+      if bGetTorrentWebSeedsResult then
+      begin
+        Log(#9'Success.');
+        Info('========Web Seeds');
+        Info(
+          Format(
+            'Torrent: %s (%s)',
+            [
+              oTorrent.Name,
+              oTorrent.Hash
+            ]
+          )
+        );
+        for index := 0 to oTorrent.WebSeeds.Count - 1 do
+        begin
+          Info(
+            Format(
+              #9'Url: %s',
+              [
+                oTorrent.WebSeeds[index]
               ]
             )
           );

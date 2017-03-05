@@ -10,7 +10,7 @@ interface
 uses
   Register_qBitTorrentWebUI, qBitTorrentWebUI, qBUtils, qBTorrents, 
   qBTorrentsFilters, qBTorrentsProperties, qBTorrentsTrackers, 
-  qBTorrentsWebSeeds, LazarusPackageIntf;
+  qBTorrentsWebSeeds, qBTorrentsFiles, LazarusPackageIntf;
 
 implementation
 
