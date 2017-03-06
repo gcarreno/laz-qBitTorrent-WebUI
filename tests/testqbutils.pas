@@ -116,10 +116,7 @@ begin
   AssertEquals('File Priority '+csPrioritySeven,    csPrioritySeven,    FormatFilesPriority(7));
 end;
 
-
-
 initialization
-
   RegisterTest(TTestqBUtils);
 end.
 
