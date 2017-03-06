@@ -9,18 +9,18 @@ uses
 
 type
 
-  { TMyTestRunner }
+  { TTestqBitTorrentWebUIRunner }
 
-  TMyTestRunner = class(TTestRunner)
+  TTestqBitTorrentWebUIRunner = class(TTestRunner)
   protected
   // override the protected methods of TTestRunner to customize its behavior
   end;
 
 var
-  Application: TMyTestRunner;
+  Application: TTestqBitTorrentWebUIRunner;
 
 begin
-  Application := TMyTestRunner.Create(nil);
+  Application := TTestqBitTorrentWebUIRunner.Create(nil);
   Application.Initialize;
   Application.Run;
   Application.Free;

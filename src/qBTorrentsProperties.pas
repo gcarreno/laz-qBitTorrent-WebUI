@@ -265,7 +265,7 @@ var
   jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IFDEF VER3}
+{$IFDEF VER3_1_1}
   jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
 {$ELSE}
   jParser := TJSONParser.Create(aJSON, True);
@@ -380,7 +380,7 @@ var
   jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IFDEF VER3}
+{$IFDEF VER3_1_1}
   jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
 {$ELSE}
   jParser := TJSONParser.Create(aStream, True);
