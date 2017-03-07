@@ -31,6 +31,9 @@ uses
   Classes, SysUtils, HTTPSend,
   qBTorrents, qBTorrentsFilters{, qBTorrentsProperties}{, qBTorrentsTrackers};
 
+const
+  csVersion = '0.15.0.65';
+
 type
 { TqBitTorrentWebUI }
   TqBitTorrentWebUI = class(TComponent)
@@ -128,7 +131,6 @@ uses
   fpjson, jsonparser, jsonscanner;
 
 const
-  csVersion = '0.15.0.65';
   ciMyAPIVersion = 11;
 {$IFDEF linux}
   {$IFDEF CPUX64}

@@ -32,31 +32,40 @@ echo Cleaning win64
 rm -f $DIRWIN64$BINWIN
 
 echo Building Linux
-$LAZBUILD --bm=RELEASE $HERE/../example/lazarus/project1.lpi
+$LAZBUILD --bm=RELEASE $HERE/../example/lazarus/project1.lpi 2>&1 > $HERE/../bin/dist/LogLinux.txt
 
 if [ -f $DIRLINUX$BINLINUX ]; then
   echo Found Linux
   pushd $DIRLINUX > /dev/null
+  echo Packaging
   tar -v --gzip --create --file ../../dist/example-$VERSION-linux-x86_64.tgz $BINLINUX
   popd > /dev/null
+else
+  echo Linux NOT found
 fi
 
 echo Building Win32
-$LAZBUILD --bm=Win32 $HERE/../example/lazarus/project1.lpi
+$LAZBUILD --bm=Win32 $HERE/../example/lazarus/project1.lpi 2>&1 > $HERE/../bin/dist/LogWin32.txt
 
 if [ -f $DIRWIN32$BINWIN ]; then
   echo Found Win32
   pushd $DIRWIN32 > /dev/null
+  echo Packaging
   zip  ../../dist/example-$VERSION-win32.zip $BINWIN
   popd > /dev/null
+else
+  echo Win32 NOT found
 fi
 
 echo Building Win64
-$LAZBUILD --bm=Win64 $HERE/../example/lazarus/project1.lpi
+$LAZBUILD --bm=Win64 $HERE/../example/lazarus/project1.lpi 2>&1 > $HERE/../bin/dist/LogWin64.txt
 
 if [ -f $DIRWIN64$BINWIN ]; then
   echo Found Win64
   pushd $DIRWIN64 > /dev/null
+  echo Packaging
   zip  ../../dist/example-$VERSION-win64.zip $BINWIN
   popd > /dev/null
+else
+  echo Win64 NOT found
 fi
