@@ -316,6 +316,17 @@
       </element>
 
       <!-- function Visibility: public -->
+      <element name="TqBTorrents.GetEnumerator">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- function result Visibility: public -->
+      <element name="TqBTorrents.GetEnumerator.Result">
+        <short />
+      </element>
+      <!-- function Visibility: public -->
       <element name="TqBTorrents.HasTorrentHASH">
         <short>Returns <var>True</var> if the hash identifies one of the contained torrents.</short>
         <descr/>
@@ -494,6 +505,53 @@
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.UpdateTorrentFiles.aStream">
         <short>A <var>TStream</var> containing a JSON <var>Array</var> of a torrent's files.</short>
+      </element>
+
+      <!-- class Visibility: default -->
+      <element name="TqBTorrentsEnumerator">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- constructor Visibility: public -->
+      <element name="TqBTorrentsEnumerator.Create">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsEnumerator.Create.ATorrents">
+        <short />
+      </element>
+      <!-- function Visibility: public -->
+      <element name="TqBTorrentsEnumerator.GetCurrent">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- function result Visibility: public -->
+      <element name="TqBTorrentsEnumerator.GetCurrent.Result">
+        <short />
+      </element>
+      <!-- function Visibility: public -->
+      <element name="TqBTorrentsEnumerator.MoveNext">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- function result Visibility: public -->
+      <element name="TqBTorrentsEnumerator.MoveNext.Result">
+        <short />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsEnumerator.Current">
+        <short />
+        <descr />
+        <seealso />
       </element>
 
       <!-- function Visibility: default -->

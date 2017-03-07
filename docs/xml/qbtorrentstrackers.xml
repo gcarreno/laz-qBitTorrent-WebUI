@@ -151,6 +151,18 @@
       <element name="TqBTorrentsTrackers.Urls.Url">
         <short/>
       </element>
+
+      <!-- function Visibility: public -->
+      <element name="TqBTorrentsTrackers.GetEnumerator">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- function result Visibility: public -->
+      <element name="TqBTorrentsTrackers.GetEnumerator.Result">
+        <short />
+      </element>
       <!-- procedure Visibility: public -->
       <element name="TqBTorrentsTrackers.LoadTrackers">
         <short>Loads the contents of a series of trackers.</short>
@@ -223,6 +235,53 @@
       <!-- argument Visibility: default -->
       <element name="TqBTorrentsTrackers.UpdateTracker.aStream">
         <short>A <var>TStream</var> contaning a JSON <var>Object</var> with a torrent's tracker.</short>
+      </element>
+
+      <!-- class Visibility: default -->
+      <element name="TqBTorrentsTrackersEnumerator">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- constructor Visibility: public -->
+      <element name="TqBTorrentsTrackersEnumerator.Create">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsTrackersEnumerator.Create.ATrackers">
+        <short />
+      </element>
+      <!-- function Visibility: public -->
+      <element name="TqBTorrentsTrackersEnumerator.GetCurrent">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- function result Visibility: public -->
+      <element name="TqBTorrentsTrackersEnumerator.GetCurrent.Result">
+        <short />
+      </element>
+      <!-- function Visibility: public -->
+      <element name="TqBTorrentsTrackersEnumerator.MoveNext">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- function result Visibility: public -->
+      <element name="TqBTorrentsTrackersEnumerator.MoveNext.Result">
+        <short />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsTrackersEnumerator.Current">
+        <short />
+        <descr />
+        <seealso />
       </element>
 
       <!-- function Visibility: default -->

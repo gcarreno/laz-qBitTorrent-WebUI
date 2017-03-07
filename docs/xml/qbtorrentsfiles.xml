@@ -129,6 +129,18 @@
       <element name="TqBTorrentsFiles.Files.FileName">
         <short/>
       </element>
+
+      <!-- function Visibility: public -->
+      <element name="TqBTorrentsFiles.GetEnumerator">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- function result Visibility: public -->
+      <element name="TqBTorrentsFiles.GetEnumerator.Result">
+        <short />
+      </element>
       <!-- procedure Visibility: public -->
       <element name="TqBTorrentsFiles.LoadFiles">
         <short>Loads the contents of a series of files.</short>
@@ -203,8 +215,64 @@
         <short>A <var>TStream</var> contaning a JSON <var>Object</var> with a torrent's file.</short>
       </element>
 
-    <element name="PriorityToStr"><short>Translates from a numerical value priority into a human readable <var>String</var>.</short>
-      </element><element name="PriorityToStr.aPriority"><short>The priority to be translated.</short>
+      <!-- class Visibility: default -->
+      <element name="TqBTorrentsFilesEnumerator">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- constructor Visibility: public -->
+      <element name="TqBTorrentsFilesEnumerator.Create">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="TqBTorrentsFilesEnumerator.Create.AFiles">
+        <short />
+      </element>
+      <!-- function Visibility: public -->
+      <element name="TqBTorrentsFilesEnumerator.GetCurrent">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- function result Visibility: public -->
+      <element name="TqBTorrentsFilesEnumerator.GetCurrent.Result">
+        <short />
+      </element>
+      <!-- function Visibility: public -->
+      <element name="TqBTorrentsFilesEnumerator.MoveNext">
+        <short />
+        <descr />
+        <errors />
+        <seealso />
+      </element>
+      <!-- function result Visibility: public -->
+      <element name="TqBTorrentsFilesEnumerator.MoveNext.Result">
+        <short />
+      </element>
+      <!-- property Visibility: public -->
+      <element name="TqBTorrentsFilesEnumerator.Current">
+        <short />
+        <descr />
+        <seealso />
+      </element>
+
+      <!-- function Visibility: public -->
+      <element name="PriorityToStr">
+        <short>Translates from a numerical value priority into a human readable <var>String</var>.</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="PriorityToStr.aPriority">
+        <short>The priority to be translated.</short>
+      </element>
+      <!-- function result Visibility: default -->
+      <element name="PriorityToStr.Result">
+        <short />
       </element>
     </module>
     <!-- qBTorrentsFiles -->
