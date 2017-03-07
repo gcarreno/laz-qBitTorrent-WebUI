@@ -87,7 +87,7 @@ begin
     slJSON.LoadFromFile(sFileName);
     FqBTorrents := TqBTorrents.Create(True);
     try
-    {$IFDEF VER3_1_1}
+    {$IF FPC_FULLVERSION >= 30101}
       jParser := TJSONParser.Create(slJSON.Text, [joUTF8, joIgnoreTrailingComma]);
     {$ELSE}
       jParser := TJSONParser.Create(slJSON.Text, True);
@@ -134,7 +134,7 @@ begin
     slJSON.LoadFromFile(sFileName);
     FqBTorrents := TqBTorrents.Create(True);
     try
-    {$IFDEF VER3_1_1}
+    {$IF FPC_FULLVERSION >= 30101}
       jParser := TJSONParser.Create(slJSON.Text, [joUTF8, joIgnoreTrailingComma]);
     {$ELSE}
       jParser := TJSONParser.Create(slJSON.Text, True);

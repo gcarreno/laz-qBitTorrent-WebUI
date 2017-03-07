@@ -172,7 +172,7 @@ var
   jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IFDEF VER3_1_1}
+{$IF FPC_FULLVERSION >= 30101}
   jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
 {$ELSE}
   jParser := TJSONParser.Create(aJSON, True);
@@ -213,7 +213,7 @@ var
   jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IFDEF VER3_1_1}
+{$IF FPC_FULLVERSION >= 30101}
   jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
 {$ELSE}
   jParser := TJSONParser.Create(aStream, True);
@@ -336,7 +336,7 @@ var
   jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IFDEF VER3_1_1}
+{$IF FPC_FULLVERSION >= 30101}
   jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
 {$ELSE}
   jParser := TJSONParser.Create(aJSON, True);
@@ -377,7 +377,7 @@ var
   jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IFDEF VER3_1_1}
+{$IF FPC_FULLVERSION >= 30101}
   jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
 {$ELSE}
   jParser := TJSONParser.Create(aStream, True);
@@ -398,7 +398,7 @@ var
   jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IFDEF VER3_1_1}
+{$IF FPC_FULLVERSION >= 30101}
   jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
 {$ELSE}
   jParser := TJSONParser.Create(aJSON, True);
@@ -466,7 +466,7 @@ var
   jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IFDEF VER3_1_1}
+{$IF FPC_FULLVERSION >= 30101}
   jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
 {$ELSE}
   jParser := TJSONParser.Create(aStream, True);

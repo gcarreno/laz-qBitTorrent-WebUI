@@ -177,6 +177,7 @@ type
   end;
 
 { TqBTorrents }
+  TqBTorrentsEnumerator = class; // Forward
   TqBTorrents = class(TFPObjectList)
   private
     function GetByIndex(Index: Integer): TqBTorrent;
@@ -186,6 +187,9 @@ type
     procedure SetByHash(Hash: String; const AValue: TqBTorrent);
   protected
   public
+    // Enumerator
+    function GetEnumerator: TqBTorrentsEnumerator;
+
     function HasTorrentHASH(const aHASH: String):Boolean;
 
     // Torrents
@@ -233,6 +237,20 @@ type
     property Hashes[Hash: String]: TqBTorrent
       read GetByHash
       write SetByHash;
+  end;
+
+{ TqBTorrentsEnumerator }
+  TqBTorrentsEnumerator = class(TObject)
+  private
+    FTorrents: TqBTorrents;
+    FPosition: Integer;
+  public
+    constructor Create(ATorrents: TqBTorrents);
+    function GetCurrent: TqBTorrent;
+    function MoveNext: Boolean;
+
+    property Current: TqBTorrent
+      read GetCurrent;
   end;
 
 // Helper functions
@@ -342,6 +360,26 @@ begin
   end;
 end;
 
+{ TqBTorrentsEnumerator }
+
+constructor TqBTorrentsEnumerator.Create(ATorrents: TqBTorrents);
+begin
+  inherited Create;
+  FTorrents := ATorrents;
+  FPosition := -1;
+end;
+
+function TqBTorrentsEnumerator.GetCurrent: TqBTorrent;
+begin
+  Result := FTorrents[FPosition];
+end;
+
+function TqBTorrentsEnumerator.MoveNext: Boolean;
+begin
+  Inc(FPosition);
+  Result := FPosition < FTorrents.Count;
+end;
+
 { TqBTorrent }
 
 procedure TqBTorrent.DoLoadFromJSON(const aJSON: String);
@@ -349,7 +387,7 @@ var
   jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IFDEF VER3_1_1}
+{$IF FPC_FULLVERSION >= 30101}
   jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
 {$ELSE}
   jParser := TJSONParser.Create(aJSON, True);
@@ -438,7 +476,7 @@ var
   jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IFDEF VER3_1_1}
+{$IF FPC_FULLVERSION >= 30101}
   jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
 {$ELSE}
   jParser := TJSONParser.Create(aStream, True);
@@ -541,16 +579,16 @@ end;
 
 function TqBTorrents.GetByHash(const Hash: String): TqBTorrent;
 var
-  index: Integer;
+  oTorrent: TqBTOrrent;
 begin
   Result := nil;
   if Length(Hash) <> 40 then
     exit;
-  for index := 0 to Count - 1 do
+  for oTorrent in Self do
   begin
-    if Items[index].Hash = Hash then
+    if oTorrent.Hash = Hash then
     begin
-      Result := inherited Items[index] as TqBTorrent;
+      Result := oTorrent;
       break;
     end;
   end;
@@ -570,6 +608,11 @@ begin
       break;
     end;
   end;
+end;
+
+function TqBTorrents.GetEnumerator: TqBTorrentsEnumerator;
+begin
+  Result := TqBTorrentsEnumerator.Create(Self);
 end;
 
 function TqBTorrents.HasTorrentHASH(const aHASH: String): Boolean;
@@ -594,7 +637,7 @@ var
   jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IFDEF VER3_1_1}
+{$IF FPC_FULLVERSION >= 30101}
   jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
 {$ELSE}
   jParser := TJSONParser.Create(aJSON, True);
@@ -641,7 +684,7 @@ var
   jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IFDEF VER3_1_1}
+{$IF FPC_FULLVERSION >= 30101}
   jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
 {$ELSE}
   jParser := TJSONParser.Create(aStream, True);
@@ -666,7 +709,7 @@ var
   jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IFDEF VER3_1_1}
+{$IF FPC_FULLVERSION >= 30101}
   jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
 {$ELSE}
   jParser := TJSONParser.Create(aJSON, True);
@@ -731,7 +774,7 @@ var
   jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IFDEF VER3_1_1}
+{$IF FPC_FULLVERSION >= 30101}
   jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
 {$ELSE}
   jParser := TJSONParser.Create(aStream, True);
@@ -838,7 +881,7 @@ var
 begin
   if Length(aHash) <> 40 then
     exit;
-{$IFDEF VER3_1_1}
+{$IF FPC_FULLVERSION >= 30101}
   jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
 {$ELSE}
   jParser := TJSONParser.Create(aJSON, True);
@@ -891,7 +934,7 @@ var
 begin
   if Length(aHash) <> 40 then
     exit;
-{$IFDEF VER3_1_1}
+{$IF FPC_FULLVERSION >= 30101}
   jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
 {$ELSE}
   jParser := TJSONParser.Create(aStream, True);
