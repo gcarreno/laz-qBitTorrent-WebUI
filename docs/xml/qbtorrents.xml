@@ -225,14 +225,14 @@
       <!-- property Visibility: public -->
       <element name="TqBTorrent.WebSeeds">
         <short>Torrent's web seeds.</short>
-        <descr />
-        <seealso />
+        <descr/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrent.Files">
         <short>Torrent's files.</short>
-        <descr />
-        <seealso />
+        <descr/>
+        <seealso/>
       </element>
       <!-- constructor Visibility: public -->
       <element name="TqBTorrent.Create">
@@ -317,14 +317,14 @@
 
       <!-- function Visibility: public -->
       <element name="TqBTorrents.GetEnumerator">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short>Returns the enumerator class for this object.</short>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- function result Visibility: public -->
       <element name="TqBTorrents.GetEnumerator.Result">
-        <short />
+        <short>The retruned enumerator class for Torrents.</short>
       </element>
       <!-- function Visibility: public -->
       <element name="TqBTorrents.HasTorrentHASH">
@@ -482,9 +482,9 @@
       <!-- procedure Visibility: public -->
       <element name="TqBTorrents.UpdateTorrentFiles">
         <short>Updates the trackers of a torrent identified by a Hash.</short>
-        <descr />
-        <errors />
-        <seealso />
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrents.UpdateTorrentFiles.aHash">
@@ -509,49 +509,49 @@
 
       <!-- class Visibility: default -->
       <element name="TqBTorrentsEnumerator">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short>Implements the enumerator for Torrents.</short>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- constructor Visibility: public -->
       <element name="TqBTorrentsEnumerator.Create">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short>Creates the enumerator object.</short>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrentsEnumerator.Create.ATorrents">
-        <short />
+        <short>The object containing the Torrent list.</short>
       </element>
       <!-- function Visibility: public -->
       <element name="TqBTorrentsEnumerator.GetCurrent">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short>Returns the current Torrent in the enumerator.</short>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- function result Visibility: public -->
       <element name="TqBTorrentsEnumerator.GetCurrent.Result">
-        <short />
+        <short>The returned current Torrent.</short>
       </element>
       <!-- function Visibility: public -->
       <element name="TqBTorrentsEnumerator.MoveNext">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short>Tries to move to the next Torrent, returning <var>False</var> if end reached.</short>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- function result Visibility: public -->
       <element name="TqBTorrentsEnumerator.MoveNext.Result">
-        <short />
+        <short>Returns <var>True</var> if moved to next, <var>False</var> if reached end of list.</short>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsEnumerator.Current">
-        <short />
-        <descr />
-        <seealso />
+        <short>Property containing the current Torrent on the enumerator.</short>
+        <descr/>
+        <seealso/>
       </element>
 
       <!-- function Visibility: default -->

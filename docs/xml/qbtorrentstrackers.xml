@@ -154,14 +154,14 @@
 
       <!-- function Visibility: public -->
       <element name="TqBTorrentsTrackers.GetEnumerator">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short>Returns the enumerator class for this object.</short>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- function result Visibility: public -->
       <element name="TqBTorrentsTrackers.GetEnumerator.Result">
-        <short />
+        <short>The returned enumerator class for Trackers.</short>
       </element>
       <!-- procedure Visibility: public -->
       <element name="TqBTorrentsTrackers.LoadTrackers">
@@ -239,49 +239,49 @@
 
       <!-- class Visibility: default -->
       <element name="TqBTorrentsTrackersEnumerator">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short>Implements the enumerator for Trackers.</short>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- constructor Visibility: public -->
       <element name="TqBTorrentsTrackersEnumerator.Create">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short>Creates the enumerator object.</short>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBTorrentsTrackersEnumerator.Create.ATrackers">
-        <short />
+        <short>The object containing the Trackers list.</short>
       </element>
       <!-- function Visibility: public -->
       <element name="TqBTorrentsTrackersEnumerator.GetCurrent">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short>Returns the current Tracker in the enumerator.</short>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- function result Visibility: public -->
       <element name="TqBTorrentsTrackersEnumerator.GetCurrent.Result">
-        <short />
+        <short>The returned current Tracker.</short>
       </element>
       <!-- function Visibility: public -->
       <element name="TqBTorrentsTrackersEnumerator.MoveNext">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short>Tries to move to the next Tracker, returning <var>False</var> if end reached.</short>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- function result Visibility: public -->
       <element name="TqBTorrentsTrackersEnumerator.MoveNext.Result">
-        <short />
+        <short>Returns <var>True</var> if moved to next, <var>False</var> if reached end of list.</short>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBTorrentsTrackersEnumerator.Current">
-        <short />
-        <descr />
-        <seealso />
+        <short>Property containing the current Tracker on the enumerator.</short>
+        <descr/>
+        <seealso/>
       </element>
 
       <!-- function Visibility: default -->
