@@ -1,0 +1,62 @@
+#!/bin/bash
+
+HERE=`dirname $0`
+
+VERSION=`grep "csVersion ="  $HERE/../src/qBitTorrentWebUI.pas | cut -d\' -f2`
+
+DIRLINUX=$HERE/../bin/linux/x86_64/
+BINLINUX=project1
+
+DIRWIN32=$HERE/../bin/win32/i386/
+DIRWIN64=$HERE/../bin/win64/x86_64/
+BINWIN=project1.exe
+
+LAZBUILD=~/FreePascal/lazarus/lazbuild
+
+#echo $HERE
+#echo $DIRLINUX$BINLINUX
+#echo $DIRWIN32$BINWIN
+#echo $DIRWIN64$BINWIN
+#echo $VERSION
+
+echo Cleaning dist
+rm $HERE/../bin/dist/*
+
+echo Cleaning linux
+rm -f $DIRLINUX$BINLINUX
+
+echo Cleaning win32
+rm -f $DIRWIN32$BINWIN
+
+echo Cleaning win64
+rm -f $DIRWIN64$BINWIN
+
+echo Building Linux
+$LAZBUILD --bm=RELEASE $HERE/../example/lazarus/project1.lpi
+
+if [ -f $DIRLINUX$BINLINUX ]; then
+  echo Found Linux
+  pushd $DIRLINUX > /dev/null
+  tar -v --gzip --create --file ../../dist/example-$VERSION-linux-x86_64.tgz $BINLINUX
+  popd > /dev/null
+fi
+
+echo Building Win32
+$LAZBUILD --bm=Win32 $HERE/../example/lazarus/project1.lpi
+
+if [ -f $DIRWIN32$BINWIN ]; then
+  echo Found Win32
+  pushd $DIRWIN32 > /dev/null
+  zip  ../../dist/example-$VERSION-win32.zip $BINWIN
+  popd > /dev/null
+fi
+
+echo Building Win64
+$LAZBUILD --bm=Win64 $HERE/../example/lazarus/project1.lpi
+
+if [ -f $DIRWIN64$BINWIN ]; then
+  echo Found Win64
+  pushd $DIRWIN64 > /dev/null
+  zip  ../../dist/example-$VERSION-win64.zip $BINWIN
+  popd > /dev/null
+fi
