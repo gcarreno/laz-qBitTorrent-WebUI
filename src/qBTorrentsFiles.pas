@@ -78,14 +78,19 @@ type
   end;
 
 { TqBTorrentsFiles }
+  TqBTorrentsFilesEnumerator = class; // Forward
   TqBTorrentsFiles = class(TFPObjectList)
   private
     function GetByIndex(Index: Integer): TqBTorrentsFile;
-    function GetByFileName(FileName: String): TqBTorrentsFile;
     procedure SetByIndex(Index: Integer; AValue: TqBTorrentsFile);
+
+    function GetByFileName(FileName: String): TqBTorrentsFile;
     procedure SetByFileName(FileName: String; AValue: TqBTorrentsFile);
   protected
   public
+    // Enumerator
+    function GetEnumerator: TqBTorrentsFilesEnumerator;
+
     procedure LoadFiles(const aJSON: String);
     procedure LoadFiles(const aJSONData: TJSONData);
     procedure LoadFiles(const aJSONArray: TJSONArray);
@@ -109,6 +114,20 @@ type
       write SetByFileName;
   end;
 
+{ TqBTorrentsFilesEnumerator }
+  TqBTorrentsFilesEnumerator = class(TObject)
+  private
+    FFiles: TqBTorrentsFiles;
+    FPosition: Integer;
+  public
+    constructor Create(AFiles: TqBTorrentsFiles);
+    function GetCurrent: TqBTorrentsFile;
+    function MoveNext: Boolean;
+
+    property Current: TqBTorrentsFile
+      read GetCurrent;
+  end;
+
 // Helper functions
 function PriorityToStr(aPriority: Integer): String;
 
@@ -130,6 +149,25 @@ begin
     2: Result := csPriorityTwo;
     7: Result := csPrioritySeven;
   end;
+end;
+
+{ TqBTorrentsFilesEnumerator }
+
+constructor TqBTorrentsFilesEnumerator.Create(AFiles: TqBTorrentsFiles);
+begin
+  FFiles := AFiles;
+  FPosition := -1;
+end;
+
+function TqBTorrentsFilesEnumerator.GetCurrent: TqBTorrentsFile;
+begin
+  Result := FFiles[FPosition];
+end;
+
+function TqBTorrentsFilesEnumerator.MoveNext: Boolean;
+begin
+  Inc(FPosition);
+  Result := FPosition < FFiles.Count;
 end;
 
 { TqBTorrentsFile }
@@ -273,14 +311,14 @@ end;
 
 function TqBTorrentsFiles.GetByFileName(FileName: String): TqBTorrentsFile;
 var
-  index: Integer;
+  oFile: TqBTorrentsFile;
 begin
   Result := nil;
-  for index := 0 to Count - 1 do
+  for oFile in Self do
   begin
-    if Items[index].Name = FileName then
+    if oFile.Name = FileName then
     begin
-      Result := Items[index];
+      Result := oFile;
       break;
     end;
   end;
@@ -298,6 +336,11 @@ begin
       break;
     end;
   end;
+end;
+
+function TqBTorrentsFiles.GetEnumerator: TqBTorrentsFilesEnumerator;
+begin
+  Result := TqBTorrentsFilesEnumerator.Create(Self);
 end;
 
 procedure TqBTorrentsFiles.LoadFiles(const aJSON: String);
