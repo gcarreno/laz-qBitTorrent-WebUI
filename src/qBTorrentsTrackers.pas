@@ -83,6 +83,7 @@ type
   end;
 
 { TqBTorrentsTrackers }
+  TqBTorrentsTrackersEnumerator = class; //Forward
   TqBTorrentsTrackers = class(TFPObjectList)
   private
     function GetByIndex(Index: Integer): TqBTorrentsTracker;
@@ -91,6 +92,9 @@ type
     procedure SetByUrl(Url: String; AValue: TqBTorrentsTracker);
   protected
   public
+    // Enumerator
+    function GetEnumerator: TqBTorrentsTrackersEnumerator;
+
     procedure LoadTrackers(const aJSON: String);
     procedure LoadTrackers(const aJSONData: TJSONData);
     procedure LoadTrackers(const aJSONArray: TJSONArray);
@@ -112,6 +116,20 @@ type
     property Urls[Url: String]: TqBTorrentsTracker
       read GetByUrl
       write SetByUrl;
+  end;
+
+{ TqBTorrentsTrackersEnumerator }
+  TqBTorrentsTrackersEnumerator = class(TObject)
+  private
+    FTrackers: TqBTorrentsTrackers;
+    FPosition: Integer;
+  public
+    constructor Create(ATrackers: TqBTorrentsTrackers);
+    function GetCurrent: TqBTorrentsTracker;
+    function MoveNext: Boolean;
+
+    property Current: TqBTorrentsTracker
+      read GetCurrent;
   end;
 
 // Helper functions
@@ -163,6 +181,25 @@ begin
     qtrsNotWorking: Result := csStatusNotWorking;
     qtrsNotContactedYet: Result := csStatusNotContactedYet;
   end;
+end;
+
+{ TqBTorrentsTrackersEnumerator }
+
+constructor TqBTorrentsTrackersEnumerator.Create(ATrackers: TqBTorrentsTrackers);
+begin
+  FTrackers := ATrackers;
+  FPosition := -1;
+end;
+
+function TqBTorrentsTrackersEnumerator.GetCurrent: TqBTorrentsTracker;
+begin
+  Result := FTrackers[FPosition];
+end;
+
+function TqBTorrentsTrackersEnumerator.MoveNext: Boolean;
+begin
+  Inc(FPosition);
+  Result := FPosition < FTrackers.Count;
 end;
 
 { TqBTorrentsTracker }
@@ -304,14 +341,14 @@ end;
 
 function TqBTorrentsTrackers.GetByUrl(Url: String): TqBTorrentsTracker;
 var
-  index: Integer;
+  oTracker: TqBTorrentsTracker;
 begin
   Result := nil;
-  for index := 0 to Count - 1 do
+  for oTracker in Self do
   begin
-    if Items[index].Url = Url then
+    if oTracker.Url = Url then
     begin
-      Result := Items[index];
+      Result := oTracker;
       break;
     end;
   end;
@@ -329,6 +366,11 @@ begin
       break;
     end;
   end;
+end;
+
+function TqBTorrentsTrackers.GetEnumerator: TqBTorrentsTrackersEnumerator;
+begin
+  Result := TqBTorrentsTrackersEnumerator.Create(Self);
 end;
 
 procedure TqBTorrentsTrackers.LoadTrackers(const aJSON: String);
