@@ -32,7 +32,7 @@ uses
   qBTorrents, qBTorrentsFilters{, qBTorrentsProperties}{, qBTorrentsTrackers};
 
 const
-  csVersion = '0.15.0.65';
+  csVersion = '0.16.3.69';
 
 type
 { TqBitTorrentWebUI }
