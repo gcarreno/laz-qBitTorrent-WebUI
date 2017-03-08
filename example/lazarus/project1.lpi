@@ -6,8 +6,15 @@
       <SessionStorage Value="InProjectDir"/>
       <MainUnit Value="0"/>
       <Title Value="project1"/>
+      <Scaled Value="True"/>
       <ResourceType Value="res"/>
       <UseXPManifest Value="True"/>
+      <XPManifest>
+        <DpiAware Value="True"/>
+        <UIAccess Value="True"/>
+        <TextName Value="lazqBitTorrentWebUI.Example"/>
+        <TextDesc Value="Example on using the component qBitTorremtWebUI."/>
+      </XPManifest>
       <Icon Value="0"/>
     </General>
     <BuildModes Count="5">
