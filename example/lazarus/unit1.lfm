@@ -235,7 +235,7 @@ object frmMain: TfrmMain
     object edtPassword: TEdit
       Left = 496
       Height = 27
-      Top = 21
+      Top = 24
       Width = 152
       EchoMode = emPassword
       PasswordChar = '*'
