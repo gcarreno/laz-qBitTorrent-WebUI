@@ -18,6 +18,7 @@
     <RunParams>
       <local>
         <FormatVersion Value="1"/>
+        <CommandLineParams Value="--format=plain --all"/>
       </local>
     </RunParams>
     <RequiredPackages Count="1">
@@ -25,7 +26,7 @@
         <PackageName Value="FCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="9">
+    <Units Count="10">
       <Unit0>
         <Filename Value="lazqbtest.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -64,6 +65,11 @@
         <Filename Value="../src/qBTorrentsWebSeeds.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit8>
+      <Unit9>
+        <Filename Value="testtqbtorrent.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="TestTqBTorrent"/>
+      </Unit9>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

@@ -206,12 +206,18 @@ begin
 end;
 
 procedure TqBTorrentsFile.DoLoadFromJSONObj(const aJSONObj: TJSONObject);
+const
+  csFilesName =     'name';
+  csFilesSize =     'size';
+  csFilesProgress = 'progress';
+  csFilesPriority = 'priority';
+  csFilesIsSeed =   'is_seed';
 begin
-  FName := aJSONObj.Get('name', FName);
-  FSize := aJSONObj.Get('size', FSize);
-  FProgress := aJSONObj.Get('progress', FProgress);
-  FPriority := aJSONObj.Get('priority', FPriority);
-  FIsSeed := aJSONObj.Get('is_seed', FIsSeed);
+  FName := aJSONObj.Get(csFilesName, FName);
+  FSize := aJSONObj.Get(csFilesSize, FSize);
+  FProgress := aJSONObj.Get(csFilesProgress, FProgress);
+  FPriority := aJSONObj.Get(csFilesPriority, FPriority);
+  FIsSeed := aJSONObj.Get(csFilesIsSeed, FIsSeed);
 end;
 
 procedure TqBTorrentsFile.DoLoadFromStream(const aStream: TStream);

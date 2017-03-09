@@ -134,6 +134,8 @@ begin
 end;
 
 procedure TqBTorrentsWebSeeds.DoLoadFromJSONArray(const aJSONArray: TJSONArray);
+const
+  csWebSeedsUrl = 'url';
 var
   index: Integer;
   jData: TJSONData;
@@ -147,7 +149,7 @@ begin
     if jData.JSONType = jtObject then
     begin
       jWebSeeds := jData as TJSONObject;
-      url := jWebSeeds.Get('url', '');
+      url := jWebSeeds.Get(csWebSeedsUrl, '');
       if Length(url) > 0 then
       begin
         FWebSeeds.Add(url);

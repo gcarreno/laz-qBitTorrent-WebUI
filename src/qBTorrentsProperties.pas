@@ -304,6 +304,9 @@ begin
 end;
 
 procedure TqBTorrentsProperties.DoLoadFromJSONObj(const aJSONObj: TJSONObject);
+const
+  csPropertiesPieceSize = 'piece_size';
+  csPropertiesComment = 'comment';
 var
   iUnixTime: Integer;
   dtTime: TDateTime;
@@ -317,8 +320,8 @@ begin
    FCreationDate := dtTime;
   end;
 
-  FPieceSize := aJSONObj.Get('piece_size', FPieceSize);
-  FComment := aJSONObj.Get('comment', FComment);
+  FPieceSize := aJSONObj.Get(csPropertiesPieceSize, FPieceSize);
+  FComment := aJSONObj.Get(csPropertiesComment, FComment);
   FTotalWasted := aJSONObj.Get('total_wasted', FTotalWasted);
   FTotalUploaded := aJSONObj.Get('total_uploaded', FTotalUploaded);
   FTotalUploadedSession := aJSONObj.Get('total_uploaded_session', FTotalUploadedSession);

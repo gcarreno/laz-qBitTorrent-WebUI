@@ -5,8 +5,9 @@ unit TestTqBTorrents;
 interface
 
 uses
-  Classes, SysUtils, fpcunit, testutils, testregistry, fpjson, jsonparser,
-  jsonscanner, qBTorrents;
+  Classes, SysUtils, DateUtils, fpcunit, testregistry, fpjson,
+  jsonparser, jsonscanner,
+  qBTorrents;
 
 type
 
@@ -28,6 +29,7 @@ type
     //Update Torrents
 
     //Update Torrent by Hash
+
   end;
 
 implementation

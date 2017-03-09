@@ -238,11 +238,18 @@ begin
 end;
 
 procedure TqBTorrentsTracker.DoLoadFromJSONObj(const aJSONObj: TJSONObject);
+const
+  csTrackersUrl = 'url';
+  csTrackersStatus = 'status';
+  csTrackersNumPeers = 'num_peers';
+  csTrackersMsg = 'msg';
 begin
-  FUrl := aJSONObj.Get('url', FUrl);
-  FStatus := StrToqBTrackerStatus(aJSONObj.Get('status', qBTrackerStatusToStr(FStatus)));
-  FNumPeers := aJSONObj.Get('num_peers', FNumPeers);
-  FMsg := aJSONObj.Get('msg', FMsg);
+  FUrl := aJSONObj.Get(csTrackersUrl, FUrl);
+  FStatus := StrToqBTrackerStatus(
+    aJSONObj.Get(csTrackersStatus, qBTrackerStatusToStr(FStatus))
+  );
+  FNumPeers := aJSONObj.Get(csTrackersNumPeers, FNumPeers);
+  FMsg := aJSONObj.Get(csTrackersMsg, FMsg);
 end;
 
 procedure TqBTorrentsTracker.DoLoadFromStream(const aStream: TStream);

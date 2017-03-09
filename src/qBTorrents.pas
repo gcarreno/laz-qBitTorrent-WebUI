@@ -426,12 +426,15 @@ begin
 end;
 
 procedure TqBTorrent.DoLoadFromJSONObj(const aJSONObj: TJSONObject);
+const
+  csTorrentsHash = 'hash';
+  csTorrentsName = 'name';
 var
   iUnixTime: Integer;
   dtTime: TDateTime;
 begin
-  FHash := aJSONObj.Get('hash', FHash);
-  FName := aJSONObj.Get('name', FName);
+  FHash := aJSONObj.Get(csTorrentsHash, FHash);
+  FName := aJSONObj.Get(csTorrentsName, FName);
   FSize := aJSONObj.Get('size', FSize);
   FProgress := aJSONObj.Get('progress', FProgress);
   FDlSpeed := aJSONObj.Get('dlspeed', FDlSpeed);
