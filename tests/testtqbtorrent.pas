@@ -17,7 +17,15 @@ type
   private
     FqBTorrent: TqBTorrent;
 
+    FTorrentText: TStringList;
+    FTorrentStream: TFileStream;
+    FjParser: TJSONParser;
+    FjData: TJSONData;
+
     procedure TestTorrent1Fields;
+  protected
+    procedure SetUp; override;
+    procedure TearDown; override;
   published
     // Create Torrent
     procedure TestTorrentCreateFromJSON;
@@ -32,64 +40,60 @@ begin
   AssertEquals('Torrent Name', 'ubuntu-16.10-desktop-amd64.iso', FqBTorrent.Name);
   AssertEquals('Torrent Size', 1593835520, FqBTorrent.Size);
   AssertEquals('Torrent Progress', 0.0, FqBTorrent.Progress);
+  AssertEquals('Torrent Dl Speed', 0, FqBTorrent.DlSpeed);
   AssertEquals('Torrent Added On', StrToDateTime('5-3-17 22:56:05'), FqBTorrent.AddedOn);
 end;
 
-procedure TTestTqBTorrent.TestTorrentCreateFromJSON;
+procedure TTestTqBTorrent.SetUp;
 var
   sFileName: String;
-  slJSON: TStringList;
 begin
   sFileName := ExtractFileDir(ParamStr(0));
   sFileName := sFileName + '/../tests/data/torrent-1.json';
-  slJSON := TStringList.Create;
+  FTorrentText := TStringList.Create;
+  FTorrentText.LoadFromFile(sFileName);
+  FTorrentStream := TFileStream.Create(sFileName, fmOpenRead);
+  //inherited SetUp;
+end;
+
+procedure TTestTqBTorrent.TearDown;
+begin
+  FTorrentText.Free;
+  FTorrentStream.Free;
+  //inherited TearDown;
+end;
+
+procedure TTestTqBTorrent.TestTorrentCreateFromJSON;
+begin
   try
-    slJSON.LoadFromFile(sFileName);
-    try
-      FqBTorrent := TqBTorrent.Create(slJSON.Text);
-      TestTorrent1Fields;
-    finally
-      FqBTorrent.Free;
-    end;
+    FqBTorrent := TqBTorrent.Create(FTorrentText.Text);
+    TestTorrent1Fields;
   finally
-    slJSON.Free;
+    FqBTorrent.Free;
   end;
 end;
 
 procedure TTestTqBTorrent.TestTorrentCreateFromJSONObject;
-var
-  sFileName: String;
-  slJSON: TStringList;
-  jParser: TJSONParser;
-  jData: TJSONData;
 begin
-  sFileName := ExtractFileDir(ParamStr(0));
-  sFileName := sFileName + '/../tests/data/torrent-1.json';
-  slJSON := TStringList.Create;
+  {$IF FPC_FULLVERSION >= 30002}
+    FjParser := TJSONParser.Create(FTorrentText.Text, [joUTF8, joIgnoreTrailingComma]);
+  {$ELSE}
+    FjParser := TJSONParser.Create(FTorrentText.Text, True);
+  {$ENDIF}
   try
-    slJSON.LoadFromFile(sFileName);
-    {$IF FPC_FULLVERSION >= 30002}
-      jParser := TJSONParser.Create(slJSON.Text, [joUTF8, joIgnoreTrailingComma]);
-    {$ELSE}
-      jParser := TJSONParser.Create(slJSON.Text, True);
-    {$ENDIF}
+    FjData := FjParser.Parse;
     try
-      jData := jParser.Parse;
       try
-        try
-          FqBTorrent := TqBTorrent.Create(jData as TJSONObject);
-          TestTorrent1Fields;
-        finally
-          FqBTorrent.Free;
-        end;
+        FqBTorrent := TqBTorrent.Create(FjData as TJSONObject);
+        TestTorrent1Fields;
       finally
-        jData.Free;
+        FqBTorrent.Free;
       end;
     finally
-      jParser.Free;
+      FjData.Free;
     end;
   finally
-    slJSON.Free;
+    FjParser.Free;
   end;
 end;
 

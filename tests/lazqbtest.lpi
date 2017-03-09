@@ -37,28 +37,29 @@
         <UnitName Value="TestqButils"/>
       </Unit1>
       <Unit2>
-        <Filename Value="../src/qBUtils.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit2>
-      <Unit3>
-        <Filename Value="../src/qBTorrentsTrackers.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit3>
-      <Unit4>
-        <Filename Value="../src/qBTorrents.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit4>
-      <Unit5>
-        <Filename Value="../src/qBTorrentsFiles.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit5>
-      <Unit6>
         <Filename Value="testtqbtorrents.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="TestTqBTorrents"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="testtqbtorrent.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="TestTqBTorrent"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="../src/qBUtils.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="../src/qBTorrents.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="../src/qBTorrentsProperties.pas"/>
+        <IsPartOfProject Value="True"/>
       </Unit6>
       <Unit7>
-        <Filename Value="../src/qBTorrentsProperties.pas"/>
+        <Filename Value="../src/qBTorrentsTrackers.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit7>
       <Unit8>
@@ -66,9 +67,8 @@
         <IsPartOfProject Value="True"/>
       </Unit8>
       <Unit9>
-        <Filename Value="testtqbtorrent.pas"/>
+        <Filename Value="../src/qBTorrentsFiles.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="TestTqBTorrent"/>
       </Unit9>
     </Units>
   </ProjectOptions>
