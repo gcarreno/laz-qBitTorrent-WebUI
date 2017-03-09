@@ -223,7 +223,7 @@ type
     procedure UpdateTorrentTrackers(const aHash: String; const aStream: TStream);
 
     // Torrent Web Seeds
-    // TODO: Evaluate the need for Updates
+    { TODO -ogcarreno -cTqBTorrents : Evaluate the need for Updates }
 
     // Torrent Trackers
     procedure UpdateTorrentFiles(const aHash: String; const aJSON: String);
