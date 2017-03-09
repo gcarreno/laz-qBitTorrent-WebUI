@@ -115,7 +115,8 @@ begin
           'da775e4aaf5635ef72583a391977e5ed6f14617e',
           FqBTorrents[2].Hash);
       finally
-        FjData.Free;
+        if Assigned(FjData) then
+          FjData.Free;
       end;
     finally
       FjParser.Free;
@@ -149,7 +150,8 @@ begin
           'da775e4aaf5635ef72583a391977e5ed6f14617e',
           FqBTorrents[2].Hash);
       finally
-        FjData.Free;
+        if Assigned(FjData) then
+          FjData.Free;
       end;
     finally
       FjParser.Free;

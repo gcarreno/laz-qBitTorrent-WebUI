@@ -90,7 +90,8 @@ begin
         FqBTorrent.Free;
       end;
     finally
-      FjData.Free;
+      if Assigned(FjData) then
+        FjData.Free;
     end;
   finally
     FjParser.Free;

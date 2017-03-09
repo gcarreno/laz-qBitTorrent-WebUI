@@ -4,9 +4,7 @@ program lazqbtest;
 
 uses
   Classes, consoletestrunner,
-  TestqButils,
-  TestTqBTorrents,
-  TestTqBTorrent,
+  TestqButils, TestTqBTorrents, TestTqBTorrent,
   qBTorrents, qBTorrentsFiles, qBTorrentsProperties, qBTorrentsTrackers,
   qBTorrentsWebSeeds, qBUtils;
 
