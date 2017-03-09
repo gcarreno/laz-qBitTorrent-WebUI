@@ -223,7 +223,7 @@ type
     procedure UpdateTorrentTrackers(const aHash: String; const aStream: TStream);
 
     // Torrent Web Seeds
-    { TODO -ogcarreno -cTqBTorrents : Evaluate the need for Updates }
+    { TODO 99 -ogcarreno -cTqBTorrents : Evaluate the need for Updates }
 
     // Torrent Trackers
     procedure UpdateTorrentFiles(const aHash: String; const aJSON: String);
@@ -742,31 +742,21 @@ end;
 
 procedure TqBTorrents.UpdateTorrents(const aJSONArray: TJSONArray);
 var
-  index, index1: Integer;
-  oTorrent: TqBTorrent;
-  jData: TJSONData;
+  jDataEnum: TJSONEnum;
+  sHash: String;
 begin
-  for index := 0 to aJSONArray.Count - 1 do
+  for jDataEnum in aJSONArray do
   begin
-    jData := aJSONArray[index];
-    oTorrent := nil;
-    if jData.JSONType = jtObject then
+    if jDataEnum.Value.JSONType = jtObject then
     begin
-      for index1 := 0 to Count - 1 do
+      sHash := TJSONObject(jDataEnum.Value).Get('hash', '');
+      if HasTorrentHASH(sHash) then
       begin
-        oTorrent := Items[index1];
-        if oTorrent.Hash = TJSONObject(jData).Get('hash', '') then
-        begin
-          break;
-        end;
-      end;
-      if Assigned(oTorrent) then
-      begin
-        oTorrent.Load(jData as TJSONObject);
+        Hashes[sHash].Load(jDataEnum.Value as TJSONObject);
       end
       else
       begin
-        Add(TqBTorrent.Create(jData as TJSONObject));
+        Add(TqBTorrent.Create(jDataEnum.Value as TJSONObject));
       end;
     end;
   end;
@@ -799,15 +789,15 @@ end;
 
 procedure TqBTorrents.UpdateTorrent(const aHash: String; const aJSON: String);
 var
-  index: Integer;
+  oTorrent: TqBTorrent;
 begin
   if Length(aHash) <> 40 then
     exit;
-  for index := 0 to Count - 1 do
+  for oTorrent in Self do
   begin
-    if Items[index].Hash = aHash then
+    if oTorrent.Hash = aHash then
     begin
-      Items[index].Load(aJSON);
+      oTorrent.Load(aJSON);
       break;
     end;
   end;
@@ -815,15 +805,15 @@ end;
 
 procedure TqBTorrents.UpdateTorrent(const aHash: String; const aJSONData: TJSONData);
 var
-  index: Integer;
+  oTorrent: TqBTorrent;
 begin
   if Length(aHash) <> 40 then
     exit;
-  for index := 0 to Count - 1 do
+  for oTorrent in Self do
   begin
-    if Items[index].Hash = aHash then
+    if oTorrent.Hash = aHash then
     begin
-      Items[index].Load(aJSONData);
+      oTorrent.Load(aJSONData);
       break;
     end;
   end;
@@ -831,15 +821,15 @@ end;
 
 procedure TqBTorrents.UpdateTorrent(const aHash: String; const aJSONObj: TJSONObject);
 var
-  index: Integer;
+  oTorrent: TqBTorrent;
 begin
   if Length(aHash) <> 40 then
     exit;
-  for index := 0 to Count - 1 do
+  for oTorrent in Self do
   begin
-    if Items[index].Hash = aHash then
+    if oTorrent.Hash = aHash then
     begin
-      Items[index].Load(aJSONObj);
+      oTorrent.Load(aJSONObj);
       break;
     end;
   end;
@@ -847,15 +837,15 @@ end;
 
 procedure TqBTorrents.UpdateTorrent(const aHash: String; const aStream: TStream);
 var
-  index: Integer;
+  oTorrent: TqBTorrent;
 begin
   if Length(aHash) <> 40 then
     exit;
-  for index := 0 to Count - 1 do
+  for oTorrent in Self do
   begin
-    if Items[index].Hash = aHash then
+    if oTorrent.Hash = aHash then
     begin
-      Items[index].Load(aStream);
+      oTorrent.Load(aStream);
       break;
     end;
   end;

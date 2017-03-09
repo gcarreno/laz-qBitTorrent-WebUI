@@ -62,7 +62,9 @@ type
     procedure Load(const aJSONArray: TJSONArray);
     procedure Load(const aStream: TStream);
 
-    { TODO -ogcarreno -cTqBTorrentsWebSeeds : Propbably needs Add and Remove ? }
+    { TODO 99 -ogcarreno -cTqBTorrentsWebSeeds : Propbably needs Add and Remove ? }
+    //procedure Add(const AUrl: String);
+    //procedure Remove(const AUrl: String);
 
     property Items[Index: integer]: String
       read GetByIndex

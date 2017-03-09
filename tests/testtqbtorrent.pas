@@ -36,7 +36,7 @@ implementation
 
 procedure TTestTqBTorrent.TestTorrent1Fields;
 begin
-  { TODO -ogcarreno -cTqBTorrent : Finish the filed list }
+  { TODO 10 -ogcarreno -cTqBTorrent : Finish the filed list }
   AssertEquals('Torrent Hash', '0403fb4728bd788fbcb67e87d6feb241ef38c75a', FqBTorrent.Hash);
   AssertEquals('Torrent Name', 'ubuntu-16.10-desktop-amd64.iso', FqBTorrent.Name);
   AssertEquals('Torrent Size', 1593835520, FqBTorrent.Size);
