@@ -6,8 +6,7 @@ interface
 
 uses
   Classes, SysUtils, DateUtils, fpcunit, testregistry, fpjson,
-  jsonparser, jsonscanner,
-  qBTorrents;
+  qBCommon, qBTorrents;
 
 type
 
@@ -19,7 +18,6 @@ type
 
     FTorrentsText: TStringList;
     FTorrentsStream: TFileStream;
-    FjParser: TJSONParser;
     FjData: TJSONData;
 
     FDataPath: String;
@@ -82,16 +80,7 @@ end;
 procedure TTestTqBTorrents.LoadJSONData(const AFile: String);
 begin
   LoadJSON(AFile);
-{$IF FPC_FULLVERSION >= 30002}
-  FjParser := TJSONParser.Create(FTorrentsText.Text, [joUTF8, joIgnoreTrailingComma]);
-{$ELSE}
-  FjParser := TJSONParser.Create(FTorrentsText.Text, True);
-{$ENDIF}
-  try
-    FjData := FjParser.Parse;
-  finally
-    FjParser.Free;
-  end;
+  FjData := GetJSONData(FTorrentsText.Text);
 end;
 
 procedure TTestTqBTorrents.LoadStream(const AFile: String);

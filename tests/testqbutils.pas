@@ -5,8 +5,8 @@ unit TestqButils;
 interface
 
 uses
-  Classes, SysUtils, fpcunit, testutils, testregistry,
-  qBUtils, qBTorrents, qBTorrentsTrackers, qBTorrentsFiles;
+  Classes, SysUtils, fpcunit, testregistry,
+  qBUtils, qBTorrents, qBTorrentsTrackers;
 
 type
 

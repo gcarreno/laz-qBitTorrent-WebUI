@@ -385,14 +385,26 @@ end;
 
 procedure TqBTorrentsTrackers.LoadTrackers(const aJSONArray: TJSONArray);
 var
+{$IF FPC_FULLVERSION >= 20604}
+  jDataEnum: TJSONEnum;
+{$ELSE}
   index: Integer;
+{$ENDIF}
 begin
   Clear;
+{$IF FPC_FULLVERSION >= 20604}
+  for jDataEnum in aJSONArray do
+  begin
+    if jDataEnum.Value.JSONType = jtObject then
+      Add(TqBTorrentsTracker.Create(jDataEnum.Value as TJSONObject));
+  end;
+{$ELSE}
   for index := 0 to aJSONArray.Count - 1 do
   begin
     if aJSONArray[index].JSONType = jtObject then
       Add(TqBTorrentsTracker.Create(aJSONArray[index] as TJSONObject));
   end;
+{$ENDIF}
 end;
 
 procedure TqBTorrentsTrackers.LoadTrackers(const aStream: TStream);
@@ -435,27 +447,37 @@ end;
 
 procedure TqBTorrentsTrackers.UpdateTrackers(const aJSONArray: TJSONArray);
 var
-  index, index1: Integer;
   oTracker: TqBTorrentsTracker;
+{$IF FPC_FULLVERSION >= 20604}
+  jDataEnum: TJSONEnum;
+{$ELSE}
+  index: Integer;
   jData: TJSONData;
+{$ENDIF}
 begin
+{$IF FPC_FULLVERSION >= 20604}
+  for jDataEnum in aJSONArray do
+  begin
+    if jDataEnum.Value.JSONType = jtObject then
+    begin
+      oTracker := Urls[TJSONObject(jDataEnum.Value).Get('url', '')];
+      if Assigned(oTracker) then
+      begin
+        oTracker.Load(jDataEnum.Value as TJSONObject);
+      end
+      else
+      begin
+        Add(TqBTorrentsTracker.Create(jDataEnum.Value as TJSONObject));
+      end;
+    end;
+  end;
+{$ELSE}
   for index := 0 to aJSONArray.Count - 1 do
   begin
     jData := aJSONArray[index];
     if jData.JSONType = jtObject then
     begin
-      for index1 := 0 to Count - 1 do
-      begin
-        oTracker := Items[index1];
-        if oTracker.Url = TJSONObject(jData).Get('url', '') then
-        begin
-          break;
-        end
-        else
-        begin
-          oTracker:= nil;
-        end;
-      end;
+      oTracker := Urls[TJSONObject(jData).Get('url', '')];
       if Assigned(oTracker) then
       begin
         oTracker.Load(jData as TJSONObject);
@@ -466,6 +488,7 @@ begin
       end;
     end;
   end;
+{$ENDIF}
 end;
 
 procedure TqBTorrentsTrackers.UpdateTrackers(const aStream: TStream);
@@ -485,57 +508,45 @@ end;
 
 procedure TqBTorrentsTrackers.UpdateTracker(const aUrl: String; const aJSON: String);
 var
-  index: Integer;
+  oTracker: TqBTorrentsTracker;
 begin
-  for index := 0 to Count - 1 do
+  oTracker := Urls[aUrl];
+  if Assigned(oTracker) then
   begin
-    if Items[index].Url = aUrl then
-    begin
-      Items[index].Load(aJSON);
-      break;
-    end;
+    oTracker.Load(aJSON);
   end;
 end;
 
 procedure TqBTorrentsTrackers.UpdateTracker(const aUrl: String; const aJSONData: TJSONData);
 var
-  index: Integer;
+  oTracker: TqBTorrentsTracker;
 begin
-  for index := 0 to Count - 1 do
+  oTracker := Urls[aUrl];
+  if Assigned(oTracker) then
   begin
-    if Items[index].Url = aUrl then
-    begin
-      Items[index].Load(aJSONData);
-      break;
-    end;
+    oTracker.Load(aJSONData);
   end;
 end;
 
 procedure TqBTorrentsTrackers.UpdateTracker(const aUrl: String; const aJSONObj: TJSONObject);
 var
-  index: Integer;
+  oTracker: TqBTorrentsTracker;
 begin
-  for index := 0 to Count - 1 do
+  oTracker := Urls[aUrl];
+  if Assigned(oTracker) then
   begin
-    if Items[index].Url = aUrl then
-    begin
-      Items[index].Load(aJSONObj);
-      break;
-    end;
+    oTracker.Load(aJSONObj);
   end;
 end;
 
 procedure TqBTorrentsTrackers.UpdateTracker(const aUrl: String; const aStream: TStream);
 var
-  index: Integer;
+  oTracker: TqBTorrentsTracker;
 begin
-  for index := 0 to Count - 1 do
+  oTracker := Urls[aUrl];
+  if Assigned(oTracker) then
   begin
-    if Items[index].Url = aUrl then
-    begin
-      Items[index].Load(aStream);
-      break;
-    end;
+    oTracker.Load(aStream);
   end;
 end;
 

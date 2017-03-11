@@ -354,14 +354,26 @@ end;
 
 procedure TqBTorrentsFiles.LoadFiles(const aJSONArray: TJSONArray);
 var
+{$IF FPC_FULLVERSION >= 20604}
+  jDataEum: TJSONEnum;
+{$ELSE}
   index: Integer;
+{$ENDIF}
 begin
   Clear;
+{$IF FPC_FULLVERSION >= 20604}
+  for jDataEum in aJSONArray do
+  begin
+    if jDataEum.Value.JSONType = jtObject then
+      Add(TqBTorrentsFile.Create(jDataEum.Value as TJSONObject));
+  end;
+{$ELSE}
   for index := 0 to aJSONArray.Count - 1 do
   begin
     if aJSONArray[index].JSONType = jtObject then
       Add(TqBTorrentsFile.Create(aJSONArray[index] as TJSONObject));
   end;
+{$ENDIF}
 end;
 
 procedure TqBTorrentsFiles.LoadFiles(const aStream: TStream);
@@ -404,30 +416,54 @@ end;
 
 procedure TqBTorrentsFiles.UpdateFiles(const aJSONArray: TJSONArray);
 var
-  index, index1: Integer;
-  oTracker: TqBTorrentsFile;
+  oFile: TqBTorrentsFile;
+{$IF FPC_FULLVERSION >= 20604}
+  jDataEnum: TJSONEnum;
+{$ELSE}
+  index: Integer;
   jData: TJSONData;
+{$ENDIF}
 begin
+{$IF FPC_FULLVERSION >= 20604}
+  for jDataEnum in aJSONArray do
+  begin
+    if jDataEnum.Value.JSONType = jtObject then
+    begin
+      oFile := nil;
+      for oFile in Self do
+      begin
+        if oFile.Name = TJSONObject(jDataEnum.Value).Get('name', '') then
+        begin
+          break;
+        end;
+      end;
+      if Assigned(oFile) then
+      begin
+        oFile.Load(jDataEnum.Value as TJSONObject);
+      end
+      else
+      begin
+        Add(TqBTorrentsFile.Create(jDataEnum.Value as TJSONObject));
+      end;
+    end;
+  end;
+{$ELSE}
   for index := 0 to aJSONArray.Count - 1 do
   begin
     jData := aJSONArray[index];
     if jData.JSONType = jtObject then
     begin
-      for index1 := 0 to Count - 1 do
+      oFile := nil;
+      for oFile in Self do
       begin
-        oTracker := Items[index1];
-        if oTracker.Name = TJSONObject(jData).Get('name', '') then
+        if oFile.Name = TJSONObject(jData).Get('name', '') then
         begin
           break;
-        end
-        else
-        begin
-          oTracker:= nil;
         end;
       end;
-      if Assigned(oTracker) then
+      if Assigned(oFile) then
       begin
-        oTracker.Load(jData as TJSONObject);
+        oFile.Load(jData as TJSONObject);
       end
       else
       begin
@@ -435,6 +471,7 @@ begin
       end;
     end;
   end;
+{$ENDIF}
 end;
 
 procedure TqBTorrentsFiles.UpdateFiles(const aStream: TStream);
@@ -454,57 +491,45 @@ end;
 
 procedure TqBTorrentsFiles.UpdateFile(const aFileName: String; const aJSON: String);
 var
-  index: Integer;
+  oFile: TqBTorrentsFile;
 begin
-  for index := 0 to Count - 1 do
+  oFile := Files[aFileName];
+  if Assigned(oFile) then
   begin
-    if Items[index].Name = aFileName then
-    begin
-      Items[index].Load(aJSON);
-      break;
-    end;
+    oFile.Load(aJSON);
   end;
 end;
 
 procedure TqBTorrentsFiles.UpdateFile(const aFileName: String; const aJSONData: TJSONData);
 var
-  index: Integer;
+  oFile: TqBTorrentsFile;
 begin
-  for index := 0 to Count - 1 do
+  oFile := Files[aFileName];
+  if Assigned(oFile) then
   begin
-    if Items[index].Name = aFileName then
-    begin
-      Items[index].Load(aJSONData);
-      break;
-    end;
+    oFile.Load(aJSONData);
   end;
 end;
 
 procedure TqBTorrentsFiles.UpdateFile(const aFileName: String; const aJSONObj: TJSONObject);
 var
-  index: Integer;
+  oFile: TqBTorrentsFile;
 begin
-  for index := 0 to Count - 1 do
+  oFile := Files[aFileName];
+  if Assigned(oFile) then
   begin
-    if Items[index].Name = aFileName then
-    begin
-      Items[index].Load(aJSONObj);
-      break;
-    end;
+    oFile.Load(aJSONObj);
   end;
 end;
 
 procedure TqBTorrentsFiles.UpdateFile(const aFileName: String; const aStream: TStream);
 var
-  index: Integer;
+  oFile: TqBTorrentsFile;
 begin
-  for index := 0 to Count - 1 do
+  oFile := Files[aFileName];
+  if Assigned(oFile) then
   begin
-    if Items[index].Name = aFileName then
-    begin
-      Items[index].Load(aStream);
-      break;
-    end;
+    oFile.Load(aStream);
   end;
 end;
 

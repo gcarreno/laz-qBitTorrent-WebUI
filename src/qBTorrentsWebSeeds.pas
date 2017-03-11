@@ -38,8 +38,9 @@ type
     FWebSeeds: TStringList;
 
     function GetByIndex(Index: integer): String;
-    function GetCount: Integer;
     procedure SetByIndex(Index: integer; AValue: String);
+
+    function GetCount: Integer;
 
     procedure DoLoadFromJSON(const aJSON: String);
     procedure DoLoadFromJSONData(const aJSONData: TJSONData);
@@ -77,11 +78,6 @@ implementation
 
 { TqBTorrentsWebSeeds }
 
-function TqBTorrentsWebSeeds.GetCount: Integer;
-begin
-  Result := FWebSeeds.Count;
-end;
-
 function TqBTorrentsWebSeeds.GetByIndex(Index: integer): String;
 begin
   Result := FWebSeeds[Index];
@@ -90,6 +86,11 @@ end;
 procedure TqBTorrentsWebSeeds.SetByIndex(Index: integer; AValue: String);
 begin
   FWebSeeds[Index] := AValue;
+end;
+
+function TqBTorrentsWebSeeds.GetCount: Integer;
+begin
+  Result := FWebSeeds.Count;
 end;
 
 procedure TqBTorrentsWebSeeds.DoLoadFromJSON(const aJSON: String);
@@ -129,12 +130,30 @@ procedure TqBTorrentsWebSeeds.DoLoadFromJSONArray(const aJSONArray: TJSONArray);
 const
   csWebSeedsUrl = 'url';
 var
+{$IF FPC_FULLVERSION >= 20604}
+  jDataEnum: TJSONEnum;
+{$ELSE}
   index: Integer;
   jData: TJSONData;
+{$ENDIF}
   jWebSeeds: TJSONObject;
   url: String;
 begin
   FWebSeeds.Clear;
+{$IF FPC_FULLVERSION >= 20604}
+  for jDataEnum in aJSONArray do
+  begin
+    if jDataEnum.Value.JSONType = jtObject then
+    begin
+      jWebSeeds := jDataEnum.Value as TJSONObject;
+      url := jWebSeeds.Get(csWebSeedsUrl, '');
+      if Length(url) > 0 then
+      begin
+        FWebSeeds.Add(url);
+      end;
+    end;
+  end;
+{$ELSE}
   for index := 0 to aJSONArray.Count - 1 do
   begin
     jData := aJSONArray[index];
@@ -148,6 +167,7 @@ begin
       end;
     end;
   end;
+{$ENDIF}
 end;
 
 procedure TqBTorrentsWebSeeds.Load(const aJSONArray: TJSONArray);

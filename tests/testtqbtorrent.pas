@@ -5,7 +5,7 @@ unit TestTqBTorrent;
 interface
 
 uses
-  Classes, SysUtils, fpcunit, testutils, testregistry, fpjson,
+  Classes, SysUtils, fpcunit, testregistry, fpjson,
   jsonparser, jsonscanner,
   qBTorrents;
 

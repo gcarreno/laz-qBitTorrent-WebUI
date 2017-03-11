@@ -641,9 +641,15 @@ end;
 
 procedure TqBTorrents.LoadTorrents(const aJSONArray: TJSONArray);
 var
+{$IF FPC_FULLVERSION >= 20604}
   jDataEnum: TJSONEnum;
+{$ELSE}
+  index: Integer;
+  jData: TJSONData;
+{$ENDIF}
 begin
   Clear;
+{$IF FPC_FULLVERSION >= 20604}
   for jDataEnum in aJSONArray do
   begin
     if jDataEnum.Value.JSONType = jtObject then
@@ -651,6 +657,16 @@ begin
       Add(TqBTorrent.Create(jDataEnum.Value as TJSONObject));
     end;
   end;
+{$ELSE}
+  for index := 0 to aJSONArray.Count - 1 do
+  begin
+    jData := aJSONArray[index];
+    if jData.JSONType = jtObject then
+    begin
+      Add(TqBTorrent.Create(jData as TJSONObject));
+    end;
+  end;
+{$ENDIF}
 end;
 
 procedure TqBTorrents.LoadTorrents(const aStream: TStream);
@@ -693,17 +709,23 @@ end;
 
 procedure TqBTorrents.UpdateTorrents(const aJSONArray: TJSONArray);
 var
+  oTorrent: TqBTorrent;
+{$IF FPC_FULLVERSION >= 20604}
   jDataEnum: TJSONEnum;
-  sHash: String;
+{$ELSE}
+  index: integer;
+  jData: TJSONData;
+{$ENDIF}
 begin
+{$IF FPC_FULLVERSION >= 20604}
   for jDataEnum in aJSONArray do
   begin
     if jDataEnum.Value.JSONType = jtObject then
     begin
-      sHash := TJSONObject(jDataEnum.Value).Get('hash', '');
-      if HasTorrentHASH(sHash) then
+      oTorrent := Hashes[TJSONObject(jDataEnum.Value).Get('hash', '')];
+      if Assigned(oTorrent) then
       begin
-        Hashes[sHash].Load(jDataEnum.Value as TJSONObject);
+        oTorrent.Load(jDataEnum.Value as TJSONObject);
       end
       else
       begin
@@ -711,6 +733,24 @@ begin
       end;
     end;
   end;
+{$ELSE}
+  for index := 0 to aJSONArray.Count - 1 do
+  begin
+    jData := aJSONArray[index];
+    if jData.JSONType = jtObject then
+    begin
+      oTorrent := Hashes[TJSONObject(jData).Get('hash', '')];
+      if Assigned(oTorrent) then
+      begin
+        oTorrent.Load(jData as TJSONObject);
+      end
+      else
+      begin
+        Add(TqBTorrent.Create(jData as TJSONObject));
+      end;
+    end;
+  end;
+{$ENDIF}
 end;
 
 procedure TqBTorrents.UpdateTorrents(const aStream: TStream);
