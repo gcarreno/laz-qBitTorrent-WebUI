@@ -24,12 +24,17 @@ type
 
     FDataPath: String;
 
-    procedure LoadData(const AFile: String);
-    procedure LoadDataStream(const AFile: String);
+    procedure LoadJSON(const AFile: String);
     procedure LoadJSONData(const AFile: String);
+    procedure LoadStream(const AFile: String);
+
+    procedure TestTorrentsLoad;
   protected
-    procedure SetUp; override;
-    procedure TearDown; override;
+    //procedure SetUp; override;
+    //procedure TearDown; override;
+  public
+    constructor Create; override;
+    destructor Destroy; override;
   published
     // Create
     procedure TestTorrentsCreate;
@@ -41,14 +46,18 @@ type
     procedure TestTorrentsLoadFromStream;
 
     // Update Torrents
-    { TODO 1 -ogcarreno -cTqBTorrents -p1 : Complete Update Torrents }
+    { DONE 1 -ogcarreno -cTqBTorrents -p1 : Complete Update Torrents }
     procedure TestTorrentsUpdateFromJSON;
     procedure TestTorrentsUpdateFromJSONData;
     procedure TestTorrentsUpdateFromJSONArray;
-    procedure TestTorrentsUpdateFromSteam;
+    procedure TestTorrentsUpdateFromStream;
 
     // Update Torrent by Hash
     { TODO 2 -ogcarreno -cTqBTorrents : Complete Update Torrent By Hash }
+    procedure TestTorrentUpdateFromJSON;
+    procedure TestTorrentUpdateFromJSONData;
+    procedure TestTorrentUpdateFromJSONObject;
+    procedure TestTorrentUpdateFromStream;
 
     // Delete Torrent by Hash
     { TODO 3 -ogcarreno -cTqBTorrents : Complete Delete Torrent By Hash }
@@ -57,14 +66,11 @@ type
 
 implementation
 
-procedure TTestTqBTorrents.LoadData(const AFile: String);
+procedure TTestTqBTorrents.LoadJSON(const AFile: String);
 begin
-  if not Assigned(FTorrentsText) then
-  begin
-    FTorrentsText := TStringList.Create;
-  end;
   if FileExists(FDataPath + AFile) then
   begin
+    FTorrentsText.Clear;
     FTorrentsText.LoadFromFile(FDataPath + AFile);
   end
   else
@@ -73,17 +79,9 @@ begin
   end;
 end;
 
-procedure TTestTqBTorrents.LoadDataStream(const AFile: String);
-begin
-  if FileExists(FDataPath + AFile) then
-  begin
-    FTorrentsStream := TFileStream.Create(FDataPath + AFile, fmOpenRead);
-  end;
-end;
-
 procedure TTestTqBTorrents.LoadJSONData(const AFile: String);
 begin
-  LoadData(AFile);
+  LoadJSON(AFile);
 {$IF FPC_FULLVERSION >= 30002}
   FjParser := TJSONParser.Create(FTorrentsText.Text, [joUTF8, joIgnoreTrailingComma]);
 {$ELSE}
@@ -96,22 +94,54 @@ begin
   end;
 end;
 
-procedure TTestTqBTorrents.SetUp;
+procedure TTestTqBTorrents.LoadStream(const AFile: String);
 begin
+  if FileExists(FDataPath + AFile) then
+  begin
+    FTorrentsStream := TFileStream.Create(FDataPath + AFile, fmOpenRead);
+  end;
+end;
+
+procedure TTestTqBTorrents.TestTorrentsLoad;
+begin
+  AssertEquals('Loaded torrents 3', 3, FqBTorrents.Count);
+  AssertEquals('Loaded #1 Hash',
+    '0403fb4728bd788fbcb67e87d6feb241ef38c75a',
+    FqBTorrents[0].Hash);
+  AssertEquals('Loaded #2 Hash',
+    '34930674ef3bb9317fb5f263cca830f52685235b',
+    FqBTorrents[1].Hash);
+  AssertEquals('Loaded #3 Hash',
+    'da775e4aaf5635ef72583a391977e5ed6f14617e',
+    FqBTorrents[2].Hash);
+end;
+
+//procedure TTestTqBTorrents.SetUp;
+//begin
+//end;
+//
+//procedure TTestTqBTorrents.TearDown;
+//begin
+//end;
+
+constructor TTestTqBTorrents.Create;
+begin
+  inherited Create;
   FDataPath := ExtractFileDir(ParamStr(0)) + '/../tests/data/';
   FTorrentsText := TStringList.Create;
 end;
 
-procedure TTestTqBTorrents.TearDown;
+destructor TTestTqBTorrents.Destroy;
 begin
   if Assigned(FTorrentsText) then
   begin
-    FTorrentsText.Free;
+    FreeAndNil(FTorrentsText);
   end;
   if Assigned(FTorrentsStream) then
   begin
-    FTorrentsStream.Free;
+    FreeAndNil(FTorrentsStream);
   end;
+  inherited Destroy;
 end;
 
 procedure TTestTqBTorrents.TestTorrentsCreate;
@@ -120,7 +150,7 @@ begin
   try
     AssertEquals('Torrents Count 0', 0, FqBTorrents.Count);
   finally
-    FqBTorrents.Free;
+    FreeAndNil(FqBTorrents);
   end;
 end;
 
@@ -128,20 +158,11 @@ procedure TTestTqBTorrents.TestTorrentsLoadFromJSON;
 begin
   FqBTorrents := TqBTorrents.Create(True);
   try
-    LoadData('torrents.json');
+    LoadJSON('torrents.json');
     FqBTorrents.LoadTorrents(FTorrentsText.Text);
-    AssertEquals('Loaded torrents 3', 3, FqBTorrents.Count);
-    AssertEquals('Loaded #1 Hash',
-      '0403fb4728bd788fbcb67e87d6feb241ef38c75a',
-      FqBTorrents[0].Hash);
-    AssertEquals('Loaded #2 Hash',
-      '34930674ef3bb9317fb5f263cca830f52685235b',
-      FqBTorrents[1].Hash);
-    AssertEquals('Loaded #3 Hash',
-      'da775e4aaf5635ef72583a391977e5ed6f14617e',
-      FqBTorrents[2].Hash);
+    TestTorrentsLoad;
   finally
-    FqBTorrents.Free;
+    FreeAndNil(FqBTorrents);
   end;
 end;
 
@@ -152,22 +173,13 @@ begin
     LoadJSONData('torrents.json');
     try
       FqBTorrents.LoadTorrents(FjData);
-      AssertEquals('Loaded torrents 3', 3, FqBTorrents.Count);
-      AssertEquals('Loaded #1 Hash',
-        '0403fb4728bd788fbcb67e87d6feb241ef38c75a',
-        FqBTorrents[0].Hash);
-      AssertEquals('Loaded #2 Hash',
-        '34930674ef3bb9317fb5f263cca830f52685235b',
-        FqBTorrents[1].Hash);
-      AssertEquals('Loaded #3 Hash',
-        'da775e4aaf5635ef72583a391977e5ed6f14617e',
-        FqBTorrents[2].Hash);
+      TestTorrentsLoad;
     finally
       if Assigned(FjData) then
         FjData.Free;
     end;
   finally
-    FqBTorrents.Free;
+    FreeAndNil(FqBTorrents);
   end;
 end;
 
@@ -176,24 +188,10 @@ begin
   FqBTorrents := TqBTorrents.Create(True);
   try
     LoadJSONData('torrents.json');
-    try
-      FqBTorrents.LoadTorrents(FjData as TJSONArray);
-      AssertEquals('Loaded torrents 3', 3, FqBTorrents.Count);
-      AssertEquals('Loaded #1 Hash',
-        '0403fb4728bd788fbcb67e87d6feb241ef38c75a',
-        FqBTorrents[0].Hash);
-      AssertEquals('Loaded #2 Hash',
-        '34930674ef3bb9317fb5f263cca830f52685235b',
-        FqBTorrents[1].Hash);
-      AssertEquals('Loaded #3 Hash',
-        'da775e4aaf5635ef72583a391977e5ed6f14617e',
-        FqBTorrents[2].Hash);
-    finally
-      if Assigned(FjData) then
-        FjData.Free;
-    end;
+    FqBTorrents.LoadTorrents(FjData as TJSONArray);
+    TestTorrentsLoad;
   finally
-    FqBTorrents.Free;
+    FreeAndNil(FqBTorrents);
   end;
 end;
 
@@ -201,20 +199,12 @@ procedure TTestTqBTorrents.TestTorrentsLoadFromStream;
 begin
   FqBTorrents := TqBTorrents.Create(True);
   try
-    LoadDataStream('torrents.json');
+    LoadStream('torrents.json');
     FqBTorrents.LoadTorrents(FTorrentsStream);
-    AssertEquals('Loaded torrents 3', 3, FqBTorrents.Count);
-    AssertEquals('Loaded #1 Hash',
-      '0403fb4728bd788fbcb67e87d6feb241ef38c75a',
-      FqBTorrents[0].Hash);
-    AssertEquals('Loaded #2 Hash',
-      '34930674ef3bb9317fb5f263cca830f52685235b',
-      FqBTorrents[1].Hash);
-    AssertEquals('Loaded #3 Hash',
-      'da775e4aaf5635ef72583a391977e5ed6f14617e',
-      FqBTorrents[2].Hash);
+    TestTorrentsLoad;
   finally
-    FqBTorrents.Free;
+    FreeAndNil(FTorrentsStream);
+    FreeAndNil(FqBTorrents);
   end;
 end;
 
@@ -222,20 +212,20 @@ procedure TTestTqBTorrents.TestTorrentsUpdateFromJSON;
 begin
   FqBTorrents := TqBTorrents.Create(True);
   try
-    LoadData('torrents.json');
+    LoadJSON('torrents.json');
     FqBTorrents.LoadTorrents(FTorrentsText.Text);
     AssertEquals('Loaded torrents 3', 3, FqBTorrents.Count);
 
-    LoadData('torrents-update-1.json');
+    LoadJSON('torrents-update-1.json');
     FqBTorrents.UpdateTorrents(FTorrentsText.Text);
     AssertEquals('Updated torrents 4', 4, FqBTorrents.Count);
     AssertEquals('Updated torrent 4 Name', 'ubuntu-17.04-desktop-amd64.iso', FqBTorrents[3].Name);
 
-    LoadData('torrents-update-2.json');
+    LoadJSON('torrents-update-2.json');
     FqBTorrents.UpdateTorrents(FTorrentsText.Text);
     AssertEquals('Updated torrent 1 NumComplete', 1337, FqBTorrents[0].NumComplete);
   finally
-    FqBTorrents.Free;
+    FreeAndNil(FqBTorrents);
   end;
 end;
 
@@ -256,7 +246,7 @@ begin
     FqBTorrents.UpdateTorrents(FjData);
     AssertEquals('Updated torrent 1 NumComplete', 1337, FqBTorrents[0].NumComplete);
   finally
-    FqBTorrents.Free;
+    FreeAndNil(FqBTorrents);
   end;
 end;
 
@@ -277,28 +267,90 @@ begin
     FqBTorrents.UpdateTorrents(FjData as TJSONArray);
     AssertEquals('Updated torrent 1 NumComplete', 1337, FqBTorrents[0].NumComplete);
   finally
-    FqBTorrents.Free;
+    FreeAndNil(FqBTorrents);
   end;
 end;
 
-procedure TTestTqBTorrents.TestTorrentsUpdateFromSteam;
+procedure TTestTqBTorrents.TestTorrentsUpdateFromStream;
 begin
   FqBTorrents := TqBTorrents.Create(True);
   try
-    LoadDataStream('torrents.json');
+    LoadStream('torrents.json');
     FqBTorrents.LoadTorrents(FTorrentsStream);
+    FreeAndNil(FTorrentsStream);
     AssertEquals('Loaded torrents 3', 3, FqBTorrents.Count);
 
-    LoadDataStream('torrents-update-1.json');
+    LoadStream('torrents-update-1.json');
     FqBTorrents.UpdateTorrents(FTorrentsStream);
+    FreeAndNil(FTorrentsStream);
     AssertEquals('Updated torrents 4', 4, FqBTorrents.Count);
     AssertEquals('Updated torrent 4 Name', 'ubuntu-17.04-desktop-amd64.iso', FqBTorrents[3].Name);
 
-    LoadDataStream('torrents-update-2.json');
+    LoadStream('torrents-update-2.json');
     FqBTorrents.UpdateTorrents(FTorrentsStream);
+    FreeAndNil(FTorrentsStream);
     AssertEquals('Updated torrent 1 NumComplete', 1337, FqBTorrents[0].NumComplete);
   finally
-    FqBTorrents.Free;
+    FreeAndNil(FqBTorrents);
+  end;
+end;
+
+procedure TTestTqBTorrents.TestTorrentUpdateFromJSON;
+begin
+  FqBTorrents := TqBTorrents.Create(True);
+  try
+    LoadJSON('torrents.json');
+    FqBTorrents.LoadTorrents(FTorrentsText.Text);
+    LoadJSON('torrents-update-3.json');
+    FqBTorrents.UpdateTorrent('0403fb4728bd788fbcb67e87d6feb241ef38c75a', FTorrentsText.Text);
+    AssertEquals('Updated torrent 1 NumComplete', 1337, FqBTorrents[0].NumComplete);
+  finally
+    FreeAndNil(FqBTorrents);
+  end;
+end;
+
+procedure TTestTqBTorrents.TestTorrentUpdateFromJSONData;
+begin
+  FqBTorrents := TqBTorrents.Create(True);
+  try
+    LoadJSONData('torrents.json');
+    FqBTorrents.LoadTorrents(FjData);
+    LoadJSONData('torrents-update-3.json');
+    FqBTorrents.UpdateTorrent('0403fb4728bd788fbcb67e87d6feb241ef38c75a', FjData);
+    AssertEquals('Updated torrent 1 NumComplete', 1337, FqBTorrents[0].NumComplete);
+  finally
+    FreeAndNil(FqBTorrents);
+  end;
+end;
+
+procedure TTestTqBTorrents.TestTorrentUpdateFromJSONObject;
+begin
+  FqBTorrents := TqBTorrents.Create(True);
+  try
+    LoadJSONData('torrents.json');
+    FqBTorrents.LoadTorrents(FjData);
+    LoadJSONData('torrents-update-3.json');
+    FqBTorrents.UpdateTorrent('0403fb4728bd788fbcb67e87d6feb241ef38c75a', FjData as TJSONObject);
+    AssertEquals('Updated torrent 1 NumComplete', 1337, FqBTorrents[0].NumComplete);
+  finally
+    FreeAndNil(FqBTorrents);
+  end;
+end;
+
+procedure TTestTqBTorrents.TestTorrentUpdateFromStream;
+begin
+  FqBTorrents := TqBTorrents.Create(True);
+  try
+    LoadStream('torrents.json');
+    FqBTorrents.LoadTorrents(FTorrentsStream);
+    FreeAndNil(FTorrentsStream);
+
+    LoadStream('torrents-update-3.json');
+    FqBTorrents.UpdateTorrent('0403fb4728bd788fbcb67e87d6feb241ef38c75a', FTorrentsStream);
+    FreeAndNil(FTorrentsStream);
+    AssertEquals('Updated torrent 1 NumComplete', 1337, FqBTorrents[0].NumComplete);
+  finally
+    FreeAndNil(FqBTorrents);
   end;
 end;
 

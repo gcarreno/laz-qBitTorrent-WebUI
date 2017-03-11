@@ -670,14 +670,14 @@ end;
 
 procedure TqBTorrents.LoadTorrents(const aJSONArray: TJSONArray);
 var
-  index: Integer;
+  jDataEnum: TJSONEnum;
 begin
   Clear;
-  for index := 0 to aJSONArray.Count - 1 do
+  for jDataEnum in aJSONArray do
   begin
-    if aJSONArray[index].JSONType = jtObject then
+    if jDataEnum.Value.JSONType = jtObject then
     begin
-      Add(TqBTorrent.Create(aJSONArray[index] as TJSONObject));
+      Add(TqBTorrent.Create(jDataEnum.Value as TJSONObject));
     end;
   end;
 end;
@@ -793,14 +793,9 @@ var
 begin
   if Length(aHash) <> 40 then
     exit;
-  for oTorrent in Self do
-  begin
-    if oTorrent.Hash = aHash then
-    begin
-      oTorrent.Load(aJSON);
-      break;
-    end;
-  end;
+  oTorrent := Hashes[aHash];
+  if Assigned(oTorrent) then
+    oTorrent.Load(aJSON);
 end;
 
 procedure TqBTorrents.UpdateTorrent(const aHash: String; const aJSONData: TJSONData);
@@ -809,14 +804,9 @@ var
 begin
   if Length(aHash) <> 40 then
     exit;
-  for oTorrent in Self do
-  begin
-    if oTorrent.Hash = aHash then
-    begin
-      oTorrent.Load(aJSONData);
-      break;
-    end;
-  end;
+  oTorrent := Hashes[aHash];
+  if Assigned(oTorrent) then
+    oTorrent.Load(aJSONData);
 end;
 
 procedure TqBTorrents.UpdateTorrent(const aHash: String; const aJSONObj: TJSONObject);
@@ -825,14 +815,9 @@ var
 begin
   if Length(aHash) <> 40 then
     exit;
-  for oTorrent in Self do
-  begin
-    if oTorrent.Hash = aHash then
-    begin
-      oTorrent.Load(aJSONObj);
-      break;
-    end;
-  end;
+  oTorrent := Hashes[aHash];
+  if Assigned(oTorrent) then
+    oTorrent.Load(aJSONObj);
 end;
 
 procedure TqBTorrents.UpdateTorrent(const aHash: String; const aStream: TStream);
@@ -841,14 +826,9 @@ var
 begin
   if Length(aHash) <> 40 then
     exit;
-  for oTorrent in Self do
-  begin
-    if oTorrent.Hash = aHash then
-    begin
-      oTorrent.Load(aStream);
-      break;
-    end;
-  end;
+  oTorrent := Hashes[aHash];
+  if Assigned(oTorrent) then
+    oTorrent.Load(aStream);
 end;
 
 procedure TqBTorrents.DeleteTorrent(const aHash: String);
@@ -906,18 +886,13 @@ end;
 
 procedure TqBTorrents.UpdateTorrentProperties(const aHash: String; const aJSONObj: TJSONObject);
 var
-  index: Integer;
+  oTorrent: TqBTorrent;
 begin
   if Length(aHash) <> 40 then
     exit;
-  for index := 0 to Count - 1 do
-  begin
-    if Items[index].Hash = aHash then
-    begin
-      Items[index].Properties.Load(aJSONObj);
-      break;
-    end;
-  end;
+  oTorrent := Hashes[aHash];
+  if Assigned(oTorrent) then
+    oTorrent.Properties.Load(aJSONObj);
 end;
 
 procedure TqBTorrents.UpdateTorrentProperties(const aHash: String; const aStream: TStream);
@@ -949,114 +924,90 @@ end;
 
 procedure TqBTorrents.UpdateTorrentTrackers(const aHash: String; const aJSON: String);
 var
-  index: Integer;
+  oTorrent: TqBTorrent;
 begin
-  for index := 0 to Count - 1 do
-  begin
-    if Items[index].Hash = aHash then
-    begin
-      Items[index].Trackers.UpdateTrackers(aJSON);
-      break;
-    end;
-  end;
+  if Length(aHash) <> 40 then
+    exit;
+  oTorrent := Hashes[aHash];
+  if Assigned(oTorrent) then
+    oTorrent.Trackers.UpdateTrackers(aJSON);
 end;
 
 procedure TqBTorrents.UpdateTorrentTrackers(const aHash: String; const aJSONData: TJSONData);
 var
-  index: Integer;
+  oTorrent: TqBTorrent;
 begin
-  for index := 0 to Count - 1 do
-  begin
-    if Items[index].Hash = aHash then
-    begin
-      Items[index].Trackers.UpdateTrackers(aJSONData);
-      break;
-    end;
-  end;
+  if Length(aHash) <> 40 then
+    exit;
+  oTorrent := Hashes[aHash];
+  if Assigned(oTorrent) then
+    oTorrent.Trackers.UpdateTrackers(aJSONData);
 end;
 
 procedure TqBTorrents.UpdateTorrentTrackers(const aHash: String; const aJSONArray: TJSONArray);
 var
-  index: Integer;
+  oTorrent: TqBTorrent;
 begin
-  for index := 0 to Count - 1 do
-  begin
-    if Items[index].Hash = aHash then
-    begin
-      Items[index].Trackers.UpdateTrackers(aJSONArray);
-      break;
-    end;
-  end;
+  if Length(aHash) <> 40 then
+    exit;
+  oTorrent := Hashes[aHash];
+  if Assigned(oTorrent) then
+    oTorrent.Trackers.UpdateTrackers(aJSONArray);
 end;
 
 procedure TqBTorrents.UpdateTorrentTrackers(const aHash: String; const aStream: TStream);
 var
-  index: Integer;
+  oTorrent: TqBTorrent;
 begin
-  for index := 0 to Count - 1 do
-  begin
-    if Items[index].Hash = aHash then
-    begin
-      Items[index].Trackers.UpdateTrackers(aStream);
-      break;
-    end;
-  end;
+  if Length(aHash) <> 40 then
+    exit;
+  oTorrent := Hashes[aHash];
+  if Assigned(oTorrent) then
+    oTorrent.Trackers.UpdateTrackers(aStream);
 end;
 
 procedure TqBTorrents.UpdateTorrentFiles(const aHash: String; const aJSON: String);
 var
-  index: Integer;
+  oTorrent: TqBTorrent;
 begin
-  for index := 0 to Count - 1 do
-  begin
-    if Items[index].Hash = aHash then
-    begin
-      Items[index].Files.UpdateFiles(aJSON);
-      break;
-    end;
-  end;
+  if Length(aHash) <> 40 then
+    exit;
+  oTorrent := Hashes[aHash];
+  if Assigned(oTorrent) then
+    oTorrent.Files.UpdateFiles(aJSON);
 end;
 
 procedure TqBTorrents.UpdateTorrentFiles(const aHash: String; const aJSONData: TJSONData);
 var
-  index: Integer;
+  oTorrent: TqBTorrent;
 begin
-  for index := 0 to Count - 1 do
-  begin
-    if Items[index].Hash = aHash then
-    begin
-      Items[index].Files.UpdateFiles(aJSONData);
-      break;
-    end;
-  end;
+  if Length(aHash) <> 40 then
+    exit;
+  oTorrent := Hashes[aHash];
+  if Assigned(oTorrent) then
+    oTorrent.Files.UpdateFiles(aJSONData);
 end;
 
 procedure TqBTorrents.UpdateTorrentFiles(const aHash: String; const aJSONArray: TJSONArray);
 var
-  index: Integer;
+  oTorrent: TqBTorrent;
 begin
-  for index := 0 to Count - 1 do
-  begin
-    if Items[index].Hash = aHash then
-    begin
-      Items[index].Files.UpdateFiles(aJSONArray);
-      break;
-    end;
-  end;
+  if Length(aHash) <> 40 then
+    exit;
+  oTorrent := Hashes[aHash];
+  if Assigned(oTorrent) then
+    oTorrent.Files.UpdateFiles(aJSONArray);
 end;
 
 procedure TqBTorrents.UpdateTorrentFiles(const aHash: String; const aStream: TStream);
 var
-  index: Integer;
+  oTorrent: TqBTorrent;
 begin
-  for index := 0 to Count - 1 do
-  begin
-    if Items[index].Hash = aHash then
-    begin
-      Items[index].Files.UpdateFiles(aStream);
-      break;
-    end;
-  end;
+  if Length(aHash) <> 40 then
+    exit;
+  oTorrent := Hashes[aHash];
+  if Assigned(oTorrent) then
+    oTorrent.Files.UpdateFiles(aStream);
 end;
 
 end.
