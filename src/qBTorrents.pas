@@ -28,8 +28,9 @@ unit qBTorrents;
 interface
 
 uses
-  Classes, Contnrs, SysUtils, DateUtils, fpjson, jsonparser, jsonscanner,
-  qBTorrentsProperties, qBTorrentsTrackers, qBTorrentsWebSeeds, qBTorrentsFiles;
+  Classes, Contnrs, SysUtils, DateUtils, fpjson,
+  qBCommon, qBTorrentsProperties, qBTorrentsTrackers, qBTorrentsWebSeeds,
+  qBTorrentsFiles;
 
 type
 { TqBTorrentStates }
@@ -384,26 +385,16 @@ end;
 
 procedure TqBTorrent.DoLoadFromJSON(const aJSON: String);
 var
-  jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IF FPC_FULLVERSION >= 30002}
-  jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
-{$ELSE}
-  jParser := TJSONParser.Create(aJSON, True);
-{$ENDIF}
+  jData := GetJSONData(aJSON);
   try
-    jData := jParser.Parse;
-    try
-      if jData.JSONType = jtObject then
-      begin
-        DoLoadFromJSONObj(jData as TJSONObject);
-      end;
-    finally
-      jData.Free;
+    if jData.JSONType = jtObject then
+    begin
+      DoLoadFromJSONObj(jData as TJSONObject);
     end;
   finally
-    jParser.Free;
+    jData.Free;
   end;
 end;
 
@@ -476,26 +467,16 @@ end;
 
 procedure TqBTorrent.DoLoadFromStream(const aStream: TStream);
 var
-  jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IF FPC_FULLVERSION >= 30002}
-  jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
-{$ELSE}
-  jParser := TJSONParser.Create(aStream, True);
-{$ENDIF}
+  jData := GetJSONData(aStream);
   try
-    jData := jParser.Parse;
-    try
-      if jData.JSONType = jtObject then
-      begin
-        DoLoadFromJSONObj(jData as TJSONObject);
-      end;
-    finally
-      jData.Free;
+    if jData.JSONType = jtObject then
+    begin
+      DoLoadFromJSONObj(jData as TJSONObject);
     end;
   finally
-    jParser.Free;
+    jData.Free;
   end;
 end;
 
@@ -637,26 +618,16 @@ end;
 
 procedure TqBTorrents.LoadTorrents(const aJSON: String);
 var
-  jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IF FPC_FULLVERSION >= 30002}
-  jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
-{$ELSE}
-  jParser := TJSONParser.Create(aJSON, True);
-{$ENDIF}
+  jData := GetJSONData(aJSON);
   try
-    jData := jParser.Parse;
-    try
-      if jData.JSONType = jtArray then
-      begin
-        LoadTorrents(jData as TJSONArray);
-      end;
-    finally
-      jData.Free;
+    if jData.JSONType = jtArray then
+    begin
+      LoadTorrents(jData as TJSONArray);
     end;
   finally
-    jParser.Free;
+    jData.Free;
   end;
 end;
 
@@ -684,51 +655,31 @@ end;
 
 procedure TqBTorrents.LoadTorrents(const aStream: TStream);
 var
-  jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IF FPC_FULLVERSION >= 30002}
-  jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
-{$ELSE}
-  jParser := TJSONParser.Create(aStream, True);
-{$ENDIF}
+  jData := GetJSONData(aStream);
   try
-    jData := jParser.Parse;
-    try
-      if jData.JSONType = jtArray then
-      begin
-        LoadTorrents(jData as TJSONArray);
-      end;
-    finally
-      jData.Free;
+    if jData.JSONType = jtArray then
+    begin
+      LoadTorrents(jData as TJSONArray);
     end;
   finally
-    jParser.Free;
+    jData.Free;
   end;
 end;
 
 procedure TqBTorrents.UpdateTorrents(const aJSON: String);
 var
-  jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IF FPC_FULLVERSION >= 30002}
-  jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
-{$ELSE}
-  jParser := TJSONParser.Create(aJSON, True);
-{$ENDIF}
+  jData := GetJSONData(aJSON);
   try
-    jData := jParser.Parse;
-    try
-      if jData.JSONType = jtArray then
-      begin
-        UpdateTorrents(jData as TJSONArray);
-      end;
-    finally
-      jData.Free;
+    if jData.JSONType = jtArray then
+    begin
+      UpdateTorrents(jData as TJSONArray);
     end;
   finally
-    jParser.Free;
+    jData.Free;
   end;
 end;
 
@@ -764,26 +715,16 @@ end;
 
 procedure TqBTorrents.UpdateTorrents(const aStream: TStream);
 var
-  jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IF FPC_FULLVERSION >= 30002}
-  jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
-{$ELSE}
-  jParser := TJSONParser.Create(aStream, True);
-{$ENDIF}
+  jData := GetJSONData(aStream);
   try
-    jData := jParser.Parse;
-    try
-      if jData.JSONType = jtArray then
-      begin
-        UpdateTorrents(jData as TJSONArray);
-      end;
-    finally
-      jData.Free;
+    if jData.JSONType = jtArray then
+    begin
+      UpdateTorrents(jData as TJSONArray);
     end;
   finally
-    jParser.Free;
+    jData.Free;
   end;
 end;
 
@@ -849,28 +790,18 @@ end;
 
 procedure TqBTorrents.UpdateTorrentProperties(const aHash: String; const aJSON: String);
 var
-  jParser: TJSONParser;
   jData: TJSONData;
 begin
   if Length(aHash) <> 40 then
     exit;
-{$IF FPC_FULLVERSION >= 30002}
-  jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
-{$ELSE}
-  jParser := TJSONParser.Create(aJSON, True);
-{$ENDIF}
+  jData := GetJSONData(aJSON);
   try
-    jData := jParser.Parse;
-    try
-      if jData.JSONType = jtObject then
-      begin
-        UpdateTorrentProperties(aHash, jData as TJSONObject);
-      end;
-    finally
-      jData.Free;
+    if jData.JSONType = jtObject then
+    begin
+      UpdateTorrentProperties(aHash, jData as TJSONObject);
     end;
   finally
-    jParser.Free;
+    jData.Free;
   end;
 end;
 
@@ -897,28 +828,18 @@ end;
 
 procedure TqBTorrents.UpdateTorrentProperties(const aHash: String; const aStream: TStream);
 var
-  jParser: TJSONParser;
   jData: TJSONData;
 begin
   if Length(aHash) <> 40 then
     exit;
-{$IF FPC_FULLVERSION >= 30002}
-  jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
-{$ELSE}
-  jParser := TJSONParser.Create(aStream, True);
-{$ENDIF}
+  jData := GetJSONData(aStream);
   try
-    jData := jParser.Parse;
-    try
-      if jData.JSONType = jtObject then
-      begin
-        UpdateTorrentProperties(aHash, jData as TJSONObject);
-      end;
-    finally
-      jData.Free;
+    if jData.JSONType = jtObject then
+    begin
+      UpdateTorrentProperties(aHash, jData as TJSONObject);
     end;
   finally
-    jParser.Free;
+    jData.Free;
   end;
 end;
 

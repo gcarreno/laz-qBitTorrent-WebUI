@@ -28,7 +28,7 @@ unit qBTorrentsTrackers;
 interface
 
 uses
-  Classes, Contnrs, SysUtils, DateUtils, fpjson, jsonparser, jsonscanner;
+  Classes, Contnrs, SysUtils, DateUtils, fpjson, qBCommon;
 
 type
 
@@ -206,26 +206,16 @@ end;
 
 procedure TqBTorrentsTracker.DoLoadFromJSON(const aJSON: String);
 var
-  jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IF FPC_FULLVERSION >= 30002}
-  jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
-{$ELSE}
-  jParser := TJSONParser.Create(aJSON, True);
-{$ENDIF}
+  jData := GetJSONData(aJSON);
   try
-    jData := jParser.Parse;
-    try
-      if jData.JSONType = jtObject then
-      begin
-        DoLoadFromJSONObj(jData as TJSONObject);
-      end;
-    finally
-      jData.Free;
+    if jData.JSONType = jtObject then
+    begin
+      DoLoadFromJSONObj(jData as TJSONObject);
     end;
   finally
-    jParser.Free;
+    jData.Free;
   end;
 end;
 
@@ -254,26 +244,16 @@ end;
 
 procedure TqBTorrentsTracker.DoLoadFromStream(const aStream: TStream);
 var
-  jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IF FPC_FULLVERSION >= 30002}
-  jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
-{$ELSE}
-  jParser := TJSONParser.Create(aStream, True);
-{$ENDIF}
+  jData := GetJSONData(aStream);
   try
-    jData := jParser.Parse;
-    try
-      if jData.JSONType = jtObject then
-      begin
-        DoLoadFromJSONObj(jData as TJSONObject);
-      end;
-    finally
-      jData.Free;
+    if jData.JSONType = jtObject then
+    begin
+      DoLoadFromJSONObj(jData as TJSONObject);
     end;
   finally
-    jParser.Free;
+    jData.Free;
   end;
 end;
 
@@ -382,22 +362,16 @@ end;
 
 procedure TqBTorrentsTrackers.LoadTrackers(const aJSON: String);
 var
-  jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IF FPC_FULLVERSION >= 30002}
-  jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
-{$ELSE}
-  jParser := TJSONParser.Create(aJSON, True);
-{$ENDIF}
+  jData := GetJSONData(aJSON);
   try
-    jData := jParser.Parse;
     if jData.JSONType = jtArray then
     begin
       LoadTrackers(jData as TJSONArray);
     end;
   finally
-    jParser.Free;
+    jData.Free;
   end;
 end;
 
@@ -423,47 +397,31 @@ end;
 
 procedure TqBTorrentsTrackers.LoadTrackers(const aStream: TStream);
 var
-  jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IF FPC_FULLVERSION >= 30002}
-  jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
-{$ELSE}
-  jParser := TJSONParser.Create(aStream, True);
-{$ENDIF}
+  jData := GetJSONData(aStream);
   try
-    jData := jParser.Parse;
     if jData.JSONType = jtArray then
     begin
       LoadTrackers(jData as TJSONArray);
     end;
   finally
-    jParser.Free;
+    jData.Free;
   end;
 end;
 
 procedure TqBTorrentsTrackers.UpdateTrackers(const aJSON: String);
 var
-  jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IF FPC_FULLVERSION >= 30002}
-  jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
-{$ELSE}
-  jParser := TJSONParser.Create(aJSON, True);
-{$ENDIF}
+  jData := GetJSONData(aJSON);
   try
-    jData := jParser.Parse;
-    try
-      if jData.JSONType = jtArray then
-      begin
-        UpdateTrackers(jData as TJSONArray);
-      end;
-    finally
-      jData.Free;
+    if jData.JSONType = jtArray then
+    begin
+      UpdateTrackers(jData as TJSONArray);
     end;
   finally
-    jParser.Free;
+    jData.Free;
   end;
 end;
 
@@ -512,26 +470,16 @@ end;
 
 procedure TqBTorrentsTrackers.UpdateTrackers(const aStream: TStream);
 var
-  jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IF FPC_FULLVERSION >= 30002}
-  jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
-{$ELSE}
-  jParser := TJSONParser.Create(aStream, True);
-{$ENDIF}
+  jData := GetJSONData(aStream);
   try
-    jData := jParser.Parse;
-    try
-      if jData.JSONType = jtArray then
-      begin
-        UpdateTrackers(jData as TJSONArray);
-      end;
-    finally
-      jData.Free;
+    if jData.JSONType = jtArray then
+    begin
+      UpdateTrackers(jData as TJSONArray);
     end;
   finally
-    jParser.Free;
+    jData.Free;
   end;
 end;
 

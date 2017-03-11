@@ -28,7 +28,7 @@ unit qBTorrentsFiles;
 interface
 
 uses
-  Classes, Contnrs, SysUtils, fpjson, jsonparser, jsonscanner;
+  Classes, Contnrs, SysUtils, fpjson, qBCommon;
 
 type
 
@@ -174,26 +174,16 @@ end;
 
 procedure TqBTorrentsFile.DoLoadFromJSON(const aJSON: String);
 var
-  jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IF FPC_FULLVERSION >= 30002}
-  jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
-{$ELSE}
-  jParser := TJSONParser.Create(aJSON, True);
-{$ENDIF}
+  jData := GetJSONData(aJSON);
   try
-    jData := jParser.Parse;
-    try
-      if jData.JSONType = jtObject then
-      begin
-        DoLoadFromJSONObj(jData as TJSONObject);
-      end;
-    finally
-      jData.Free;
+    if jData.JSONType = jtObject then
+    begin
+      DoLoadFromJSONObj(jData as TJSONObject);
     end;
   finally
-    jParser.Free;
+    jData.Free;
   end;
 end;
 
@@ -222,26 +212,16 @@ end;
 
 procedure TqBTorrentsFile.DoLoadFromStream(const aStream: TStream);
 var
-  jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IF FPC_FULLVERSION >= 30002}
-  jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
-{$ELSE}
-  jParser := TJSONParser.Create(aStream, True);
-{$ENDIF}
+  jData := GetJSONData(aStream);
   try
-    jData := jParser.Parse;
-    try
-      if jData.JSONType = jtObject then
-      begin
-        DoLoadFromJSONObj(jData as TJSONObject);
-      end;
-    finally
-      jData.Free;
+    if jData.JSONType = jtObject then
+    begin
+      DoLoadFromJSONObj(jData as TJSONObject);
     end;
   finally
-    jParser.Free;
+    jData.Free;
   end;
 end;
 
@@ -351,22 +331,16 @@ end;
 
 procedure TqBTorrentsFiles.LoadFiles(const aJSON: String);
 var
-  jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IF FPC_FULLVERSION >= 30002}
-  jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
-{$ELSE}
-  jParser := TJSONParser.Create(aJSON, True);
-{$ENDIF}
+  jData := GetJSONData(aJSON);
   try
-    jData := jParser.Parse;
     if jData.JSONType = jtArray then
     begin
       LoadFiles(jData as TJSONArray);
     end;
   finally
-    jParser.Free;
+    jData.Free;
   end;
 end;
 
@@ -392,47 +366,31 @@ end;
 
 procedure TqBTorrentsFiles.LoadFiles(const aStream: TStream);
 var
-  jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IF FPC_FULLVERSION >= 30002}
-  jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
-{$ELSE}
-  jParser := TJSONParser.Create(aStream, True);
-{$ENDIF}
+  jData := GetJSONData(aStream);
   try
-    jData := jParser.Parse;
     if jData.JSONType = jtArray then
     begin
       LoadFiles(jData as TJSONArray);
     end;
   finally
-    jParser.Free;
+    jData.Free;
   end;
 end;
 
 procedure TqBTorrentsFiles.UpdateFiles(const aJSON: String);
 var
-  jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IF FPC_FULLVERSION >= 30002}
-  jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
-{$ELSE}
-  jParser := TJSONParser.Create(aJSON, True);
-{$ENDIF}
+  jData := GetJSONData(aJSON);
   try
-    jData := jParser.Parse;
-    try
-      if jData.JSONType = jtArray then
-      begin
-        UpdateFiles(jData as TJSONArray);
-      end;
-    finally
-      jData.Free;
+    if jData.JSONType = jtArray then
+    begin
+      UpdateFiles(jData as TJSONArray);
     end;
   finally
-    jParser.Free;
+    jData.Free;
   end;
 end;
 
@@ -481,26 +439,16 @@ end;
 
 procedure TqBTorrentsFiles.UpdateFiles(const aStream: TStream);
 var
-  jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IF FPC_FULLVERSION >= 30002}
-  jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
-{$ELSE}
-  jParser := TJSONParser.Create(aStream, True);
-{$ENDIF}
+  jData := GetJSONData(aStream);
   try
-    jData := jParser.Parse;
-    try
-      if jData.JSONType = jtArray then
-      begin
-        UpdateFiles(jData as TJSONArray);
-      end;
-    finally
-      jData.Free;
+    if jData.JSONType = jtArray then
+    begin
+      UpdateFiles(jData as TJSONArray);
     end;
   finally
-    jParser.Free;
+    jData.Free;
   end;
 end;
 

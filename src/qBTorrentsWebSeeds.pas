@@ -28,7 +28,7 @@ unit qBTorrentsWebSeeds;
 interface
 
 uses
-  Classes, SysUtils, fpjson, jsonparser, jsonscanner;
+  Classes, SysUtils, fpjson, qBCommon;
 
 type
 
@@ -94,26 +94,16 @@ end;
 
 procedure TqBTorrentsWebSeeds.DoLoadFromJSON(const aJSON: String);
 var
-  jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IF FPC_FULLVERSION >= 30002}
-  jParser := TJSONParser.Create(aJSON, [joUTF8, joIgnoreTrailingComma]);
-{$ELSE}
-  jParser := TJSONParser.Create(aJSON, True);
-{$ENDIF}
+  jData := GetJSONData(aJSON);
   try
-    jData := jParser.Parse;
-    try
-      if jData.JSONType = jtArray then
-      begin
-        DoLoadFromJSONArray(jData as TJSONArray);
-      end;
-    finally
-      jData.Free;
+    if jData.JSONType = jtArray then
+    begin
+      DoLoadFromJSONArray(jData as TJSONArray);
     end;
   finally
-    jParser.Free;
+    jData.Free;
   end;
 end;
 
@@ -167,26 +157,16 @@ end;
 
 procedure TqBTorrentsWebSeeds.DoLoadFromStream(const aStream: TStream);
 var
-  jParser: TJSONParser;
   jData: TJSONData;
 begin
-{$IF FPC_FULLVERSION >= 30002}
-  jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
-{$ELSE}
-  jParser := TJSONParser.Create(aStream, True);
-{$ENDIF}
+  jData := GetJSONData(aStream);
   try
-    jData := jParser.Parse;
-    try
-      if jData.JSONType = jtArray then
-      begin
-        DoLoadFromJSONArray(jData as TJSONArray);
-      end;
-    finally
-      jData.Free;
+    if jData.JSONType = jtArray then
+    begin
+      DoLoadFromJSONArray(jData as TJSONArray);
     end;
   finally
-    jParser.Free;
+    jData.Free;
   end;
 end;
 
