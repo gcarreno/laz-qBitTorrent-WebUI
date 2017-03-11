@@ -85,7 +85,7 @@ begin
 {$IF FPC_FULLVERSION >= 30002}
   FjParser := TJSONParser.Create(FTorrentsText.Text, [joUTF8, joIgnoreTrailingComma]);
 {$ELSE}
-  FjParser := TJSONParser.Create(FTorrentText.Text, True);
+  FjParser := TJSONParser.Create(FTorrentsText.Text, True);
 {$ENDIF}
   try
     FjData := FjParser.Parse;
