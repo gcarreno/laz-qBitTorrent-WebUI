@@ -27,9 +27,6 @@ type
     procedure LoadStream(const AFile: String);
 
     procedure TestTorrentsLoad;
-  protected
-    //procedure SetUp; override;
-    //procedure TearDown; override;
   public
     constructor Create; override;
     destructor Destroy; override;
@@ -44,39 +41,33 @@ type
     procedure TestTorrentsLoadFromStream;
 
     // Update Torrents
-    { DONE 1 -ogcarreno -cTqBTorrents -p1 : Complete Update Torrents }
     procedure TestTorrentsUpdateFromJSON;
     procedure TestTorrentsUpdateFromJSONData;
     procedure TestTorrentsUpdateFromJSONArray;
     procedure TestTorrentsUpdateFromStream;
 
     // Update Torrent by Hash
-    { DONE 2 -ogcarreno -cTqBTorrents : Complete Update Torrent By Hash }
     procedure TestTorrentUpdateFromJSON;
     procedure TestTorrentUpdateFromJSONData;
     procedure TestTorrentUpdateFromJSONObject;
     procedure TestTorrentUpdateFromStream;
 
     // Delete Torrent by Hash
-    { DONE 3 -ogcarreno -cTqBTorrents : Complete Delete Torrent By Hash }
     procedure TestTorrentsDelete;
 
     // Update Properties by Hash
-    { DONE 4 -ogcarreno -cTqBTorrents : Complete Update Properties By Hash }
     procedure TestTorrentsUpdatePropertiesFromJSON;
     procedure TestTorrentsUpdatePropertiesFromJSONData;
     procedure TestTorrentsUpdatePropertiesFromJSONObject;
     procedure TestTorrentsUpdatePropertiesFromStream;
 
     // Update Trackers by Hash
-    { DONE 5 -ogcarreno -cTqBTorrents : Complete Update Trackers By Hash }
     procedure TestTorrentsUpdateTrackersFromJSON;
     procedure TestTorrentsUpdateTrackersFromJSONData;
     procedure TestTorrentsUpdateTrackersFromJSONArray;
     procedure TestTorrentsUpdateTrackersFromJSONStream;
 
     // Update Files by Hash
-    { TODO 5 -ogcarreno -cTqBTorrents : Complete Update Files By Hash }
     procedure TestTorrentsUpdateFilesFromJSON;
     procedure TestTorrentsUpdateFilesFromJSONData;
     procedure TestTorrentsUpdateFilesFromJSONArray;
@@ -125,14 +116,6 @@ begin
     'da775e4aaf5635ef72583a391977e5ed6f14617e',
     FqBTorrents[2].Hash);
 end;
-
-//procedure TTestTqBTorrents.SetUp;
-//begin
-//end;
-//
-//procedure TTestTqBTorrents.TearDown;
-//begin
-//end;
 
 constructor TTestTqBTorrents.Create;
 begin

@@ -59,7 +59,7 @@ type
     FProgress: Double;
     FDlSpeed: Integer;
     FUpSpeed: Integer;
-    FPriority: Integer; // -1 if no priority of is seeding
+    FPriority: Integer; // -1 if no priority or is seeding
     FNumSeeds: Integer;
     FNumComplete: Integer;
     FNumLeechs: Integer;
