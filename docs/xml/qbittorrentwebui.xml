@@ -11,25 +11,29 @@
       <descr>
         <p>In this unit you can find an implementation of component to access the WebUI of qBitTorrent.</p>
       </descr>
+      <!-- constant Visibily: default -->
+      <element name="csVersion">
+        <short>Constant that contains the component's version.</short>
+      </element>
       <!-- object Visibility: default -->
       <element name="TqBitTorrentWebUI">
         <short>Implements an interface to access the WebUI of qBitTorrent.</short>
-        <descr />
-        <errors />
-        <seealso />
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBitTorrentWebUI.IsLogged">
         <short>Contains state of Login.</short>
-        <descr />
-        <errors />
-        <seealso />
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- property Visibility: public -->
       <element name="TqBitTorrentWebUI.LoginCookie">
         <short>Cookie value from the Login.</short>
-        <descr />
-        <errors />
+        <descr/>
+        <errors/>
         <seealso>
           <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.Active">TqBitTorrentWebUI.Active</link>
         </seealso>
@@ -37,8 +41,8 @@
       <!-- property Visibility: public -->
       <element name="TqBitTorrentWebUI.Torrents">
         <short>Contains the list of torrents</short>
-        <descr />
-        <errors />
+        <descr/>
+        <errors/>
         <seealso>
           <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.GetTorrents">TqBitTorrentWebUI.GetTorrents</link>
         </seealso>
@@ -46,8 +50,8 @@
       <!-- property Visibility: public -->
       <element name="TqBitTorrentWebUI.APIVersion">
         <short>Contains the version of the API.</short>
-        <descr />
-        <errors />
+        <descr/>
+        <errors/>
         <seealso>
           <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.Active">TqBitTorrentWebUI.Active</link>
         </seealso>
@@ -55,8 +59,8 @@
       <!-- property Visibility: public -->
       <element name="TqBitTorrentWebUI.MinAPIVersion">
         <short>Contains the minimum version the API supports.</short>
-        <descr />
-        <errors />
+        <descr/>
+        <errors/>
         <seealso>
           <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.Active">TqBitTorrentWebUI.Active</link>
         </seealso>
@@ -64,8 +68,8 @@
       <!-- property Visibility: public -->
       <element name="TqBitTorrentWebUI.qBitTorrentVersion">
         <short>Contains the version of the qBitTorrent client.</short>
-        <descr />
-        <errors />
+        <descr/>
+        <errors/>
         <seealso>
           <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.Active">TqBitTorrentWebUI.Active</link>
         </seealso>
@@ -92,7 +96,7 @@
             <li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.qBitTorrentVersion">qBitTorrentVersion</link> property to empty.</li>
           </ul>
         </descr>
-        <errors />
+        <errors/>
         <seealso>
           <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.IsLogged">TqBitTorrentWebUI.IsLogged</link>
           <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.LoginCookie">TqBitTorrentWebUI.LoginCookie</link>
@@ -104,65 +108,65 @@
       <!-- property Visibility: published -->
       <element name="TqBitTorrentWebUI.UserName">
         <short>Username to login to the qBittorrent client.</short>
-        <descr />
-        <errors />
-        <seealso />
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- property Visibility: published -->
       <element name="TqBitTorrentWebUI.Password">
         <short>Password to login to the qBittorrent client.</short>
-        <descr />
-        <errors />
-        <seealso />
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- property Visibility: published -->
       <element name="TqBitTorrentWebUI.Host">
         <short>Host/Address  for the qBittorrent client.</short>
-        <descr />
-        <errors />
-        <seealso />
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- property Visibility: published -->
       <element name="TqBitTorrentWebUI.Port">
         <short>Port  for the qBittorrent client.</short>
-        <descr />
-        <errors />
-        <seealso />
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
 
       <!-- constructor Visibility: public -->
       <element name="TqBitTorrentWebUI.Create">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short/>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBitTorrentWebUI.Create.AOwner">
-        <short />
+        <short/>
       </element>
       <!-- destructor Visibility: public -->
       <element name="TqBitTorrentWebUI.Destroy">
-        <short />
-        <descr />
-        <errors />
-        <seealso />
+        <short/>
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
 
       <!-- procedure Visibility: public -->
       <element name="TqBitTorrentWebUI.Clear">
         <short>Clears all contained torrents and resets API values to the default.</short>
-        <descr />
-        <errors />
-        <seealso />
+        <descr/>
+        <errors/>
+        <seealso/>
       </element>
       <!-- function Visibility: public -->
       <element name="TqBitTorrentWebUI.ExecShutdown">
         <short>Executes the command to shutdown(close) the qBitTorrent client.</short>
-        <descr />
+        <descr/>
         <errors>Will throw an exception if not successfull.</errors>
-        <example file="examples/execshutdown_example.pas" />
-        <seealso />
+        <example file="examples/execshutdown_example.pas"/>
+        <seealso/>
       </element>
       <!-- function result Visibility: default -->
       <element name="TqBitTorrentWebUI.ExecShutdown.Result">
@@ -171,10 +175,10 @@
       <!-- function Visibility: public -->
       <element name="TqBitTorrentWebUI.GetTorrents">
         <short>Queries the API for torrents.</short>
-        <descr />
+        <descr/>
         <errors>Will throw an exception if not successfull.</errors>
-        <example file="examples/gettorrents_example.pas" />
-        <seealso />
+        <example file="examples/gettorrents_example.pas"/>
+        <seealso/>
       </element>
       <!-- function result Visibility: default -->
       <element name="TqBitTorrentWebUI.GetTorrents.Result">
@@ -183,10 +187,10 @@
       <!-- function Visibility: public -->
       <element name="TqBitTorrentWebUI.GetTorrentsFiltered">
         <short>Queries the API for torrents applying a filter.</short>
-        <descr />
+        <descr/>
         <errors>Will throw an exception if not successfull.</errors>
-        <example file="examples/gettorrentsfiltered_example.pas" />
-        <seealso />
+        <example file="examples/gettorrentsfiltered_example.pas"/>
+        <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBitTorrentWebUI.GetTorrentsFiltered.aFilter">
@@ -199,10 +203,10 @@
       <!-- function Visibility: public -->
       <element name="TqBitTorrentWebUI.GetTorrentProperties">
         <short>Queries the API for torrent's properties.</short>
-        <descr />
+        <descr/>
         <errors>Will throw an exception if not successfull.</errors>
-        <example file="examples/gettorrentproperties_example.pas" />
-        <seealso />
+        <example file="examples/gettorrentproperties_example.pas"/>
+        <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBitTorrentWebUI.GetTorrentProperties.aHash">
@@ -215,10 +219,10 @@
       <!-- function Visibility: public -->
       <element name="TqBitTorrentWebUI.GetTorrentTrackers">
         <short>Queries the API for torrent's trackers.</short>
-        <descr />
+        <descr/>
         <errors>Will throw an execption if not successfull.</errors>
-        <example file="examples/gettorrenttrackers_example.pas" />
-        <seealso />
+        <example file="examples/gettorrenttrackers_example.pas"/>
+        <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBitTorrentWebUI.GetTorrentTrackers.aHash">
@@ -231,10 +235,10 @@
       <!-- function Visibility: public -->
       <element name="TqBitTorrentWebUI.GetTorrentWebSeeds">
         <short>Queries the API for torrent's web seeds.</short>
-        <descr />
+        <descr/>
         <errors>Will throw an execption if not successfull.</errors>
-        <example file="examples/gettorrentwebseeds_example.pas" />
-        <seealso />
+        <example file="examples/gettorrentwebseeds_example.pas"/>
+        <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBitTorrentWebUI.GetTorrentWebSeeds.aHash">
@@ -247,10 +251,10 @@
       <!-- function Visibility: public -->
       <element name="TqBitTorrentWebUI.GetTorrentFiles">
         <short>Queries the API for torrent's files.</short>
-        <descr />
+        <descr/>
         <errors>Will throw an execption if not successfull.</errors>
-        <example file="examples/gettorrentfiles_example.pas" />
-        <seealso />
+        <example file="examples/gettorrentfiles_example.pas"/>
+        <seealso/>
       </element>
       <!-- argument Visibility: default -->
       <element name="TqBitTorrentWebUI.GetTorrentFiles.aHash">
