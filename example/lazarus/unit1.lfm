@@ -18,19 +18,19 @@ object frmMain: TfrmMain
     Top = 175
     Width = 752
     Align = alClient
-    Position = 200
+    Position = 300
     SplitterType = pstVertical
     object pssInfo: TPairSplitterSide
       Cursor = crArrow
       Left = 0
-      Height = 200
+      Height = 300
       Top = 0
       Width = 752
       ClientWidth = 752
-      ClientHeight = 200
+      ClientHeight = 300
       object memInfo: TMemo
         Left = 0
-        Height = 180
+        Height = 280
         Top = 20
         Width = 752
         Align = alClient
@@ -52,17 +52,18 @@ object frmMain: TfrmMain
     object pssLog: TPairSplitterSide
       Cursor = crArrow
       Left = 0
-      Height = 193
-      Top = 205
+      Height = 93
+      Top = 305
       Width = 752
       ClientWidth = 752
-      ClientHeight = 193
+      ClientHeight = 93
       object memLog: TMemo
         Left = 0
-        Height = 171
+        Height = 71
         Top = 22
         Width = 752
         Align = alClient
+        ReadOnly = True
         ScrollBars = ssAutoVertical
         TabOrder = 0
       end

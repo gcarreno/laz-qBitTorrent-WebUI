@@ -270,16 +270,18 @@ begin
           begin
             Info(
               Format(
-                #9'Name: %s',
+                #9'%.2d Name: %s',
                 [
+                  index,
                   oTorrent.Files[index].Name
                 ]
               )
             );
             Info(
               Format(
-                #9'Size: %s',
+                #9'%.2d Size: %s',
                 [
+                  index,
                   FormatBytes(oTorrent.Files[index].Size)
                 ]
               )
@@ -550,32 +552,36 @@ begin
           begin
             Info(
               Format(
-                #9'Url: %s',
+                #9'%.2d Url: %s',
                 [
+                  index,
                   oTorrent.Trackers[index].Url
                 ]
               )
             );
             Info(
               Format(
-                #9'Status: %s',
+                #9'%.2d Status: %s',
                 [
+                  index,
                   FormatTrackerStatus(oTorrent.Trackers[index].Status)
                 ]
               )
             );
             Info(
               Format(
-                #9'Peers: %d',
+                #9'%.2d Peers: %d',
                 [
+                  index,
                   oTorrent.Trackers[index].NumPeers
                 ]
               )
             );
             Info(
               Format(
-                #9'Msg: %s',
+                #9'%.2d Msg: %s',
                 [
+                  index,
                   oTorrent.Trackers[index].Msg
                 ]
               )
@@ -632,8 +638,9 @@ begin
           begin
             Info(
               Format(
-                #9'Url: %s',
+                #9'%.2d Url: %s',
                 [
+                  index,
                   oTorrent.WebSeeds[index]
                 ]
               )

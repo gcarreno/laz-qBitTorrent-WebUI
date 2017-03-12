@@ -38,6 +38,12 @@ type
     procedure TestTorrentCreateFromJSONData;
     procedure TestTorrentCreateFromJSONObject;
     procedure TestTorrentCreateFromStream;
+
+    // Load Torrent
+    procedure TestTorrentLoadFromJSON;
+    procedure TestTorrentLoadFromJSONData;
+    procedure TestTorrentLoadFromJSONObject;
+    procedure TestTorrentLoadFromStream;
   end;
 
 implementation
@@ -187,6 +193,55 @@ begin
   try
     LoadStream('torrent-1.json');
     FqBTorrent := TqBTorrent.Create(FTorrentsStream);
+    FreeAndNil(FTorrentsStream);
+    TestTorrent1Fields;
+  finally
+    FqBTorrent.Free;
+  end;
+end;
+
+procedure TTestTqBTorrent.TestTorrentLoadFromJSON;
+begin
+  FqBTorrent := TqBTorrent.Create;
+  try
+    LoadJSON('torrent-1.json');
+    FqBTorrent.Load(FTorrentsText.Text);
+    TestTorrent1Fields;
+  finally
+    FqBTorrent.Free;
+  end;
+end;
+
+procedure TTestTqBTorrent.TestTorrentLoadFromJSONData;
+begin
+  FqBTorrent := TqBTorrent.Create;
+  try
+    LoadJSONData('torrent-1.json');
+    FqBTorrent.Load(FjData);
+    TestTorrent1Fields;
+  finally
+    FqBTorrent.Free;
+  end;
+end;
+
+procedure TTestTqBTorrent.TestTorrentLoadFromJSONObject;
+begin
+  FqBTorrent := TqBTorrent.Create;
+  try
+    LoadJSONData('torrent-1.json');
+    FqBTorrent.Load(FjData as TJSONObject);
+    TestTorrent1Fields;
+  finally
+    FqBTorrent.Free;
+  end;
+end;
+
+procedure TTestTqBTorrent.TestTorrentLoadFromStream;
+begin
+  FqBTorrent := TqBTorrent.Create;
+  try
+    LoadStream('torrent-1.json');
+    FqBTorrent.Load(FTorrentsStream);
     FreeAndNil(FTorrentsStream);
     TestTorrent1Fields;
   finally
