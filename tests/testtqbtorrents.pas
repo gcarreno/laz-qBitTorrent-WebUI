@@ -61,13 +61,26 @@ type
     { DONE 3 -ogcarreno -cTqBTorrents : Complete Delete Torrent By Hash }
     procedure TestTorrentsDelete;
 
-    // Update properties by Hash
-    { TODO 4 -ogcarreno -cTqBTorrents : Complete Update Properties By Hash }
+    // Update Properties by Hash
+    { DONE 4 -ogcarreno -cTqBTorrents : Complete Update Properties By Hash }
     procedure TestTorrentsUpdatePropertiesFromJSON;
     procedure TestTorrentsUpdatePropertiesFromJSONData;
     procedure TestTorrentsUpdatePropertiesFromJSONObject;
     procedure TestTorrentsUpdatePropertiesFromStream;
 
+    // Update Trackers by Hash
+    { DONE 5 -ogcarreno -cTqBTorrents : Complete Update Trackers By Hash }
+    procedure TestTorrentsUpdateTrackersFromJSON;
+    procedure TestTorrentsUpdateTrackersFromJSONData;
+    procedure TestTorrentsUpdateTrackersFromJSONArray;
+    procedure TestTorrentsUpdateTrackersFromJSONStream;
+
+    // Update Files by Hash
+    { TODO 5 -ogcarreno -cTqBTorrents : Complete Update Files By Hash }
+    procedure TestTorrentsUpdateFilesFromJSON;
+    procedure TestTorrentsUpdateFilesFromJSONData;
+    procedure TestTorrentsUpdateFilesFromJSONArray;
+    procedure TestTorrentsUpdateFilesFromStream;
   end;
 
 implementation
@@ -437,6 +450,154 @@ begin
     FreeAndNil(FTorrentsStream);
     AssertEquals('Torrent 1 Porperty Comment', 'Ubuntu CD releases.ubuntu.com', FqBTorrents[0].Properties.Comment);
     AssertEquals('Torrent 1 Porperty SavePath', '/home/user/Downloads/Ubuntu 16.10/', FqBTorrents[0].Properties.SavePath);
+  finally
+    FreeAndNil(FqBTorrents);
+  end;
+end;
+
+procedure TTestTqBTorrents.TestTorrentsUpdateTrackersFromJSON;
+begin
+  FqBTorrents := TqBTorrents.Create(True);
+  try
+    LoadJSON('torrents.json');
+    FqBTorrents.LoadTorrents(FTorrentsText.Text);
+    AssertEquals('Torrent 1 Trackers Empty Count', 0, FqBTorrents[0].Trackers.Count);
+
+    LoadJSON('torrent-1-trackers.json');
+    FqBTorrents.UpdateTorrentTrackers('0403fb4728bd788fbcb67e87d6feb241ef38c75a', FTorrentsText.Text);
+    AssertEquals('Torrent 1 Trackers Count', 2, FqBTorrents[0].Trackers.Count);
+    AssertEquals('Torrent 1 Trackers 1 Url', 'http://torrent.ubuntu.com:6969/announce', FqBTorrents[0].Trackers[0].Url);
+    AssertEquals('Torrent 1 Trackers 2 Url', 'http://ipv6.torrent.ubuntu.com:6969/announce', FqBTorrents[0].Trackers[1].Url);
+  finally
+    FreeAndNil(FqBTorrents);
+  end;
+end;
+
+procedure TTestTqBTorrents.TestTorrentsUpdateTrackersFromJSONData;
+begin
+  FqBTorrents := TqBTorrents.Create(True);
+  try
+    LoadJSONData('torrents.json');
+    FqBTorrents.LoadTorrents(FjData);
+    AssertEquals('Torrent 1 Trackers Empty Count', 0, FqBTorrents[0].Trackers.Count);
+
+    LoadJSONData('torrent-1-trackers.json');
+    FqBTorrents.UpdateTorrentTrackers('0403fb4728bd788fbcb67e87d6feb241ef38c75a', FjData);
+    AssertEquals('Torrent 1 Trackers Count', 2, FqBTorrents[0].Trackers.Count);
+    AssertEquals('Torrent 1 Trackers 1 Url', 'http://torrent.ubuntu.com:6969/announce', FqBTorrents[0].Trackers[0].Url);
+    AssertEquals('Torrent 1 Trackers 2 Url', 'http://ipv6.torrent.ubuntu.com:6969/announce', FqBTorrents[0].Trackers[1].Url);
+  finally
+    FreeAndNil(FqBTorrents);
+  end;
+end;
+
+procedure TTestTqBTorrents.TestTorrentsUpdateTrackersFromJSONArray;
+begin
+  FqBTorrents := TqBTorrents.Create(True);
+  try
+    LoadJSONData('torrents.json');
+    FqBTorrents.LoadTorrents(FjData as TJSONArray);
+    AssertEquals('Torrent 1 Trackers Empty Count', 0, FqBTorrents[0].Trackers.Count);
+
+    LoadJSONData('torrent-1-trackers.json');
+    FqBTorrents.UpdateTorrentTrackers('0403fb4728bd788fbcb67e87d6feb241ef38c75a', FjData as TJSONArray);
+    AssertEquals('Torrent 1 Trackers Count', 2, FqBTorrents[0].Trackers.Count);
+    AssertEquals('Torrent 1 Trackers 1 Url', 'http://torrent.ubuntu.com:6969/announce', FqBTorrents[0].Trackers[0].Url);
+    AssertEquals('Torrent 1 Trackers 2 Url', 'http://ipv6.torrent.ubuntu.com:6969/announce', FqBTorrents[0].Trackers[1].Url);
+  finally
+    FreeAndNil(FqBTorrents);
+  end;
+end;
+
+procedure TTestTqBTorrents.TestTorrentsUpdateTrackersFromJSONStream;
+begin
+  FqBTorrents := TqBTorrents.Create(True);
+  try
+    LoadStream('torrents.json');
+    FqBTorrents.LoadTorrents(FTorrentsStream);
+    FreeAndNil(FTorrentsStream);
+    AssertEquals('Torrent 1 Trackers Empty Count', 0, FqBTorrents[0].Trackers.Count);
+
+    LoadStream('torrent-1-trackers.json');
+    FqBTorrents.UpdateTorrentTrackers('0403fb4728bd788fbcb67e87d6feb241ef38c75a', FTorrentsStream);
+    FreeAndNil(FTorrentsStream);
+    AssertEquals('Torrent 1 Trackers Count', 2, FqBTorrents[0].Trackers.Count);
+    AssertEquals('Torrent 1 Trackers 1 Url', 'http://torrent.ubuntu.com:6969/announce', FqBTorrents[0].Trackers[0].Url);
+    AssertEquals('Torrent 1 Trackers 2 Url', 'http://ipv6.torrent.ubuntu.com:6969/announce', FqBTorrents[0].Trackers[1].Url);
+  finally
+    FreeAndNil(FqBTorrents);
+  end;
+end;
+
+procedure TTestTqBTorrents.TestTorrentsUpdateFilesFromJSON;
+begin
+  FqBTorrents := TqBTorrents.Create(True);
+  try
+    LoadJSON('torrents.json');
+    FqBTorrents.LoadTorrents(FTorrentsText.Text);
+    AssertEquals('Torrent 1 Files Empty Count', 0, FqBTorrents[0].Files.Count);
+
+    LoadJSON('torrent-1-files.json');
+    FqBTorrents.UpdateTorrentFiles('0403fb4728bd788fbcb67e87d6feb241ef38c75a', FTorrentsText.Text);
+    AssertEquals('Torrent 1 Files Count', 1, FqBTorrents[0].Files.Count);
+    AssertEquals('Torrent 1 Files 1 Name', 'ubuntu-16.10-desktop-amd64.iso', FqBTorrents[0].Files[0].Name);
+    AssertEquals('Torrent 1 Files 1 Size', 1593835520, FqBTorrents[0].Files[0].Size);
+  finally
+    FreeAndNil(FqBTorrents);
+  end;
+end;
+
+procedure TTestTqBTorrents.TestTorrentsUpdateFilesFromJSONData;
+begin
+  FqBTorrents := TqBTorrents.Create(True);
+  try
+    LoadJSONData('torrents.json');
+    FqBTorrents.LoadTorrents(FjData);
+    AssertEquals('Torrent 1 Files Empty Count', 0, FqBTorrents[0].Files.Count);
+
+    LoadJSONData('torrent-1-files.json');
+    FqBTorrents.UpdateTorrentFiles('0403fb4728bd788fbcb67e87d6feb241ef38c75a', FjData);
+    AssertEquals('Torrent 1 Files Count', 1, FqBTorrents[0].Files.Count);
+    AssertEquals('Torrent 1 Files 1 Name', 'ubuntu-16.10-desktop-amd64.iso', FqBTorrents[0].Files[0].Name);
+    AssertEquals('Torrent 1 Files 1 Size', 1593835520, FqBTorrents[0].Files[0].Size);
+  finally
+    FreeAndNil(FqBTorrents);
+  end;
+end;
+
+procedure TTestTqBTorrents.TestTorrentsUpdateFilesFromJSONArray;
+begin
+  FqBTorrents := TqBTorrents.Create(True);
+  try
+    LoadJSONData('torrents.json');
+    FqBTorrents.LoadTorrents(FjData as TJSONArray);
+    AssertEquals('Torrent 1 Files Empty Count', 0, FqBTorrents[0].Files.Count);
+
+    LoadJSONData('torrent-1-files.json');
+    FqBTorrents.UpdateTorrentFiles('0403fb4728bd788fbcb67e87d6feb241ef38c75a', FjData as TJSONArray);
+    AssertEquals('Torrent 1 Files Count', 1, FqBTorrents[0].Files.Count);
+    AssertEquals('Torrent 1 Files 1 Name', 'ubuntu-16.10-desktop-amd64.iso', FqBTorrents[0].Files[0].Name);
+    AssertEquals('Torrent 1 Files 1 Size', 1593835520, FqBTorrents[0].Files[0].Size);
+  finally
+    FreeAndNil(FqBTorrents);
+  end;
+end;
+
+procedure TTestTqBTorrents.TestTorrentsUpdateFilesFromStream;
+begin
+  FqBTorrents := TqBTorrents.Create(True);
+  try
+    LoadStream('torrents.json');
+    FqBTorrents.LoadTorrents(FTorrentsStream);
+    FreeAndNil(FTorrentsStream);
+    AssertEquals('Torrent 1 Files Empty Count', 0, FqBTorrents[0].Files.Count);
+
+    LoadStream('torrent-1-files.json');
+    FqBTorrents.UpdateTorrentFiles('0403fb4728bd788fbcb67e87d6feb241ef38c75a', FTorrentsStream);
+    FreeAndNil(FTorrentsStream);
+    AssertEquals('Torrent 1 Files Count', 1, FqBTorrents[0].Files.Count);
+    AssertEquals('Torrent 1 Files 1 Name', 'ubuntu-16.10-desktop-amd64.iso', FqBTorrents[0].Files[0].Name);
+    AssertEquals('Torrent 1 Files 1 Size', 1593835520, FqBTorrents[0].Files[0].Size);
   finally
     FreeAndNil(FqBTorrents);
   end;

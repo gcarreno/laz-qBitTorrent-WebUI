@@ -1,1 +1,9 @@
-[{"is_seed":false,"name":"ubuntu-16.10-desktop-amd64.iso","priority":1,"progress":0,"size":1593835520}]
+[
+    {
+        "is_seed": false,
+        "name": "ubuntu-16.10-desktop-amd64.iso",
+        "priority": 1,
+        "progress": 0,
+        "size": 1593835520
+    }
+]
