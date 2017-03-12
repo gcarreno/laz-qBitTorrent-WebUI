@@ -51,14 +51,22 @@ type
     procedure TestTorrentsUpdateFromStream;
 
     // Update Torrent by Hash
-    { TODO 2 -ogcarreno -cTqBTorrents : Complete Update Torrent By Hash }
+    { DONE 2 -ogcarreno -cTqBTorrents : Complete Update Torrent By Hash }
     procedure TestTorrentUpdateFromJSON;
     procedure TestTorrentUpdateFromJSONData;
     procedure TestTorrentUpdateFromJSONObject;
     procedure TestTorrentUpdateFromStream;
 
     // Delete Torrent by Hash
-    { TODO 3 -ogcarreno -cTqBTorrents : Complete Delete Torrent By Hash }
+    { DONE 3 -ogcarreno -cTqBTorrents : Complete Delete Torrent By Hash }
+    procedure TestTorrentsDelete;
+
+    // Update properties by Hash
+    { TODO 4 -ogcarreno -cTqBTorrents : Complete Update Properties By Hash }
+    procedure TestTorrentsUpdatePropertiesFromJSON;
+    procedure TestTorrentsUpdatePropertiesFromJSONData;
+    procedure TestTorrentsUpdatePropertiesFromJSONObject;
+    procedure TestTorrentsUpdatePropertiesFromStream;
 
   end;
 
@@ -338,6 +346,97 @@ begin
     FqBTorrents.UpdateTorrent('0403fb4728bd788fbcb67e87d6feb241ef38c75a', FTorrentsStream);
     FreeAndNil(FTorrentsStream);
     AssertEquals('Updated torrent 1 NumComplete', 1337, FqBTorrents[0].NumComplete);
+  finally
+    FreeAndNil(FqBTorrents);
+  end;
+end;
+
+procedure TTestTqBTorrents.TestTorrentsDelete;
+begin
+  FqBTorrents := TqBTorrents.Create(True);
+  try
+    LoadJSON('torrents.json');
+    FqBTorrents.LoadTorrents(FTorrentsText.Text);
+    FqBTorrents.DeleteTorrent('0403fb4728bd788fbcb67e87d6feb241ef38c75a');
+    AssertEquals('Delete torrent 1', 2, FqBTorrents.Count);
+    FqBTorrents.DeleteTorrent('34930674ef3bb9317fb5f263cca830f52685235b');
+    AssertEquals('Delete torrent 2', 1, FqBTorrents.Count);
+    FqBTorrents.DeleteTorrent('da775e4aaf5635ef72583a391977e5ed6f14617e');
+    AssertEquals('Delete torrent 3', 0, FqBTorrents.Count);
+  finally
+    FreeAndNil(FqBTorrents);
+  end;
+end;
+
+procedure TTestTqBTorrents.TestTorrentsUpdatePropertiesFromJSON;
+begin
+  FqBTorrents := TqBTorrents.Create(True);
+  try
+    LoadJSON('torrents.json');
+    FqBTorrents.LoadTorrents(FTorrentsText.Text);
+    AssertEquals('Torrent 1 Porperty Empty Comment', '', FqBTorrents[0].Properties.Comment);
+    AssertEquals('Torrent 1 Porperty Empty SavePath', '', FqBTorrents[0].Properties.SavePath);
+
+    LoadJSON('torrent-1-properties.json');
+    FqBTorrents.UpdateTorrentProperties('0403fb4728bd788fbcb67e87d6feb241ef38c75a', FTorrentsText.Text);
+    AssertEquals('Torrent 1 Porperty Comment', 'Ubuntu CD releases.ubuntu.com', FqBTorrents[0].Properties.Comment);
+    AssertEquals('Torrent 1 Porperty SavePath', '/home/user/Downloads/Ubuntu 16.10/', FqBTorrents[0].Properties.SavePath);
+  finally
+    FreeAndNil(FqBTorrents);
+  end;
+end;
+
+procedure TTestTqBTorrents.TestTorrentsUpdatePropertiesFromJSONData;
+begin
+  FqBTorrents := TqBTorrents.Create(True);
+  try
+    LoadJSONData('torrents.json');
+    FqBTorrents.LoadTorrents(FjData);
+    AssertEquals('Torrent 1 Porperty Empty Comment', '', FqBTorrents[0].Properties.Comment);
+    AssertEquals('Torrent 1 Porperty Empty SavePath', '', FqBTorrents[0].Properties.SavePath);
+
+    LoadJSONData('torrent-1-properties.json');
+    FqBTorrents.UpdateTorrentProperties('0403fb4728bd788fbcb67e87d6feb241ef38c75a', FjData);
+    AssertEquals('Torrent 1 Porperty Comment', 'Ubuntu CD releases.ubuntu.com', FqBTorrents[0].Properties.Comment);
+    AssertEquals('Torrent 1 Porperty SavePath', '/home/user/Downloads/Ubuntu 16.10/', FqBTorrents[0].Properties.SavePath);
+  finally
+    FreeAndNil(FqBTorrents);
+  end;
+end;
+
+procedure TTestTqBTorrents.TestTorrentsUpdatePropertiesFromJSONObject;
+begin
+  FqBTorrents := TqBTorrents.Create(True);
+  try
+    LoadJSONData('torrents.json');
+    FqBTorrents.LoadTorrents(FjData as TJSONArray);
+    AssertEquals('Torrent 1 Porperty Empty Comment', '', FqBTorrents[0].Properties.Comment);
+    AssertEquals('Torrent 1 Porperty Empty SavePath', '', FqBTorrents[0].Properties.SavePath);
+
+    LoadJSONData('torrent-1-properties.json');
+    FqBTorrents.UpdateTorrentProperties('0403fb4728bd788fbcb67e87d6feb241ef38c75a', FjData as TJSONObject);
+    AssertEquals('Torrent 1 Porperty Comment', 'Ubuntu CD releases.ubuntu.com', FqBTorrents[0].Properties.Comment);
+    AssertEquals('Torrent 1 Porperty SavePath', '/home/user/Downloads/Ubuntu 16.10/', FqBTorrents[0].Properties.SavePath);
+  finally
+    FreeAndNil(FqBTorrents);
+  end;
+end;
+
+procedure TTestTqBTorrents.TestTorrentsUpdatePropertiesFromStream;
+begin
+  FqBTorrents := TqBTorrents.Create(True);
+  try
+    LoadStream('torrents.json');
+    FqBTorrents.LoadTorrents(FTorrentsStream);
+    FreeAndNil(FTorrentsStream);
+    AssertEquals('Torrent 1 Porperty Empty Comment', '', FqBTorrents[0].Properties.Comment);
+    AssertEquals('Torrent 1 Porperty Empty SavePath', '', FqBTorrents[0].Properties.SavePath);
+
+    LoadStream('torrent-1-properties.json');
+    FqBTorrents.UpdateTorrentProperties('0403fb4728bd788fbcb67e87d6feb241ef38c75a', FTorrentsStream);
+    FreeAndNil(FTorrentsStream);
+    AssertEquals('Torrent 1 Porperty Comment', 'Ubuntu CD releases.ubuntu.com', FqBTorrents[0].Properties.Comment);
+    AssertEquals('Torrent 1 Porperty SavePath', '/home/user/Downloads/Ubuntu 16.10/', FqBTorrents[0].Properties.SavePath);
   finally
     FreeAndNil(FqBTorrents);
   end;
