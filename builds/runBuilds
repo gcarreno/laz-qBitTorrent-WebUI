@@ -39,6 +39,8 @@ rm -f $DIRWIN32$BINWIN
 echo Cleaning win64
 rm -f $DIRWIN64$BINWIN
 
+echo Building v$VERSION
+
 echo Building Linux
 $LAZBUILD --bm=RELEASE $HERE/$LPIFILE 2>&1 > $HERE/$LOGLINUX
 
