@@ -6,14 +6,14 @@ VERSION=`grep "csVersion ="  $HERE/../src/qBitTorrentWebUI.pas | cut -d\' -f2`
 
 LPIFILE=../example/lazarus/project1.lpi
 
-DIRLINUX=$HERE/../bin/linux/x86_64/
+DIRLINUX=$HERE/../bin/linux/x86_64
 BINLINUX=project1
 LOGLINUX=../bin/dist/LogLinux.txt
 
-DIRWIN32=$HERE/../bin/win32/i386/
+DIRWIN32=$HERE/../bin/win32/i386
 LOGWIN32=../bin/dist/LogWin32.txt
 
-DIRWIN64=$HERE/../bin/win64/x86_64/
+DIRWIN64=$HERE/../bin/win64/x86_64
 LOGWIN64=../bin/dist/LogWin64.txt
 
 BINWIN=project1.exe
@@ -39,12 +39,12 @@ rm -f $DIRWIN32$BINWIN
 echo Cleaning win64
 rm -f $DIRWIN64$BINWIN
 
-echo Building v$VERSION
+echo "laz-qBitTorrent-WebUI example v$VERSION"
 
 echo Building Linux
 $LAZBUILD --bm=RELEASE $HERE/$LPIFILE 2>&1 > $HERE/$LOGLINUX
 
-if [ -f $DIRLINUX$BINLINUX ]; then
+if [ -f $DIRLINUX/$BINLINUX ]; then
   echo "  Found Linux"
   pushd $DIRLINUX > /dev/null
   echo -ne "Packaging\n  "
@@ -57,7 +57,7 @@ fi
 echo Building Win32
 $LAZBUILD --bm=Win32 $HERE/$LPIFILE 2>&1 > $HERE/$LOGWIN32
 
-if [ -f $DIRWIN32$BINWIN ]; then
+if [ -f $DIRWIN32/$BINWIN ]; then
   echo "  Found Win32"
   pushd $DIRWIN32 > /dev/null
   echo Packaging
@@ -70,7 +70,7 @@ fi
 echo Building Win64
 $LAZBUILD --bm=Win64 $HERE/$LPIFILE 2>&1 > $HERE/$LOGWIN64
 
-if [ -f $DIRWIN64$BINWIN ]; then
+if [ -f $DIRWIN64/$BINWIN ]; then
   echo "  Found Win64"
   pushd $DIRWIN64 > /dev/null
   echo Packaging
