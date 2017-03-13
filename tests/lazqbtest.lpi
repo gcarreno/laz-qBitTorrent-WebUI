@@ -19,6 +19,7 @@
       <local>
         <FormatVersion Value="1"/>
         <CommandLineParams Value="--format=plain --all"/>
+        <LaunchingApplication PathPlusParams="/usr/bin/gnome-terminal -t 'Lazarus Run Output' -e '$(LazarusDir)/tools/runwait.sh $(TargetCmdLine) --format=plain --all'"/>
       </local>
     </RunParams>
     <RequiredPackages Count="1">

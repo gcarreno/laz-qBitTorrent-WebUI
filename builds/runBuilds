@@ -4,13 +4,21 @@ HERE=`dirname $0`
 
 VERSION=`grep "csVersion ="  $HERE/../src/qBitTorrentWebUI.pas | cut -d\' -f2`
 
+LPIFILE=../example/lazarus/project1.lpi
+
 DIRLINUX=$HERE/../bin/linux/x86_64/
 BINLINUX=project1
+LOGLINUX=../bin/dist/LogLinux.txt
 
 DIRWIN32=$HERE/../bin/win32/i386/
+LOGWIN32=../bin/dist/LogWin32.txt
+
 DIRWIN64=$HERE/../bin/win64/x86_64/
+LOGWIN64=../bin/dist/LogWin64.txt
+
 BINWIN=project1.exe
 
+DISTPATH=../../dist
 LAZBUILD=~/FreePascal/lazarus/lazbuild
 
 #echo $HERE
@@ -32,40 +40,40 @@ echo Cleaning win64
 rm -f $DIRWIN64$BINWIN
 
 echo Building Linux
-$LAZBUILD --bm=RELEASE $HERE/../example/lazarus/project1.lpi 2>&1 > $HERE/../bin/dist/LogLinux.txt
+$LAZBUILD --bm=RELEASE $HERE/$LPIFILE 2>&1 > $HERE/$LOGLINUX
 
 if [ -f $DIRLINUX$BINLINUX ]; then
-  echo Found Linux
+  echo "  Found Linux"
   pushd $DIRLINUX > /dev/null
   echo Packaging
-  tar -v --gzip --create --file ../../dist/example-$VERSION-linux-x86_64.tgz $BINLINUX
+  tar -v --gzip --create --file $DISTPATH/example-$VERSION-linux-x86_64.tgz $BINLINUX
   popd > /dev/null
 else
-  echo Linux NOT found
+  echo "  Linux NOT found"
 fi
 
 echo Building Win32
-$LAZBUILD --bm=Win32 $HERE/../example/lazarus/project1.lpi 2>&1 > $HERE/../bin/dist/LogWin32.txt
+$LAZBUILD --bm=Win32 $HERE/$LPIFILE 2>&1 > $HERE/$LOGWIN32
 
 if [ -f $DIRWIN32$BINWIN ]; then
-  echo Found Win32
+  echo "  Found Win32"
   pushd $DIRWIN32 > /dev/null
   echo Packaging
-  zip  ../../dist/example-$VERSION-win32.zip $BINWIN
+  zip  $DISTPATH/example-$VERSION-win32.zip $BINWIN
   popd > /dev/null
 else
-  echo Win32 NOT found
+  echo "  Win32 NOT found"
 fi
 
 echo Building Win64
-$LAZBUILD --bm=Win64 $HERE/../example/lazarus/project1.lpi 2>&1 > $HERE/../bin/dist/LogWin64.txt
+$LAZBUILD --bm=Win64 $HERE/$LPIFILE 2>&1 > $HERE/$LOGWIN64
 
 if [ -f $DIRWIN64$BINWIN ]; then
-  echo Found Win64
+  echo "  Found Win64"
   pushd $DIRWIN64 > /dev/null
   echo Packaging
-  zip  ../../dist/example-$VERSION-win64.zip $BINWIN
+  zip  $DISTPATH/example-$VERSION-win64.zip $BINWIN
   popd > /dev/null
 else
-  echo Win64 NOT found
+  echo "  Win64 NOT found"
 fi

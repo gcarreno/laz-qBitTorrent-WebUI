@@ -145,10 +145,10 @@ begin
 
   actTestExecShutdown.Enabled := chkFileActive.Checked;
   actTestGetTorrents.Enabled := chkFileActive.Checked;
-  actTestGetTorrentProperties.Enabled := chkFileActive.Checked;
-  actTestGetTorrentTrackers.Enabled := chkFileActive.Checked;
-  actTestGetTorrentWebSeeds.Enabled := chkFileActive.Checked;
-  actTestGetTorrentFiles.Enabled := chkFileActive.Checked;
+  actTestGetTorrentProperties.Enabled := qbttMain.Torrents.Count > 0;
+  actTestGetTorrentTrackers.Enabled := qbttMain.Torrents.Count > 0;
+  actTestGetTorrentWebSeeds.Enabled := qbttMain.Torrents.Count > 0;
+  actTestGetTorrentFiles.Enabled := qbttMain.Torrents.Count > 0;
 end;
 
 procedure TfrmMain.SetEndpoint;
@@ -179,10 +179,10 @@ begin
   actFileSetActive.Enabled := True;
 
   actTestGetTorrents.Enabled := True;
-  actTestGetTorrentProperties.Enabled := True;
-  actTestGetTorrentTrackers.Enabled := True;
-  actTestGetTorrentWebSeeds.Enabled := True;
-  actTestGetTorrentFiles.Enabled := True;
+  actTestGetTorrentProperties.Enabled := qbttMain.Torrents.Count > 0;
+  actTestGetTorrentTrackers.Enabled := qbttMain.Torrents.Count > 0;
+  actTestGetTorrentWebSeeds.Enabled := qbttMain.Torrents.Count > 0;
+  actTestGetTorrentFiles.Enabled := qbttMain.Torrents.Count > 0;
 
   actTestExecShutdown.Enabled := True;
 
