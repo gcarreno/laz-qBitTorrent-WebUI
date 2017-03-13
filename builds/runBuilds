@@ -47,7 +47,7 @@ $LAZBUILD --bm=RELEASE $HERE/$LPIFILE 2>&1 > $HERE/$LOGLINUX
 if [ -f $DIRLINUX$BINLINUX ]; then
   echo "  Found Linux"
   pushd $DIRLINUX > /dev/null
-  echo Packaging
+  echo -ne "Packaging\n  "
   tar -v --gzip --create --file $DISTPATH/example-$VERSION-linux-x86_64.tgz $BINLINUX
   popd > /dev/null
 else
