@@ -26,8 +26,8 @@ type
     procedure LoadJSONData(const AFile: String);
     procedure LoadStream(const AFile: String);
 
-    procedure TestTorrent1EmptyFields;
-    procedure TestTorrent1Fields;
+    procedure TestTorrentEmptyFields;
+    procedure TestTorrentFields;
   public
     constructor Create; override;
     destructor Destroy; override;
@@ -75,9 +75,9 @@ begin
   end;
 end;
 
-procedure TTestTqBTorrent.TestTorrent1EmptyFields;
+procedure TTestTqBTorrent.TestTorrentEmptyFields;
 begin
-  { TODO 1 -ogcarreno -cTqBTorrent : Finish the filed list }
+  { TODO 1 -ogcarreno -cTqBTorrent : Finish the field list }
   AssertEquals('Torrent Hash', '', FqBTorrent.Hash);
   AssertEquals('Torrent Name', '', FqBTorrent.Name);
   AssertEquals('Torrent Size', 0, FqBTorrent.Size);
@@ -102,9 +102,9 @@ begin
   AssertEquals('Torrent Completion On', 0.0, FqBTorrent.CompletionOn);
 end;
 
-procedure TTestTqBTorrent.TestTorrent1Fields;
+procedure TTestTqBTorrent.TestTorrentFields;
 begin
-  { TODO 2 -ogcarreno -cTqBTorrent : Finish the filed list }
+  { TODO 2 -ogcarreno -cTqBTorrent : Finish the field list }
   AssertEquals('Torrent Hash', '0403fb4728bd788fbcb67e87d6feb241ef38c75a', FqBTorrent.Hash);
   AssertEquals('Torrent Name', 'ubuntu-16.10-desktop-amd64.iso', FqBTorrent.Name);
   AssertEquals('Torrent Size', 1593835520, FqBTorrent.Size);
@@ -152,7 +152,7 @@ end;
 procedure TTestTqBTorrent.TestTorrentCreate;
 begin
   FqBTorrent:= TqBTorrent.Create;
-  TestTorrent1EmptyFields;
+  TestTorrentEmptyFields;
 end;
 
 procedure TTestTqBTorrent.TestTorrentCreateFromJSON;
@@ -160,7 +160,7 @@ begin
   try
     LoadJSON('torrent-1.json');
     FqBTorrent := TqBTorrent.Create(FTorrentsText.Text);
-    TestTorrent1Fields;
+    TestTorrentFields;
   finally
     FqBTorrent.Free;
   end;
@@ -171,7 +171,7 @@ begin
   try
     LoadJSONData('torrent-1.json');
     FqBTorrent := TqBTorrent.Create(FjData as TJSONObject);
-    TestTorrent1Fields;
+    TestTorrentFields;
   finally
     FqBTorrent.Free;
   end;
@@ -182,7 +182,7 @@ begin
   try
     LoadJSONData('torrent-1.json');
     FqBTorrent := TqBTorrent.Create(FjData as TJSONObject);
-    TestTorrent1Fields;
+    TestTorrentFields;
   finally
     FqBTorrent.Free;
   end;
@@ -194,7 +194,7 @@ begin
     LoadStream('torrent-1.json');
     FqBTorrent := TqBTorrent.Create(FTorrentsStream);
     FreeAndNil(FTorrentsStream);
-    TestTorrent1Fields;
+    TestTorrentFields;
   finally
     FqBTorrent.Free;
   end;
@@ -206,7 +206,7 @@ begin
   try
     LoadJSON('torrent-1.json');
     FqBTorrent.Load(FTorrentsText.Text);
-    TestTorrent1Fields;
+    TestTorrentFields;
   finally
     FqBTorrent.Free;
   end;
@@ -218,7 +218,7 @@ begin
   try
     LoadJSONData('torrent-1.json');
     FqBTorrent.Load(FjData);
-    TestTorrent1Fields;
+    TestTorrentFields;
   finally
     FqBTorrent.Free;
   end;
@@ -230,7 +230,7 @@ begin
   try
     LoadJSONData('torrent-1.json');
     FqBTorrent.Load(FjData as TJSONObject);
-    TestTorrent1Fields;
+    TestTorrentFields;
   finally
     FqBTorrent.Free;
   end;
@@ -243,7 +243,7 @@ begin
     LoadStream('torrent-1.json');
     FqBTorrent.Load(FTorrentsStream);
     FreeAndNil(FTorrentsStream);
-    TestTorrent1Fields;
+    TestTorrentFields;
   finally
     FqBTorrent.Free;
   end;
