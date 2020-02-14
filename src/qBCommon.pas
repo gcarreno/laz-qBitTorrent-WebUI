@@ -57,6 +57,7 @@ var
   jParser: TJSONParser;
 begin
   Result := nil;
+  aStream.Position:= 0;
 {$IF FPC_FULLVERSION >= 30002}
   jParser := TJSONParser.Create(aStream, [joUTF8, joIgnoreTrailingComma]);
 {$ELSE}
