@@ -1,8 +1,7 @@
 # Part of `travis-lazarus` (https://github.com/nielsAD/travis-lazarus)
 # License: MIT
 
-language: pascal
-sudo: required
+language: generic
 dist: trusty
 
 os:
@@ -13,13 +12,13 @@ env:
   global:
     - WINEPREFIX=~/.winelaz
     - DISPLAY=:99.0
-  matrix:
+  jobs:
     - LAZ_PKG=true  # Use the latest version from the default package manager
     - LAZ_VER=1.4.4 # Use specific (binary) release
     - LAZ_VER=1.6.2
     - LAZ_VER=1.8.2
 
-matrix:
+jobs:
   include:
     - os: linux
       env: LAZ_VER=1.4.4  LAZ_ENV=wine WINEARCH=win32 LAZ_OPT="--os=win32 --cpu=i386"
