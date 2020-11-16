@@ -4,7 +4,7 @@ HERE=`dirname $0`
 
 VERSION=`grep "csVersion ="  $HERE/../src/qBitTorrentWebUI.pas | cut -d\' -f2`
 
-LPIFILE=../example/lazarus/project1.lpi
+LPIFILE=../example/Lazarus/project1.lpi
 
 DIRLINUX=$HERE/../bin/linux/x86_64
 BINLINUX=project1
