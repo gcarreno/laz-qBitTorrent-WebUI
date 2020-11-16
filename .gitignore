@@ -1,9 +1,6 @@
 # laz-qBitTorrent-WebUI project specific
 /bin
 
-# Compiled l10n files: .mo should be ignored
-*.mo
-
 # Uncomment these types if you want even more clean repository. But be careful.
 # It can make harm to an existing project source. Read explanations below.
 #
@@ -50,3 +47,9 @@ backup/
 
 # Castalia statistics file
 *.stat
+
+# Compiled l10n files: .mo should be ignored
+*.mo
+
+# GhostWriter backup files
+*.backup
