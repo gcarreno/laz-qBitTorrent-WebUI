@@ -32,7 +32,7 @@ uses
   qBTorrents, qBTorrentsFilters{, qBTorrentsProperties}{, qBTorrentsTrackers};
 
 const
-  csVersion = '0.16.5.90';
+  csVersion = '0.16.7.0';
 
 type
 { TqBitTorrentWebUI }
@@ -53,6 +53,7 @@ type
     FTorrents: TqBTorrents;
 
     procedure SetActive(aValue: Boolean);
+    function GetVersion: String;
 
     // Authentication
     function DoLogin: Boolean;
@@ -128,6 +129,8 @@ type
       read FPort
       write FPort
       default 8080;
+    property Version: String
+      read GetVersion;
   end;
 
 implementation
@@ -136,6 +139,7 @@ uses
   fpjson, jsonparser, jsonscanner;
 
 const
+  // Current API version: 2.6.0
   csAPIPath = '/api/v2';
 {$IFDEF linux}
   {$IFDEF CPUX64}
@@ -198,6 +202,11 @@ begin
       Clear;
     end;
   end;
+end;
+
+function TqBitTorrentWebUI.GetVersion: String;
+begin
+  Result:= csVersion;
 end;
 
 procedure TqBitTorrentWebUI.Clear;

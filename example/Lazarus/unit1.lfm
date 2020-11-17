@@ -10,8 +10,9 @@ object frmMain: TfrmMain
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
+  LCLVersion = '2.1.0.0'
   object psMain: TPairSplitter
-    Cursor = crVSplit
+    Cursor = crDefault
     Left = 0
     Height = 352
     Top = 216

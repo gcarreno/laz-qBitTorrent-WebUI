@@ -123,6 +123,7 @@ begin
 {$IFDEF WINDOWS}
   actFileExit.ShortCut := KeyToShortCut(VK_X, [ssAlt]);
 {$ENDIF}
+  Caption:= 'qBitTorrent Web UI v'+ qbttMain.Version;
   edtHost.Text := qbttMain.Host;
   edtPort.Value := qbttMain.Port;
   edtLogin.Text := qbttMain.UserName;

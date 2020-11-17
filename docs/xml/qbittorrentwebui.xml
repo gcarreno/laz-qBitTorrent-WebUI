@@ -43,8 +43,7 @@
         <short>Contains the list of torrents</short>
         <descr/>
         <errors/>
-        <seealso>
-          <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.GetTorrents">TqBitTorrentWebUI.GetTorrents</link>
+        <seealso><link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.GetTorrents">TqBitTorrentWebUI.GetTorrents</link>
         </seealso>
       </element>
       <!-- property Visibility: public -->
@@ -77,32 +76,12 @@
       <!-- property Visibility: published -->
       <element name="TqBitTorrentWebUI.Active">
         <short>If the component is Active or not.</short>
-        <descr>
-          <p>Changing this property triggers a series of internal events.</p>
-          <p>If you set it to <var>True</var> the component will Login and:</p>
-          <ul>
-            <li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.IsLogged">IsLogged</link> property <var>True</var>.</li>
-            <li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.LoginCookie">LoginCookie</link> property to what the API returns.</li>
-            <li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.APIVersion">APIVersion</link> property to what the API returns.</li>
-            <li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.MinAPIVersion">MinAPIVersion</link> property to what the API returns.</li>
-            <li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.qBitTorrentVersion">qBitTorrentVersion</link> property to what the API returns.</li>
-          </ul>
-          <p>If you set it to <var>False</var> the component will Logout and:</p>
-          <ul>
-            <li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.IsLogged">IsLogged</link> property to <var>False</var>.</li>
-            <li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.LoginCookie">LoginCookie</link> property to empty.</li>
-            <li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.APIVersion">APIVersion</link> property to -1.</li>
-            <li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.MinAPIVersion">MinAPIVersion</link> property to -1.</li>
-            <li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.qBitTorrentVersion">qBitTorrentVersion</link> property to empty.</li>
+        <descr><p>Changing this property triggers a series of internal events.</p><p>If you set it to <var>True</var> the component will Login and:</p><ul><li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.IsLogged">IsLogged</link> property <var>True</var>.</li><li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.LoginCookie">LoginCookie</link> property to what the API returns.</li><li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.APIVersion">APIVersion</link> property to what the API returns.</li><li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.MinAPIVersion">MinAPIVersion</link> property to what the API returns.</li><li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.qBitTorrentVersion">qBitTorrentVersion</link> property to what the API returns.</li>
+          </ul><p>If you set it to <var>False</var> the component will Logout and:</p><ul><li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.IsLogged">IsLogged</link> property to <var>False</var>.</li><li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.LoginCookie">LoginCookie</link> property to empty.</li><li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.APIVersion">APIVersion</link> property to -1.</li><li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.MinAPIVersion">MinAPIVersion</link> property to -1.</li><li>Set the <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.qBitTorrentVersion">qBitTorrentVersion</link> property to empty.</li>
           </ul>
         </descr>
         <errors/>
-        <seealso>
-          <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.IsLogged">TqBitTorrentWebUI.IsLogged</link>
-          <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.LoginCookie">TqBitTorrentWebUI.LoginCookie</link>
-          <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.APIVersion">TqBitTorrentWebUI.APIVersion</link>
-          <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.MinAPIVersion">TqBitTorrentWebUI.MinAPIVersion</link>
-          <link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.qBitTorrentVersion">TqBitTorrentWebUI.qBitTorrentVersion</link>
+        <seealso><link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.IsLogged">TqBitTorrentWebUI.IsLogged</link><link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.LoginCookie">TqBitTorrentWebUI.LoginCookie</link><link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.APIVersion">TqBitTorrentWebUI.APIVersion</link><link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.MinAPIVersion">TqBitTorrentWebUI.MinAPIVersion</link><link id="#lazqBitTorrentWebUI.qBitTorrentWebUI.TqBitTorrentWebUI.qBitTorrentVersion">TqBitTorrentWebUI.qBitTorrentVersion</link>
         </seealso>
       </element>
       <!-- property Visibility: published -->
@@ -176,7 +155,8 @@
       <element name="TqBitTorrentWebUI.GetTorrents">
         <short>Queries the API for torrents.</short>
         <descr/>
-        <errors>Will throw an exception if not successfull.</errors>
+        <errors>Will throw an exception if not successfull.
+</errors>
         <example file="examples/gettorrents_example.pas"/>
         <seealso/>
       </element>
@@ -252,7 +232,8 @@
       <element name="TqBitTorrentWebUI.GetTorrentFiles">
         <short>Queries the API for torrent's files.</short>
         <descr/>
-        <errors>Will throw an execption if not successfull.</errors>
+        <errors>Will throw an execption if not successfull.
+</errors>
         <example file="examples/gettorrentfiles_example.pas"/>
         <seealso/>
       </element>
@@ -265,6 +246,12 @@
         <short>True if query of torrent's files succeded.</short>
       </element>
 
+    <element name="TqBitTorrentWebUI.Version"><short>Component Version.</short>
+      </element><element name="TqBitTorrentWebUI.PauseTorrentsAll"><short>Pauses all torrents.</short>
+      </element><element name="TqBitTorrentWebUI.PauseTorrents"><short>Pauses a list of torrents.</short>
+      </element><element name="TqBitTorrentWebUI.ResumeTorrentsAll"><short>Resumes all torrents.</short>
+      </element><element name="TqBitTorrentWebUI.ResumeTorrents"><short>Resumes a list of torrents.</short>
+      </element>
     </module>
   </package>
 </fpdoc-descriptions>

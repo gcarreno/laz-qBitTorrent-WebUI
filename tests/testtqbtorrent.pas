@@ -125,8 +125,12 @@ begin
   AssertEquals('Torrent Super Seeding', False, FqBTorrent.SuperSeeding);
   AssertEquals('Torrent Force Start', False, FqBTorrent.ForceStart);
   AssertEquals('Torrent Save Path', '/home/user/Downloads/Ubuntu 16.10/', FqBTorrent.SavePath);
-  AssertEquals('Torrent Added On', StrToDateTime('5-3-17 22:56:05'), FqBTorrent.AddedOn);
-  AssertEquals('Torrent Completion On', 0.0, FqBTorrent.CompletionOn);
+  AssertEquals('Torrent Added On',
+    ComposeDateTime(
+      EncodeDate(2017,3,5),
+      EncodeTime(22,56,05,0)),
+    FqBTorrent.AddedOn);
+  AssertEquals('Torrent Completion On', 0.0, FqBTorrent.CompletionOn);Now
 end;
 
 constructor TTestTqBTorrent.Create;
