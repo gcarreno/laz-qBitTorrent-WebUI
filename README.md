@@ -3,6 +3,10 @@
 
 A Lazarus component to access the qBitTorrent Web UI
 
+## Implements API version 2.6.0
+
+Documentation on [v2.6.0](https://github.com/qbittorrent/qBittorrent/wiki/WebUI-API-(qBittorrent-4.1)
+
 ## Dependencies
 
 ### Ararat Synapse
