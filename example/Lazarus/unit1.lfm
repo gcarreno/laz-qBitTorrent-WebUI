@@ -1,22 +1,21 @@
 object frmMain: TfrmMain
   Left = 419
-  Height = 568
+  Height = 555
   Top = 115
-  Width = 1048
+  Width = 1033
   Caption = 'frmMain'
-  ClientHeight = 568
-  ClientWidth = 1048
+  ClientHeight = 555
+  ClientWidth = 1033
   Menu = mmMain
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
-  LCLVersion = '2.1.0.0'
   object psMain: TPairSplitter
     Cursor = crDefault
     Left = 0
-    Height = 352
+    Height = 339
     Top = 216
-    Width = 1048
+    Width = 1033
     Align = alClient
     Position = 300
     SplitterType = pstVertical
@@ -25,14 +24,14 @@ object frmMain: TfrmMain
       Left = 0
       Height = 300
       Top = 0
-      Width = 1048
-      ClientWidth = 1048
+      Width = 1033
+      ClientWidth = 1033
       ClientHeight = 300
       object memInfo: TMemo
         Left = 0
         Height = 280
         Top = 20
-        Width = 1048
+        Width = 1033
         Align = alClient
         ReadOnly = True
         ScrollBars = ssAutoVertical
@@ -42,7 +41,7 @@ object frmMain: TfrmMain
         Left = 0
         Height = 20
         Top = 0
-        Width = 1048
+        Width = 1033
         Align = alTop
         Caption = 'Info:'
         FocusControl = memInfo
@@ -52,16 +51,16 @@ object frmMain: TfrmMain
     object pssLog: TPairSplitterSide
       Cursor = crArrow
       Left = 0
-      Height = 47
+      Height = 34
       Top = 305
-      Width = 1048
-      ClientWidth = 1048
-      ClientHeight = 47
+      Width = 1033
+      ClientWidth = 1033
+      ClientHeight = 34
       object memLog: TMemo
         Left = 0
         Height = 33
         Top = 22
-        Width = 1048
+        Width = 1033
         Align = alClient
         ReadOnly = True
         ScrollBars = ssAutoVertical
@@ -71,7 +70,7 @@ object frmMain: TfrmMain
         Left = 0
         Height = 22
         Top = 0
-        Width = 1048
+        Width = 1033
         Align = alTop
         Caption = 'Log:'
         TabOrder = 1
@@ -82,13 +81,13 @@ object frmMain: TfrmMain
     Left = 0
     Height = 216
     Top = 0
-    Width = 1048
+    Width = 1033
     Align = alTop
     ClientHeight = 216
-    ClientWidth = 1048
+    ClientWidth = 1033
     TabOrder = 1
     object btnFileExit: TButton
-      Left = 959
+      Left = 944
       Height = 25
       Top = 8
       Width = 75
@@ -100,7 +99,7 @@ object frmMain: TfrmMain
       Left = 8
       Height = 17
       Top = 64
-      Width = 1025
+      Width = 1010
       Caption = ' Torrents '
       Anchors = [akTop, akLeft, akRight]
       Font.Style = [fsBold]
@@ -110,14 +109,14 @@ object frmMain: TfrmMain
       Left = 9
       Height = 17
       Top = 152
-      Width = 1025
+      Width = 1010
       Caption = 'Application'
       Anchors = [akTop, akLeft, akRight]
       Font.Style = [fsBold]
       ParentFont = False
     end
     object btnTestExecShutdown: TButton
-      Left = 949
+      Left = 934
       Height = 25
       Top = 176
       Width = 85
@@ -308,7 +307,22 @@ object frmMain: TfrmMain
       object mnuTestGetTorrentFiles: TMenuItem
         Action = actTestGetTorrentFiles
       end
-      object mnuSep2: TMenuItem
+      object mnuTestSep1: TMenuItem
+        Caption = '-'
+      end
+      object mnuTestPauseTorrentsAll: TMenuItem
+        Action = actTestPauseTorrentsAll
+      end
+      object mnuTestPauseTorrent: TMenuItem
+        Action = actTestPauseTorrent
+      end
+      object mnuTestResumeTorrentsAll: TMenuItem
+        Action = actTestResumeTorrentsAll
+      end
+      object mnuTestResumeTorrent: TMenuItem
+        Action = actTestResumeTorrent
+      end
+      object mnuTestSep2: TMenuItem
         Caption = '-'
       end
       object mnuTestExecShutdown: TMenuItem
