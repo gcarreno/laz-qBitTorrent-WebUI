@@ -343,7 +343,7 @@ begin
   begin
     if FHttp.ResultCode = 200 then
     begin
-      sVer := TStringStream.Create;
+      sVer := TStringStream.Create('');
       FHttp.Document.SaveToStream(sVer);
       Result := sVer.DataString;
       sVer.Free;
@@ -386,7 +386,7 @@ begin
   begin
     if FHttp.ResultCode = 200 then
     begin
-      sVer := TStringStream.Create;
+      sVer := TStringStream.Create('');
       FHttp.Document.SaveToStream(sVer);
       Result := sVer.DataString;
       sVer.Free;
