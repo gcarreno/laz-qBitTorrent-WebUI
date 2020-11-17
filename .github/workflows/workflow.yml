@@ -4,8 +4,9 @@ on:
   pull_request:
   push:
     paths-ignore:
-    - "README.md"
-    - "LICENSE"
+      - README.md
+      - LICENSE
+      - builds/runBuilds
     branches:
       - master
       - releases/*

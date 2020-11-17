@@ -2,13 +2,17 @@
 
 HERE=`dirname $0`
 
-VERSION=`grep "csVersion ="  $HERE/../src/qBitTorrentWebUI.pas | cut -d\' -f2`
+VERSION=$(grep "csVersion ="  $HERE/../src/qBitTorrentWebUI.pas | cut -d\' -f2)
 
 LPIFILE=../example/Lazarus/project1.lpi
 
-DIRLINUX=$HERE/../bin/linux/x86_64
+DIRLIN64=$HERE/../bin/linux/x86_64
+LOGLIN64=../bin/dist/LogLin64.txt
+
+DIRLIN32=$HERE/../bin/linux/i386
+LOGLIN32=../bin/dist/LogLin32.txt
+
 BINLINUX=project1
-LOGLINUX=../bin/dist/LogLinux.txt
 
 DIRWIN32=$HERE/../bin/win32/i386
 LOGWIN32=../bin/dist/LogWin32.txt
@@ -22,7 +26,8 @@ DISTPATH=../../dist
 LAZBUILD=~/FreePascal/lazarus/lazbuild
 
 #echo $HERE
-#echo $DIRLINUX$BINLINUX
+#echo $DIRLIN32$BINLIN32
+#echo $DIRLIN64$BINLIN64
 #echo $DIRWIN32$BINWIN
 #echo $DIRWIN64$BINWIN
 #echo $VERSION
@@ -30,8 +35,11 @@ LAZBUILD=~/FreePascal/lazarus/lazbuild
 echo Cleaning dist
 rm $HERE/../bin/dist/*
 
-echo Cleaning linux
-rm -f $DIRLINUX$BINLINUX
+#echo Cleaning linux 32
+#rm -f $DIRLIN32$BINLINUX
+
+echo Cleaning linux 64
+rm -f $DIRLIN64$BINLINUX
 
 echo Cleaning win32
 rm -f $DIRWIN32$BINWIN
@@ -41,21 +49,34 @@ rm -f $DIRWIN64$BINWIN
 
 echo "laz-qBitTorrent-WebUI example v$VERSION"
 
-echo Building Linux
-$LAZBUILD --bm=RELEASE $HERE/$LPIFILE 2>&1 > $HERE/$LOGLINUX
+#echo Building Linux 32
+#$LAZBUILD -B -r --bm=Release --os=Linux --cpu=i386 $HERE/$LPIFILE 2>&1 > $HERE/$LOGLIN32
 
-if [ -f $DIRLINUX/$BINLINUX ]; then
-  echo "  Found Linux"
-  pushd $DIRLINUX > /dev/null
+#if [ -f $DIRLIN32/$BINLINUX ]; then
+#  echo "  Found Linux 32"
+#  pushd $DIRLIN32 > /dev/null
+#  echo -ne "Packaging\n  "
+#  tar -v --gzip --create --file $DISTPATH/example-$VERSION-linux-i386.tgz $BINLINUX
+#  popd > /dev/null
+#else
+#  echo "  Linux 32 NOT found"
+#fi
+
+echo Building Linux 64
+$LAZBUILD -B -r --bm=Release --os=Linux --cpu=x86_64 $HERE/$LPIFILE 2>&1 > $HERE/$LOGLIN64
+
+if [ -f $DIRLIN64/$BINLINUX ]; then
+  echo "  Found Linux 64"
+  pushd $DIRLIN64 > /dev/null
   echo -ne "Packaging\n  "
   tar -v --gzip --create --file $DISTPATH/example-$VERSION-linux-x86_64.tgz $BINLINUX
   popd > /dev/null
 else
-  echo "  Linux NOT found"
+  echo "  Linux 64 NOT found"
 fi
 
 echo Building Win32
-$LAZBUILD --bm=Win32 $HERE/$LPIFILE 2>&1 > $HERE/$LOGWIN32
+$LAZBUILD -B -r --bm=Release --os=win32 --cpu=i386 $HERE/$LPIFILE 2>&1 > $HERE/$LOGWIN32
 
 if [ -f $DIRWIN32/$BINWIN ]; then
   echo "  Found Win32"
@@ -68,7 +89,7 @@ else
 fi
 
 echo Building Win64
-$LAZBUILD --bm=Win64 $HERE/$LPIFILE 2>&1 > $HERE/$LOGWIN64
+$LAZBUILD -B -r --bm=Release --os=win64 --cpu=x86_64 $HERE/$LPIFILE 2>&1 > $HERE/$LOGWIN64
 
 if [ -f $DIRWIN64/$BINWIN ]; then
   echo "  Found Win64"
