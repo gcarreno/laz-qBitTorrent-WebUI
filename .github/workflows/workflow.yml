@@ -24,9 +24,8 @@ jobs:
       with:
         lazarus-version: ${{ matrix.lazarus-versions }}
     - name: Build the Example App
-      run: |
-        lazbuild --add-package-link="package/lazqbittorrentwebui.lpk";
-        lazbuild "example/Lazarus/project1.lpi";
+      run: lazbuild --add-package-link "package/lazqbittorrentwebui.lpk";
+      run: lazbuild "example/Lazarus/project1.lpi";
     - name: Build the Test App
       run: lazbuild "tests/lazqbtest.lpi";
     - name: Run the Test App
