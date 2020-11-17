@@ -23,6 +23,8 @@ jobs:
       uses: gcarreno/setup-lazarus@v2.2.6
       with:
         lazarus-version: ${{ matrix.lazarus-versions }}
+    - name: Build the Example App
+      run: lazbuild --add-package-link="package/lazqbittorrentwebui.lpk" "example/Lazarus/project1.lpi"
     - name: Build the Test App
       run: lazbuild "tests/lazqbtest.lpi"
     - name: Run the Test App
