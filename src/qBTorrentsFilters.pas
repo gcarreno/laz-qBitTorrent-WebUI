@@ -61,6 +61,7 @@ type
     function withOutLimit: TqBTorrentsFilter;
     function withOffset(const aOffset: Integer): TqBTorrentsFilter;
     function withOutOffset: TqBTorrentsFilter;
+    { #todo -ogcarreno : Add the new Hashes Filter }
 
     property Filters: String
       read GetFilters;
@@ -77,6 +78,7 @@ const
   cNameReverse = 'reverse';
   cNameLimit = 'limit';
   cNameOffset = 'offset';
+  cNameHashes = 'hashes';
 
 { TqBTorrentsFilter }
 

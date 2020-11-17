@@ -46,8 +46,7 @@ type
     FHttp: THTTPSend;
     FIsLogged: Boolean;
     FLoginCookie: String;
-    FAPIVersion: Integer;
-    FMinAPIVersion: Integer;
+    FAPIVersion: String;
     FqBitTorrentVersion: String;
     FRefreshID: Integer;
 
@@ -59,20 +58,22 @@ type
     function DoLogin: Boolean;
     function DoLogout: Boolean;
 
-    // Get methods
+    // Application
     function DoGetApiVersion: String;
-    function DoGetMinApiVersion: String;
     function DoGetqBitTorrentVersion: String;
+    function DoExecShutdown: Boolean;
 
-    // Queries
+    // Torrents
     function DoGetTorrents(const aFilter: TqBTorrentsFilter): Boolean;
     function DoGetTorrentProperties(const aHash: String): Boolean;
     function DoGetTorrentTrackers(const aHash: String): Boolean;
     function DoGetTorrentWebSeeds(const aHash: String): Boolean;
     function DoGetTorrentFiles(const aHash: String): Boolean;
+    function DoPauseTorrentsAll: Boolean;
+    function DoPauseTorrents(const aHashes: TStringList): Boolean;
+    function DoResumeTorrentsAll: Boolean;
+    function DoResumeTorrents(const aHashes: TStringList): Boolean;
 
-    // Commands
-    function DoExecShutdown: Boolean;
 
   protected
   public
@@ -81,23 +82,27 @@ type
 
     procedure Clear;
 
-    // Get methods
+    // Application
     function ExecShutdown: Boolean;
+
+    // Torrents
     function GetTorrents: Boolean;
     function GetTorrentsFiltered(const aFilter: TqBTorrentsFilter): Boolean;
     function GetTorrentProperties(const aHash: String): Boolean;
     function GetTorrentTrackers(const aHash: String): Boolean;
     function GetTorrentWebSeeds(const aHash: String): Boolean;
     function GetTorrentFiles(const aHash: String): Boolean;
+    function PauseTorrentsAll: Boolean;
+    function PauseTorrents(const aHashes: TStringList): Boolean;
+    function ResumeTorrentsAll: Boolean;
+    function ResumeTorrents(const aHashes: TStringList): Boolean;
 
     property IsLogged: Boolean
       read FIsLogged;
     property LoginCookie: String
       read FLoginCookie;
-    property APIVersion: Integer
+    property APIVersion: String
       read FAPIVersion;
-    property MinAPIVersion: Integer
-      read FMinAPIVersion;
     property qBitTorrentVersion: String
       read FqBitTorrentVersion;
     //property RefreshID: Integer
@@ -131,7 +136,7 @@ uses
   fpjson, jsonparser, jsonscanner;
 
 const
-  ciMyAPIVersion = 11;
+  csAPIPath = '/api/v2';
 {$IFDEF linux}
   {$IFDEF CPUX64}
   sUserAgent = 'lazqBitTorrentWebUI/'+csVersion+' (X11; Linux x86_64;) Synapse/40.1';
@@ -160,8 +165,7 @@ begin
   FHttp := THTTPSend.Create;
   FIsLogged := False;
   FLoginCookie := '';
-  FAPIVersion := -1;
-  FMinAPIVersion := -1;
+  FAPIVersion := '';
   FqBitTorrentVersion := '';
   FRefreshID := 0;
 
@@ -182,8 +186,7 @@ begin
     True:begin
       // Add code to Login and get Versions
       DoLogin;
-      FAPIVersion := StrToInt(DoGetApiVersion);
-      FMinAPIVersion := StrToInt(DoGetMinApiVersion);
+      FAPIVersion := DoGetApiVersion;
       FqBitTorrentVersion := DoGetqBitTorrentVersion;
       FActive := True;
     end;
@@ -200,8 +203,7 @@ end;
 procedure TqBitTorrentWebUI.Clear;
 begin
   FLoginCookie := '';
-  FAPIVersion := -1;
-  FMinAPIVersion := -1;
+  FAPIVersion := '';
   FqBitTorrentVersion := '';
   FTorrents.Clear;
 end;
@@ -209,50 +211,62 @@ end;
 function TqBitTorrentWebUI.DoLogin: Boolean;
 var
   sURL: String;
-  sDoc: TStringStream;
   sCookie: String;
   index: Integer;
   iPos: Integer;
 const
-  sPath = '/login';
+  sPath = csAPIPath + '/auth/login';
 begin
   Result := False;
   FHttp.Clear;
   FHttp.UserAgent := sUserAgent;
-  FHttp.Headers.Add('Content-Type: application/x-www-form-urlencoded');
-  sDoc := TStringStream.Create('username='+FUserName+'&password='+FPassword);
-  FHttp.Document.LoadFromStream(sDoc);
-  sDoc.Free;
   if FPort = 80 then
   begin
-    sURL := 'http://'+FHost+sPath;
+    sURL := 'http://'+FHost+sPath+'?username='+FUserName+'&password='+FPassword;
   end
   else
   begin
-    sURL := 'http://'+FHost+':'+IntToStr(FPort)+sPath;
+    sURL := 'http://'+FHost+':'+IntToStr(FPort)+sPath+'?username='+FUserName+'&password='+FPassword;
   end;
-  FHttp.HTTPMethod('POST', sURL);
-  if FHttp.ResultCode = 200 then
+  if FHttp.HTTPMethod('GET', sURL) then
   begin
-    Result := True;
-    FIsLogged := True;
-    sCookie := '';
-    FLoginCookie := '';
-    for index := 0 to FHttp.Cookies.Count - 1 do
+    if FHttp.ResultCode = 200 then
     begin
-      sCookie := FHttp.Cookies[index];
-      iPos := Pos('SID=', sCookie);
-      if iPos > 0 then
+      Result := True;
+      FIsLogged := True;
+      sCookie := '';
+      FLoginCookie := '';
+      if FHttp.Cookies.Count > 0 then
       begin
-        FLoginCookie := Copy(sCookie, iPos+4, MaxInt);
-        Break;
+        for index := 0 to Pred(FHttp.Cookies.Count) do
+        begin
+          sCookie := FHttp.Cookies[index];
+          iPos := Pos('SID=', sCookie);
+          if iPos > 0 then
+          begin
+            FLoginCookie := Copy(sCookie, iPos+4, MaxInt);
+            Break;
+          end;
+        end;
+      end
+      else
+      begin
+        raise Exception.Create(
+          Format('Login Cookies error: %d', [FHttp.Cookies.Count])
+        );
       end;
+    end
+    else
+    begin
+      raise Exception.Create(
+        Format('Login failed: %d %s', [FHttp.ResultCode, FHttp.ResultString])
+      );
     end;
   end
   else
   begin
     raise Exception.Create(
-      'Login failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
+      Format('GET %s failed: %d %s', [sURL, FHttp.ResultCode, FHttp.ResultString])
     );
   end;
 end;
@@ -261,7 +275,7 @@ function TqBitTorrentWebUI.DoLogout: Boolean;
 var
   sURL: String;
 const
-  sPath = '/logout';
+  sPath = csAPIPath + '/auth/logout';
 begin
   Result := False;
   FHttp.Clear;
@@ -275,16 +289,24 @@ begin
   begin
     sURL := 'http://'+FHost+':'+IntToStr(FPort)+sPath;
   end;
-  FHttp.HTTPMethod('POST', sURL);
-  if FHttp.ResultCode = 200 then
+  if FHttp.HTTPMethod('GET', sURL) then
   begin
-    Result := True;
-    FIsLogged := False;
+    if FHttp.ResultCode = 200 then
+    begin
+      Result := True;
+      FIsLogged := False;
+    end
+    else
+    begin
+      raise Exception.Create(
+        Format('Logout failed: %d %s', [FHttp.ResultCode, FHttp.ResultString])
+      );
+    end;
   end
   else
   begin
     raise Exception.Create(
-      'Logout failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
+      Format('GET %s failed: %d %s', [sURL, FHttp.ResultCode, FHttp.ResultString])
     );
   end;
 end;
@@ -294,7 +316,7 @@ var
   sURL: String;
   sVer: TStringStream;
 const
-  sPath = '/version/api';
+  sPath = csAPIPath + '/app/webapiVersion';
 begin
   Result := '';
   FHttp.Clear;
@@ -308,53 +330,26 @@ begin
   begin
     sURL := 'http://'+FHost+':'+IntToStr(FPort)+sPath;
   end;
-  FHttp.HTTPMethod('GET', sURL);
-  if FHttp.ResultCode = 200 then
+  if FHttp.HTTPMethod('GET', sURL) then
   begin
-    sVer := TStringStream.Create;
-    FHttp.Document.SaveToStream(sVer);
-    Result := sVer.DataString;
-    sVer.Free;
+    if FHttp.ResultCode = 200 then
+    begin
+      sVer := TStringStream.Create;
+      FHttp.Document.SaveToStream(sVer);
+      Result := sVer.DataString;
+      sVer.Free;
+    end
+    else
+    begin
+      raise Exception.Create(
+        Format('API Version failed: %d %s', [FHttp.ResultCode, FHttp.ResultString])
+      );
+    end;
   end
   else
   begin
     raise Exception.Create(
-      'API Version failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
-    );
-  end;
-end;
-
-function TqBitTorrentWebUI.DoGetMinApiVersion: String;
-var
-  sURL: String;
-  sVer: TStringStream;
-const
-  sPath = '/version/api_min';
-begin
-  Result := '';
-  FHttp.Clear;
-  FHttp.UserAgent := sUserAgent;
-  FHttp.Cookies.Add('SID='+FLoginCookie+';');
-  if FPort = 80 then
-  begin
-    sURL := 'http://'+FHost+sPath;
-  end
-  else
-  begin
-    sURL := 'http://'+FHost+':'+IntToStr(FPort)+sPath;
-  end;
-  FHttp.HTTPMethod('GET', sURL);
-  if FHttp.ResultCode = 200 then
-  begin
-    sVer := TStringStream.Create;
-    FHttp.Document.SaveToStream(sVer);
-    Result := sVer.DataString;
-    sVer.Free;
-  end
-  else
-  begin
-    raise Exception.Create(
-      'Minimum API Version failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
+      Format('GET %s failed: %d %s', [sURL, FHttp.ResultCode, FHttp.ResultString])
     );
   end;
 end;
@@ -364,7 +359,7 @@ var
   sURL: String;
   sVer: TStringStream;
 const
-  sPath = '/version/qbittorrent';
+  sPath = csAPIPath + '/app/version';
 begin
   Result := '';
   FHttp.Clear;
@@ -378,18 +373,26 @@ begin
   begin
     sURL := 'http://'+FHost+':'+IntToStr(FPort)+sPath;
   end;
-  FHttp.HTTPMethod('GET', sURL);
-  if FHttp.ResultCode = 200 then
+  if FHttp.HTTPMethod('GET', sURL) then
   begin
-    sVer := TStringStream.Create;
-    FHttp.Document.SaveToStream(sVer);
-    Result := sVer.DataString;
-    sVer.Free;
+    if FHttp.ResultCode = 200 then
+    begin
+      sVer := TStringStream.Create;
+      FHttp.Document.SaveToStream(sVer);
+      Result := sVer.DataString;
+      sVer.Free;
+    end
+    else
+    begin
+      raise Exception.Create(
+        Format('qBitTorrent Version failed: %d %s', [FHttp.ResultCode, FHttp.ResultString])
+      );
+    end;
   end
   else
   begin
     raise Exception.Create(
-      'qBitTorrent Version failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
+      Format('GET %s failed: %d %s', [sURL, FHttp.ResultCode, FHttp.ResultString])
     );
   end;
 end;
@@ -398,7 +401,7 @@ function TqBitTorrentWebUI.DoExecShutdown: Boolean;
 var
   sURL: String;
 const
-  sPath = '/command/shutdown';
+  sPath = csAPIPath + '/app/shutdown';
 begin
   Result := False;
   FHttp.Clear;
@@ -412,15 +415,23 @@ begin
   begin
     sURL := 'http://'+FHost+':'+IntToStr(FPort)+sPath;
   end;
-  FHttp.HTTPMethod('GET', sURL);
-  if FHttp.ResultCode = 200 then
+  if FHttp.HTTPMethod('GET', sURL) then
   begin
-    Result := True;
+    if FHttp.ResultCode = 200 then
+    begin
+      Result := True;
+    end
+    else
+    begin
+      raise Exception.Create(
+        Format('Shutdown failed: %d %s', [FHttp.ResultCode, FHttp.ResultString])
+      );
+    end;
   end
   else
   begin
     raise Exception.Create(
-      'Shutdown failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
+      Format('GET %s failed: %d %s', [sURL, FHttp.ResultCode, FHttp.ResultString])
     );
   end;
 end;
@@ -429,19 +440,9 @@ function TqBitTorrentWebUI.ExecShutdown: Boolean;
 begin
   if FActive then
   begin
-    if ciMyAPIVersion >= FMinAPIVersion then
-    begin
-      Result := DoExecShutdown;
-      if Result then
-        Active := False;
-    end
-    else
-    begin
-      Result := False;
-      raise Exception.Create(
-        'Cannot manage this API version.'
-      );
-    end;
+    Result := DoExecShutdown;
+    if Result then
+      Active := False;
   end
   else
   begin
@@ -456,7 +457,7 @@ function TqBitTorrentWebUI.DoGetTorrents(const aFilter: TqBTorrentsFilter): Bool
 var
   sURL: String;
 const
-  sPath = '/query/torrents';
+  sPath = csAPIPath + '/torrents/info';
 begin
   Result := False;
   FTorrents.Clear;
@@ -475,17 +476,25 @@ begin
   begin
     sURL := sURL + '?' + aFilter.Filters;
   end;
-  // TODO: On debug get a file from sessions
-  FHttp.HTTPMethod('GET', sURL);
-  if FHttp.ResultCode = 200 then
+  { #todo -ogcarreno : On debug get a file from sessions }
+  if FHttp.HTTPMethod('GET', sURL) then
   begin
-    Result := True;
-    FTorrents.LoadTorrents(FHttp.Document);
+    if FHttp.ResultCode = 200 then
+    begin
+      Result := True;
+      FTorrents.LoadTorrents(FHttp.Document);
+    end
+    else
+    begin
+      raise Exception.Create(
+        Format('Getting torrents failed: %d %s', [FHttp.ResultCode, FHttp.ResultString])
+      );
+    end;
   end
   else
   begin
     raise Exception.Create(
-      'Getting torrents failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
+      Format('GET %s failed: %d %s', [sURL, FHttp.ResultCode, FHttp.ResultString])
     );
   end;
 end;
@@ -494,17 +503,7 @@ function TqBitTorrentWebUI.GetTorrents: Boolean;
 begin
   if FActive then
   begin
-    if ciMyAPIVersion >= FMinAPIVersion then
-    begin
-      Result := DoGetTorrents(nil);
-    end
-    else
-    begin
-      Result := False;
-      raise Exception.Create(
-        'Cannot manage this API version.'
-      );
-    end;
+    Result := DoGetTorrents(nil);
   end
   else
   begin
@@ -519,17 +518,7 @@ function TqBitTorrentWebUI.GetTorrentsFiltered(const aFilter: TqBTorrentsFilter)
 begin
   if FActive then
   begin
-    if ciMyAPIVersion >= FMinAPIVersion then
-    begin
-      Result := DoGetTorrents(aFilter);
-    end
-    else
-    begin
-      Result := False;
-      raise Exception.Create(
-        'Cannot manage this API version.'
-      );
-    end;
+    Result := DoGetTorrents(aFilter);
   end
   else
   begin
@@ -544,7 +533,7 @@ function TqBitTorrentWebUI.DoGetTorrentProperties(const aHash: String): Boolean;
 var
   sURL: String;
 const
-  sPath = '/query/propertiesGeneral';
+  sPath = csAPIPath + '/torrents/properties';
 begin
   Result := False;
   FHttp.Clear;
@@ -558,18 +547,26 @@ begin
   begin
     sURL := 'http://'+FHost+':'+IntToStr(FPort)+sPath;
   end;
-  sURL := sURL + '/' + aHash;
+  sURL := sURL + '?hash=' + aHash;
   // TDOD: On debug get a file from sessions
-  FHttp.HTTPMethod('GET', sURL);
-  if FHttp.ResultCode = 200 then
+  if FHttp.HTTPMethod('GET', sURL) then
   begin
-    Result := True;
-    FTorrents.Hashes[aHash].Properties.Load(FHttp.Document);
+    if FHttp.ResultCode = 200 then
+    begin
+      Result := True;
+      FTorrents.Hashes[aHash].Properties.Load(FHttp.Document);
+    end
+    else
+    begin
+      raise Exception.Create(
+        Format('Getting torrent properties failed: %d %s', [FHttp.ResultCode, FHttp.ResultString])
+      );
+    end;
   end
   else
   begin
     raise Exception.Create(
-      'Getting torrent properties failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
+      Format('GET %s failed: %d %s', [sURL, FHttp.ResultCode, FHttp.ResultString])
     );
   end;
 end;
@@ -578,17 +575,7 @@ function TqBitTorrentWebUI.GetTorrentProperties(const aHash: String): Boolean;
 begin
   if FActive then
   begin
-    if ciMyAPIVersion >= FMinAPIVersion then
-    begin
-      Result := DoGetTorrentProperties(aHash);
-    end
-    else
-    begin
-      Result := False;
-      raise Exception.Create(
-        'Cannot manage this API version.'
-      );
-    end;
+    Result := DoGetTorrentProperties(aHash);
   end
   else
   begin
@@ -603,7 +590,7 @@ function TqBitTorrentWebUI.DoGetTorrentTrackers(const aHash: String): Boolean;
 var
   sURL: String;
 const
-  sPath = '/query/propertiesTrackers';
+  sPath = csAPIPath + '/torrents/trackers';
 begin
   Result := False;
   FHttp.Clear;
@@ -617,18 +604,26 @@ begin
   begin
     sURL := 'http://'+FHost+':'+IntToStr(FPort)+sPath;
   end;
-  sURL := sURL + '/' + aHash;
+  sURL := sURL + '?hash=' + aHash;
   // TDOD: On debug get a file from sessions
-  FHttp.HTTPMethod('GET', sURL);
-  if FHttp.ResultCode = 200 then
+  if FHttp.HTTPMethod('GET', sURL) then
   begin
-    Result := True;
-    FTorrents.UpdateTorrentTrackers(aHash, FHttp.Document);//Hashes[aHash].Trackers.LoadTrackers();
+    if FHttp.ResultCode = 200 then
+    begin
+      Result := True;
+      FTorrents.UpdateTorrentTrackers(aHash, FHttp.Document);
+    end
+    else
+    begin
+      raise Exception.Create(
+        Format('Getting torrent trackers failed: %d %s', [FHttp.ResultCode, FHttp.ResultString])
+      );
+    end;
   end
   else
   begin
     raise Exception.Create(
-      'Getting torrent trackers failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
+      Format('GET %s failed: %d %s', [sURL, FHttp.ResultCode, FHttp.ResultString])
     );
   end;
 end;
@@ -637,17 +632,7 @@ function TqBitTorrentWebUI.GetTorrentTrackers(const aHash: String): Boolean;
 begin
   if FActive then
   begin
-    if ciMyAPIVersion >= FMinAPIVersion then
-    begin
-      Result := DoGetTorrentTrackers(aHash);
-    end
-    else
-    begin
-      Result := False;
-      raise Exception.Create(
-        'Cannot manage this API version.'
-      );
-    end;
+    Result := DoGetTorrentTrackers(aHash);
   end
   else
   begin
@@ -662,7 +647,7 @@ function TqBitTorrentWebUI.DoGetTorrentWebSeeds(const aHash: String): Boolean;
 var
   sURL: String;
 const
-  sPath = '/query/propertiesWebSeeds';
+  sPath = csAPIPath + '/torrents/webseeds';
 begin
   Result := False;
   FHttp.Clear;
@@ -676,18 +661,26 @@ begin
   begin
     sURL := 'http://'+FHost+':'+IntToStr(FPort)+sPath;
   end;
-  sURL := sURL + '/' + aHash;
+  sURL := sURL + '?hash=' + aHash;
   // TDOD: On debug get a file from sessions
-  FHttp.HTTPMethod('GET', sURL);
-  if FHttp.ResultCode = 200 then
+  if FHttp.HTTPMethod('GET', sURL) then
   begin
-    Result := True;
-    FTorrents.Hashes[aHash].WebSeeds.Load(FHttp.Document);
+    if FHttp.ResultCode = 200 then
+    begin
+      Result := True;
+      FTorrents.Hashes[aHash].WebSeeds.Load(FHttp.Document);
+    end
+    else
+    begin
+      raise Exception.Create(
+        Format('Getting torrent web seeds failed: %d %s', [FHttp.ResultCode, FHttp.ResultString])
+      );
+    end;
   end
   else
   begin
     raise Exception.Create(
-      'Getting torrent web seeds failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
+      Format('GET %s failed: %d %s', [sURL, FHttp.ResultCode, FHttp.ResultString])
     );
   end;
 end;
@@ -696,17 +689,7 @@ function TqBitTorrentWebUI.GetTorrentWebSeeds(const aHash: String): Boolean;
 begin
   if FActive then
   begin
-    if ciMyAPIVersion >= FMinAPIVersion then
-    begin
-      Result := DoGetTorrentWebSeeds(aHash);
-    end
-    else
-    begin
-      Result := False;
-      raise Exception.Create(
-        'Cannot manage this API version.'
-      );
-    end;
+    Result := DoGetTorrentWebSeeds(aHash);
   end
   else
   begin
@@ -721,7 +704,7 @@ function TqBitTorrentWebUI.DoGetTorrentFiles(const aHash: String): Boolean;
 var
   sURL: String;
 const
-  sPath = '/query/propertiesFiles';
+  sPath = csAPIPath + '/torrents/files';
 begin
   Result := False;
   FHttp.Clear;
@@ -735,18 +718,26 @@ begin
   begin
     sURL := 'http://'+FHost+':'+IntToStr(FPort)+sPath;
   end;
-  sURL := sURL + '/' + aHash;
-  // TDOD: On debug get a file from sessions
-  FHttp.HTTPMethod('GET', sURL);
-  if FHttp.ResultCode = 200 then
+  sURL := sURL + '?hash=' + aHash;
+  { #todo -ogcarreno : On debug get a file from sessions }
+  if FHttp.HTTPMethod('GET', sURL) then
   begin
-    Result := True;
-    FTorrents.UpdateTorrentFiles(aHash, FHttp.Document); //Hashes[aHash].Files.LoadFiles(FHttp.Document);
+    if FHttp.ResultCode = 200 then
+    begin
+      Result := True;
+      FTorrents.UpdateTorrentFiles(aHash, FHttp.Document); //Hashes[aHash].Files.LoadFiles(FHttp.Document);
+    end
+    else
+    begin
+      raise Exception.Create(
+        Format('Getting torrent files failed: %d %s', [FHttp.ResultCode, FHttp.ResultString])
+      );
+    end;
   end
   else
   begin
     raise Exception.Create(
-      'Getting torrent files failed: '+IntToStr(FHttp.ResultCode)+' '+FHttp.ResultString
+      Format('GET %s failed: %d %s', [sURL, FHttp.ResultCode, FHttp.ResultString])
     );
   end;
 end;
@@ -755,17 +746,237 @@ function TqBitTorrentWebUI.GetTorrentFiles(const aHash: String): Boolean;
 begin
   if FActive then
   begin
-    if ciMyAPIVersion >= FMinAPIVersion then
+    Result := DoGetTorrentFiles(aHash);
+  end
+  else
+  begin
+    Result := False;
+    raise Exception.Create(
+      'You need to set Active True first.'
+    );
+  end;
+end;
+
+function TqBitTorrentWebUI.DoPauseTorrentsAll: Boolean;
+var
+  sURL: String;
+const
+  sPath = csAPIPath + '/torrents/pause';
+begin
+  Result := False;
+  FHttp.Clear;
+  FHttp.UserAgent := sUserAgent;
+  FHttp.Cookies.Add('SID='+FLoginCookie);
+  if FPort = 80 then
+  begin
+    sURL := 'http://'+FHost+sPath;
+  end
+  else
+  begin
+    sURL := 'http://'+FHost+':'+IntToStr(FPort)+sPath;
+  end;
+  sURL := sURL + '?hashes=all';
+  { #todo -ogcarreno : On debug get a file from sessions }
+  if FHttp.HTTPMethod('GET', sURL) then
+  begin
+    if FHttp.ResultCode = 200 then
     begin
-      Result := DoGetTorrentFiles(aHash);
+      Result := True;
     end
     else
     begin
-      Result := False;
       raise Exception.Create(
-        'Cannot manage this API version.'
+        Format('Pausing all torrents failed: %d %s', [FHttp.ResultCode, FHttp.ResultString])
       );
     end;
+  end
+  else
+  begin
+    raise Exception.Create(
+      Format('GET %s failed: %d %s', [sURL, FHttp.ResultCode, FHttp.ResultString])
+    );
+  end;
+end;
+
+function TqBitTorrentWebUI.PauseTorrentsAll: Boolean;
+begin
+  if FActive then
+  begin
+    Result := DoPauseTorrentsAll;
+  end
+  else
+  begin
+    Result := False;
+    raise Exception.Create(
+      'You need to set Active True first.'
+    );
+  end;
+end;
+
+function TqBitTorrentWebUI.DoPauseTorrents(const aHashes: TStringList): Boolean;
+var
+  sURL: String;
+const
+  sPath = csAPIPath + '/torrents/pause';
+begin
+  Result := False;
+  FHttp.Clear;
+  FHttp.UserAgent := sUserAgent;
+  FHttp.Cookies.Add('SID='+FLoginCookie);
+  if FPort = 80 then
+  begin
+    sURL := 'http://'+FHost+sPath;
+  end
+  else
+  begin
+    sURL := 'http://'+FHost+':'+IntToStr(FPort)+sPath;
+  end;
+  sURL := sURL + '?hashes=';
+  aHashes.Delimiter:='|';
+  aHashes.StrictDelimiter:= True;
+  sURL:= sURL + aHashes.DelimitedText;
+  { #todo -ogcarreno : On debug get a file from sessions }
+  if FHttp.HTTPMethod('GET', sURL) then
+  begin
+    if FHttp.ResultCode = 200 then
+    begin
+      Result := True;
+    end
+    else
+    begin
+      raise Exception.Create(
+        Format('Pausing torrents failed: %d %s', [FHttp.ResultCode, FHttp.ResultString])
+      );
+    end;
+  end
+  else
+  begin
+    raise Exception.Create(
+      Format('GET %s failed: %d %s', [sURL, FHttp.ResultCode, FHttp.ResultString])
+    );
+  end;
+end;
+
+function TqBitTorrentWebUI.PauseTorrents(const aHashes: TStringList): Boolean;
+begin
+  if FActive then
+  begin
+    Result := DoPauseTorrents(aHashes);
+  end
+  else
+  begin
+    Result := False;
+    raise Exception.Create(
+      'You need to set Active True first.'
+    );
+  end;
+end;
+
+function TqBitTorrentWebUI.DoResumeTorrentsAll: Boolean;
+var
+  sURL: String;
+const
+  sPath = csAPIPath + '/torrents/resume';
+begin
+  Result := False;
+  FHttp.Clear;
+  FHttp.UserAgent := sUserAgent;
+  FHttp.Cookies.Add('SID='+FLoginCookie);
+  if FPort = 80 then
+  begin
+    sURL := 'http://'+FHost+sPath;
+  end
+  else
+  begin
+    sURL := 'http://'+FHost+':'+IntToStr(FPort)+sPath;
+  end;
+  sURL := sURL + '?hashes=all';
+  { #todo -ogcarreno : On debug get a file from sessions }
+  if FHttp.HTTPMethod('GET', sURL) then
+  begin
+    if FHttp.ResultCode = 200 then
+    begin
+      Result := True;
+    end
+    else
+    begin
+      raise Exception.Create(
+        Format('Resuming all torrents failed: %d %s', [FHttp.ResultCode, FHttp.ResultString])
+      );
+    end;
+  end
+  else
+  begin
+    raise Exception.Create(
+      Format('GET %s failed: %d %s', [sURL, FHttp.ResultCode, FHttp.ResultString])
+    );
+  end;
+end;
+
+function TqBitTorrentWebUI.ResumeTorrentsAll: Boolean;
+begin
+  if FActive then
+  begin
+    Result := DoResumeTorrentsAll;
+  end
+  else
+  begin
+    Result := False;
+    raise Exception.Create(
+      'You need to set Active True first.'
+    );
+  end;
+end;
+
+function TqBitTorrentWebUI.DoResumeTorrents(const aHashes: TStringList): Boolean;
+var
+  sURL: String;
+const
+  sPath = csAPIPath + '/torrents/resume';
+begin
+  Result := False;
+  FHttp.Clear;
+  FHttp.UserAgent := sUserAgent;
+  FHttp.Cookies.Add('SID='+FLoginCookie);
+  if FPort = 80 then
+  begin
+    sURL := 'http://'+FHost+sPath;
+  end
+  else
+  begin
+    sURL := 'http://'+FHost+':'+IntToStr(FPort)+sPath;
+  end;
+  sURL := sURL + '?hashes=';
+  aHashes.Delimiter:='|';
+  aHashes.StrictDelimiter:= True;
+  sURL:= sURL + aHashes.DelimitedText;
+  { #todo -ogcarreno : On debug get a file from sessions }
+  if FHttp.HTTPMethod('GET', sURL) then
+  begin
+    if FHttp.ResultCode = 200 then
+    begin
+      Result := True;
+    end
+    else
+    begin
+      raise Exception.Create(
+        Format('Resuming torrents failed: %d %s', [FHttp.ResultCode, FHttp.ResultString])
+      );
+    end;
+  end
+  else
+  begin
+    raise Exception.Create(
+      Format('GET %s failed: %d %s', [sURL, FHttp.ResultCode, FHttp.ResultString])
+    );
+  end;
+end;
+
+function TqBitTorrentWebUI.ResumeTorrents(const aHashes: TStringList): Boolean;
+begin
+  if FActive then
+  begin
+    Result := DoResumeTorrents(aHashes);
   end
   else
   begin

@@ -180,6 +180,8 @@ begin
     qtrsUpdating: Result := csStatusUpdating;
     qtrsNotWorking: Result := csStatusNotWorking;
     qtrsNotContactedYet: Result := csStatusNotContactedYet;
+    else
+      Result := csStatusUnknown;
   end;
 end;
 

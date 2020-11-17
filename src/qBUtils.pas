@@ -128,6 +128,8 @@ begin
     qtsCheckingDl:  Result := csStateCheckingDl;
     qtsDownloading: Result := csStateDownloading;
     qtsMetaDl:      Result := csStateMetaDl;
+    else
+        Result := csStateUnknown;
   end;
 end;
 

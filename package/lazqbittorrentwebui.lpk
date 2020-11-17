@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
-  <Package Version="4">
+  <Package Version="5">
     <Name Value="lazqBitTorrentWebUI"/>
     <Type Value="RunAndDesignTime"/>
     <AddToProjectUsesSection Value="True"/>
@@ -8,7 +8,7 @@
     <CompilerOptions>
       <Version Value="11"/>
       <SearchPaths>
-        <OtherUnitFiles Value="../src;../../../FreePascal/config_lazarus/onlinepackagemanager/packages/synapse40.1"/>
+        <OtherUnitFiles Value="../src"/>
         <UnitOutputDirectory Value="../bin/lib/$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
@@ -79,17 +79,21 @@ SOFTWARE."/>
         <UnitName Value="qBCommon"/>
       </Item10>
     </Files>
+    <CompatibilityMode Value="True"/>
     <LazDoc Paths="../docs/xml"/>
-    <RequiredPkgs Count="2">
+    <RequiredPkgs Count="3">
       <Item1>
+        <PackageName Value="laz_synapse"/>
+      </Item1>
+      <Item2>
         <PackageName Value="LCL"/>
         <MaxVersion Major="1"/>
         <MinVersion Major="1" Valid="True"/>
-      </Item1>
-      <Item2>
+      </Item2>
+      <Item3>
         <PackageName Value="FCL"/>
         <MinVersion Major="1" Valid="True"/>
-      </Item2>
+      </Item3>
     </RequiredPkgs>
     <UsageOptions>
       <UnitPath Value="$(PkgOutDir)"/>

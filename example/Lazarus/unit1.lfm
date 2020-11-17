@@ -1,23 +1,21 @@
 object frmMain: TfrmMain
   Left = 419
-  Height = 573
+  Height = 568
   Top = 115
-  Width = 752
+  Width = 1048
   Caption = 'frmMain'
-  ClientHeight = 573
-  ClientWidth = 752
+  ClientHeight = 568
+  ClientWidth = 1048
   Menu = mmMain
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
-  LCLVersion = '1.7'
-  Visible = False
   object psMain: TPairSplitter
     Cursor = crVSplit
     Left = 0
-    Height = 398
-    Top = 175
-    Width = 752
+    Height = 352
+    Top = 216
+    Width = 1048
     Align = alClient
     Position = 300
     SplitterType = pstVertical
@@ -26,14 +24,14 @@ object frmMain: TfrmMain
       Left = 0
       Height = 300
       Top = 0
-      Width = 752
-      ClientWidth = 752
+      Width = 1048
+      ClientWidth = 1048
       ClientHeight = 300
       object memInfo: TMemo
         Left = 0
         Height = 280
         Top = 20
-        Width = 752
+        Width = 1048
         Align = alClient
         ReadOnly = True
         ScrollBars = ssAutoVertical
@@ -43,7 +41,7 @@ object frmMain: TfrmMain
         Left = 0
         Height = 20
         Top = 0
-        Width = 752
+        Width = 1048
         Align = alTop
         Caption = 'Info:'
         FocusControl = memInfo
@@ -53,16 +51,16 @@ object frmMain: TfrmMain
     object pssLog: TPairSplitterSide
       Cursor = crArrow
       Left = 0
-      Height = 93
+      Height = 47
       Top = 305
-      Width = 752
-      ClientWidth = 752
-      ClientHeight = 93
+      Width = 1048
+      ClientWidth = 1048
+      ClientHeight = 47
       object memLog: TMemo
         Left = 0
-        Height = 71
+        Height = 33
         Top = 22
-        Width = 752
+        Width = 1048
         Align = alClient
         ReadOnly = True
         ScrollBars = ssAutoVertical
@@ -72,7 +70,7 @@ object frmMain: TfrmMain
         Left = 0
         Height = 22
         Top = 0
-        Width = 752
+        Width = 1048
         Align = alTop
         Caption = 'Log:'
         TabOrder = 1
@@ -81,15 +79,15 @@ object frmMain: TfrmMain
   end
   object panButtons: TPanel
     Left = 0
-    Height = 175
+    Height = 216
     Top = 0
-    Width = 752
+    Width = 1048
     Align = alTop
-    ClientHeight = 175
-    ClientWidth = 752
+    ClientHeight = 216
+    ClientWidth = 1048
     TabOrder = 1
     object btnFileExit: TButton
-      Left = 663
+      Left = 959
       Height = 25
       Top = 8
       Width = 75
@@ -97,30 +95,30 @@ object frmMain: TfrmMain
       Anchors = [akTop, akRight]
       TabOrder = 0
     end
-    object divbGetMethhods: TDividerBevel
+    object divbTorrents: TDividerBevel
       Left = 8
       Height = 17
       Top = 64
-      Width = 729
-      Caption = 'Get Methods'
+      Width = 1025
+      Caption = ' Torrents '
       Anchors = [akTop, akLeft, akRight]
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object divbCommands: TDividerBevel
-      Left = 8
+    object divbApplication: TDividerBevel
+      Left = 9
       Height = 17
-      Top = 120
-      Width = 729
-      Caption = 'Commands'
+      Top = 152
+      Width = 1025
+      Caption = 'Application'
       Anchors = [akTop, akLeft, akRight]
       Font.Style = [fsBold]
       ParentFont = False
     end
     object btnTestExecShutdown: TButton
-      Left = 652
+      Left = 949
       Height = 25
-      Top = 144
+      Top = 176
       Width = 85
       Action = actTestExecShutdown
       Anchors = [akTop, akRight]
@@ -136,9 +134,9 @@ object frmMain: TfrmMain
     end
     object chkFileActive: TCheckBox
       Left = 8
-      Height = 24
+      Height = 23
       Top = 24
-      Width = 69
+      Width = 68
       Action = actFileSetActive
       TabOrder = 3
     end
@@ -178,14 +176,14 @@ object frmMain: TfrmMain
       Left = 96
       Height = 17
       Top = 1
-      Width = 33
+      Width = 32
       Caption = '&Host'
       FocusControl = edtHost
       ParentColor = False
     end
     object edtHost: TEdit
       Left = 96
-      Height = 27
+      Height = 33
       Top = 24
       Width = 160
       TabOrder = 8
@@ -201,7 +199,7 @@ object frmMain: TfrmMain
     end
     object edtPort: TSpinEdit
       Left = 264
-      Height = 27
+      Height = 33
       Top = 24
       Width = 64
       MaxValue = 65535
@@ -213,14 +211,14 @@ object frmMain: TfrmMain
       Left = 336
       Height = 17
       Top = 0
-      Width = 39
+      Width = 36
       Caption = '&Login'
       FocusControl = edtLogin
       ParentColor = False
     end
     object edtLogin: TEdit
       Left = 336
-      Height = 27
+      Height = 33
       Top = 24
       Width = 152
       TabOrder = 10
@@ -229,26 +227,57 @@ object frmMain: TfrmMain
       Left = 496
       Height = 17
       Top = 1
-      Width = 67
+      Width = 66
       Caption = 'Pa&ssword'
       FocusControl = edtPassword
       ParentColor = False
     end
     object edtPassword: TEdit
       Left = 496
-      Height = 27
+      Height = 33
       Top = 24
       Width = 152
       EchoMode = emPassword
       PasswordChar = '*'
       TabOrder = 11
     end
+    object btnTestPauseTorrentsAll: TButton
+      Left = 8
+      Height = 25
+      Top = 120
+      Width = 80
+      Action = actTestPauseTorrentsAll
+      TabOrder = 12
+    end
+    object btnTestPauseTorrent: TButton
+      Left = 96
+      Height = 25
+      Top = 120
+      Width = 112
+      Action = actTestPauseTorrent
+      TabOrder = 13
+    end
+    object btnTestResumeTorrentsAll: TButton
+      Left = 216
+      Height = 25
+      Top = 120
+      Width = 96
+      Action = actTestResumeTorrentsAll
+      TabOrder = 14
+    end
+    object btnTestResumeTorrent: TButton
+      Left = 320
+      Height = 25
+      Top = 120
+      Width = 120
+      Action = actTestResumeTorrent
+      TabOrder = 15
+    end
   end
   object qbttMain: TqBitTorrentWebUI
     UserName = 'qBitTorrentWebUI'
     Password = 'Password'
     Host = '127.0.0.1'
-    Port = 9090
     Left = 440
     Top = 224
   end
@@ -341,6 +370,34 @@ object frmMain: TfrmMain
       DisableIfNoHandler = False
       Enabled = False
       OnExecute = actTestExecShutdownExecute
+    end
+    object actTestPauseTorrentsAll: TAction
+      Category = 'Test'
+      Caption = 'Pause All'
+      DisableIfNoHandler = False
+      Enabled = False
+      OnExecute = actTestPauseTorrentsAllExecute
+    end
+    object actTestPauseTorrent: TAction
+      Category = 'Test'
+      Caption = 'Pause Torrent'
+      DisableIfNoHandler = False
+      Enabled = False
+      OnExecute = actTestPauseTorrentExecute
+    end
+    object actTestResumeTorrentsAll: TAction
+      Category = 'Test'
+      Caption = 'Resume All'
+      DisableIfNoHandler = False
+      Enabled = False
+      OnExecute = actTestResumeTorrentsAllExecute
+    end
+    object actTestResumeTorrent: TAction
+      Category = 'Test'
+      Caption = 'Resume Torrent'
+      DisableIfNoHandler = False
+      Enabled = False
+      OnExecute = actTestResumeTorrentExecute
     end
   end
 end

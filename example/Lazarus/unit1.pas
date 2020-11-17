@@ -15,6 +15,10 @@ type
 
   TfrmMain = class(TForm)
     actFileSetActive: TAction;
+    actTestResumeTorrentsAll: TAction;
+    actTestResumeTorrent: TAction;
+    actTestPauseTorrent: TAction;
+    actTestPauseTorrentsAll: TAction;
     actTestGetTorrentWebSeeds: TAction;
     actTestGetTorrentFiles: TAction;
     actTestGetTorrentTrackers: TAction;
@@ -30,9 +34,13 @@ type
     btnTestGetTorrentTrackers: TButton;
     btnTestGetTorrentWebSeeds: TButton;
     btnTestGetTorrentFiles: TButton;
+    btnTestPauseTorrentsAll: TButton;
+    btnTestPauseTorrent: TButton;
+    btnTestResumeTorrentsAll: TButton;
+    btnTestResumeTorrent: TButton;
     chkFileActive: TCheckBox;
-    divbGetMethhods: TDividerBevel;
-    divbCommands: TDividerBevel;
+    divbTorrents: TDividerBevel;
+    divbApplication: TDividerBevel;
     edtPassword: TEdit;
     edtLogin: TEdit;
     edtHost: TEdit;
@@ -62,12 +70,23 @@ type
     stLabelLog: TStaticText;
     stLabelInfo: TStaticText;
     procedure actFileSetActiveExecute(Sender: TObject);
+
+    //Application
     procedure actTestExecShutdownExecute(Sender: TObject);
+
+    //Torrents
+    procedure actTestGetTorrentsExecute(Sender: TObject);
     procedure actTestGetTorrentFilesExecute(Sender: TObject);
     procedure actTestGetTorrentPropertiesExecute(Sender: TObject);
-    procedure actTestGetTorrentsExecute(Sender: TObject);
     procedure actTestGetTorrentTrackersExecute(Sender: TObject);
     procedure actTestGetTorrentWebSeedsExecute(Sender: TObject);
+
+    procedure actTestPauseTorrentExecute(Sender: TObject);
+    procedure actTestPauseTorrentsAllExecute(Sender: TObject);
+
+    procedure actTestResumeTorrentsAllExecute(Sender: TObject);
+    procedure actTestResumeTorrentExecute(Sender: TObject);
+
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
@@ -112,7 +131,11 @@ end;
 
 procedure TfrmMain.FormCloseQuery(Sender: TObject; var CanClose: boolean);
 begin
-  CanClose := True;
+  CanClose := not qbttMain.Active;
+  if not CanClose then
+  begin
+    ShowMessage('Please De-Activate the component');
+  end;
 end;
 
 procedure TfrmMain.FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -143,12 +166,19 @@ begin
   lblPassword.Enabled := not chkFileActive.Checked;
   edtPassword.Enabled := not chkFileActive.Checked;
 
+  //Application
   actTestExecShutdown.Enabled := chkFileActive.Checked;
+
+  //Torrents
   actTestGetTorrents.Enabled := chkFileActive.Checked;
   actTestGetTorrentProperties.Enabled := qbttMain.Torrents.Count > 0;
   actTestGetTorrentTrackers.Enabled := qbttMain.Torrents.Count > 0;
   actTestGetTorrentWebSeeds.Enabled := qbttMain.Torrents.Count > 0;
   actTestGetTorrentFiles.Enabled := qbttMain.Torrents.Count > 0;
+  actTestPauseTorrentsAll.Enabled:= chkFileActive.Checked;
+  actTestPauseTorrent.Enabled:= qbttMain.Torrents.Count > 0;
+  actTestResumeTorrentsAll.Enabled:= chkFileActive.Checked;
+  actTestResumeTorrent.Enabled:= qbttMain.Torrents.Count > 0;
 end;
 
 procedure TfrmMain.SetEndpoint;
@@ -163,13 +193,19 @@ procedure TfrmMain.DisableAll;
 begin
   actFileSetActive.Enabled := False;
 
+  //Application
+  actTestExecShutdown.Enabled := False;
+
+  //Torrents
   actTestGetTorrents.Enabled := False;
   actTestGetTorrentProperties.Enabled := False;
   actTestGetTorrentTrackers.Enabled := False;
   actTestGetTorrentWebSeeds.Enabled := False;
   actTestGetTorrentFiles.Enabled := False;
-
-  actTestExecShutdown.Enabled := False;
+  actTestPauseTorrentsAll.Enabled:= False;
+  actTestPauseTorrent.Enabled:= False;
+  actTestResumeTorrentsAll.Enabled:= False;
+  actTestResumeTorrent.Enabled:= False;
 
   Application.ProcessMessages;
 end;
@@ -178,13 +214,20 @@ procedure TfrmMain.EnableAll;
 begin
   actFileSetActive.Enabled := True;
 
+  //Application
+  actTestExecShutdown.Enabled := True;
+
+  //Torrents
   actTestGetTorrents.Enabled := True;
   actTestGetTorrentProperties.Enabled := qbttMain.Torrents.Count > 0;
   actTestGetTorrentTrackers.Enabled := qbttMain.Torrents.Count > 0;
   actTestGetTorrentWebSeeds.Enabled := qbttMain.Torrents.Count > 0;
   actTestGetTorrentFiles.Enabled := qbttMain.Torrents.Count > 0;
+  actTestPauseTorrentsAll.Enabled:= True;
+  actTestPauseTorrent.Enabled:= qbttMain.Torrents.Count > 0;
+  actTestResumeTorrentsAll.Enabled:= True;
+  actTestResumeTorrent.Enabled:= qbttMain.Torrents.Count > 0;
 
-  actTestExecShutdown.Enabled := True;
 
   Application.ProcessMessages;
 end;
@@ -195,12 +238,12 @@ begin
     Log('Active: True')
   else
     Log('Active: False');
+  SetEndpoint;
   qbttMain.Active := chkFileActive.Checked;
   SetActions;
   if chkFileActive.Checked then
   begin
-    Info('API Version: ' + IntToStr(qbttMain.APIVersion));
-    Info('Min API Version: ' + IntToStr(qbttMain.MinAPIVersion));
+    Info('API Version: ' + qbttMain.APIVersion);
     Info('qBitTorrent Version: ' + qbttMain.qBitTorrentVersion);
   end;
 end;
@@ -661,6 +704,88 @@ begin
       Log('Torrent list is empty');
     end;
   finally
+    EnableAll;
+  end;
+end;
+
+procedure TfrmMain.actTestPauseTorrentExecute(Sender: TObject);
+var
+  hashes: TStringList;
+  oTorrent: TqBTorrent;
+begin
+  DisableAll;
+  hashes:= TStringList.Create;
+  oTorrent:= qbttMain.Torrents[0];
+  Log('Pausing torrent with hash "' + oTorrent.Hash + '"');
+  try
+    try
+      hashes.Add(oTorrent.Hash);
+      qbttMain.PauseTorrents(hashes);
+      Log(#9'Success');
+    except
+      on E:Exception do
+        Log('Error: ' + E.Message);
+    end;
+  finally
+    hashes.Free;
+    EnableAll;
+  end;
+end;
+
+procedure TfrmMain.actTestPauseTorrentsAllExecute(Sender: TObject);
+begin
+  DisableAll;
+  Log('Pausing all torrents');
+  try
+    try
+     qbttMain.PauseTorrentsAll;
+     Log(#9'Success');
+    except
+      on E:Exception do
+        Log('Error: ' + E.Message);
+    end;
+  finally
+    EnableAll;
+  end;
+end;
+
+procedure TfrmMain.actTestResumeTorrentsAllExecute(Sender: TObject);
+begin
+  DisableAll;
+  Log('Resuming all torrents');
+  try
+    try
+     qbttMain.ResumeTorrentsAll;
+     Log(#9'Success');
+    except
+      on E:Exception do
+        Log('Error: ' + E.Message);
+    end;
+  finally
+    EnableAll;
+  end;
+end;
+
+procedure TfrmMain.actTestResumeTorrentExecute(Sender: TObject);
+var
+  hashes: TStringList;
+  oTorrent: TqBTorrent;
+begin
+  DisableAll;
+  hashes:= TStringList.Create;
+  oTorrent:= qbttMain.Torrents[0];
+  Log('Resuming torrent with hash "' + oTorrent.Hash + '"');
+  try
+    try
+      hashes.Add(oTorrent.Hash);
+      qbttMain.ResumeTorrents(hashes);
+      Log(#9'Success');
+    except
+      on E:Exception do
+        Log('Error: ' + E.Message);
+    end;
+  finally
+    hashes.Free;
     EnableAll;
   end;
 end;
