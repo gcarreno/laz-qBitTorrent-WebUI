@@ -204,7 +204,9 @@ constructor TqBTorrentsFilter.Create;
 begin
   FFilters := TStringList.Create;
   FFilters.NameValueSeparator := '=';
+{$IF FPC_FULLVERSION > 30004}
   FFilters.AlwaysQuote := False;
+{$ENDIF}
   FFilters.Delimiter := '&';
 end;
 
