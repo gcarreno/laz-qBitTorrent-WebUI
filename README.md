@@ -23,9 +23,9 @@ You can get it from one of these options:
 
 I'm using the [Online Package Manager](http://wiki.freepascal.org/Online_Package_Manager) and I'm testing this with version 40.1 of the Synapse Network lib.
 
-I've chosen not to put a package dependency on that lib so you can manage what version you want to use.
+The package itself has a dependency on `laz_synapse`.
 
-The package has a path for my personal version of Synapse, so you may want to fix that once you decide to use it.
+Since I'm building and testing this with GitHub Actions I'm usin the [setup-lazarus](https://github.com/gcarreno/setup-lazarus) action to setup the environment with all the necessary packages.
 
 ## Usage
 
