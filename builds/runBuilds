@@ -26,31 +26,31 @@ DISTPATH=../../dist
 LAZBUILD=~/FreePascal/lazarus/lazbuild
 
 #echo $HERE
-#echo $DIRLIN32$BINLIN32
-#echo $DIRLIN64$BINLIN64
-#echo $DIRWIN32$BINWIN
-#echo $DIRWIN64$BINWIN
+#echo $DIRLIN32/$BINLIN32
+#echo $DIRLIN64/$BINLIN64
+#echo $DIRWIN32/$BINWIN
+#echo $DIRWIN64/$BINWIN
 #echo $VERSION
 
 echo Cleaning dist
 rm $HERE/../bin/dist/*
 
 #echo Cleaning linux 32
-#rm -f $DIRLIN32$BINLINUX
+#rm $DIRLIN32/$BINLINUX
 
 echo Cleaning linux 64
-rm -f $DIRLIN64$BINLINUX
+rm $DIRLIN64/$BINLINUX
 
 echo Cleaning win32
-rm -f $DIRWIN32$BINWIN
+rm $DIRWIN32/$BINWIN
 
 echo Cleaning win64
-rm -f $DIRWIN64$BINWIN
+rm $DIRWIN64/$BINWIN
 
 echo "laz-qBitTorrent-WebUI example v$VERSION"
 
 #echo Building Linux 32
-#$LAZBUILD -B -r --bm=Release --os=Linux --cpu=i386 $HERE/$LPIFILE 2>&1 > $HERE/$LOGLIN32
+#$LAZBUILD -B --bm=Release --os=Linux --cpu=i386 $HERE/$LPIFILE 2>&1 > $HERE/$LOGLIN32
 
 #if [ -f $DIRLIN32/$BINLINUX ]; then
 #  echo "  Found Linux 32"
@@ -63,7 +63,7 @@ echo "laz-qBitTorrent-WebUI example v$VERSION"
 #fi
 
 echo Building Linux 64
-$LAZBUILD -B -r --bm=Release --os=Linux --cpu=x86_64 $HERE/$LPIFILE 2>&1 > $HERE/$LOGLIN64
+$LAZBUILD -B --bm=Release --os=Linux --cpu=x86_64 $HERE/$LPIFILE 2>&1 > $HERE/$LOGLIN64
 
 if [ -f $DIRLIN64/$BINLINUX ]; then
   echo "  Found Linux 64"
@@ -76,7 +76,7 @@ else
 fi
 
 echo Building Win32
-$LAZBUILD -B -r --bm=Release --os=win32 --cpu=i386 $HERE/$LPIFILE 2>&1 > $HERE/$LOGWIN32
+$LAZBUILD -B --bm=Release --os=win32 --cpu=i386 $HERE/$LPIFILE 2>&1 > $HERE/$LOGWIN32
 
 if [ -f $DIRWIN32/$BINWIN ]; then
   echo "  Found Win32"
@@ -89,7 +89,7 @@ else
 fi
 
 echo Building Win64
-$LAZBUILD -B -r --bm=Release --os=win64 --cpu=x86_64 $HERE/$LPIFILE 2>&1 > $HERE/$LOGWIN64
+$LAZBUILD -B --bm=Release --os=win64 --cpu=x86_64 $HERE/$LPIFILE 2>&1 > $HERE/$LOGWIN64
 
 if [ -f $DIRWIN64/$BINWIN ]; then
   echo "  Found Win64"
