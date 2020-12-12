@@ -1,5 +1,5 @@
 #!/bin/bash
-/home/gcarreno/fpcupdeluxe/fpc/bin/x86_64-linux/fpdoc \
+/home/gcarreno/FreePascal/fpc/bin/x86_64-linux/fpdoc \
     --package=lazqBitTorrentWebUI \
     --output=/home/gcarreno/Programming/laz-qBitTorrent-WebUI/docs/html \
     --format=html \
