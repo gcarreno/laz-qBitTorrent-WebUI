@@ -145,14 +145,21 @@ const
   {$IFDEF CPUX64}
   sUserAgent = 'lazqBitTorrentWebUI/'+csVersion+' (X11; Linux x86_64;) Synapse/40.1';
   {$ELSE}
-  sUserAgent = 'lazqBitTorrentWebUI/'+csVersion+' (X11; Linux x86_32;) Synapse/40.1';
+  sUserAgent = 'lazqBitTorrentWebUI/'+csVersion+' (X11; Linux i386;) Synapse/40.1';
   {$ENDIF}
 {$ENDIF}
 {$IFDEF windows}
   {$IFDEF CPUX64}
   sUserAgent = 'lazqBitTorrentWebUI/'+csVersion+' (Windows x86_64;) Synapse/40.1';
   {$ELSE}
-  sUserAgent = 'lazqBitTorrentWebUI/'+csVersion+' (Windows x86_32;) Synapse/40.1';
+  sUserAgent = 'lazqBitTorrentWebUI/'+csVersion+' (Windows i386;) Synapse/40.1';
+  {$ENDIF}
+{$ENDIF}
+{$IFDEF darwin}
+  {$IFDEF CPUX64}
+  sUserAgent = 'lazqBitTorrentWebUI/'+csVersion+' (OSX x86_64;) Synapse/40.1';
+  {$ELSE}
+  sUserAgent = 'lazqBitTorrentWebUI/'+csVersion+' (OSX i386;) Synapse/40.1';
   {$ENDIF}
 {$ENDIF}
 
