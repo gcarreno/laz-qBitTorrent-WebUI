@@ -28,9 +28,15 @@ jobs:
         lazarus-version: ${{ matrix.lazarus-versions }}
         include-packages: "Synapse 40.1"
     - name: Build the Example App
+      if: ${{ matrix.operating-system != 'macos-latest' }}
       run: |
         lazbuild --add-package-link "package/lazqbittorrentwebui.lpk";
-        lazbuild "example/Lazarus/project1.lpi";
+        lazbuild -B "example/Lazarus/project1.lpi";
+    - name: Build the Example App
+      if: ${{ matrix.operating-system == 'macos-latest' }}
+      run: |
+        lazbuild --add-package-link "package/lazqbittorrentwebui.lpk";
+        lazbuild -B --ws=cocoa "example/Lazarus/project1.lpi";
     - name: Build the Test App
       run: lazbuild "tests/lazqbtest.lpi";
     - name: Run the Test App
