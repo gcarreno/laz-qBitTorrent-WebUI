@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [ubuntu-latest,windows-latest,macos-latest]
-        lazarus-versions: [stable, 2.0.10, 2.0.6]
+        lazarus-versions: [stable, 2.0.10]
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
